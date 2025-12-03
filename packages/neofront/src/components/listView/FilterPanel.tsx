@@ -34,7 +34,7 @@ export default function FilterPanel({ schema, open, onAction }: FilterPanelProps
   }
 
   const { appCfg } = useAppUI();
-  const filterCfg = appCfg.listViews.filterPanel;
+  const filterCfg = appCfg.listViews.filterPanel ?? {};
   const transitionMs = filterCfg.transitionDuration ?? 200;
   const vPadding = filterCfg.verticalPadding || 0;
 
