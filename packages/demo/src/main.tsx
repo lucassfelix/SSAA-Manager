@@ -2,6 +2,8 @@
 // Entry point for the demo application.
 //
 
+// #region --------------------------------------------------------------------------------- Imports
+
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -15,6 +17,10 @@ import iconsCfg from "project/icons.json";
 import viewsCfg from "project/views/views.json";
 import "./styles/theme.css";
 import "./styles/app.css";
+
+// #endregion
+
+// #region ----------------------------------------------------------------------------- Entry point
 
 // Vite glob import must be at module level
 const loaderModules = import.meta.glob("../project/views/*/loader.js");
@@ -31,3 +37,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </BrowserRouter>
   </StrictMode>
 );
+
+// #endregion
