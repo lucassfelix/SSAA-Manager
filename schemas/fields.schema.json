@@ -79,8 +79,8 @@
           "description": "Column header text displayed in the table."
         },
         "colWidth": {
-          "type": "integer",
-          "description": "Column width in pixels."
+          "type": [ "integer", "string" ],
+          "description": "Column width in pixels or percentage."
         },
         "colStyles": {
           "description": "Style keyword or list of style keywords for the column cells.",

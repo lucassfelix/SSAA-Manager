@@ -166,7 +166,6 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       const opt = options?.find((opt: DataColumnOptions) => opt.value == value);
 
       if (!opt) {
-        console.warn(`No option found for value "${value}" in column "${colName}".`);
         return `[${value}]`;
       }
       return (
