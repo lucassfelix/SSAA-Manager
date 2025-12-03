@@ -5,10 +5,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w @neofront/demo",
-    "build": "npm run build -w @neofront/demo",
+    "dev": "npm run dev -w @neofront/ssaa",
+    "build": "npm run build -w @neofront/ssaa",
     "check-schemas": "node scripts/check-schemas ./schemas --out ./check-schemas.log",
-    "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/demo/project --log ./validate-jsons.log"
+    "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/ssaa/project --log ./validate-jsons.log"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
