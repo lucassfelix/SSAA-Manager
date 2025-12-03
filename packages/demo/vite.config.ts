@@ -8,10 +8,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "project": path.resolve(__dirname, "project/"),
       "@neofront/core": path.resolve(neofrontPath, "index.ts"),
-      "@": path.resolve(neofrontPath, "components/"),
-      "context": path.resolve(neofrontPath, "contexts/index.ts"),
+      "project": path.resolve(__dirname, "project/"),
     },
   },
 });
