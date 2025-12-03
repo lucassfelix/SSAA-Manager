@@ -1,0 +1,288 @@
+{
+	"$schema": "../../../schemas/app.schema.json",
+	"version": "0.2.0",
+	"language": "pt-br",
+	"comments": "This file should be generated automatically by merging the default app settings, the project-specific settings, and localized translations.",
+	"strings": {
+		"appTitle": "{pageName} | SSAA",
+		"appVersion": "0.10.0",
+		"no": "Não",
+		"yes": "Sim",
+		"defaultDateFormat": "DD/MM/YYYY",
+		"decimalSeparator": ",",
+		"thousandSeparator": "."
+	},
+	"errorStrings": {
+		"noViewType": "O tipo de visualização <b>{type}</b> não é suportado.",
+		"viewMissing": "A visualização <b>{view}</b> não foi encontrada.",
+		"formMissing": "O form <b>{type}</b> não foi declarado para a view <b>{view}</b>.",
+		"formConfigMissing": "Não foi encontrada uma configuração para este form.",
+		"formLayoutMissing": "O layout do form não foi definido para a operação <b>${op}</b>."
+	},
+	"paths": {
+		"images": "images/"
+	},
+	"shell": {
+		"header": {
+			"fullWidth": true,
+			"height": 80,
+			"bordered": true,
+			"items": [
+				"collapseToggle",
+				"logo",
+				"title",
+				"spacer",
+				"themeSwitch"
+			]
+		},
+		"navbar": {
+			"width": 200,
+			"collapsible": true,
+			"collapsedWidth": 72,
+			"bordered": true,
+			"icons": true,
+			"footer": true,
+			"items": [
+				"mainMenu"
+			],
+			"footerItems": [
+				"logo"
+			]
+		},
+		"menu": {
+			"clickOnHover": false,
+			"menuItem": {
+				"gap": 16,
+				"radius": 8
+			},
+			"leftIcon": {
+				"filled": false,
+				"size": 26,
+				"stroke": 1.5
+			},
+			"rightIcon": {
+				"icon": "chevronRight",
+				"stroke": 2,
+				"size": 20
+			},
+			"label": {
+				"size": "1rem",
+				"fontWeight": 400
+			},
+			"description": {
+				"size": "0.85rem",
+				"fontWeight": 600
+			},
+			"submenu": {
+				"gap": 6,
+				"offset": 12,
+				"radius": 8,
+				"label": {
+					"size": "0.9rem",
+					"fontWeight": 400
+				},
+				"subtitle": {
+					"label": {
+						"size": "0.65rem",
+						"fontWeight": 700,
+						"uppercase": true
+					}
+				}
+			}
+		},
+		"title": {
+			"label": "Sistema Gerencial"
+		},
+		"toggleNavbar": {
+			"rotateIcon": true,
+			"tipCollapse": "Fechar a barra lateral",
+			"tipExpand": "Abrir a barra lateral"
+		},
+		"themeSwitcher": {
+			"tipLight": "Mudar para o tema claro",
+			"tipDark": "Mudar para o tema escuro"
+		},
+		"logo": {
+			"height": 52,
+			"altText": "Logotipo SSAA"
+		},
+		"userMenu": {
+			"type": "iconButton",
+			"name": "userSettings",
+			"icon": "manage_accounts",
+			"action": "openUserSettings",
+			"items": [ ]
+		}
+	},
+	"listViews": {
+		"defaultList": "usuarios",
+		"defaultPageSize": 10,
+		"table": {
+			"striped": false,
+			"bordered": false,
+			"rowBorders": true,
+			"colBorders": false,
+			"borderRadius": "sm",
+			"horizontalSpacing": 10,
+			"verticalSpacing": 12,
+			"headerHeight": 20,
+			"shadow": "xs",
+			"wrappers": {
+				"size": "md",
+				"statusWidth": 120,
+				"booleanWidth": 50
+			},
+			"booleanIcons": {
+				"size": 26,
+				"stroke": 1,
+				"trueIcon": "circleCheck",
+				"falseIcon": "squareX",
+				"trueColorLight": "var(--mantine-color-teal-6)",
+				"trueColorDark": "var(--mantine-color-green-4)",
+				"falseColorLight": "var(--mantine-color-red-6)",
+				"falseColorDark": "var(--mantine-color-red-4)"
+			}
+		},
+		"toolbar": {
+			"horizontalPadding": 10,
+			"verticalPadding": 6,
+			"gap": 16,
+			"align": "left",
+			"iconButton": {
+				"rotateSelected": true,
+				"size": 36,
+				"radius": 8,
+				"stroke": 1.5,
+				"filled": false,
+				"icon": {
+					"size": 24,
+					"stroke": 2
+				}
+			},
+			"textButton": {
+				"size": "sm",
+				"radius": 6
+			},
+			"text": {
+				"size": 20,
+				"fontWeight": 600,
+				"width": 120
+			}
+		},
+		"buttons": {
+			"separator": {
+				"type": "separator"
+			},
+			"add": {
+				"type": "iconButton",
+				"tip": "Adicionar {singular}",
+				"icon": "add",
+				"action": "add"
+			},
+			"search": {
+				"type": "iconButton",
+				"tip": "Pesquisar {plural}",
+				"icon": "search",
+				"action": "search"
+			},
+			"more": {
+				"type": "iconButton",
+				"tip": "Mais ações",
+				"icon": "moreVertical",
+				"items": [
+					{
+						"name": "exportCSV",
+						"label": "Exportar para planilha",
+						"action": "exportCSV"
+					},
+					{
+						"name": "exportPDF",
+						"label": "Exportar PDF",
+						"action": "exportPDF"
+					},
+					{
+						"type": "separator"
+					},
+					{
+						"name": "print",
+						"label": "Imprimir listagem",
+						"action": "printRecords"
+					}
+				]
+			}
+		}
+	},
+	"forms": {
+		"fieldSize": "sm",
+		"verticalGap": "xl",
+		"fullHeight": true,
+		"clearSelectionValue": "__clear_selection__",
+		"selectionCheck": false,
+		"checkboxTopPadding": 36,
+		"outlinedSections": false,
+		"toolbar": {
+			"horizontalPadding": 24,
+			"verticalPadding": 6,
+			"gap": 16,
+			"align": "right",
+			"upperBorder": true,
+			"iconButton": {
+				"rotateSelected": true,
+				"size": 36,
+				"radius": 8,
+				"stroke": 1.5,
+				"filled": false,
+				"selectedVariant": "filled",
+				"regularVariant": "default",
+				"icon": {
+					"size": 24,
+					"stroke": 2
+				}
+			},
+			"textButton": {
+				"size": "sm",
+				"radius": 6,
+				"defaultVariant": "filled",
+				"regularVariant": "light"
+			},
+			"text": {
+				"size": 20,
+				"fontWeight": 600,
+				"width": 120
+			}
+		},
+		"buttons": {
+			"separator": {
+				"type": "separator"
+			},
+			"send": {
+				"type": "textButton",
+				"label": "Enviar",
+				"action": "send",
+				"default": true
+			},
+			"cancel": {
+				"type": "textButton",
+				"label": "Cancelar",
+				"action": "cancel"
+			}
+		}
+	},
+	"theme": {
+		"defaultUIScale": 100,
+		"typography": {
+			"mainFamily": null,
+			"headingsFamily": null
+		},
+		"modes": {
+			"light": {
+				"expandedLogo": "logo-ssaa.svg",
+				"collapsedLogo": "logo-ssaa.svg"
+			},
+			"dark": {
+				"expandedLogo": "logo-ssaa.svg",
+				"collapsedLogo": "logo-ssaa.svg"
+			}
+		}
+	}
+}

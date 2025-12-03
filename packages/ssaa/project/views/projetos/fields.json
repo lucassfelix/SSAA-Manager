@@ -1,0 +1,74 @@
+{
+    "$schema": "../../../../../schemas/fields.schema.json",
+    "comment": "Generated from listview.json and form.json",
+    "name": "projetos",
+    "language": "ptBR",
+    "fields": {
+        "id": {
+            "colStyles": "tabular",
+            "colTitle": "Nº",
+            "colWidth": 60,
+            "dataType": "string",
+            "fieldWidth": 60,
+            "footerIcon": "sum",
+            "label": "Nº",
+            "mask": { "pattern": "0000", "digits": 4 },
+            "readOnly": true
+        },
+        "nome": {
+            "colTitle": "Nome",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "footer": "{count} projetos",
+            "label": "Nome",
+            "placeholder": "Nome do projeto",
+            "render": { "layout": "link", "op": "edit" },
+            "required": true
+        },
+        "instituicao": {
+            "colTitle": "Instituição",
+            "colWidth": 180,
+            "dataType": "select",
+            "fieldWidth": 200,
+            "label": "Instituição",
+            "options": { "table": "instituicoes", "valueAccessor": "id",
+                "labelAccessor": "nome_abreviado" },
+            "placeholder": "Selecione uma opção"
+        },
+        "data_criacao": {
+            "colStyles": "sm",
+            "colTitle": "Entrada",
+            "colWidth": 140,
+            "dataType": "date",
+            "fieldWidth": 140,
+            "label": "Data de entrada",
+            "placeholder": "Selecione",
+            "render": { "layout": "date", "format": "relative" },
+            "readOnly": true
+        },
+        "ultima_edicao": {
+            "colStyles": "sm",
+            "colTitle": "Últ. edição",
+            "colWidth": 140,
+            "dataType": "date",
+            "fieldWidth": 140,
+            "label": "Última edição",
+            "placeholder": "Selecione",
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
+        },
+        "status": {
+            "colTextAlign": "center",
+            "colTitle": "Status",
+            "colWidth": 140,
+            "dataType": "select",
+            "defaultValue": 1,
+            "fieldWidth": 240,
+            "label": "Status",
+            "options": { "table": "status", "valueAccessor": "value", "labelAccessor": "label" },
+            "placeholder": "Selecione uma opção",
+            "render": { "layout": "colorWrapper" },
+            "required": true
+        }
+    }
+}

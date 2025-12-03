@@ -1,0 +1,43 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "name": "projetos",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "hidden",
+                "columns": [
+                    [
+                        "nome",
+                        [ "data_criacao", "ultima_edicao" ]
+                    ],
+                    [
+                        "instituicao",
+                        "status"
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "{name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Novo produto",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "{name}",
+        "toolbar": [
+            "edit",
+            "close"
+        ]
+    }
+}

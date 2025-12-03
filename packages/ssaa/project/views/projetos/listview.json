@@ -1,0 +1,28 @@
+{
+    "$schema": "../../../../../schemas/listview.schema.json",
+    "name": "projetos",
+    "type": "listView",
+    "language": "ptBR",
+    "config": {
+        "header": true,
+        "footer": false,
+        "idAccessor": "id",
+        "nameAccessor": "nome",
+        "rowClassAccessor": "none"
+    },
+    "strings": {
+        "singular": "projeto",
+        "plural": "projetos"
+    },
+    "columns": [
+        "nome",
+        "instituicao",
+        "data_criacao",
+        "ultima_edicao",
+        "status"
+    ],
+    "toolbar": [
+        { "type": "text", "text": "Projetos" },
+        "add"
+    ]
+}

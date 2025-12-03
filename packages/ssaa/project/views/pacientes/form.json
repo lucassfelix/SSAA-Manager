@@ -1,0 +1,45 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "pacientes",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "hidden",
+                "columns": [
+                    [
+                        [ "username" ],
+                        "nome_completo",
+                        [ "tipo_permissao" ]
+                    ],
+                    [
+                        "data_criacao",
+                        "instituicao"
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "Paciente {name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Novo paciente",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "Paciente {name}",
+        "toolbar": [
+            "edit",
+            "close"
+        ]
+    }
+}

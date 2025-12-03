@@ -1,0 +1,46 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "usuarios",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "hidden",
+                "columns": [
+                    [
+                        [ "username" ],
+                        "nome_completo",
+                        "email"
+                    ],
+                    [
+                        "instituicao",
+                        ["data_criacao", "data_expiracao"],
+                        "status"
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "Usuário {name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Novo usuário",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "Usuário {name}",
+        "toolbar": [
+            "edit",
+            "close"
+        ]
+    }
+}

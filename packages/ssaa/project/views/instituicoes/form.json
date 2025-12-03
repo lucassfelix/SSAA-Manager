@@ -1,0 +1,40 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "instituicoes",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "hidden",
+                "columns": [
+                    [ "nome", "nome_abreviado" ],
+                    [
+                        [ "data_criacao", "data_expiracao" ],
+                        "cnpj"
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "Instituição {name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Nova instituição",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "Instituição {name}",
+        "toolbar": [
+            "close"
+        ]
+    }
+}

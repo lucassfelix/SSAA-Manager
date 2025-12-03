@@ -1,0 +1,94 @@
+/*
+ * Theme-specific style overrides for this application.
+ */
+
+/* #region ---------------------------------------------------------------- Global element styles */
+
+/* Tooltip custom styles */
+.nf-light {
+  --tooltip-bg: var(--mantine-color-gray-7);
+}
+.nf-light .mantine-Tooltip-tooltip b {
+  font-weight: 600;
+  color: var(--mantine-color-teal-3);
+}
+.nf-dark .mantine-Tooltip-tooltip b {
+  font-weight: 700;
+  color: var(--mantine-color-teal-9);
+}
+
+/* Switch track styles */
+.nf-light .mantine-Switch-track {
+  background-color: var(--mantine-color-blue-5);
+}
+.nf-dark .mantine-Switch-track {
+  background-color: var(--mantine-color-blue-8);
+}
+
+/* #endregion */
+
+/* #region ----------------------------------------------------------- Table and datatable styles */
+
+/* Table cell styles */
+.mantine-Table-td p,
+.mantine-Table-td a {
+  font-size: 0.95rem;
+}
+
+/* Default header and footer styles */
+.mantine-Table-th {
+  font-weight: 600;
+}
+
+/* Wrapper (badge) styles */
+.mantine-Badge-root.nf-normal {
+  background-color: transparent;
+}
+.mantine-Badge-root.nf-success {
+  background-color: var(--mantine-color-teal-8);
+}
+.mantine-Badge-root.nf-warning {
+  background-color: var(--mantine-color-gray-7);
+}
+.mantine-Badge-root.nf-error {
+  background-color: var(--mantine-color-red-6);
+}
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Form element styles */
+
+/* Read-only field styles */
+.nf-light .nf-readonly input {
+  background-color: #7585aa50;
+}
+.nf-dark .nf-readonly input {
+  background-color: #4d5d8050;
+}
+
+/* Accordion form element styles */
+.mantine-Accordion-control {
+  margin-bottom: 0;
+  transition: margin-bottom 200ms ease;
+}
+[data-active=true] .mantine-Accordion-control {
+  margin-bottom: 1em;
+}
+.mantine-Accordion-label {
+  font-weight: 600;
+}
+.nf-open .mantine-Accordion-label {
+  padding-left: 0;
+  transition: padding-left 200ms ease;
+}
+.nf-open .mantine-Accordion-control:hover .mantine-Accordion-label {
+  padding-left: 16px;
+}
+.nf-light .mantine-Accordion-control {
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+}
+.nf-dark .mantine-Accordion-control {
+  border-bottom: 1px solid var(--mantine-color-gray-8);
+}
+
+/* #endregion */

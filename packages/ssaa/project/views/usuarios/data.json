@@ -1,0 +1,74 @@
+[
+	{
+		"id": 106,
+		"nome_completo": "João Luís Machado Ayres Filho",
+		"nome_abreviado": "João Luís Filho",
+		"username": "jayres",
+		"email": "joao.ayres18@uol.com.br",
+		"instituicao": 1,
+		"status": 2,
+		"tipo_permissao": "admin",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	},
+	{
+		"id": 2209,
+		"nome_completo": "Mariana Duarte da Costa",
+		"nome_abreviado": "Mariana Duarte",
+		"username": "maricosta",
+		"email": "mari_costa@ig.com.br",
+		"instituicao": 2,
+		"status": 1,
+		"tipo_permissao": "usuario",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	},
+	{
+		"id": 980,
+		"nome_completo": "Pedro Henrique Bernardes Machado",
+		"nome_abreviado": "Pedro Machado",
+		"username": "pedroh98",
+		"email": "pedro98@google.com",
+		"instituicao": 1,
+		"status": 3,
+		"tipo_permissao": "usuario",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	},
+	{
+		"id": 40,
+		"nome_completo": "Maria Beatriz Figueira Gomes",
+		"nome_abreviado": "Maria B. Gomes",
+		"username": "maria_fig",
+		"email": "marifigueira@google.com",
+		"status": 1,
+		"instituicao": 5,
+		"tipo_permissao": "usuario",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	},
+	{
+		"id": 195,
+		"nome_completo": "Marcelo Barroso Goulart",
+		"nome_abreviado": "Marcelo Barroso",
+		"username": "mar33",
+		"email": "marcelobgoulart77@yahoo.com",
+		"status": 1,
+		"instituicao": 7,
+		"tipo_permissao": "superusuario",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	},
+	{
+		"id": 340,
+		"nome_completo": "Ana Lúcia Schneider Fernandes",
+		"nome_abreviado": "Ana Lúcia",
+		"username": "anafer21",
+		"email": "anaschneider21@uol.com.br",
+		"status": 1,
+		"instituicao": 5,
+		"tipo_permissao": "usuario",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31"
+	}
+]

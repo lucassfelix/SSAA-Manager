@@ -1,0 +1,6 @@
+{
+	"$schema": "../../../schemas/icons.schema.json",
+	"add": "IconPlus",
+	"menu": "IconMenu2",
+	"moreVertical": "IconDotsVertical"
+}
