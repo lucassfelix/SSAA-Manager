@@ -1,0 +1,15 @@
+{
+  "name": "neofront-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "npm run dev -w @neofront/demo",
+    "build": "npm run build -w @neofront/demo",
+    "check-schemas": "node scripts/check-schemas ./schemas --out ./check-schemas.log",
+    "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/demo/project --log ./validate-jsons.log"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ajv": "^8.17.1"
+  }
+}

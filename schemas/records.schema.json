@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/records.schema.json",
+  "title": "Records data schema",
+  "description": "Schema for mock data record files (project/views/*/records.json).",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "description": "A single record entry. Structure varies by view."
+  }
+}

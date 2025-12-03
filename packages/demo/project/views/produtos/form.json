@@ -1,0 +1,44 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "name": "produtos",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "hidden",
+                "columns": [
+                    [
+                        "id",
+                        [ "data_entrada", "estoque" ]
+                    ],
+                    [
+                        "descricao",
+                        [ "sku", "valor" ]
+
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "{name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Novo produto",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "{name}",
+        "toolbar": [
+            "edit",
+            "close"
+        ]
+    }
+}

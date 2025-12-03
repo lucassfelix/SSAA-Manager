@@ -1,0 +1,111 @@
+//
+// Select field component.
+//
+
+// #region --------------------------------------------------------------------------------- Imports
+
+import { useState } from 'react';
+import { ComboboxItem, Select, type ComboboxData } from '@mantine/core';
+
+import { FormFieldProps, useAppUI } from 'context';
+import NfIcon from '@/icon/NfIcon';
+import NfTextField from './TextField';
+
+// #endregion
+
+// #region ------------------------------------------------------------------------------- Component
+
+export default function NfSelectField({ props }: { props: FormFieldProps; }) {
+
+  // #region Hooks and variables
+
+  const { name, enabled, label, initialValue, width, size, required, readOnly, placeholder,
+    options } = props;
+
+  // Controlled value state
+  const raw: any = initialValue as any;
+  const initNorm = (raw && typeof raw === 'object') ? (raw.id ?? raw.value ?? null) : raw;
+  const [value, setValue] = useState<string | null>(initNorm != null ? String(initNorm) : null);
+
+  // If select field is read-only, render as text field showing the option label
+  if (props.readOnly) {
+    const initValue = props.options?.find(o => String(o.value) ===
+      String(initNorm))?.label ?? (initNorm != null ? String(initNorm) : undefined);
+    return (
+      <NfTextField
+        props={{
+          name: props.name,
+          dataType: props.dataType,
+          label: props.label,
+          initialValue: initValue,
+          width: props.width,
+          size: props.size,
+          enabled: props.enabled,
+          required: false,
+          readOnly: true,
+        }}
+      />
+    );
+  }
+
+  const { appCfg } = useAppUI();
+  const formsCfg = appCfg.forms ?? {};
+  const clearValue = formsCfg.clearSelectionValue ?? "__clear_selection__";
+  const selectionCheck = formsCfg.selectionCheck ?? false;
+
+  // Make sure values are in correct format
+  const data = (options || [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
+    const v = String(o.value);
+    if (required && v === clearValue) {
+      console.warn(`NfSelectField: '${clearValue}' should not be used as a regular option value.`);
+      return [];
+    }
+    return { value: v, label: o.label ?? v };
+  }) as ComboboxData | undefined;
+
+  function renderOption(option: ComboboxItem) {
+
+    const renderedOption = (
+      <span className={option.value === clearValue ? 'nf-clear' : (
+        option.value === value ? 'nf-selected' : undefined
+      )}>
+        {option.label}
+      </span>
+    );
+
+    return selectionCheck ? <>
+      <NfIcon
+        icon={option.value === value ? 'check' : null}
+        size={16}
+        stroke={3}
+        style={{ opacity: 0.5 }}
+      />
+      {renderedOption}
+    </> : renderedOption;
+  }
+
+  // #endregion
+
+  return (
+    <Select
+      name={name}
+      label={label}
+      size={size}
+      required={required}
+      readOnly={readOnly}
+      disabled={enabled === false}
+      placeholder={placeholder}
+      value={value}
+      w={width}
+      autoSelectOnBlur
+      allowDeselect={!required}
+      renderOption={({ option }) => renderOption(option)}
+      data={data ?? []}
+      onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
+      className="nf-field"
+      wrapperProps={{ 'data-field-props': name }}
+    />
+  );
+}
+
+// #endregion

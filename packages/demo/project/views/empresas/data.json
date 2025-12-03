@@ -1,0 +1,88 @@
+[
+	{
+		"id": 8976,
+		"empresa": {
+			"nome": "Companhia Alfa",
+			"nome_abreviado": "Alfa",
+			"cnpj": "12.345.678/0001-90",
+			"ie": "987654321"
+		},
+		"endereco": "Rua Teodósio Junqueira das Flores, 123",
+		"cidade": "São Paulo",
+		"uf": 26,
+		"status": 1,
+		"ativo": true
+	},
+	{
+		"id": 216,
+		"empresa": {
+			"nome": "Betatests Ltda.",
+			"nome_abreviado": "Betatests",
+			"cnpj": "7765432000101"
+		},
+		"endereco": "Av. Brasil, 4561",
+		"cidade": "Rio de Janeiro",
+		"uf": 19,
+		"status": 2,
+		"ativo": false
+	},
+	{
+		"id": 312,
+		"empresa": {
+			"nome": "Delta Corporações de Atacado, Varejo e Comércio de Alimentos Ltda.",
+			"nome_abreviado": "Delta",
+			"cnpj": 49505234000103
+		},
+		"endereco": "R. Vale Verde, 101, cj. 1104",
+		"cidade": "Curitiba",
+		"uf": 18,
+		"status": 3
+	},
+	{
+		"id": 4345,
+		"empresa": {
+			"nome": "Gamalon Solutions",
+			"nome_abreviado": "Gamalon"
+		},
+		"endereco": "Avenida Marechal Odenor Nascentino Torres, 303 / apto. 1201",
+		"cidade": "São Paulo",
+		"uf": 26,
+		"status": 1
+	},
+	{
+		"id": 9,
+		"empresa": {
+			"nome": "ZetaTech",
+			"nome_abreviado": "ZetaTech",
+			"cnpj": 76000187
+		},
+		"endereco": "Av. Atlântica, 4041 — sala 403",
+		"cidade": "São Paulo",
+		"uf": 26,
+		"status": 1
+	},
+	{
+		"id": 68,
+		"empresa": {
+			"nome": "Sigma Comércio e Serviços",
+			"nome_abreviado": "Sigma",
+			"cnpj": "92.834.352/0001-08"
+		},
+		"endereco": "Rua Pedro Acaciano, 606",
+		"cidade": "São Paulo",
+		"uf": 26,
+		"status": 3
+	},
+	{
+		"id": 77,
+		"empresa": {
+			"nome": "Ômega Indústrias",
+			"nome_abreviado": "Ômega",
+			"cnpj": "9.213.671/0001-09"
+		},
+		"endereco": "Av. Muriel Silva Paes, 884",
+		"cidade": "Belo Horizonte",
+		"uf": "MG",
+		"status": 2
+	}
+]

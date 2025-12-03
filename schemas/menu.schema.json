@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/menu.schema.json",
+  "title": "Menu configuration schema",
+  "description": "Schema that defines the main navigation menu structure (project/menu.json).",
+  "type": "object",
+  "additionalProperties": false,
+
+  // Top-level properties
+
+  "properties": {
+    "$schema": {
+      "$ref": "./common.schema.json#/definitions/$schema"
+    },
+    "items": {
+      "type": "array",
+      "description": "Top-level menu items.",
+      "items": {
+        "$ref": "#/definitions/menuItem"
+      }
+    }
+  },
+
+  // Required properties
+
+  "required": [
+    "items"
+  ],
+
+  // Definitions for reusable components
+
+  "definitions": {
+    "menuItem": {
+      "type": "object",
+      "description": "A menu item (link, submenu, separator, or subtitle).",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["menuItem", "separator", "subtitle"],
+          "description": "Item type (may be omitted for menu items)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Logical name used for routing."
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description text."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name from icons.json."
+        },
+        "emphasis": {
+          "type": "string",
+          "description": "Color emphasis (e.g. 'blue-5')."
+        },
+        "badge": {
+          "type": ["string", "number"],
+          "description": "Badge value to display."
+        },
+        "badgeEmphasis": {
+          "type": "string",
+          "description": "Badge color emphasis."
+        },
+        "resolver": {
+          "type": "string",
+          "description": "Name of a custom resolver function."
+        },
+        "items": {
+          "type": "array",
+          "description": "Submenu items.",
+          "items": {
+            "$ref": "#/definitions/menuItem"
+          }
+        }
+      }
+    }
+  }
+}

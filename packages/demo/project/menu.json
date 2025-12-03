@@ -1,0 +1,106 @@
+{
+    "$schema": "../../../schemas/menu.schema.json",
+    "items": [
+        {
+            "name": "inicio",
+            "label": "Início",
+            "description": "Dashboard e insights",
+            "icon": "home",
+            "emphasis": "blue-5"
+        },
+        {
+            "name": "financeiro",
+            "label": "Financeiro",
+            "icon": "wallet",
+            "items": [
+                {
+                    "name": "pedidos",
+                    "label": "Pedidos"
+                },
+                {
+                    "name": "notas-fiscais",
+                    "label": "Notas fiscais"
+                },
+                {
+                    "type": "separator"
+                },
+                {
+                    "type": "subtitle",
+                    "label": "Mais configurações"
+                },
+                {
+                    "name": "usuarios",
+                    "label": "Usuários"
+                },
+                {
+                    "name": "clientes",
+                    "label": "Clientes"
+                },
+                {
+                    "name": "fornecedores",
+                    "label": "Fornecedores"
+                }
+            ]
+        },
+        {
+            "name": "vendas",
+            "label": "Vendas",
+            "icon": "activity",
+            "badge": 22,
+            "badgeEmphasis": "red-7",
+            "emphasis": "orange-5"
+        },
+        {
+            "type": "subtitle",
+            "label": "Favoritos"
+        },
+        {
+            "name": "usuarios",
+            "label": "Usuários",
+            "icon": "user"
+        },
+        {
+            "name": "empresas",
+            "label": "Empresas",
+            "icon": "building"
+        },
+        {
+            "name": "produtos",
+            "label": "Produtos",
+            "icon": "shoppingCart"
+        },
+        {
+            "name": "seguranca",
+            "label": "Segurança",
+            "icon": "fingerprint"
+        },
+        {
+            "name": "notificacoes",
+            "label": "Notificações",
+            "icon": "notification"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "name": "cadastros",
+            "label": "Cadastros",
+            "icon": "adjustments",
+            "items": [
+                {
+                    "name": "usuarios",
+                    "label": "Usuários",
+                    "resolver": "usuarios"
+                },
+                {
+                    "name": "perfis",
+                    "label": "Perfis"
+                },
+                {
+                    "name": "seguranca",
+                    "label": "Segurança"
+                }
+            ]
+        }
+    ]
+}

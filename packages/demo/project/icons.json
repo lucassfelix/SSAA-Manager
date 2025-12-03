@@ -1,0 +1,9 @@
+{
+	"$schema": "../../../schemas/icons.schema.json",
+	"add": "IconPlus",
+	"bank": "IconBuildingBank",
+	"filter": "IconFilter2",
+	"menu": "IconMenu2",
+	"moreVertical": "IconDotsVertical",
+	"notification": "IconBellRinging2"
+}

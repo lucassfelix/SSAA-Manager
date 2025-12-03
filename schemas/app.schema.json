@@ -1,0 +1,837 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/app.schema.json",
+  "title": "Application configuration schema",
+  "description": "Schema for the application configuration file (project/app.json).",
+  "type": "object",
+  "additionalProperties": false,
+
+  // Top-level properties
+
+  "properties": {
+    "$schema": {
+      "$ref": "./common.schema.json#/definitions/$schema"
+    },
+    "version": {
+      "$ref": "./common.schema.json#/definitions/version"
+    },
+    "language": {
+      "$ref": "./common.schema.json#/definitions/language"
+    },
+    "comments": {
+      "$ref": "./common.schema.json#/definitions/comments"
+    },
+    "strings": {
+      "type": "object",
+      "description": "Localized strings for the application UI.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "A simple string."
+      }
+    },
+    "errorStrings": {
+      "type": "object",
+      "description": "Localized error strings for the application UI.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "A simple string."
+      }
+    },
+    "paths": {
+      "type": "object",
+      "description": "Optional path overrides for project resources (views, images, menus, mock data, etc.).",
+      "additionalProperties": false,
+      "properties": {
+        "images": {
+          "type": "string",
+          "description": "Path to the images folder (e.g. 'project/images')."
+        }
+      },
+      "required": [
+        "images"
+      ]
+    },
+    "shell": {
+      "type": "object",
+      "description": "Configuration for the application shell: header, navbar, logo, title, user menu, and theme switcher.",
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "type": "object",
+          "description": "Header configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "fullWidth": {
+              "type": "boolean",
+              "description": "Whether the header should span the full width of the viewport."
+            },
+            "height": {
+              "type": "number",
+              "description": "Height of the header in pixels."
+            },
+            "bordered": {
+              "type": "boolean",
+              "description": "Whether the header should have a bottom border."
+            },
+            "items": {
+              "type": "array",
+              "description": "Ordered list of items to display in the header.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "collapseToggle",
+                  "logo",
+                  "spacer",
+                  "title",
+                  "themeSwitch",
+                  "userMenu"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items"
+          ]
+        },
+        "navbar": {
+          "type": "object",
+          "description": "Navbar (sidebar) configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "number",
+              "description": "Width of the navbar when expanded, in pixels."
+            },
+            "collapsible": {
+              "type": "boolean",
+              "description": "Whether the navbar can be collapsed."
+            },
+            "collapsedWidth": {
+              "type": "number",
+              "description": "Width of the navbar when collapsed, in pixels."
+            },
+            "bordered": {
+              "type": "boolean",
+              "description": "Whether the navbar should have a right border."
+            },
+            "icons": {
+              "type": "boolean",
+              "description": "Whether to show only icons when the navbar is collapsed."
+            },
+            "footer": {
+              "type": "boolean",
+              "description": "Whether to show a footer area in the navbar."
+            },
+            "items": {
+              "type": "array",
+              "description": "Ordered list of items to display in the navbar.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "mainMenu"
+                ]
+              }
+            },
+            "footerItems": {
+              "type": "array",
+              "description": "Ordered list of items to display in the navbar footer.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "logo"
+                ]
+              }
+            }
+          }
+        },
+        "menu": {
+          "type": "object",
+          "description": "Menu configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "clickOnHover": {
+              "type": "boolean",
+              "description": "Whether submenu menus should open on hover instead of click."
+            },
+            "menuItem": {
+              "type": "object",
+              "description": "Default menu item styling and behavior.",
+              "additionalProperties": false,
+              "properties": {
+                "gap": {
+                  "type": "number",
+                  "description": "Gap between menu item icon and label."
+                },
+                "radius": {
+                  "type": "number",
+                  "description": "Border radius for menu items."
+                },
+                "subtitle": {
+                  "type": "object",
+                  "description": "Subtitle text styling for menu items.",
+                  "additionalProperties": false,
+                  "properties": {
+                    "label": {
+                      "type": "object",
+                      "description": "Label text styling.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "size": {
+                          "type": [ "number", "string" ],
+                          "description": "Font size for the subtitle label."
+                        },
+                        "fontWeight": {
+                          "type": "number",
+                          "description": "Font weight for the subtitle label."
+                        },
+                        "uppercase": {
+                          "type": "boolean",
+                          "description": "Whether the subtitle label text should be uppercase."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "leftIcon": {
+              "type": "object",
+              "description": "Default left icon styling for menu items.",
+              "additionalProperties": false,
+              "properties": {
+                "filled": {
+                  "type": "boolean",
+                  "description": "Whether the icon should be filled."
+                },
+                "size": {
+                  "type": "number",
+                  "description": "Size of the left icon."
+                },
+                "stroke": {
+                  "type": "number",
+                  "description": "Stroke width of the left icon."
+                }
+              }
+            },
+            "rightIcon": {
+              "type": "object",
+              "description": "Default right icon styling for menu items.",
+              "additionalProperties": false,
+              "properties": {
+                "icon": {
+                  "type": "string",
+                  "description": "Name of the right icon (e.g. 'chevronRight')."
+                },
+                "stroke": {
+                  "type": "number",
+                  "description": "Stroke width of the right icon."
+                },
+                "size": {
+                  "type": "number",
+                  "description": "Size of the right icon."
+                }
+              }
+            },
+            "label": {
+              "type": "object",
+              "description": "Default label text styling for menu items."
+            },
+            "description": {
+              "type": "object",
+              "description": "Default description text styling for menu items.",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": [ "number", "string" ],
+                  "description": "Font size for the description text."
+                },
+                "fontWeight": {
+                  "type": "number",
+                  "description": "Font weight for the description text."
+                }
+              }
+            },
+            "submenu": {
+              "type": "object",
+              "description": "Default submenu styling for menu items."
+            }
+          }
+        },
+        "title": {
+          "type": "object",
+          "description": "Title configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string",
+              "description": "Title text label."
+            }
+          },
+          "required": [
+            "label"
+          ]
+        },
+        "toggleNavbar": {
+          "type": "object",
+          "description": "Configuration for the navbar toggle button tooltips.",
+          "additionalProperties": false,
+          "properties": {
+            "rotateIcon": {
+              "type": "boolean",
+              "description": "Whether to rotate the toggle icon when toggling."
+            },
+            "tipCollapse": {
+              "type": "string",
+              "description": "Tooltip text when hovering the collapse button."
+            },
+            "tipExpand": {
+              "type": "string",
+              "description": "Tooltip text when hovering the expand button."
+            }
+          }
+        },
+        "themeSwitcher": {
+          "type": "object",
+          "description": "Configuration for the theme switcher button.",
+          "additionalProperties": false,
+          "properties": {
+            "tipLight": {
+              "type": "string",
+              "description": "Tooltip text for switching to light theme."
+            },
+            "tipDark": {
+              "type": "string",
+              "description": "Tooltip text for switching to dark theme."
+            }
+          }
+        },
+        "logo": {
+          "type": "object",
+          "description": "Logo configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "height": {
+              "type": "number",
+              "description": "Height of the logo in pixels."
+            },
+            "altText": {
+              "type": "string",
+              "description": "Alternative text for the logo image."
+            }
+          }
+        },
+        "userMenu": {
+          "type": "object",
+          "description": "User menu configuration for the application shell.",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of user menu trigger (e.g. 'iconButton')."
+            },
+            "name": {
+              "type": "string",
+              "description": "Logical name or key for the user menu."
+            },
+            "icon": {
+              "type": "string",
+              "description": "Material icon name for the user menu button."
+            },
+            "action": {
+              "type": "string",
+              "description": "Named action to dispatch when the user menu button is clicked."
+            },
+            "items": {
+              "type": "array",
+              "description": "List of menu items for the user menu.",
+              "items": {
+                "$ref": "#/definitions/menuItem"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "header"
+      ]
+    },
+    "theme": {
+      "type": "object",
+      "description": "Theme configuration including palette, typography and list densities.",
+      "additionalProperties": false,
+      "properties": {
+        "defaultUIScale": {
+          "type": "number",
+          "description": "Default UI scale factor, in percentage (e.g. 100%, 95%)."
+        },
+        "typography": {
+          "type": "object",
+          "description": "Typography defaults.",
+          "additionalProperties": false,
+          "properties": {
+            "mainFamily": {
+              "type": ["string", "null"],
+              "description": "Primary font family. May be null to use system default."
+            },
+            "headingsFamily": {
+              "type": ["string", "null"],
+              "description": "Font family for headings. May be null to use system default."
+            }
+          }
+        },
+        "modes": {
+          "type": "object",
+          "description": "Light and dark theme modes.",
+          "additionalProperties": false,
+          "properties": {
+            "light": {
+              "description": "Light theme specific settings.",
+              "$ref": "#/definitions/modeProps"
+            },
+            "dark": {
+              "description": "Dark theme specific settings.",
+              "$ref": "#/definitions/modeProps"
+            }
+          }
+        }
+      }
+    },
+    "forms": {
+      "type": "object",
+      "description": "Default settings for forms and form toolbars.",
+      "additionalProperties": false,
+      "properties": {
+        "fieldSize": {
+          "type": "string",
+          "description": "Default Mantine field size (e.g. 'sm','md','lg')."
+        },
+        "verticalGap": {
+          "type": "string",
+          "description": "Default vertical gap between form rows."
+        },
+        "fullHeight": {
+          "type": "boolean",
+          "description": "Whether forms should take full height."
+        },
+        "clearSelectionValue": {
+          "type": "string",
+          "description": "Special value used to clear select components."
+        },
+        "selectionCheck": {
+          "type": "boolean",
+          "description": "Whether to show selection check controls."
+        },
+        "checkboxTopPadding": {
+          "type": "number",
+          "description": "Top padding applied to checkbox fields."
+        },
+        "outlinedSections": {
+          "type": "boolean",
+          "description": "Whether form groups should be outlined."
+        },
+        "toolbar": {
+          "type": "object",
+          "description": "Toolbar defaults for forms.",
+          "additionalProperties": false,
+          "properties": {
+            "horizontalPadding": {
+              "type": "number",
+              "description": "Horizontal padding for the toolbar."
+            },
+            "verticalPadding": {
+              "type": "number",
+              "description": "Vertical padding for the toolbar."
+            },
+            "gap": {
+              "type": "number",
+              "description": "Gap between toolbar items."
+            },
+            "align": {
+              "type": "string",
+              "description": "Alignment of toolbar items.",
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ]
+            },
+            "upperBorder": {
+              "type": "boolean",
+              "description": "Whether the toolbar should have an upper border."
+            },
+            "iconButton": {
+              "type": "object",
+              "description": "Default settings for icon buttons in form toolbars.",
+              "additionalProperties": false,
+              "properties": {
+                "rotateSelected": {
+                  "type": "boolean",
+                  "description": "Whether to rotate the icon when selected."
+                },
+                "size": {
+                  "type": "number",
+                  "description": "Size of the icon button."
+                },
+                "radius": {
+                  "type": "number",
+                  "description": "Border radius of the icon button."
+                },
+                "stroke": {
+                  "type": "number",
+                  "description": "Stroke width of the icon button."
+                },
+                "filled": {
+                  "type": "boolean",
+                  "description": "Whether the icon button should be filled."
+                },
+                "selectedVariant": {
+                  "type": "string",
+                  "description": "Default variant for selected icon buttons.",
+                  "$ref": "#/definitions/buttonVariant"
+                },
+                "regularVariant": {
+                  "type": "string",
+                  "description": "Variant for regular icon buttons.",
+                  "$ref": "#/definitions/buttonVariant"
+                },
+                "icon": {
+                  "type": "object",
+                  "description": "Default icon settings for icon buttons.",
+                  "additionalProperties": false,
+                  "properties": {
+                    "size": { "type": "number", "description": "Size of the icon." },
+                    "stroke": { "type": "number", "description": "Stroke width of the icon." }
+                  }
+                }
+              }
+            },
+            "textButton": {
+              "type": "object",
+              "description": "Default settings for text buttons in form toolbars.",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "description": "Size of the text button (e.g. 'sm','md','lg')."
+                },
+                "radius": {
+                  "type": "number",
+                  "description": "Border radius of the text button."
+                },
+                "defaultVariant": {
+                  "type": "string",
+                  "description": "Default variant for default (primary) text buttons.",
+                  "$ref": "#/definitions/buttonVariant"
+                },
+                "regularVariant": {
+                  "type": "string",
+                  "description": "Variant for regular text buttons.",
+                  "$ref": "#/definitions/buttonVariant"
+                }
+              }
+            },
+            "text": {
+              "type": "object",
+              "description": "Default settings for text elements in form toolbars.",
+              "additionalProperties": false,
+              "properties": {
+                "size": {
+                  "type": "number",
+                  "description": "Font size of the text."
+                },
+                "fontWeight": {
+                  "type": "number",
+                  "description": "Font weight of the text."
+                },
+                "width": {
+                  "type": "number",
+                  "description": "Width of the text element."
+                }
+              }
+            }
+          }
+        },
+        "buttons": {
+          "type": "object",
+          "description": "Default form buttons (e.g. send, cancel).",
+          "additionalProperties": {
+            "$ref": "#/definitions/formButton"
+          }
+        }
+      }
+    },
+    "listViews": {
+      "type": "object",
+      "description": "Default settings for list views and data tables.",
+      "additionalProperties": false,
+      "properties": {
+        "defaultList": {
+          "type": "string",
+          "description": "Name of the default list to show when navigating to /lists."
+        },
+        "defaultPageSize": {
+          "type": "number",
+          "description": "Default number of rows per page in list views."
+        },
+        "toolbar": {
+          "type": "object",
+          "description": "Default toolbar settings for list views."
+        },
+        "buttons": {
+          "type": "object",
+          "description": "Default list view buttons.",
+          "additionalProperties": {
+            "$ref": "#/definitions/formButton"
+          }
+        },
+        "filterPanel": {
+          "type": "object",
+          "description": "Default filter panel settings for list views."
+        },
+        "table": {
+          "type": "object",
+          "description": "Default table properties for list views (singular 'table' supported)."
+        },
+        "tables": {
+          "type": "object",
+          "description": "Default table properties for list views."
+        },
+        "pageSizes": {
+          "type": "array",
+          "description": "Available page sizes for list views.",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "default": [ 5, 10, 20, 50, 100 ]
+        },
+        "pagination": {
+          "type": "object",
+          "description": "Default pagination settings for list views."
+        },
+        "infiniteScroll": {
+          "type": "object",
+          "description": "Default infinite scroll settings for list views."
+        }
+      },
+      "required": [
+        "defaultList"
+      ]
+    }
+  },
+
+  // Required properties
+
+  "required": [
+    "strings",
+    "paths",
+    "shell",
+    "theme",
+    "listViews"
+  ],
+
+  // Definitions for reusable components
+
+  "definitions": {
+    "colorEntry": {
+      "type": "object",
+      "description": "A simple color entry with main color and an optional text color.",
+      "additionalProperties": false,
+      "properties": {
+        "main": {
+          "type": "string",
+          "description": "Hex or CSS color string for the main color."
+        },
+        "text": {
+          "type": "string",
+          "description": "Color used for text/icons on top of the main color."
+        }
+      },
+      "required": [
+        "main"
+      ]
+    },
+    "backgroundEntry": {
+      "type": "object",
+      "description": "Background color entries for default and paper surfaces.",
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "type": "string",
+          "description": "Background color used for page backgrounds (e.g. body)."
+        },
+        "paper": {
+          "type": "string",
+          "description": "Background color used for surface/paper elements."
+        }
+      }
+    },
+    "modePalette": {
+      "type": "object",
+      "description": "Palette entries for a single mode (light or dark).",
+      "additionalProperties": false,
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/colorEntry"
+        },
+        "secondary": {
+          "$ref": "#/definitions/colorEntry"
+        },
+        "background": {
+          "$ref": "#/definitions/backgroundEntry"
+        },
+        "error": {
+          "$ref": "#/definitions/colorEntry"
+        },
+        "warning": {
+          "$ref": "#/definitions/colorEntry"
+        },
+        "info": {
+          "$ref": "#/definitions/colorEntry"
+        },
+        "link": {
+          "$ref": "#/definitions/colorEntry"
+        }
+      }
+    },
+    "menuItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A single menu item for sidebar settings menus. Can be recursive via 'items'.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Logical name or key for the menu item. Used for i18n and settings lookup."
+        },
+        "type": {
+          "type": "string",
+          "description": "Kind of item: menu (select), submenu (group), action (click), separator (visual).",
+          "enum": [
+            "menu",
+            "submenu",
+            "action",
+            "separator",
+            "option"
+          ]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Material icon name to render alongside the item."
+        },
+        "defaultOption": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "description": "Default selected option value for menu/select items."
+        },
+        "label": {
+          "type": "string",
+          "description": "i18n key for the menu item label."
+        },
+        "action": {
+          "type": "string",
+          "description": "Named action to dispatch when this item is activated (e.g. 'setTheme')."
+        },
+        "value": {
+          "type": [ "string", "number", "boolean" ],
+          "description": "Value associated with this item (for options and actions)."
+        },
+        "items": {
+          "type": "array",
+          "description": "Nested menu items for submenu structures (recursive).",
+          "items": {
+            "$ref": "#/definitions/menuItem"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "type": { "const": "option" }
+        },
+        "required": [ "type" ]
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": [ "string", "number", "boolean" ],
+            "minLength": 1
+          }
+        },
+        "required": [ "value" ]
+      }
+    },
+    "fieldSizes": {
+      "type": "string",
+      "description": "Allowed field size values for forms.",
+      "enum": [ "xxs", "xs", "sm", "md", "lg", "xl", "xxl", "half", "full" ]
+    },
+    "buttonVariant": {
+      "type": "string",
+      "description": "Allowed component variant values for buttons.",
+      "enum": [ "default", "filled", "light", "outline", "subtle", "transparent", "white" ]
+    },
+    "formButton": {
+      "type": "object",
+      "description": "A form button definition.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of element (e.g. 'textButton', 'iconButton', 'separator').",
+          "enum": [ "textButton", "iconButton", "separator" ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Button label text."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name for icon buttons."
+        },
+        "tip": {
+          "type": "string",
+          "description": "Tooltip text for the button."
+        },
+        "selectedTip": {
+          "type": "string",
+          "description": "Tooltip text when the button is in selected/toggled state."
+        },
+        "toggle": {
+          "type": "boolean",
+          "description": "Whether the button is a toggle button."
+        },
+        "action": {
+          "type": "string",
+          "description": "Named action to dispatch when clicked."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Whether this is the default button (triggered on Enter key)."
+        },
+        "items": {
+          "type": "array",
+          "description": "Nested menu items for dropdown buttons.",
+          "items": {
+            "$ref": "#/definitions/menuItem"
+          }
+        }
+      }
+    },
+    "modeProps": {
+      "type": "object",
+      "description": "Used to define properties for light and dark modes.",
+      "additionalProperties": false,
+      "properties": {
+        "expandedLogo": {
+          "description": "Image file to be shown when the navbar is expanded.",
+          "type": "string"
+        },
+        "collapsedLogo": {
+          "description": "Image file to be shown when the navbar is collapsed.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

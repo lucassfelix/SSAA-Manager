@@ -1,0 +1,74 @@
+{
+    "$schema": "../../../../../schemas/fields.schema.json",
+    "comment": "Generated from listview.json and form.json",
+    "name": "produtos",
+    "language": "ptBR",
+    "fields": {
+        "id": {
+            "colStyles": "tabular",
+            "colTitle": "Nº",
+            "colWidth": 60,
+            "dataType": "string",
+            "fieldWidth": 60,
+            "footerIcon": "sum",
+            "label": "Nº",
+            "mask": { "pattern": "0000", "digits": 4 },
+            "readOnly": true
+        },
+        "sku": {
+            "colStyles": "semibold",
+            "colTitle": "SKU",
+            "colWidth": 140,
+            "dataType": "string",
+            "fieldWidth": 180,
+            "label": "SKU",
+            "placeholder": "Código SKU",
+            "required": true
+        },
+        "descricao": {
+            "colTitle": "Descrição",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "filterPlaceholder": "Descrição parcial ou completa",
+            "filterWidth": "50%",
+            "footer": "{count} produtos",
+            "label": "Descrição",
+            "placeholder": "Descrição do produto",
+            "render": { "layout": "link", "op": "edit" },
+            "required": true
+        },
+        "data_entrada": {
+            "colStyles": "sm",
+            "colTitle": "Entrada",
+            "colWidth": 120,
+            "dataType": "date",
+            "fieldWidth": 140,
+            "label": "Data de entrada",
+            "placeholder": "Selecione",
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
+        },
+        "estoque": {
+            "colTextAlign": "right",
+            "colTitle": "Estoque",
+            "colWidth": 80,
+            "dataType": "integer",
+            "fieldWidth": 120,
+            "label": "Estoque",
+            "placeholder": "0",
+            "required": true
+        },
+        "valor": {
+            "colTextAlign": "right",
+            "colTitle": "Valor (R$)",
+            "colWidth": 100,
+            "dataType": "decimal",
+            "fieldWidth": 120,
+            "footer": "{sum}",
+            "label": "Valor (R$)",
+            "placeholder": "0,00",
+            "render": { "layout": "decimal" },
+            "required": true
+        }
+    }
+}

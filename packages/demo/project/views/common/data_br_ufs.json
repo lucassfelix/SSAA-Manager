@@ -1,0 +1,137 @@
+[
+    {
+        "code": 1,
+        "label": "AC",
+        "name": "Acre"
+    },
+    {
+        "code": 2,
+        "label": "AL",
+        "name": "Alagoas"
+    },
+    {
+        "code": 3,
+        "label": "AM",
+        "name": "Amazonas"
+    },
+    {
+        "code": 4,
+        "label": "AP",
+        "name": "Amapá"
+    },
+    {
+        "code": 5,
+        "label": "BA",
+        "name": "Bahia"
+    },
+    {
+        "code": 6,
+        "label": "CE",
+        "name": "Ceará"
+    },
+    {
+        "code": 7,
+        "label": "DF",
+        "name": "Distrito Federal"
+    },
+    {
+        "code": 8,
+        "label": "ES",
+        "name": "Espírito Santo"
+    },
+    {
+        "code": 9,
+        "label": "GO",
+        "name": "Goiás"
+    },
+    {
+        "code": 10,
+        "label": "MA",
+        "name": "Maranhão"
+    },
+    {
+        "code": 11,
+        "label": "MG",
+        "name": "Minas Gerais"
+    },
+    {
+        "code": 12,
+        "label": "MS",
+        "name": "Mato Grosso do Sul"
+    },
+    {
+        "code": 13,
+        "label": "MT",
+        "name": "Mato Grosso"
+    },
+    {
+        "code": 14,
+        "label": "PA",
+        "name": "Pará"
+    },
+    {
+        "code": 15,
+        "label": "PB",
+        "name": "Paraíba"
+    },
+    {
+        "code": 16,
+        "label": "PE",
+        "name": "Pernambuco"
+    },
+    {
+        "code": 17,
+        "label": "PI",
+        "name": "Piauí"
+    },
+    {
+        "code": 18,
+        "label": "PR",
+        "name": "Paraná"
+    },
+    {
+        "code": 19,
+        "label": "RJ",
+        "name": "Rio de Janeiro"
+    },
+    {
+        "code": 20,
+        "label": "RN",
+        "name": "Rio Grande do Norte"
+    },
+    {
+        "code": 21,
+        "label": "RO",
+        "name": "Rondônia"
+    },
+    {
+        "code": 22,
+        "label": "RR",
+        "name": "Roraima"
+    },
+    {
+        "code": 23,
+        "label": "RS",
+        "name": "Rio Grande do Sul"
+    },
+    {
+        "code": 24,
+        "label": "SC",
+        "name": "Santa Catarina"
+    },
+    {
+        "code": 25,
+        "label": "SE",
+        "name": "Sergipe"
+    },
+    {
+        "code": 26,
+        "label": "SP",
+        "name": "São Paulo"
+    },
+    {
+        "code": 27,
+        "label": "TO",
+        "name": "Tocantins"
+    }
+]

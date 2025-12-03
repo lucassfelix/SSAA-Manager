@@ -1,0 +1,14 @@
+[
+    {
+        "value": "usuario",
+        "label": "Usuário"
+    },
+    {
+        "value": "admin",
+        "label": "Administrador"
+    },
+    {
+        "value": "superusuario",
+        "label": "Superusuário"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "value": 1,
+        "label": "Ativa",
+        "className": "success"
+    },
+    {
+        "value": 2,
+        "label": "Inativa",
+        "className": "warning"
+    },
+    {
+        "value": 3,
+        "label": "Cancelada",
+        "className": "error"
+    }
+]

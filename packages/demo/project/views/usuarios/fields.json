@@ -1,0 +1,80 @@
+{
+    "$schema": "../../../../../schemas/fields.schema.json",
+    "comment": "Generated manually",
+    "name": "usuarios",
+    "language": "ptBR",
+    "fields": {
+        "id": {
+            "colStyles": "tabular",
+            "colTitle": "Nº",
+            "colWidth": 60,
+            "dataType": "string",
+            "fieldWidth": 60,
+            "footerIcon": "sum",
+            "label": "Nº",
+            "mask": { "pattern": "0000", "digits": 4 },
+            "readOnly": true
+        },
+        "nome": {
+            "colStyles": "semibold",
+            "colTitle": "Nome completo",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "filterPlaceholder": "Nome parcial ou completo",
+            "filterWidth": "50%",
+            "footer": "{count} usuários",
+            "label": "Nome",
+            "placeholder": "Nome completo",
+            "render": { "layout": "link", "op": "edit" },
+            "required": true
+        },
+        "username": {
+            "colTitle": "Usuário",
+            "colWidth": 140,
+            "dataType": "string",
+            "fieldWidth": 200,
+            "label": "Nome de usuário",
+            "placeholder": "Username",
+            "required": true
+        },
+        "tipo_permissao": {
+            "colTitle": "Permissões",
+            "colWidth": 160,
+            "dataType": "select",
+            "defaultValue": "usuario",
+            "fieldWidth": 180,
+            "label": "Tipo de permissão",
+            "options": { "table": "permissoes" },
+            "placeholder": "Selecione uma opção"
+        },
+        "email": {
+            "colTitle": "E-mail",
+            "colWidth": 220,
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "E-mail",
+            "placeholder": "Preencha o e-mail",
+            "render": { "layout": "link", "op": "email" }
+        },
+        "empresa": {
+            "colTitle": "Empresa",
+            "colWidth": 180,
+            "dataType": "select",
+            "fieldWidth": 200,
+            "footer": "{unique} empresas",
+            "label": "Empresa",
+            "options": { "table": "empresas", "valueAccessor": "id", "labelAccessor": "empresa.nome_abreviado" },
+            "placeholder": "Selecione uma opção"
+        },
+        "ativo": {
+            "colTextAlign": "center",
+            "colTitle": "Ativo",
+            "colWidth": 70,
+            "dataType": "boolean",
+            "defaultValue": true,
+            "fieldWidth": 80,
+            "label": "Ativo",
+            "render": { "layout": "booleanIcon" }
+        }
+    }
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/common.schema.json",
+  "title": "Common schema",
+  "description": "Schema for information used by several schemas.",
+  "type": "object",
+
+  // Definitions for reusable components
+
+  "definitions": {
+    "$schema": {
+      "type": "string",
+      "description": "URI reference to the schema that documents this file."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the shape used for this file.",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "language": {
+      "type": "string",
+      "description": "BCP-47 language code used in the localization of this file.",
+      "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$",
+      "enum": [ "en-us", "es-419", "pt-br" ]
+    },
+    "comments": {
+      "type": "string",
+      "description": "Comments about the automatic generation of this file."
+    },
+    "formLayout": {
+      "type": "object",
+      "description": "Layout definition describing header fields and sectioned columns.",
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "type": "array",
+          "description": "List of field names to render in the header row.",
+          "items": {
+            "type": "string",
+            "description": "Field name to render in the header row."
+          }
+        },
+        "sections": {
+          "type": "array",
+          "description": "Array of sections that compose the form body.",
+          "items": {
+            "type": "object",
+            "description": "A single section with title, state and columns.",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Section title."
+              },
+              "initialState": {
+                "type": "string",
+                "enum": [
+                  "collapsed",
+                  "expanded",
+                  "fixed",
+                  "hidden"
+                ],
+                "description": "Initial state of the section (accordion)."
+              },
+              "columns": {
+                "type": "array",
+                "description": "Columns for this section; each column is an array of field names or row arrays.",
+                "items": {
+                  "type": "array",
+                  "description": "A single column containing field names or row arrays.",
+                  "items": {
+                    "description": "Field names or rows of field names.",
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Field name used in this column."
+                      },
+                      {
+                        "type": "array",
+                        "description": "Row of field names rendered side by side.",
+                        "items": {
+                          "type": "string",
+                          "description": "Field name in the row."
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "columns"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+    "$schema": "../../../../../schemas/fields.schema.json",
+    "comment": "Generated from listview.json and form.json",
+    "name": "empresas",
+    "language": "ptBR",
+    "fields": {
+        "id": {
+            "colStyles": ["semibold", "tabular"],
+            "colTitle": "Nº",
+            "colWidth": 40,
+            "dataType": "string",
+            "fieldWidth": 60,
+            "footerIcon": "sum",
+            "label": "Nº",
+            "mask": { "pattern": "0000", "digits": 4 },
+            "readOnly": true,
+            "render": { "layout": "link", "op": "edit" }
+        },
+        "nome": {
+            "accessor": "empresa.nome",
+            "colTitle": "Empresa",
+            "colWidth": 300,
+            "dataType": "string",
+            "fieldWidth": "70%",
+            "filterPlaceholder": "Nome parcial ou completo",
+            "filterWidth": "50%",
+            "footer": "{count} empresas",
+            "label": "Nome da empresa",
+            "placeholder": "Nome completo da empresa",
+            "render": {
+                "layout": "stacked",
+                "values": [
+                    { "accessor": "empresa.nome", "styles": [ "bold", "italic" ] },
+                    { "accessor": "empresa.cnpj", "styles": "small",
+                        "mask": { "pattern": "00.000.000/0000-00", "digits": 14 } }
+                ]
+            },
+            "required": true
+        },
+        "nome_abreviado": {
+            "accessor": "empresa.nome_abreviado",
+            "colTitle": "Abreviado",
+            "colWidth": 100,
+            "dataType": "string",
+            "fieldWidth": 240,
+            "label": "Nome abreviado",
+            "placeholder": "Nome curto da empresa",
+            "required": true
+        },
+        "cnpj": {
+            "accessor": "empresa.cnpj",
+            "dataType": "string",
+            "fieldWidth": 180,
+            "label": "CNPJ",
+            "mask": { "pattern": "00.000.000/0000-00", "digits": 14 },
+            "placeholder": "CNPJ da empresa",
+            "required": true
+        },
+        "ie": {
+            "accessor": "empresa.ie",
+            "dataType": "string",
+            "fieldWidth": 180,
+            "label": "Inscrição estadual",
+            "placeholder": "Opcional"
+        },
+        "endereco": {
+            "colTitle": "Endereço",
+            "colWidth": 180,
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "Endereço"
+        },
+        "cidade": {
+            "colTitle": "Cidade",
+            "colWidth": 100,
+            "dataType": "string",
+            "fieldWidth": 300,
+            "footer": "{unique} cidades",
+            "label": "Cidade"
+        },
+        "uf": {
+            "colTextAlign": "center",
+            "colTitle": "UF",
+            "colWidth": 40,
+            "dataType": "select",
+            "emphasizeColumn": true,
+            "fieldWidth": 120,
+            "label": "UF",
+            "options": { "table": "ufs", "valueAccessor": "code", "labelAccessor": "label" },
+            "placeholder": "Escolha"
+        },
+        "status": {
+            "colTextAlign": "center",
+            "colTitle": "Status",
+            "colWidth": 100,
+            "dataType": "select",
+            "defaultValue": 1,
+            "fieldWidth": 240,
+            "label": "Status",
+            "options": { "table": "status_empresa", "valueAccessor": "value", "labelAccessor": "label" },
+            "placeholder": "Selecione uma opção",
+            "render": { "layout": "colorWrapper" },
+            "required": true
+        },
+        "ativo": {
+            "dataType": "boolean",
+            "defaultValue": true,
+            "fieldWidth": 180,
+            "label": "Ativo"
+        }
+    }
+}

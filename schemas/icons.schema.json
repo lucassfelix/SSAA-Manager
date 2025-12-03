@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/icons.schema.json",
+  "title": "Icons mapping schema",
+  "description": "Schema that maps icon names to Tabler icon components (project/icons.json).",
+  "type": "object",
+
+  // Top-level properties
+
+  "properties": {
+    "$schema": {
+      "$ref": "./common.schema.json#/definitions/$schema"
+    }
+  },
+
+  // Additional properties
+
+  "additionalProperties": {
+    "type": "string",
+    "description": "Tabler icon component name."
+  }
+}

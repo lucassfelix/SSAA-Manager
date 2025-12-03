@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/node_modules": true
+		},
+		"search.exclude": {
+			"package*.*": true,
+			"node_modules": true,
+			".git": true,
+			"**/*.svg": true,
+			"**/*.png": true,
+			"**/*.jpg": true,
+			"**/__*/**": true
+		},
+		"[typescript]": {
+			"editor.tabSize": 2
+		}
+	}
+}

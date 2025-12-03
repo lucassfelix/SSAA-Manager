@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/form.schema.json",
+  "title": "Form metadata schema",
+  "description": "Schema for form metadata files (project/views/*/form.json).",
+  "type": "object",
+  "additionalProperties": false,
+
+  // Top-level properties
+
+  "properties": {
+    "$schema": {
+      "$ref": "./common.schema.json#/definitions/$schema"
+    },
+    "name": {
+      "type": "string",
+      "description": "Logical name of the form/view."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Free-form comment about this file."
+    },
+    "language": {
+      "type": "string",
+      "description": "Locale code used in this file."
+    },
+    "layout": {
+      "$ref": "./common.schema.json#/definitions/formLayout"
+    },
+    "edit": {
+      "type": "object",
+      "description": "Operation-specific metadata for edit mode.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title shown on edit forms."
+        },
+        "toolbar": {
+          "type": "array",
+          "description": "Toolbar items for the operation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "add": {
+      "$ref": "#/properties/edit"
+    },
+    "detail": {
+      "$ref": "#/properties/edit"
+    }
+  },
+
+  // Required properties
+
+  "required": [
+    "name",
+    "layout"
+  ]
+}

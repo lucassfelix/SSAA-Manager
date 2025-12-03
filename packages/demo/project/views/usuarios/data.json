@@ -1,0 +1,54 @@
+[
+	{
+		"id": 106,
+		"nome": "João Luís Machado Ayres Filho",
+		"username": "jayres",
+		"email": "joao.ayres18@uol.com.br",
+		"empresa": 8976,
+		"tipo_permissao": "admin"
+	},
+	{
+		"id": 2209,
+		"nome": "Mariana Duarte da Costa",
+		"username": "maricosta",
+		"email": "mari_costa@ig.com.br",
+		"empresa": 312,
+		"ativo": false,
+		"tipo_permissao": "usuario"
+	},
+	{
+		"id": 980,
+		"nome": "Pedro Henrique Bernardes Machado",
+		"username": "pedroh98",
+		"email": "pedro98@google.com",
+		"empresa": 216,
+		"tipo_permissao": "usuario"
+	},
+	{
+		"id": 40,
+		"nome": "Maria Beatriz Figueira Gomes",
+		"username": "maria_fig",
+		"email": "marifigueira@google.com",
+		"ativo": true,
+		"empresa": 1212,
+		"tipo_permissao": "usuario"
+	},
+	{
+		"id": 195,
+		"nome": "Marcelo Barroso Goulart",
+		"username": "mar33",
+		"email": "marcelobgoulart77@yahoo.com",
+		"ativo": true,
+		"empresa": 77,
+		"tipo_permissao": "superusuario"
+	},
+	{
+		"id": 340,
+		"nome": "Ana Beatriz Schneider Fernandes",
+		"username": "anafer21",
+		"email": "anaschneider21@uol.com.br",
+		"ativo": false,
+		"empresa": 4345,
+		"tipo_permissao": "usuario"
+	}
+]

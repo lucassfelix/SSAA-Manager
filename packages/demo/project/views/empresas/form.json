@@ -1,0 +1,45 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "empresas",
+    "language": "ptBR",
+    "layout": {
+        "header": [ "id", "nome", "nome_abreviado" ],
+        "sections": [
+            {
+                "initialState": "fixed",
+                "title": "Informações principais",
+                "columns": [
+                    [
+                        [ "cnpj", "ie" ],
+                        [ "status", "ativo" ]
+                    ],
+                    [
+                        "endereco",
+                        [ "uf", "cidade" ]
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "Empresa {name}",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "add": {
+        "title": "Nova empresa",
+        "toolbar": [
+            "send",
+            "cancel"
+        ]
+    },
+    "detail": {
+        "title": "Empresa {name}",
+        "toolbar": [
+            "close"
+        ]
+    }
+}

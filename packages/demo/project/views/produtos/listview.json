@@ -1,0 +1,38 @@
+{
+    "$schema": "../../../../../schemas/listview.schema.json",
+    "name": "produtos",
+    "type": "listView",
+    "language": "ptBR",
+    "config": {
+        "header": true,
+        "footer": true,
+        "idAccessor": "id",
+        "nameAccessor": "descricao",
+        "rowClassAccessor": "none"
+    },
+    "strings": {
+        "singular": "produto",
+        "plural": "produtos"
+    },
+    "columns": [
+        "id",
+        "sku",
+        "descricao",
+        "data_entrada",
+        "estoque",
+        "valor"
+    ],
+    "toolbar": [
+        { "type": "text", "text": "Produtos" },
+        "add",
+        "separator",
+        "search",
+        "filter",
+        "separator",
+        "more"
+    ],
+    "filterPanel": {
+        "layout": { "header": [ "descricao", "sku" ] },
+        "toolbar": [ "filter", "more" ]
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://neofront.com.br/schemas/views.schema.json",
+  "title": "Views configuration schema",
+  "description": "Schema for the list of active views for dynamic loading (project/views/views.json).",
+  "type": "object",
+  "additionalProperties": false,
+
+  // Top-level properties
+
+  "properties": {
+    "$schema": {
+      "$ref": "./common.schema.json#/definitions/$schema"
+    },
+    "active": {
+      "type": "array",
+      "description": "List of active view names to load.",
+      "items": {
+        "type": "string",
+        "description": "View folder name (e.g. 'usuarios', 'empresas')."
+      }
+    }
+  },
+
+  // Required properties
+
+  "required": [
+    "active"
+  ]
+}

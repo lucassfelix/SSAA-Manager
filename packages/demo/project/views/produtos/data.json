@@ -1,0 +1,66 @@
+[
+	{
+		"id": 4527,
+		"sku": "X15D-NB",
+		"descricao": "Notebook Dell Inspiron 15\" com Intel i5, 8GB RAM, 256GB SSD e Windows 11 Home Edition",
+		"data_entrada": "2025-01-15",
+		"valor": 5599.9,
+		"estoque": 12
+	},
+	{
+		"id": 891,
+		"sku": "LG-MX3",
+		"descricao": "Mouse Logitech MX Master 3",
+		"data_entrada": "2025-12-02",
+		"valor": 549,
+		"estoque": 45
+	},
+	{
+		"id": 3042,
+		"sku": "9230987120009",
+		"descricao": "Teclado mecânico Keychron K2 ABNT2",
+		"data_entrada": "2025-03-10",
+		"valor": 812,
+		"estoque": 23
+	},
+	{
+		"id": 15,
+		"sku": "987LG-UW29",
+		"descricao": "Volkswagen Golf 2025 1.4 TSI Highline",
+		"data_entrada": "2026-04-05",
+		"valor": 232899,
+		"estoque": 3
+	},
+	{
+		"id": 256,
+		"sku": "WC-920L",
+		"descricao": "Webcam Logitech C920 Pro HD",
+		"data_entrada": "2025-05-18",
+		"valor": 399,
+		"estoque": 67
+	},
+	{
+		"id": 5983,
+		"sku": "CLOHY08972",
+		"descricao": "Headset HyperX Cloud II",
+		"data_entrada": "2025-11-20",
+		"valor": 649,
+		"estoque": 31
+	},
+	{
+		"id": 1647,
+		"sku": "RZDV200",
+		"descricao": "Mouse pad gamer Razer DeathAdder V2",
+		"data_entrada": "2025-07-10",
+		"valor": 99.9,
+		"estoque": 156
+	},
+	{
+		"id": 782,
+		"sku": "PC-CLIP01",
+		"descricao": "Clipe de papel",
+		"data_entrada": "2025-07-10",
+		"valor": 0.438,
+		"estoque": 5000
+	}
+]
