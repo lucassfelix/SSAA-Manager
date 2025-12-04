@@ -1,5 +1,6 @@
 {
   "name": "@neofront/core",
+  "private": true,
   "version": "0.9.0",
   "type": "module",
   "main": "./src/index.ts",
@@ -14,12 +15,12 @@
     "react-dom": "^19.2.1",
     "react-router-dom": "^7.10.0"
   },
-  "devDependencies": {
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3"
-  },
   "dependencies": {
     "clsx": "^2.1.1",
     "react-imask": "^7.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3"
   }
 }
