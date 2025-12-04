@@ -39,7 +39,8 @@ export default function ThemeSwitch() {
     <Tooltip label={label}>
       <ActionIcon
         variant="default"
-        size="lg"
+        size={appCfg.forms.toolbar?.iconButton?.size}
+        radius={appCfg.forms.toolbar?.iconButton?.radius}
         aria-label={label}
         onClick={() => togggleTheme()}
       >

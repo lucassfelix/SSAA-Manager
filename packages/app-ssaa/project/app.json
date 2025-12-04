@@ -2,7 +2,7 @@
 	"$schema": "../../../schemas/app.schema.json",
 	"version": "0.2.0",
 	"language": "pt-br",
-	"comments": "This file should be generated automatically by merging the default app settings, the project-specific settings, and localized translations.",
+	"comments": "SSAA: configuração de projeto",
 	"strings": {
 		"appTitle": "{pageName} | SSAA",
 		"appVersion": "0.10.0",
@@ -90,7 +90,7 @@
 			}
 		},
 		"title": {
-			"label": "Sistema Gerencial"
+			"label": "Sistema Gerencial SSAA"
 		},
 		"toggleNavbar": {
 			"rotateIcon": true,
@@ -165,7 +165,7 @@
 			},
 			"text": {
 				"size": 20,
-				"fontWeight": 600,
+				"fontWeight": 500,
 				"width": 120
 			}
 		},

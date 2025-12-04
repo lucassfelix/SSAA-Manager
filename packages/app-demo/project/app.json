@@ -2,7 +2,7 @@
 	"$schema": "../../../schemas/app.schema.json",
 	"version": "0.2.0",
 	"language": "pt-br",
-	"comments": "This file should be generated automatically by merging the default app settings, the project-specific settings, and localized translations.",
+	"comments": "Demo: configuração de projeto",
 	"strings": {
 		"appTitle": "{pageName} | NeoFront {version}",
 		"appVersion": "0.17.2",

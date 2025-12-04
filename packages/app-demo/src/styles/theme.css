@@ -4,14 +4,6 @@
 
 /* #region ---------------------------------------------------------------- Global element styles */
 
-/* Custom theme colors */
-/* body {
-  --mantine-color-body: #242930;
-  --mantine-primary-color-light-color: #FFF187;
-  --mantine-color-blue-light-color: #FFF187;
-  --mantine-color-anchor: #52a2e4;
-} */
-
 /* Tooltip custom styles */
 .nf-light {
   --tooltip-bg: var(--mantine-color-gray-7);

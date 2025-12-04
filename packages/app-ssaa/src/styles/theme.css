@@ -5,11 +5,22 @@
 /* #region ---------------------------------------------------------------- Global element styles */
 
 /* Custom theme colors */
-body {
-  --mantine-color-body: #242930;
-  /* --mantine-primary-color-light-color: #FFF187; */
-  /* --mantine-color-blue-light-color: #FFF187; */
-  /* --mantine-color-anchor: #52a2e4; */
+body.nf-light {
+  --nf-background-color: #f9faff;
+  --nf-primary-color: #1f82da;
+
+  --mantine-color-body: var(--nf-background-color);
+  --mantine-primary-color-light-color: var(--nf-primary-color);
+  --mantine-color-anchor: var(--nf-primary-color);
+}
+body.nf-dark {
+  --nf-background-color: #242930;
+  --nf-primary-color: #3fa6ff;
+  
+  --mantine-color-body: var(--nf-background-color);
+  --mantine-primary-color-light-color: var(--nf-primary-color);
+  --mantine-color-anchor: var(--nf-primary-color);
+  --mantine-color-default: var(--mantine-color-gray-8);
 }
 
 /* Tooltip custom styles */
@@ -23,6 +34,10 @@ body {
 .nf-dark .mantine-Tooltip-tooltip b {
   font-weight: 700;
   color: var(--mantine-color-teal-9);
+}
+
+header h4 {
+  font-weight: 500 !important;
 }
 
 /* #endregion */

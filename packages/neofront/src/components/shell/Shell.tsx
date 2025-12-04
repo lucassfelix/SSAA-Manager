@@ -153,10 +153,11 @@ export default function Shell() {
   const navCollapseToggle = collapsible ? (
     <Tooltip label={desktopOpened ? toggleCfg.tipCollapse : toggleCfg.tipExpand}>
       <ActionIcon
-        size={40}
-        radius={20}
+        size={appCfg.forms.toolbar?.iconButton?.size}
+        radius={appCfg.forms.toolbar?.iconButton?.radius}
         title={desktopOpened ? toggleCfg.tipCollapse : toggleCfg.tipExpand}
         variant="subtle"
+        color="var(--mantine-primary-color-light-color)"
         onClick={() => { handleToggleDesktop(); toggleMobile(); }}
       >
         <NfIcon
