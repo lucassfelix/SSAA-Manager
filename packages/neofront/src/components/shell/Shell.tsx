@@ -60,7 +60,10 @@ export interface ShellProps {
     tipDark: string;
   };
   logo: {
-    height: number;
+    collapsedHeight: number;
+    expandedHeight: number;
+    collapsedWidth: number;
+    expandedWidth: number;
     altText: string;
   }
 }
@@ -110,8 +113,8 @@ export default function Shell() {
         <Image
           src={appCfg.paths.images + (collapsed ? themeCfg.collapsedLogo : themeCfg.expandedLogo)}
           alt={shellCfg.logo.altText ?? "Logo"}
-          h={shellCfg.logo.height}
-          w="auto"
+          h={collapsed ? shellCfg.logo.collapsedHeight : shellCfg.logo.expandedHeight}
+          w={ collapsed ? shellCfg.logo.collapsedWidth : shellCfg.logo.expandedWidth }
           fit="contain"
         />
       </Group>

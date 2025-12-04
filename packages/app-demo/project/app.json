@@ -111,7 +111,8 @@
 			"tipDark": "Mudar para o tema escuro"
 		},
 		"logo": {
-			"height": 52,
+			"collapsedHeight": 52,
+			"expandedHeight": 52,
 			"altText": "Logotipo Hypervisual"
 		},
 		"userMenu": {

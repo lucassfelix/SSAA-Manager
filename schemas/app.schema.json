@@ -310,9 +310,21 @@
           "description": "Logo configuration for the application shell.",
           "additionalProperties": false,
           "properties": {
-            "height": {
-              "type": "number",
-              "description": "Height of the logo in pixels."
+            "collapsedHeight": {
+              "type": ["number", "string"],
+              "description": "Collapsed height of the logo in pixels, or \"auto\" (optional)."
+            },
+            "expandedHeight": {
+              "type": ["number", "string"],
+              "description": "Expanded height of the logo in pixels, or \"auto\" (optional)."
+            },
+            "collapsedWidth": {
+              "type": ["number", "string"],
+              "description": "Collapsed width of the logo in pixels, or \"auto\" (optional)."
+            },
+            "expandedWidth": {
+              "type": ["number", "string"],
+              "description": "Expanded width of the logo in pixels, or \"auto\" (optional)."
             },
             "altText": {
               "type": "string",

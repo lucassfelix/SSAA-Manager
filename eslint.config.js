@@ -21,8 +21,7 @@ export default defineConfig([
         "caughtErrorsIgnorePattern": "^_"
       }],
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      // "brace-style": ["warn", "1tbs", { "allowSingleLine": false }],
+      "@typescript-eslint/no-explicit-any": "off"
     },
   }
 ]);

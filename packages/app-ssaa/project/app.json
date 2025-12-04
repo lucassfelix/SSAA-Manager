@@ -29,7 +29,6 @@
 			"bordered": true,
 			"items": [
 				"collapseToggle",
-				"logo",
 				"title",
 				"spacer",
 				"themeSwitch"
@@ -103,7 +102,8 @@
 			"tipDark": "Mudar para o tema escuro"
 		},
 		"logo": {
-			"height": 52,
+			"collapsedWidth": 72,
+			"expandedWidth": 140,
 			"altText": "Logotipo SSAA"
 		},
 		"userMenu": {
@@ -271,17 +271,17 @@
 	"theme": {
 		"defaultUIScale": 100,
 		"typography": {
-			"mainFamily": null,
-			"headingsFamily": null
+			"mainFamily": "Roboto",
+			"headingsFamily": "Roboto"
 		},
 		"modes": {
 			"light": {
-				"expandedLogo": "logo-ssaa.svg",
-				"collapsedLogo": "logo-ssaa.svg"
+				"expandedLogo": "logo-ssaa-light.svg",
+				"collapsedLogo": "logo-ssaa-light.svg"
 			},
 			"dark": {
-				"expandedLogo": "logo-ssaa.svg",
-				"collapsedLogo": "logo-ssaa.svg"
+				"expandedLogo": "logo-ssaa-dark.svg",
+				"collapsedLogo": "logo-ssaa-dark.svg"
 			}
 		}
 	}
