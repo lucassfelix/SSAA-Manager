@@ -1,5 +1,5 @@
 //
-// Entry point for the demo application.
+// Entry point for this application.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
