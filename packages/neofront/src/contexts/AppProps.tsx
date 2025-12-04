@@ -56,7 +56,7 @@ interface ListViewsProps {
   buttons: {
     [key: string]: ToolbarItem;
   };
-  filterPanel: {
+  filterPanel?: {
     verticalPadding?: number;
     transitionDuration?: number;
     verticalGap?: MantineSpacing;
