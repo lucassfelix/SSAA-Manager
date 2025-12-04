@@ -11,7 +11,8 @@
 		"yes": "Sim",
 		"defaultDateFormat": "DD/MM/YYYY",
 		"decimalSeparator": ",",
-		"thousandSeparator": "."
+		"thousandSeparator": ".",
+		"noRecordsText": "Sem itens a exibir"
 	},
 	"errorStrings": {
 		"noViewType": "O tipo de visualização <b>{type}</b> não é suportado.",
