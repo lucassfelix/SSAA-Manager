@@ -76,6 +76,7 @@ export type IconsConfig = Record<string, string | string[]>;
  */
 export interface AppProps {
   language: 'en-us' | 'es-419' | 'pt-br';
+  projectId: string;
   strings: {
     [key: string]: string;
   };

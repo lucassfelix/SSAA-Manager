@@ -21,6 +21,10 @@
     "comments": {
       "$ref": "./common.schema.json#/definitions/comments"
     },
+    "projectId": {
+      "type": "string",
+      "description": "Unique identifier for this project. Used for settings storage."
+    },
     "strings": {
       "type": "object",
       "description": "Localized strings for the application UI.",

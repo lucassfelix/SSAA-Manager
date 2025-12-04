@@ -38,6 +38,11 @@ export default function App(props: MainAppProps) {
   
   const { appCfg, menuCfg, iconsCfg, loadView } = props;
 
+  // Validate projectId
+  if(!appCfg.projectId || appCfg.projectId.trim() === '') {
+    throw new Error("Missing required projectId in app configuration.");
+  }
+
   // Validate locale
   if (['en-us', 'es-419', 'pt-br'].includes(appCfg.language) === false) {
     throw new Error(`Unsupported language locale "${appCfg.language}" in app configuration.`);
@@ -48,7 +53,7 @@ export default function App(props: MainAppProps) {
 
   // Store and retrieve settings from local storage
   const [userSettings, setUserSettings] = useLocalStorage<UserSettings>({
-    key: "neofront-settings",
+    key: `nf-${appCfg.projectId}`,
     defaultValue: {
       dark: false,
       navbarCollapsed: false,
