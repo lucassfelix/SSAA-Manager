@@ -4,7 +4,7 @@
         {
             "name": "instituicoes",
             "label": "Instituições",
-            "icon": "buildingCommunity"
+            "icon": "building"
         },
         {
             "name": "usuarios",
@@ -19,7 +19,7 @@
         {
             "name": "projetos",
             "label": "Projetos",
-            "icon": "folder"
+            "icon": "folderOpen"
         }
     ]
 }

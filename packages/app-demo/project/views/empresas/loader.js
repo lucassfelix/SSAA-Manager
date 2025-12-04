@@ -1,5 +1,5 @@
 
-// Simple metadata / mock data loader
+// Metadata and data loader
 
 import fields from "./fields.json";
 import listView from "./listview.json";

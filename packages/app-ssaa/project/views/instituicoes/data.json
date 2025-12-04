@@ -1,64 +1,49 @@
 [
 	{
 		"id": 1,
-		"nome": "Companhia Alfa",
-		"nome_abreviado": "Alfa",
+		"nome": "Companhia AlfaDent",
+		"nome_abreviado": "AlfaDent",
 		"cnpj": "12.345.678/0001-90",
 		"data_criacao": "2020-01-15",
 		"data_expiracao": "2026-01-15",
-		"endereco": "Rua Teodósio Junqueira das Flores, 123",
-		"cidade": "São Paulo",
-		"uf": 26,
 		"status": 1,
 		"ativo": true
 	},
 	{
 		"id": 2,
-		"nome": "Beta dentária Ltda.",
-		"nome_abreviado": "Betatests",
+		"nome": "Beta Dentária Ltda.",
+		"nome_abreviado": "Beta Dentária",
 		"cnpj": "7765432000101",
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "Av. Brasil, 4561",
-		"cidade": "Rio de Janeiro",
-		"uf": 19,
 		"status": 2,
 		"ativo": false
 	},
 	{
 		"id": 3,
 		"nome": "Delta Dentes",
-		"nome_abreviado": "Delta",
+		"nome_abreviado": "Delta Dentes",
 		"cnpj": 49505234000103,
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "R. Vale Verde, 101, cj. 1104",
-		"cidade": "Curitiba",
-		"uf": 18,
 		"status": 3
 	},
 	{
 		"id": 4,
-		"nome": "Gamalon Solutions",
+		"nome": "Clínica Gamalon Solutions",
 		"nome_abreviado": "Gamalon",
 		"cnpj": "15.987.654/0001-32",
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "Avenida Marechal Odenor Nascentino Torres, 303 / apto. 1201",
-		"cidade": "São Paulo",
-		"uf": 26,
 		"status": 1
 	},
 	{
 		"id": 5,
-		"nome": "ZetaTech",
+		"nome": "ZetaTech Odontologia Avançada",
 		"nome_abreviado": "ZetaTech",
 		"cnpj": 76000187,
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "Av. Atlântica, 4041 — sala 403",
-		"cidade": "São Paulo",
-		"uf": 26,
 		"status": 1
 	},
 	{
@@ -68,21 +53,15 @@
 		"cnpj": "92.834.352/0001-08",
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "Rua Pedro Acaciano, 606",
-		"cidade": "São Paulo",
-		"uf": 26,
 		"status": 3
 	},
 	{
 		"id": 7,
-		"nome": "Ômega Indústrias",
+		"nome": "Ômega Serviços Odontológicos Integrados",
 		"nome_abreviado": "Ômega",
 		"cnpj": "9.213.671/0001-09",
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
-		"endereco": "Av. Muriel Silva Paes, 884",
-		"cidade": "Belo Horizonte",
-		"uf": "MG",
 		"status": 2
 	}
 ]
