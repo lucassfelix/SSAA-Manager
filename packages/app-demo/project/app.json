@@ -44,12 +44,9 @@
 			"collapsedWidth": 72,
 			"bordered": true,
 			"icons": true,
-			"footer": true,
+			"footer": false,
 			"items": [
 				"mainMenu"
-			],
-			"footerItems": [
-				"logo"
 			]
 		},
 		"menu": {

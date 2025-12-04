@@ -127,7 +127,7 @@ export default function Shell() {
       console.warn(`No items defined in container`);
       return [<span key={`header-item-empty`}>{`[No elements found in container]`}</span>];
     }
-    return ((items as string[]) || []).map((it, idx) => {
+    return ((items as ItemRendererTypes[]) || []).map((it, idx) => {
       const key = `header-item-${idx}-${it}`;
       switch (it) {
         case 'collapseToggle':

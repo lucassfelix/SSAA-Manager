@@ -25,6 +25,26 @@
   background-color: var(--mantine-color-blue-8);
 }
 
+/* Watermark */
+.mantine-AppShell-navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+.nf-light .mantine-AppShell-navbar::before {
+  background-image: url('images/watermark-colors.svg');
+  opacity: 0.3;
+}
+.nf-dark .mantine-AppShell-navbar::before {
+  background-image: url('images/watermark-white.svg');
+  opacity: 0.2;
+}
+
 /* #endregion */
 
 /* #region ----------------------------------------------------------- Table and datatable styles */
