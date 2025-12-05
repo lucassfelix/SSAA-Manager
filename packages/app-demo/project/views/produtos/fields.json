@@ -16,7 +16,7 @@
             "readOnly": true
         },
         "sku": {
-            "colStyles": "semibold",
+            "colStyles": "sm",
             "colTitle": "SKU",
             "colWidth": 140,
             "dataType": "string",
