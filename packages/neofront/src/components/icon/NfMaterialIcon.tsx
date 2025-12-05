@@ -6,7 +6,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX } from 'react';
-import '@material-design-icons/font';
+import 'material-icons/iconfont/material-icons.css';
 import { Box } from '@mantine/core';
 
 import { NfIconProps } from './NfIcon';
