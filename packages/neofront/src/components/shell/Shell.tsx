@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX, ReactNode } from "react";
-import { Space, Tooltip, Title, Box, Group, ActionIcon, Center, Loader } from "@mantine/core";
+import { Space, Tooltip, Title, Box, Group, ActionIcon } from "@mantine/core";
 import { Image } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
 
@@ -85,8 +85,7 @@ export default function Shell() {
 
   // #region Hooks and variables
 
-  const { appCfg, userSettings, setUserSettings, currentView, currentOp, viewResult,
-    isReady } = useAppUI();
+  const { appCfg, userSettings, setUserSettings, currentView, currentOp, viewResult } = useAppUI();
   const op = currentOp as FormOperationType;
 
   const shellCfg = appCfg.shell as ShellProps;
@@ -175,11 +174,7 @@ export default function Shell() {
 
   const mainContents = (
     <Box p={16} h="100%" miw={800}>
-      {!isReady ? (
-        <Center h="100%">
-          <Loader size="lg" />
-        </Center>
-      ) : viewResult.listView ? (
+      {viewResult?.listView ? (
         viewResult.listView.type === 'listView' ?
           (op ? <NfForm op={op} /> : <NfListView />) : (
             <ErrorPage

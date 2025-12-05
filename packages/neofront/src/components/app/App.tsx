@@ -35,11 +35,11 @@ interface MainAppProps {
 export default function App(props: MainAppProps) {
 
   // #region Hooks and variables
-  
+
   const { appCfg, menuCfg, iconsCfg, loadView } = props;
 
   // Validate projectId
-  if(!appCfg.projectId || appCfg.projectId.trim() === '') {
+  if (!appCfg.projectId || appCfg.projectId.trim() === '') {
     throw new Error("Missing required projectId in app configuration.");
   }
 
@@ -73,7 +73,29 @@ export default function App(props: MainAppProps) {
     op: string;
     recordId: string;
     result: ViewResultProps | undefined;
-  }>({ view: '', op: '', recordId: '', result: undefined });
+  }>(() => {
+    // Initialize from sessionStorage if available (survives full page reloads)
+    try {
+      const cached = sessionStorage.getItem('__nf_loaded_cache');
+      if (cached) {
+        return JSON.parse(cached);
+      }
+    } catch (_e) {
+      /* ignore */
+    }
+    return { view: '', op: '', recordId: '', result: undefined };
+  });
+
+  // Cache loaded state to sessionStorage for reload survival
+  useEffect(() => {
+    if (loaded.result?.listView) {
+      try {
+        sessionStorage.setItem('__nf_loaded_cache', JSON.stringify(loaded));
+      } catch (_e) {
+        /* ignore */
+      }
+    }
+  }, [loaded]);
 
   // Use loaded values for rendering to prevent flashes during navigation
   const currentView = loaded.view || urlView;
