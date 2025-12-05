@@ -5,6 +5,13 @@ import path from "path";
 const neofrontPath = path.resolve(__dirname, "../neofront/src");
 
 export default defineConfig({
+  build: {
+    sourcemap: false,
+  },
+  server: {
+    port: 5173,
+    sourcemapIgnoreList: () => true
+  },
   plugins: [react()],
   resolve: {
     alias: {

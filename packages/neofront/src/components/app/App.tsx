@@ -7,6 +7,7 @@
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
+// import { StrictMode } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { DatesProvider } from '@mantine/dates';
@@ -148,6 +149,7 @@ export default function App(props: MainAppProps) {
   // #endregion
 
   return (
+    // <StrictMode>
     <MantineProvider
       theme={theme}
       defaultColorScheme={userSettings.dark ? 'dark' : 'light'}
@@ -170,6 +172,7 @@ export default function App(props: MainAppProps) {
         </AppUIContext.Provider>
       </DatesProvider>
     </MantineProvider>
+    // </StrictMode>
   );
 
 }

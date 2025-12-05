@@ -5,7 +5,6 @@
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
-	"typescript.formatter.enable": true,
 	"eslint.useFlatConfig": true,
 	"eslint.validate": [
 		"javascript",
@@ -13,7 +12,6 @@
 		"typescript",
 		"typescriptreact"
 	],
-	// "eslint.format.enable": true,
 	"eslint.enable": true,
 	"eslint.run": "onType",
 	"eslint.workingDirectories": [

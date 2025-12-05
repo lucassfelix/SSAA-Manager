@@ -4,7 +4,6 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
@@ -30,16 +29,14 @@ const container = document.getElementById("root")!;
 const root = (window as any).__nf_root || ((window as any).__nf_root = ReactDOM.createRoot(container));
 
 root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <App
-        appCfg={appCfg as AppProps}
-        menuCfg={menuCfg as MenuConfig}
-        iconsCfg={iconsCfg as IconsConfig}
-        loadView={createViewLoader(viewsCfg.active, loaderModules)}
-      />
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <App
+      appCfg={appCfg as AppProps}
+      menuCfg={menuCfg as MenuConfig}
+      iconsCfg={iconsCfg as IconsConfig}
+      loadView={createViewLoader(viewsCfg.active, loaderModules)}
+    />
+  </BrowserRouter>
 );
 
 // #endregion
