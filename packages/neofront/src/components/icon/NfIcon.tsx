@@ -1,21 +1,20 @@
 //
-// Small typed wrapper for @tabler/icons-react.
-// Exports a mapping of icon names to Tabler icons,
+// Simple icon component that wraps different icon libraries.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import React, { JSX, CSSProperties } from "react";
-import { type IconProps, IconCircleOff } from "@tabler/icons-react";
-import * as Tabler from '@tabler/icons-react';
+import { CSSProperties, JSX } from "react";
 
-import { useAppUI, IconsConfig } from "context";
+import NfTablerIcon from "./NfTablerIcon";
+import NfMaterialIcon from "./NfMaterialIcon";
+import { useAppUI } from "context";
 
 // #endregion
 
 // #region ----------------------------------------------------------------------------------- Types
 
-interface NfIconProps {
+export interface NfIconProps {
   icon: string | null;
   size?: number;
   stroke?: number | string;
@@ -26,44 +25,18 @@ interface NfIconProps {
 
 // #endregion
 
-// #region -------------------------------------------------------------------------------- Icon map
-
-function buildIconMap(iconsCfg: IconsConfig, filled: boolean = false) {
-  return Object.entries(iconsCfg).reduce((acc, [key, exportName]) => {
-    (acc as any)[key] = (Tabler as any)[Array.isArray(exportName) ?
-      exportName[filled ? (exportName[1] ? 1 : 0) : 0] : exportName];
-    return acc;
-  }, {} as Record<string, React.ComponentType<IconProps>>);
-}
-
-// #endregion
-
 // #region ------------------------------------------------------------------------------- Component
 
 export default function NfIcon(props: NfIconProps): JSX.Element {
+  const { appCfg } = useAppUI();
 
-  if (!props.icon) {
-    return <></>;
+  switch(appCfg.theme.iconFamily) {
+    case 'material':
+      return <NfMaterialIcon {...props} />;
+    case 'tabler':
+    default:
+      return <NfTablerIcon {...props} />;
   }
-  const { icon, size, stroke, color, filled, style } = props;
-  const { iconsCfg } = useAppUI();
-  const map = buildIconMap(iconsCfg, filled);
-
-  // Prefer explicit mapping; otherwise try to derive Tabler export name automatically
-  let Comp: React.ComponentType<IconProps> | undefined = map[icon];
-  if (!Comp) {
-    const toPascal = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-    const base = `Icon${toPascal(icon)}`;
-    const autoName = filled && (Tabler as any)[`${base}Filled`] ? `${base}Filled` : base;
-    Comp = (Tabler as any)[autoName] as React.ComponentType<IconProps> | undefined;
-  }
-
-  if (Comp === undefined) {
-    console.warn(`NfIcon: Icon "${icon}" not found.`);
-    return <IconCircleOff size={size} stroke={stroke} color="red" />;
-  }
-
-  return <Comp size={size} stroke={stroke} color={color} style={style} />;
 }
 
 // #endregion

@@ -101,6 +101,7 @@ export interface AppProps {
   }
   theme: {
     defaultUIScale: number;
+    iconFamily: 'tabler' | 'material';
     typography: {
       mainFamily?: string | null;
       headingsFamily?: string | null;

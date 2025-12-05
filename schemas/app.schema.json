@@ -380,6 +380,11 @@
           "type": "number",
           "description": "Default UI scale factor, in percentage (e.g. 100%, 95%)."
         },
+        "iconFamily": {
+          "type": "string",
+          "description": "Default icon family to use in the application.",
+          "enum": [ "tabler", "material" ]
+        },
         "typography": {
           "type": "object",
           "description": "Typography defaults.",

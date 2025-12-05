@@ -351,6 +351,7 @@
 	},
 	"theme": {
 		"defaultUIScale": 100,
+		"iconFamily": "material",
 		"typography": {
 			"mainFamily": null,
 			"headingsFamily": null
