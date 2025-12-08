@@ -249,13 +249,15 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
     }
 
     function renderDecimalCell(value: string | number): ReactNode {
-      return <NumberFormatter
-        value={Number(value)}
-        thousandSeparator="."
-        decimalSeparator=","
-        decimalScale={2}
-        fixedDecimalScale={true}
-      />;
+      return (
+        <NumberFormatter
+          value={Number(value)}
+          thousandSeparator={appCfg.strings.thousandSeparator || ","}
+          decimalSeparator={appCfg.strings.decimalSeparator || "."}
+          decimalScale={2}
+          fixedDecimalScale={true}
+        />
+      );
     }
 
     function renderCell(): ((r: Record<string, unknown>) => ReactNode) | undefined {
