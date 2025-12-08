@@ -27,12 +27,12 @@
         "add",
         "separator",
         "search",
-        "filter",
+        "filterPanel",
         "separator",
-        "more"
+        "listViewMore"
     ],
     "filterPanel": {
         "layout": { "header": [ "descricao", "sku" ] },
-        "toolbar": [ "filter", "more" ]
+        "toolbar": [ "filter", "filterMore" ]
     }
 }

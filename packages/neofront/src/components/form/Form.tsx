@@ -10,7 +10,7 @@ import { Divider, ScrollArea, Stack, Title } from "@mantine/core";
 
 import { useAppUI } from "context";
 import { getValueByPath } from '@/listView/datatableUtils';
-import NfToolbar from "@/toolbar/Toolbar";
+import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
 import FormLayout from './FormLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
 import { RecordConfig } from 'src/contexts/FormProps';
@@ -56,7 +56,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     String(currentRecordId)) : undefined;
   const name = record ? getValueByPath(record, nameAccessor) : undefined;
   const navigate = useNavigate();
-  const formCfg = (op === 'filter') ? appCfg.listViews.filterPanel ?? {} : appCfg.forms;
+  const formCfg = (op === 'filter') ? { ...appCfg.forms, ...appCfg.listViews.filterPanel} : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ?
     viewResult.form[op as AllowedOp] : {}) as RecordConfig;
   const toolbar = (op === 'filter') ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
@@ -104,14 +104,14 @@ export default function NfForm(props: FormProps): JSX.Element {
         <Stack>
           {formCfg.toolbar?.upperBorder && <Divider />}
           <NfToolbar
-            items={appCfg.forms.buttons ? (toolbar?.map(bn => {
-              const btn = appCfg.forms.buttons[bn];
+            items={toolbar?.map(name => {
+              const btn = appCfg.controls[name] as ToolbarItem;
               if (!btn) {
-                console.warn(`Button '${bn}' not found in appCfg.forms.buttons.`);
+                console.warn(`Button '${name}' not found in appCfg.controls.`);
               }
               return btn;
-            }).filter(Boolean) ?? []) : []}
-            cfg={formCfg.toolbar!}
+            }).filter(Boolean) ?? []}
+            cfg={{...appCfg.toolbars, ...(op === 'filter' ? appCfg.listViews.filterToolbar : formCfg.toolbar)}}
             onAction={handleAction}
           />
         </Stack>

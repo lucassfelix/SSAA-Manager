@@ -67,7 +67,6 @@
 			"rotateSelected": true,
 			"size": 36,
 			"radius": 8,
-			"outlineStroke": 1.5,
 			"filled": false,
 			"selectedVariant": "filled",
 			"regularVariant": "subtle",
@@ -86,7 +85,7 @@
 			"width": 120
 		}
 	},
-	"controls": {
+	"mainControls": {
 		"mainTitle": {
 			"label": "Aplicação de Exemplo NeoFront"
 		},
@@ -105,7 +104,9 @@
 			"type": "iconButton",
 			"tipLight": "Mudar para o tema claro",
 			"tipDark": "Mudar para o tema escuro"
-		},
+		}
+	},
+	"controls": {
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
@@ -197,92 +198,14 @@
 			"trueIcon": "circleCheck",
 			"falseIcon": "squareX"
 		},
-		"toolbar": {
-			"horizontalPadding": 24,
-			"verticalPadding": 6,
-			"gap": 16,
-			"align": "left",
-			"iconButton": {
-				"rotateSelected": true,
-				"size": 36,
-				"radius": 8,
-				"stroke": 1.5,
-				"filled": false,
-				"icon": {
-					"size": 24,
-					"stroke": 2
-				}
-			},
-			"textButton": {
-				"size": "sm",
-				"radius": 6
-			},
-			"text": {
-				"size": 20,
-				"fontWeight": 600,
-				"width": 120
-			}
-		},
-		"buttons": {
-			"separator": {
-				"type": "separator"
-			},
-			"add": {
-				"type": "iconButton",
-				"tip": "Adicionar {singular}",
-				"icon": "add",
-				"action": "add"
-			},
-			"search": {
-				"type": "iconButton",
-				"tip": "Pesquisar {plural}",
-				"icon": "search",
-				"action": "search"
-			},
-			"filter": {
-				"type": "iconButton",
-				"toggle": true,
-				"tip": "Abrir painel de pesquisa",
-				"selectedTip": "Fechar painel de pesquisa",
-				"icon": "filter",
-				"action": "toggleFilterPanel"
-			},
-			"more": {
-				"type": "iconButton",
-				"tip": "Mais ações",
-				"icon": "moreVertical",
-				"items": [
-					{
-						"name": "exportCSV",
-						"label": "Exportar para planilha",
-						"action": "exportCSV"
-					},
-					{
-						"name": "exportPDF",
-						"label": "Exportar PDF",
-						"action": "exportPDF"
-					},
-					{
-						"type": "separator"
-					},
-					{
-						"name": "print",
-						"label": "Imprimir listagem",
-						"action": "printRecords"
-					}
-				]
-			}
+		"filterToolbar": {
+			"horizontalPadding": 0,
+			"verticalPadding": 0,
+			"align": "right"
 		},
 		"filterPanel": {
 			"verticalPadding": 12,
-			"transitionDuration": 200,
-			"toolbar": {
-				"horizontalPadding": 0,
-				"verticalPadding": 0,
-				"gap": 16,
-				"align": "right",
-				"upperBorder": false
-			}
+			"transitionDuration": 200
 		},
 		"pagination": {
 			"pageSizes": [ 5, 10, 20, 50, 100 ],
@@ -304,83 +227,8 @@
 		"checkboxTopPadding": 36,
 		"outlinedSections": false,
 		"toolbar": {
-			"horizontalPadding": 24,
-			"verticalPadding": 6,
-			"gap": 16,
 			"align": "right",
-			"upperBorder": true,
-			"iconButton": {
-				"rotateSelected": true,
-				"size": 36,
-				"radius": 8,
-				"stroke": 1.5,
-				"filled": false,
-				"selectedVariant": "filled",
-				"regularVariant": "subtle",
-				"icon": {
-					"size": 24,
-					"stroke": 2
-				}
-			},
-			"textButton": {
-				"size": "sm",
-				"radius": 6,
-				"defaultVariant": "filled",
-				"regularVariant": "light"
-			},
-			"text": {
-				"size": 20,
-				"fontWeight": 600,
-				"width": 120
-			}
-		},
-		"buttons": {
-			"separator": {
-				"type": "separator"
-			},
-			"send": {
-				"type": "textButton",
-				"label": "Enviar",
-				"action": "send",
-				"default": true
-			},
-			"cancel": {
-				"type": "textButton",
-				"label": "Cancelar",
-				"action": "cancel"
-			},
-			"filter": {
-				"type": "textButton",
-				"label": "Pesquisar",
-				"action": "filter",
-				"default": true
-			},
-			"more": {
-				"type": "iconButton",
-				"icon": "moreVertical",
-				"tip": "Mais opções",
-				"items": [
-					{
-						"label": "Salvar pesquisa",
-						"action": "saveFilter"
-					},
-					{
-						"label": "Carregar pesquisa",
-						"action": "loadFilter"
-					},
-					{
-						"type": "separator"
-					},
-					{
-						"label": "Fechar painel",
-						"action": "closeFilterPanel"
-					},
-					{
-						"label": "Limpar filtros",
-						"action": "clearForm"
-					}
-				]
-			}
+			"upperBorder": true
 		}
 	},
 	"theme": {

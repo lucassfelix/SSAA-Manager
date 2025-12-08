@@ -233,127 +233,10 @@
       }
     },
     "toolbars": {
-      "type": "object",
-      "description": "Toolbar default properties for forms and listViews.",
-      "additionalProperties": false,
-      "properties": {
-        "horizontalPadding": {
-          "type": "number",
-          "description": "Horizontal padding for the toolbar."
-        },
-        "verticalPadding": {
-          "type": "number",
-          "description": "Vertical padding for the toolbar."
-        },
-        "gap": {
-          "type": "number",
-          "description": "Gap between toolbar items."
-        },
-        "align": {
-          "type": "string",
-          "description": "Alignment of toolbar items.",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "upperBorder": {
-          "type": "boolean",
-          "description": "Whether the toolbar should have an upper border."
-        },
-        "iconButtons": {
-          "type": "object",
-          "description": "Default settings for icon buttons in toolbars.",
-          "additionalProperties": false,
-          "properties": {
-            "rotateSelected": {
-              "type": "boolean",
-              "description": "Whether to rotate the icon when selected."
-            },
-            "size": {
-              "type": "number",
-              "description": "Size of the icon button."
-            },
-            "radius": {
-              "type": "number",
-              "description": "Border radius of the icon button."
-            },
-            "outlineStroke": {
-              "type": "number",
-              "description": "Stroke width of the icon button."
-            },
-            "filled": {
-              "type": "boolean",
-              "description": "Whether the icon button should be filled."
-            },
-            "selectedVariant": {
-              "type": "string",
-              "description": "Default variant for selected icon buttons.",
-              "$ref": "#/definitions/buttonVariant"
-            },
-            "regularVariant": {
-              "type": "string",
-              "description": "Variant for regular icon buttons.",
-              "$ref": "#/definitions/buttonVariant"
-            },
-            "iconSize": {
-              "type": "number",
-              "description": "Size of the icon."
-            },
-            "iconStroke": {
-              "type": "number",
-              "description": "Stroke width of the icon."
-            }
-          }
-        },
-        "textButtons": {
-          "type": "object",
-          "description": "Default settings for text buttons in toolbars.",
-          "additionalProperties": false,
-          "properties": {
-            "size": {
-              "type": "string",
-              "description": "Size of the text button (e.g. 'sm','md','lg')."
-            },
-            "radius": {
-              "type": "number",
-              "description": "Border radius of the text button."
-            },
-            "defaultVariant": {
-              "type": "string",
-              "description": "Default variant for default (primary) text buttons.",
-              "$ref": "#/definitions/buttonVariant"
-            },
-            "regularVariant": {
-              "type": "string",
-              "description": "Variant for regular text buttons.",
-              "$ref": "#/definitions/buttonVariant"
-            }
-          }
-        },
-        "titles": {
-          "type": "object",
-          "description": "Default settings for text elements in toolbars.",
-          "additionalProperties": false,
-          "properties": {
-            "size": {
-              "type": "number",
-              "description": "Font size of the text."
-            },
-            "fontWeight": {
-              "type": "number",
-              "description": "Font weight of the text."
-            },
-            "width": {
-              "type": "number",
-              "description": "Width of the text element."
-            }
-          }
-        }
-      }
+      "description": "Toolbar properties for forms and listViews.",
+      "$ref": "#/definitions/toolbar"
     },
-    "controls": {
+    "mainControls": {
       "type": "object",
       "description": "Default settings for various UI controls.",
       "additionalProperties": false,
@@ -399,7 +282,14 @@
             "tipLight": { "type": "string", "description": "Tooltip text for switching to light theme." },
             "tipDark": { "type": "string", "description": "Tooltip text for switching to dark theme." }
           }
-        },
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "description": "Generic controls used by toolbar/menu actions.",
+      "additionalProperties": false,
+      "properties": {
         "separator": {
           "type": "object",
           "description": "Configuration for separator controls.",
@@ -412,9 +302,6 @@
             }
           }
         },
-
-        // Generic controls used by toolbar/menu actions
-
         "userMenu": { "$ref": "#/definitions/genericControl" },
         "add": { "$ref": "#/definitions/genericControl" },
         "search": { "$ref": "#/definitions/genericControl" },
@@ -424,94 +311,6 @@
         "filter": { "$ref": "#/definitions/genericControl" },
         "listViewMore": { "$ref": "#/definitions/genericControl" },
         "filterMore": { "$ref": "#/definitions/genericControl" }
-      }
-    },
-    "theme": {
-      "type": "object",
-      "description": "Theme configuration including palette, typography and list densities.",
-      "additionalProperties": false,
-      "properties": {
-        "defaultUIScale": {
-          "type": "number",
-          "description": "Default UI scale factor, in percentage (e.g. 100%, 95%)."
-        },
-        "iconFamily": {
-          "type": "string",
-          "description": "Default icon family to use in the application.",
-          "enum": [ "tabler", "material" ]
-        },
-        "typography": {
-          "type": "object",
-          "description": "Typography defaults.",
-          "additionalProperties": false,
-          "properties": {
-            "mainFamily": {
-              "type": [ "string", "null" ],
-              "description": "Primary font family. May be null to use system default."
-            },
-            "headingsFamily": {
-              "type": [ "string", "null" ],
-              "description": "Font family for headings. May be null to use system default."
-            }
-          }
-        },
-        "modes": {
-          "type": "object",
-          "description": "Light and dark theme modes.",
-          "additionalProperties": false,
-          "properties": {
-            "light": {
-              "description": "Light theme specific settings.",
-              "$ref": "#/definitions/modeProps"
-            },
-            "dark": {
-              "description": "Dark theme specific settings.",
-              "$ref": "#/definitions/modeProps"
-            }
-          }
-        }
-      }
-    },
-    "forms": {
-      "type": "object",
-      "description": "Default settings for forms and form toolbars.",
-      "additionalProperties": false,
-      "properties": {
-        "fieldSize": {
-          "type": "string",
-          "description": "Default Mantine field size (e.g. 'sm','md','lg')."
-        },
-        "verticalGap": {
-          "type": "string",
-          "description": "Default vertical gap between form rows."
-        },
-        "fullHeight": {
-          "type": "boolean",
-          "description": "Whether forms should take full height."
-        },
-        "clearSelectionValue": {
-          "type": "string",
-          "description": "Special value used to clear select components."
-        },
-        "selectionCheck": {
-          "type": "boolean",
-          "description": "Whether to show selection check controls."
-        },
-        "checkboxTopPadding": {
-          "type": "number",
-          "description": "Top padding applied to checkbox fields."
-        },
-        "outlinedSections": {
-          "type": "boolean",
-          "description": "Whether form groups should be outlined."
-        },
-        "buttons": {
-          "type": "object",
-          "description": "Default form buttons (e.g. send, cancel).",
-          "additionalProperties": {
-            "$ref": "#/definitions/formButton"
-          }
-        }
       }
     },
     "listViews": {
@@ -595,20 +394,23 @@
             }
           }
         },
-        "toolbar": {
-          "type": "object",
-          "description": "Default toolbar settings for list views."
-        },
-        "buttons": {
-          "type": "object",
-          "description": "Default list view buttons.",
-          "additionalProperties": {
-            "$ref": "#/definitions/formButton"
-          }
-        },
         "filterPanel": {
           "type": "object",
-          "description": "Default filter panel settings for list views."
+          "additionalProperties": false,
+          "properties": {
+            "verticalPadding": {
+              "type": "number",
+              "description": "Vertical padding for the filter panel."
+            },
+            "transitionDuration": {
+              "type": "number",
+              "description": "Duration of the filter panel transition."
+            }
+          }
+        },
+        "filterToolbar": {
+          "description": "Toolbar settings for filter panel. Overrides the toolbar object.",
+          "$ref": "#/definitions/toolbar"
         },
         "pagination": {
           "type": "object",
@@ -646,6 +448,91 @@
       "required": [
         "defaultList"
       ]
+    },
+    "forms": {
+      "type": "object",
+      "description": "Default settings for forms and form toolbars.",
+      "additionalProperties": false,
+      "properties": {
+        "fieldSize": {
+          "type": "string",
+          "description": "Default Mantine field size (e.g. 'sm','md','lg')."
+        },
+        "verticalGap": {
+          "type": "string",
+          "description": "Default vertical gap between form rows."
+        },
+        "fullHeight": {
+          "type": "boolean",
+          "description": "Whether forms should take full height."
+        },
+        "clearSelectionValue": {
+          "type": "string",
+          "description": "Special value used to clear select components."
+        },
+        "selectionCheck": {
+          "type": "boolean",
+          "description": "Whether to show selection check controls."
+        },
+        "checkboxTopPadding": {
+          "type": "number",
+          "description": "Top padding applied to checkbox fields."
+        },
+        "outlinedSections": {
+          "type": "boolean",
+          "description": "Whether form groups should be outlined."
+        },
+        "toolbar": {
+          "description": "Toolbar settings for forms. Overrides the toolbar object.",
+          "$ref": "#/definitions/toolbar"
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "description": "Theme configuration including palette, typography and list densities.",
+      "additionalProperties": false,
+      "properties": {
+        "defaultUIScale": {
+          "type": "number",
+          "description": "Default UI scale factor, in percentage (e.g. 100%, 95%)."
+        },
+        "iconFamily": {
+          "type": "string",
+          "description": "Default icon family to use in the application.",
+          "enum": [ "tabler", "material" ]
+        },
+        "typography": {
+          "type": "object",
+          "description": "Typography defaults.",
+          "additionalProperties": false,
+          "properties": {
+            "mainFamily": {
+              "type": [ "string", "null" ],
+              "description": "Primary font family. May be null to use system default."
+            },
+            "headingsFamily": {
+              "type": [ "string", "null" ],
+              "description": "Font family for headings. May be null to use system default."
+            }
+          }
+        },
+        "modes": {
+          "type": "object",
+          "description": "Light and dark theme modes.",
+          "additionalProperties": false,
+          "properties": {
+            "light": {
+              "description": "Light theme specific settings.",
+              "$ref": "#/definitions/modeProps"
+            },
+            "dark": {
+              "description": "Dark theme specific settings.",
+              "$ref": "#/definitions/modeProps"
+            }
+          }
+        }
+      }
     }
   },
 
@@ -906,6 +793,126 @@
         "collapsedLogo": {
           "description": "Image file to be shown when the navbar is collapsed.",
           "type": "string"
+        }
+      }
+    },
+    "toolbar": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "horizontalPadding": {
+          "type": "number",
+          "description": "Horizontal padding for the toolbar."
+        },
+        "verticalPadding": {
+          "type": "number",
+          "description": "Vertical padding for the toolbar."
+        },
+        "gap": {
+          "type": "number",
+          "description": "Gap between toolbar items."
+        },
+        "align": {
+          "type": "string",
+          "description": "Alignment of toolbar items.",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "upperBorder": {
+          "type": "boolean",
+          "description": "Whether the toolbar should have an upper border."
+        },
+        "iconButtons": {
+          "type": "object",
+          "description": "Default settings for icon buttons in toolbars.",
+          "additionalProperties": false,
+          "properties": {
+            "rotateSelected": {
+              "type": "boolean",
+              "description": "Whether to rotate the icon when selected."
+            },
+            "size": {
+              "type": "number",
+              "description": "Size of the icon button."
+            },
+            "radius": {
+              "type": "number",
+              "description": "Border radius of the icon button."
+            },
+            "outlineStroke": {
+              "type": "number",
+              "description": "Stroke width of the icon button."
+            },
+            "filled": {
+              "type": "boolean",
+              "description": "Whether the icon button should be filled."
+            },
+            "selectedVariant": {
+              "type": "string",
+              "description": "Default variant for selected icon buttons.",
+              "$ref": "#/definitions/buttonVariant"
+            },
+            "regularVariant": {
+              "type": "string",
+              "description": "Variant for regular icon buttons.",
+              "$ref": "#/definitions/buttonVariant"
+            },
+            "iconSize": {
+              "type": "number",
+              "description": "Size of the icon."
+            },
+            "iconStroke": {
+              "type": "number",
+              "description": "Stroke width of the icon."
+            }
+          }
+        },
+        "textButtons": {
+          "type": "object",
+          "description": "Default settings for text buttons in toolbars.",
+          "additionalProperties": false,
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "Size of the text button (e.g. 'sm','md','lg')."
+            },
+            "radius": {
+              "type": "number",
+              "description": "Border radius of the text button."
+            },
+            "defaultVariant": {
+              "type": "string",
+              "description": "Default variant for default (primary) text buttons.",
+              "$ref": "#/definitions/buttonVariant"
+            },
+            "regularVariant": {
+              "type": "string",
+              "description": "Variant for regular text buttons.",
+              "$ref": "#/definitions/buttonVariant"
+            }
+          }
+        },
+        "titles": {
+          "type": "object",
+          "description": "Default settings for text elements in toolbars.",
+          "additionalProperties": false,
+          "properties": {
+            "size": {
+              "type": "number",
+              "description": "Font size of the text."
+            },
+            "fontWeight": {
+              "type": "number",
+              "description": "Font weight of the text."
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the text element."
+            }
+          }
         }
       }
     }

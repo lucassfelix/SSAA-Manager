@@ -37,23 +37,14 @@ interface ListViewsProps {
     booleanIconsStroke?: number;
     trueIcon?: string;
     falseIcon?: string;
-    emphasis?: {
-      textLight?: string;
-      textDark?: string;
-      backgroundLight?: string;
-      backgroundDark?: string;
-    }
   };
-  toolbar: ToolbarThemeProps;
-  buttons: {
-    [key: string]: ToolbarItem;
-  };
+  filterToolbar?: ToolbarThemeProps;
   filterPanel?: {
     verticalPadding?: number;
     transitionDuration?: number;
-    verticalGap?: MantineSpacing;
-    fullHeight?: boolean;
-    toolbar?: ToolbarThemeProps;
+    // verticalGap?: MantineSpacing;
+    // fullHeight?: boolean;
+    // toolbar?: ToolbarThemeProps;
   };
 }
 
@@ -79,9 +70,13 @@ export interface AppProps {
     images: string;
   };
   shell: ShellProps;
-  controls: ControlProps;
+  mainControls: ControlProps;
+  controls: {
+    [key: string]: ToolbarItem;
+  }
   listViews: ListViewsProps;
-  menu: MainMenuProps
+  menu: MainMenuProps;
+  toolbars: ToolbarThemeProps;
   forms: {
     fieldSize?: MantineSize;
     verticalGap?: MantineSpacing;

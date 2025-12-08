@@ -29,7 +29,7 @@
 		"add",
 		"separator",
 		"search",
-		"filter",
+		"filterPanel",
 		"separator",
 		{
 			"name": "revalidar",
@@ -38,10 +38,10 @@
 			"tip": "Clique para revalidar as informações de todos os usuários.<br/><b>Esta ação pode levar vários minutos</b>.",
 			"action": "revalidar"
 		},
-		"more"
+		"listViewMore"
 	],
 	"filterPanel": {
 		"layout": { "header": [ "nome", "username", "empresa" ] },
-		"toolbar": [ "filter", "more" ]
+		"toolbar": [ "filter", "filterMore" ]
 	}
 }

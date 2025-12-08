@@ -25,7 +25,7 @@ import NfIcon from "@/icon/NfIcon";
 // #region ----------------------------------------------------------------------------------- Types
 
 /** Types accepted by the item renderer */
-type ItemRendererTypes = 'collapseToggle' | 'logo' | 'spacer' | 'mainTitle' | 'themeSwitch' | 'mainMenu';
+type ItemRendererTypes = 'mainTitle' | 'collapseToggle' | 'logo' | 'spacer' | 'themeSwitch' | 'mainMenu';
 
 /** Shell layout configuration */
 export interface ShellProps {
@@ -91,14 +91,14 @@ export default function Shell() {
   const op = currentOp as FormOperationType;
 
   const shellCfg = appCfg.shell as ShellProps;
-  const controls = appCfg.controls as ControlProps;
+  const mainControls = appCfg.mainControls as ControlProps;
   const errStr = appCfg.errorStrings;
   const expandedWidth = shellCfg.navbar.width || 240;
   const themeCfg = appCfg.theme.modes[userSettings.dark ? 'dark' : 'light'];
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const desktopOpened = !userSettings.navbarCollapsed;
   const collapsible = shellCfg.navbar.collapsible;
-  const toggleCfg = controls.collapseToggle;
+  const toggleCfg = mainControls.collapseToggle;
 
   function handleToggleDesktop(): void {
     try {
@@ -114,9 +114,9 @@ export default function Shell() {
       <Group justify="center">
         <Image
           src={appCfg.paths.images + (collapsed ? themeCfg.collapsedLogo : themeCfg.expandedLogo)}
-          alt={controls?.logo?.altText ?? "Logo"}
-          h={collapsed ? controls?.logo?.collapsedHeight : controls?.logo?.expandedHeight}
-          w={collapsed ? controls?.logo?.collapsedWidth : controls?.logo?.expandedWidth}
+          alt={mainControls?.logo?.altText ?? "Logo"}
+          h={collapsed ? mainControls?.logo?.collapsedHeight : mainControls?.logo?.expandedHeight}
+          w={collapsed ? mainControls?.logo?.collapsedWidth : mainControls?.logo?.expandedWidth}
           fit="contain"
         />
       </Group>
@@ -139,7 +139,7 @@ export default function Shell() {
         case 'spacer':
           return <Space key={key} flex="auto" />;
         case 'mainTitle':
-          return <Title key={key} order={4}>{controls.mainTitle?.label}</Title>;
+          return <Title key={key} order={4}>{mainControls.mainTitle?.label}</Title>;
         case 'themeSwitch':
           return <ThemeSwitch key={key} />;
         case 'mainMenu':
@@ -155,8 +155,8 @@ export default function Shell() {
   const navCollapseToggle = collapsible ? (
     <Tooltip label={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}>
       <ActionIcon
-        size={appCfg.forms.toolbar?.iconButton?.size}
-        radius={appCfg.forms.toolbar?.iconButton?.radius}
+        size={appCfg.forms.toolbar?.iconButtons?.size}
+        radius={appCfg.forms.toolbar?.iconButtons?.radius}
         title={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}
         variant="subtle"
         color="var(--mantine-primary-color-light-color)"

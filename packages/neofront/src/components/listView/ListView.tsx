@@ -31,9 +31,9 @@ export default function NfListView(): JSX.Element {
   const toolbarItems: ToolbarItem[] = (listViewSchema?.toolbar ?? []).map(
     (item: string | ToolbarItem) => {
       if (typeof item === 'string') {
-        const btn = appCfg.listViews.buttons?.[item];
+        const btn = appCfg.controls?.[item];
         if (!btn) {
-          console.warn(`Toolbar button '${item}' not found in appCfg.lists.buttons.`);
+          console.warn(`ListView: Toolbar button '${item}' not found in appCfg.controls.`);
         }
         return btn;
       }
@@ -84,7 +84,7 @@ export default function NfListView(): JSX.Element {
         <NfToolbar
           items={toolbarItems.map(it => it.action === 'toggleFilterPanel' ?
             { ...it, selected: filterOpen } : it)}
-          cfg={appCfg.listViews.toolbar}
+          cfg={appCfg.toolbars}
           onAction={handleAction}
         />
       )}

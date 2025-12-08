@@ -19,28 +19,25 @@ export interface ToolbarThemeProps {
   gap: number;
   upperBorder?: boolean;
   align?: 'left' | 'center' | 'right' | 'apart';
-  iconButton?: {
+  iconButtons?: {
     rotateSelected?: boolean;
     size?: number | string;
     radius?: number | string;
-    stroke?: number;
     filled?: boolean;
     selectedVariant?: string;
     regularVariant?: string;
-    icon?: {
-      size: number;
-      stroke?: number;
-    };
+    iconSize?: number;
+    iconStroke?: number;
   };
-  textButton?: {
+  textButtons?: {
     size?: number | string;
     radius?: number | string;
     defaultVariant?: string;
     regularVariant?: string;
   };
-  text?: {
-    fontWeight: number;
+  titles?: {
     size?: number | string;
+    fontWeight: number;
     width?: number;
   };
 }
@@ -101,7 +98,7 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
     apart: 'space-between',
   };
 
-  const iconBtnConfig = cfg.iconButton;
+  const iconBtnConfig = cfg.iconButtons;
   const listCfg = viewResult?.listView;
   const tbCfg = appCfg.forms.toolbar || {} as ToolbarThemeProps;
 
@@ -141,8 +138,8 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
 
     function renderText(it: ToolbarItem, key: string): JSX.Element {
       return (
-        <Text key={key} fw={cfg.text?.fontWeight} styles={{ root: { fontSize: cfg.text?.size } }}
-          style={cfg.text?.width ? { minWidth: cfg.text.width } : undefined}>
+        <Text key={key} fw={cfg.titles?.fontWeight} styles={{ root: { fontSize: cfg.titles?.size } }}
+          style={cfg.titles?.width ? { minWidth: cfg.titles.width } : undefined}>
           {it.text}
         </Text>
       );
@@ -151,8 +148,8 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
     function renderIcon(icon: string, selected?: boolean): JSX.Element {
       return <NfIcon
         icon={icon}
-        size={iconBtnConfig?.icon?.size}
-        stroke={iconBtnConfig?.icon?.stroke}
+        size={iconBtnConfig?.iconSize}
+        stroke={iconBtnConfig?.iconStroke}
         filled={iconBtnConfig?.filled}
         style={iconBtnConfig?.rotateSelected ? {
           transform: selected ? 'rotate(-180deg)' : 'rotate(0deg)',
@@ -178,21 +175,21 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
       const name = it.name ? replaceVars(it.name) : undefined;
 
       if (it.type === 'textButton') {
-        const textBtnVariant = it.default ? tbCfg.textButton?.defaultVariant || 'filled' :
-          tbCfg.textButton?.regularVariant || 'outline';
+        const textBtnVariant = it.default ? tbCfg.textButtons?.defaultVariant || 'filled' :
+          tbCfg.textButtons?.regularVariant || 'outline';
         return renderTooltip(it, key,
           <Button
             key={key}
-            size={cfg.textButton?.size ? String(cfg.textButton.size) : undefined}
+            size={cfg.textButtons?.size ? String(cfg.textButtons.size) : undefined}
             variant={textBtnVariant}
             className={`nf-Button-${textBtnVariant}`}
             aria-label={it.label ?? name}
-            radius={cfg.textButton?.radius}
+            radius={cfg.textButtons?.radius}
             onClick={() => handleClick(it)}
           >{it.label ?? `[${name}]`}</Button>);
       } else {
-        const iconBtnVariant = it.selected ? tbCfg.iconButton?.selectedVariant || 'filled' :
-          tbCfg.iconButton?.regularVariant || 'subtle';
+        const iconBtnVariant = it.selected ? tbCfg.iconButtons?.selectedVariant || 'filled' :
+          tbCfg.iconButtons?.regularVariant || 'subtle';
         return renderTooltip(it, key,
           <ActionIcon
             key={key}

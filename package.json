@@ -1,6 +1,7 @@
 {
   "name": "neofront-monorepo",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],

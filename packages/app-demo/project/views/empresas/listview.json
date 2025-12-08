@@ -29,12 +29,12 @@
 		"add",
 		"separator",
 		"search",
-		"filter",
+		"filterPanel",
 		"separator",
-		"more"
+		"listViewMore"
 	],
 	"filterPanel": {
 		"layout": { "header": [ "nome", "cnpj", "status" ] },
-		"toolbar": [ "filter", "more" ]
+		"toolbar": [ "filter", "filterMore" ]
 	}
 }
