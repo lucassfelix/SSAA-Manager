@@ -6,6 +6,7 @@
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import { defaultStrings, errorStrings } from "context";
 
 // import { StrictMode } from "react";
 import { useEffect, useState } from "react";
@@ -38,6 +39,10 @@ export default function App(props: MainAppProps) {
   // #region Hooks and variables
 
   const { appCfg, menuCfg, iconsCfg, loadView } = props;
+
+  // Merge strings from standard strings and app config
+  appCfg.strings = { ...defaultStrings[appCfg.language], ...appCfg.strings };
+  appCfg.errorStrings = { ...errorStrings[appCfg.language], ...appCfg.errorStrings };
 
   // Validate projectId
   if (!appCfg.projectId || appCfg.projectId.trim() === '') {

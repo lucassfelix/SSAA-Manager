@@ -6,20 +6,10 @@
 	"projectId": "ssaa-smile-manager",
 	"strings": {
 		"appTitle": "{pageName} | SSAA",
-		"appVersion": "0.10.0",
-		"no": "Não",
-		"yes": "Sim",
-		"defaultDateFormat": "DD/MM/YYYY",
-		"decimalSeparator": ",",
-		"thousandSeparator": ".",
-		"noRecordsText": "Sem itens a exibir"
+		"appVersion": "0.10.0"
 	},
 	"errorStrings": {
-		"noViewType": "O tipo de visualização <b>{type}</b> não é suportado.",
-		"viewMissing": "A visualização <b>{view}</b> não foi encontrada.",
-		"formMissing": "O form <b>{type}</b> não foi declarado para a view <b>{view}</b>.",
-		"formConfigMissing": "Não foi encontrada uma configuração para este form.",
-		"formLayoutMissing": "O layout do form não foi definido para a operação <b>${op}</b>."
+		"noRecordsText": "Sem itens a exibir"
 	},
 	"paths": {
 		"images": "images/"

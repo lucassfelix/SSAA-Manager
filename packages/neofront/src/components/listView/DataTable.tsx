@@ -349,7 +349,7 @@ export default function NfDataTable(): JSX.Element {
       horizontalSpacing={tblAppCfg.horizontalSpacing ?? 'xs'}
       verticalSpacing={tblAppCfg.verticalSpacing ?? 'xs'}
       shadow={tblAppCfg.shadow ?? "none"}
-      noRecordsText={ appCfg.strings.noRecordsText }
+      noRecordsText={appCfg.errorStrings.noRecordsText}
 
       // Row class names based on rules
 

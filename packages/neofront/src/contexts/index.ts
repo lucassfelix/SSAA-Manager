@@ -4,6 +4,7 @@
 // #region --------------------------------------------------------------------------------- Exports
 
 export { default as AppUIContext, useAppUI, type UserSettings } from "./AppUIContext";
+export { defaultStrings, errorStrings } from "./standardStrings";
 export type { AppProps, MenuConfig, IconsConfig } from "./AppProps";
 export type { FormDataConfig, RecordConfig, ViewResultProps, FormLayoutProps } from "./FormProps";
 export type { DataColumnProps, DataColumnRenderProps, DataColumnOptions } from "./ListViewProps";  
