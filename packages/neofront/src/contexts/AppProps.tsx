@@ -6,8 +6,8 @@
 
 import type { MantineShadow, MantineSize, MantineSpacing } from "@mantine/core";
 
-import { ShellProps } from "@/shell/Shell";
-import { MenuItem } from "@/shell/MainMenu";
+import { ControlProps, ShellProps } from "@/shell/Shell";
+import { MainMenuProps, MenuItem } from "@/shell/MainMenu";
 import { ToolbarItem, ToolbarThemeProps } from "@/toolbar/Toolbar";
 
 // #endregion
@@ -87,7 +87,9 @@ export interface AppProps {
     images: string;
   };
   shell: ShellProps;
+  controls: ControlProps;
   listViews: ListViewsProps;
+  menu: MainMenuProps
   forms: {
     fieldSize?: MantineSize;
     verticalGap?: MantineSpacing;

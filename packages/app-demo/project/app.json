@@ -19,14 +19,7 @@
 			"fullWidth": true,
 			"height": 80,
 			"bordered": true,
-			"items": [
-				"collapseToggle",
-				"logo",
-				"spacer",
-				"title",
-				"spacer",
-				"themeSwitch"
-			]
+			"items": [ "collapseToggle", "logo", "spacer", "mainTitle", "spacer", "themeSwitch" ]
 		},
 		"navbar": {
 			"width": 280,
@@ -35,74 +28,83 @@
 			"bordered": true,
 			"icons": true,
 			"footer": false,
-			"items": [
-				"mainMenu"
-			]
+			"items": [ "mainMenu" ]
+		}
+	},
+	"menu": {
+		"openSubmenusOnHover": false,
+		"submenuOffset": 12,
+		"items": {
+			"gap": 2,
+			"radius": 8,
+			"labelSize": "1rem",
+			"labelWeight": 600,
+			"subtitleSize": "0.65rem",
+			"subtitleWeight": 700,
+			"subtitleUppercase": true,
+			"descriptionSize": "0.85rem",
+			"descriptionWeight": 600,
+			"iconFilled": false,
+			"iconSize": 26,
+			"iconStroke": 1.5,
+			"arrowIcon": "chevronRight",
+			"arrowStroke": 2,
+			"arrowSize": 20
 		},
-		"menu": {
-			"clickOnHover": false,
-			"menuItem": {
-				"gap": 2,
-				"radius": 8,
-				"subtitle": {
-					"label": {
-						"size": "0.65rem",
-						"fontWeight": 700,
-						"uppercase": true
-					}
-				}
-			},
-			"leftIcon": {
-				"filled": false,
-				"size": 26,
-				"stroke": 1.5
-			},
-			"rightIcon": {
-				"icon": "chevronRight",
-				"stroke": 2,
-				"size": 20
-			},
-			"label": {
-				"size": "1rem",
-				"fontWeight": 600
-			},
-			"description": {
-				"size": "0.85rem",
-				"fontWeight": 600
-			},
-			"submenu": {
-				"gap": 6,
-				"offset": 12,
-				"radius": 8,
-				"label": {
-					"size": "0.9rem",
-					"fontWeight": 400
-				},
-				"subtitle": {
-					"label": {
-						"size": "0.65rem",
-						"fontWeight": 700,
-						"uppercase": true
-					}
-				}
-			}
+		"submenuItems": {
+			"gap": 6,
+			"labelSize": "0.9rem",
+			"labelWeight": 400
+		}
+	},
+	"toolbars": {
+		"horizontalPadding": 24,
+		"verticalPadding": 6,
+		"gap": 16,
+		"align": "left",
+		"upperBorder": false,
+		"iconButtons": {
+			"rotateSelected": true,
+			"size": 36,
+			"radius": 8,
+			"outlineStroke": 1.5,
+			"filled": false,
+			"selectedVariant": "filled",
+			"regularVariant": "subtle",
+			"iconSize": 24,
+			"iconStroke": 2
 		},
-		"title": {
+		"textButtons": {
+			"size": "sm",
+			"radius": 6,
+			"defaultVariant": "filled",
+			"regularVariant": "light"
+		},
+		"titles": {
+			"size": 20,
+			"fontWeight": 600,
+			"width": 120
+		}
+	},
+	"controls": {
+		"mainTitle": {
 			"label": "Aplicação de Exemplo NeoFront"
 		},
-		"toggleNavbar": {
+		"collapseToggle": {
 			"rotateIcon": true,
 			"tipCollapse": "Fechar a barra lateral",
 			"tipExpand": "Abrir a barra lateral"
 		},
-		"themeSwitcher": {
-			"tipLight": "Mudar para o tema claro",
-			"tipDark": "Mudar para o tema escuro"
-		},
 		"logo": {
 			"collapsedHeight": 52,
 			"expandedHeight": 52,
-			"altText": "Logotipo Hypervisual"
+			"altText": "Logotipo Hypervisual",
+			"link": "/"
+		},
+		"themeSwitch": {
+			"type": "iconButton",
+			"tipLight": "Mudar para o tema claro",
+			"tipDark": "Mudar para o tema escuro"
 		},
 		"userMenu": {
 			"type": "iconButton",
@@ -110,6 +112,69 @@
 			"icon": "manage_accounts",
 			"action": "openUserSettings",
 			"items": [ ]
+		},
+		"separator": {
+			"type": "separator"
+		},
+		"add": {
+			"type": "iconButton",
+			"tip": "Adicionar {singular}",
+			"icon": "add",
+			"action": "add"
+		},
+		"search": {
+			"type": "iconButton",
+			"tip": "Pesquisar {plural}",
+			"icon": "search",
+			"action": "search"
+		},
+		"filterPanel": {
+			"type": "iconButton",
+			"toggle": true,
+			"tip": "Abrir painel de pesquisa",
+			"selectedTip": "Fechar painel de pesquisa",
+			"icon": "filter",
+			"action": "toggleFilterPanel"
+		},
+		"send": {
+			"type": "textButton",
+			"label": "Enviar",
+			"action": "send",
+			"default": true
+		},
+		"cancel": {
+			"type": "textButton",
+			"label": "Cancelar",
+			"action": "cancel"
+		},
+		"filter": {
+			"type": "textButton",
+			"label": "Pesquisar",
+			"action": "filter",
+			"default": true
+		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{ "label": "Exportar para planilha", "action": "exportCSV" },
+				{ "label": "Exportar PDF", "action": "exportPDF" },
+				{ "type": "separator" },
+				{ "label": "Imprimir listagem", "action": "printRecords" }
+			]
+		},
+		"filterMore": {
+			"type": "iconButton",
+			"icon": "moreVertical",
+			"tip": "Mais opções",
+			"items": [
+				{ "label": "Salvar pesquisa", "action": "saveFilter" },
+				{ "label": "Carregar pesquisa", "action": "loadFilter" },
+				{ "type": "separator" },
+				{ "label": "Fechar painel", "action": "closeFilterPanel" },
+				{ "label": "Limpar filtros", "action": "clearForm" }
+			]
 		}
 	},
 	"listViews": {

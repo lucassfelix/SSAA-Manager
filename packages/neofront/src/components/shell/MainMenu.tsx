@@ -15,41 +15,37 @@ import { useAppUI } from "context";
 
 // #region ----------------------------------------------------------------------------------- Types
 
-type LabelProps = {
-  size?: number | string;
-  fontWeight?: number | string;
-  uppercase?: boolean;
-};
+// type LabelProps = {
+//   size?: number | string;
+//   fontWeight?: number | string;
+//   uppercase?: boolean;
+// };
 
 export interface MainMenuProps {
-  clickOnHover?: boolean;
-  menuItem?: {
+  openSubmenusOnHover?: boolean;
+  submenuOffset: number;
+  items: {
     gap?: number | string;
     radius?: number | string;
-    subtitle?: {
-      label?: LabelProps;
-    };
+    labelSize?: number | string;
+    labelWeight?: number | string;
+    subtitleSize?: number | string;
+    subtitleWeight?: number | string;
+    subtitleUppercase?: boolean;
+    descriptionSize?: number | string;
+    descriptionWeight?: number | string;
+    iconFilled?: boolean;
+    iconSize?: number | string;
+    iconStroke?: number;
+    arrowIcon?: string;
+    arrowSize?: number;
+    arrowStroke?: number;
   };
-  leftIcon?: {
-    size: number;
-    stroke: number;
-    filled?: boolean;
-  };
-  rightIcon?: {
-    icon: string;
-    size: number;
-    stroke: number;
-  };
-  label?: LabelProps;
-  description?: LabelProps;
-  submenu?: {
+  submenuItems: {
     gap?: number | string;
-    offset: number;
     radius: number | string;
-    label?: LabelProps;
-    subtitle?: {
-      label?: LabelProps;
-    };
+    labelSize?: number | string;
+    labelWeight?: number | string;
   }
 }
 
@@ -88,25 +84,20 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   const [_searchParams, setSearchParams] = useSearchParams();
   const opacityTransition = { opacity: collapsed ? 0 : 1, transition: 'opacity 200ms ease' };
 
-  const labelProps = (labelCfg: typeof cfg.label) => ({
-    fontSize: labelCfg?.size,
-    fontWeight: labelCfg?.fontWeight,
-  });
-
   // #endregion
 
   // #region Renderers
 
   function renderIcon(it: MenuItem, depth: number) {
 
-    const iconSize = cfg.leftIcon?.size;
+    const iconSize = cfg.items.iconSize;
     const iconComponent = (
       <NfIcon
         icon={it.icon!}
         size={iconSize}
-        stroke={cfg.leftIcon?.stroke}
+        stroke={cfg.items.iconStroke}
         color={it.emphasis ? `var(--mantine-color-${it.emphasis})` : undefined}
-        filled={cfg.leftIcon?.filled}
+        filled={cfg.items.iconFilled}
       />
     );
 
@@ -148,9 +139,9 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
     return depth >= 1 ? (
       <Menu.Label
         key={`${key}-lbl`}
-        fz={cfg.submenu?.subtitle?.label?.size}
+        fz={cfg.items.subtitleSize}
         style={{
-          textTransform: cfg.submenu?.subtitle?.label?.uppercase ? "uppercase" : undefined
+          textTransform: cfg.items.subtitleUppercase ? "uppercase" : undefined
         }}
       >{it.label}</Menu.Label>
     ) : (
@@ -160,16 +151,17 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
         label={it.label}
         style={{
           ...opacityTransition,
-          textTransform: cfg.menuItem?.subtitle?.label?.uppercase ? "uppercase" : undefined
+          textTransform: cfg.items.subtitleUppercase ? "uppercase" : undefined
         }}
-        styles={{ label: labelProps(cfg.menuItem?.subtitle?.label) }} />
+        styles={{ label: { size: cfg.items.subtitleSize, weight: cfg.items.subtitleWeight } }}
+      />
     );
   }
 
   function renderTooltip(it: MenuItem, depth: number, key: string, node: JSX.Element) {
     // HACK: The initial condition below ensures that when the navbar is collapsed, the submenu
     // is opened when clicked, but in this case we lose the tooltip.
-    return ((!cfg.clickOnHover ? !it.items : true) && collapsed && depth === 0 && it.label) ? (
+    return ((!cfg.openSubmenusOnHover ? !it.items : true) && collapsed && depth === 0 && it.label) ? (
       <Tooltip key={key}
         label={it.label + (it.description ? `: ${it.description}` : '') +
           (it.badge ? ` (${it.badge})` : '')}
@@ -199,12 +191,15 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
         description: depth === 0 ? it.description : undefined,
         styles: {
           root: {
-            borderRadius: cfg.menuItem?.radius,
+            borderRadius: cfg.items.radius,
           },
-          label: labelProps(depth > 0 ? cfg.submenu?.label : cfg.label),
+          label: {
+            fontSize: cfg.items.labelSize,
+            fontWeight: cfg.items.labelWeight,
+          },
           description: {
-            fontSize: cfg.description?.size,
-            fontWeight: cfg.description?.fontWeight,
+            fontSize: cfg.items.descriptionSize,
+            fontWeight: cfg.items.descriptionWeight,
           }
         },
         onClick: () => {
@@ -223,9 +218,9 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
           <Menu
             shadow="md"
             position="right-start"
-            trigger={cfg.clickOnHover ? "hover" : undefined}
-            offset={cfg.submenu?.offset}
-            radius={cfg.submenu?.radius}
+            trigger={cfg.openSubmenusOnHover ? "hover" : undefined}
+            offset={cfg.submenuOffset}
+            radius={cfg.submenuItems.radius ?? cfg.items.radius}
             key={key}
           >
             <Menu.Target>
@@ -234,13 +229,13 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
                   key={key}
                   {...commonProps}
                   rightSection={<NfIcon
-                    icon={cfg.rightIcon?.icon || 'chevronRight'}
-                    size={cfg.rightIcon?.size}
-                    stroke={cfg.rightIcon?.stroke} />} />
+                    icon={cfg.items.arrowIcon || 'chevronRight'}
+                    size={cfg.items.arrowSize}
+                    stroke={cfg.items.arrowStroke} />} />
               )}
             </Menu.Target>
             <Menu.Dropdown className='nf-submenu'>
-              <Stack gap={cfg.submenu?.gap}>
+              <Stack gap={cfg.submenuItems.gap ?? cfg.items.gap}>
                 {renderItems(it.items, key ? `${key}-` : '', depth + 1)}
               </Stack>
             </Menu.Dropdown>
@@ -257,7 +252,10 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
               onClick={commonProps.onClick}
               className={isActive ? 'nf-active' : ''}
               styles={{
-                itemLabel: labelProps(cfg.submenu?.label),
+                itemLabel: {
+                  fontSize: cfg.submenuItems.labelSize ?? cfg.items.labelSize,
+                  fontWeight: cfg.submenuItems.labelWeight ?? cfg.items.labelWeight,
+                }
               }}
             >
               {it.label}
@@ -278,7 +276,7 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   // #endregion
 
   return (
-    <Stack gap={cfg.menuItem?.gap} id="main-menu-stack">
+    <Stack gap={cfg.items.gap} id="main-menu-stack">
       {renderItems(menuCfg.items as MenuItem[], '')}
     </Stack>
   );

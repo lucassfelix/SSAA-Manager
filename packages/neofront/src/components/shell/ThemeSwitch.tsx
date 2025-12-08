@@ -7,7 +7,6 @@
 import { useMantineColorScheme, Tooltip, ActionIcon } from "@mantine/core";
 
 import { useAppUI } from "context";
-import type { ShellProps } from "./Shell";
 import NfIcon from "../icon/NfIcon";
 
 // #endregion
@@ -24,8 +23,8 @@ export default function ThemeSwitch() {
 
   const { appCfg, userSettings, setUserSettings } = useAppUI();
   const { colorScheme, setColorScheme } = useMantineColorScheme({ keepTransitions: true });
-  const switcherCfg = (appCfg.shell as ShellProps).themeSwitcher;
-  const label = userSettings.dark ? switcherCfg.tipLight : switcherCfg.tipDark;
+  const switcherCfg = appCfg.controls.themeSwitch;
+  const label = userSettings.dark ? switcherCfg?.tipLight : switcherCfg?.tipDark;
 
   const togggleTheme = (): void => {
     const next = colorScheme === "dark" ? "light" : "dark";

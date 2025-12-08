@@ -16,7 +16,7 @@ import { useAppUI } from "context";
 
 export interface NfIconProps {
   icon: string | null;
-  size?: number;
+  size?: number | string;
   stroke?: number | string;
   color?: string;
   filled?: boolean;

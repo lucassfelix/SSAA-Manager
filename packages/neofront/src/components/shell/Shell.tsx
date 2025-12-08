@@ -25,7 +25,7 @@ import NfIcon from "@/icon/NfIcon";
 // #region ----------------------------------------------------------------------------------- Types
 
 /** Types accepted by the item renderer */
-type ItemRendererTypes = 'collapseToggle' | 'logo' | 'spacer' | 'title' | 'themeSwitch' | 'mainMenu';
+type ItemRendererTypes = 'collapseToggle' | 'logo' | 'spacer' | 'mainTitle' | 'themeSwitch' | 'mainMenu';
 
 /** Shell layout configuration */
 export interface ShellProps {
@@ -44,22 +44,24 @@ export interface ShellProps {
     footer: boolean;
     items: ItemRendererTypes[];
     footerItems: ItemRendererTypes[];
-  },
+  }
+}
+
+export interface ControlProps {
   menu: MainMenuProps;
-  title?: {
+  mainTitle?: {
     label: string;
   };
-  toggleNavbar?: {
+  collapseToggle?: {
     rotateIcon?: boolean;
-    native?: boolean;
     tipCollapse: string;
     tipExpand: string;
   };
-  themeSwitcher: {
+  themeSwitch?: {
     tipLight: string;
     tipDark: string;
   };
-  logo: {
+  logo?: {
     collapsedHeight: number;
     expandedHeight: number;
     collapsedWidth: number;
@@ -89,13 +91,14 @@ export default function Shell() {
   const op = currentOp as FormOperationType;
 
   const shellCfg = appCfg.shell as ShellProps;
+  const controls = appCfg.controls as ControlProps;
   const errStr = appCfg.errorStrings;
   const expandedWidth = shellCfg.navbar.width || 240;
   const themeCfg = appCfg.theme.modes[userSettings.dark ? 'dark' : 'light'];
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const desktopOpened = !userSettings.navbarCollapsed;
   const collapsible = shellCfg.navbar.collapsible;
-  const toggleCfg = shellCfg.toggleNavbar!;
+  const toggleCfg = controls.collapseToggle;
 
   function handleToggleDesktop(): void {
     try {
@@ -111,9 +114,9 @@ export default function Shell() {
       <Group justify="center">
         <Image
           src={appCfg.paths.images + (collapsed ? themeCfg.collapsedLogo : themeCfg.expandedLogo)}
-          alt={shellCfg.logo.altText ?? "Logo"}
-          h={collapsed ? shellCfg.logo.collapsedHeight : shellCfg.logo.expandedHeight}
-          w={ collapsed ? shellCfg.logo.collapsedWidth : shellCfg.logo.expandedWidth }
+          alt={controls?.logo?.altText ?? "Logo"}
+          h={collapsed ? controls?.logo?.collapsedHeight : controls?.logo?.expandedHeight}
+          w={collapsed ? controls?.logo?.collapsedWidth : controls?.logo?.expandedWidth}
           fit="contain"
         />
       </Group>
@@ -135,33 +138,33 @@ export default function Shell() {
           return <Logo key={key} collapsed={collapsed} />;
         case 'spacer':
           return <Space key={key} flex="auto" />;
-        case 'title':
-          return <Title key={key} order={4}>{shellCfg.title?.label}</Title>;
+        case 'mainTitle':
+          return <Title key={key} order={4}>{controls.mainTitle?.label}</Title>;
         case 'themeSwitch':
           return <ThemeSwitch key={key} />;
         case 'mainMenu':
-          return <MainMenu key={key} cfg={appCfg.shell.menu} collapsed={collapsed} />;
+          return <MainMenu key={key} cfg={appCfg.menu} collapsed={collapsed} />;
         default:
           console.warn(`No header item found for '${it}'`);
-          return <span key={key}>{`[No element found: ${it}]`}</span>;
+          return <span key={key}>{`[${it}]`}</span>;
       }
     });
   }
 
   // Navbar collapse/expand toggle
   const navCollapseToggle = collapsible ? (
-    <Tooltip label={desktopOpened ? toggleCfg.tipCollapse : toggleCfg.tipExpand}>
+    <Tooltip label={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}>
       <ActionIcon
         size={appCfg.forms.toolbar?.iconButton?.size}
         radius={appCfg.forms.toolbar?.iconButton?.radius}
-        title={desktopOpened ? toggleCfg.tipCollapse : toggleCfg.tipExpand}
+        title={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}
         variant="subtle"
         color="var(--mantine-primary-color-light-color)"
         onClick={() => { handleToggleDesktop(); toggleMobile(); }}
       >
         <NfIcon
           icon="menu"
-          style={toggleCfg.rotateIcon ? {
+          style={toggleCfg?.rotateIcon ? {
             transform: desktopOpened ? 'rotate(-180deg)' : 'rotate(0deg)',
             transition: 'transform 0.4s ease',
           } : undefined}

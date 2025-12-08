@@ -19,12 +19,7 @@
 			"fullWidth": true,
 			"height": 80,
 			"bordered": true,
-			"items": [
-				"collapseToggle",
-				"title",
-				"spacer",
-				"themeSwitch"
-			]
+			"items": [ "collapseToggle", "mainTitle", "spacer", "themeSwitch" ]
 		},
 		"navbar": {
 			"width": 200,
@@ -33,12 +28,8 @@
 			"bordered": true,
 			"icons": true,
 			"footer": true,
-			"items": [
-				"mainMenu"
-			],
-			"footerItems": [
-				"logo"
-			]
+			"items": [ "mainMenu" ],
+			"footerItems": [ "logo" ]
 		},
 		"menu": {
 			"clickOnHover": false,
@@ -81,7 +72,7 @@
 				}
 			}
 		},
-		"title": {
+		"mainTitle": {
 			"label": "Sistema Gerencial SSAA"
 		},
 		"toggleNavbar": {
