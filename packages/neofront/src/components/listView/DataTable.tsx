@@ -10,7 +10,6 @@ import { JSX, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Anchor, Badge, Box, NumberFormatter, Stack, Text } from "@mantine/core";
-import type { CSSProperties, MantineTheme } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
 
 import { AppProps, DataColumnOptions, FormLayoutProps, UnifiedFieldProps } from "context";
@@ -92,22 +91,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       (fieldDef.colStyles ? [fieldDef.colStyles] : undefined);
     const options = resolveOptions(fieldDef.options);
 
-    // #region Helpers and renderers
-
-    function getEmphasis(enable?: boolean): ((theme: MantineTheme) => CSSProperties) | undefined {
-      return enable ? (theme) => (((theme: MantineTheme) => {
-        if (!theme.colors) {
-          return {};
-        }
-        const emphasisCfg = tblAppCfg?.emphasis;
-        return {
-          color: isDark ? emphasisCfg?.textDark || 'var(--mantine-color-green-3)' :
-            emphasisCfg?.textLight || 'var(--mantine-color-green-9)',
-          background: isDark ? emphasisCfg?.backgroundDark || undefined :
-            emphasisCfg?.backgroundLight || undefined
-        };
-      })(theme)) : undefined;
-    }
+    // #region Renderers
 
     function renderFooter(): ReactNode | undefined {
       if (!tableProps?.footer) {
@@ -144,7 +128,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
           </Text>
         );
       } else {
-        return output;
+        return String(output);
       }
     }
 
@@ -170,9 +154,9 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       }
       return (
         <Badge
-          size={tblAppCfg?.wrappers?.size}
+          size={tblAppCfg?.wrapperSize}
           color={isDark ? opt.darkColor || 'black' : opt.lightColor || 'gray'}
-          w={tblAppCfg?.wrappers?.statusWidth}
+          w={fieldDef.wrapperWidth}
           className={`nf-${opt.className}`}
         >
           {opt.label}
@@ -184,8 +168,8 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       return (
         <Badge
           color={value ? (isDark ? 'green' : 'teal') : (isDark ? 'red' : 'gray')}
-          size={tblAppCfg?.wrappers?.size}
-          w={tblAppCfg?.wrappers?.booleanWidth}
+          size={tblAppCfg?.wrapperSize}
+          w={tblAppCfg?.wrapperBooleanWidth}
         >
           {String(value ? appCfg.strings.yes : appCfg.strings.no)}
         </Badge>
@@ -193,16 +177,13 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
     }
 
     function renderBooleanIcon(value?: boolean): ReactNode {
-      const iconCfg = tblAppCfg?.booleanIcons;
       return (
-        <Box mb={-4}>
+        <Box mt={-2} mb={-7} className={`nf-boolean-icon nf-boolean-${value ? 'true' : 'false'}`}>
           <NfIcon
-            icon={value ? iconCfg?.trueIcon ?? 'check' : iconCfg?.falseIcon ?? 'x'}
-            size={iconCfg?.size} stroke={iconCfg?.stroke}
-            color={value ? (isDark ? iconCfg?.trueColorDark ?? 'var(--mantine-color-green-4)' :
-              iconCfg?.trueColorLight ?? 'var(--mantine-color-teal-6)') :
-              (isDark ? iconCfg?.falseColorDark ?? 'var(--mantine-color-red-4)' :
-                iconCfg?.falseColorLight ?? 'var(--mantine-color-red-6)')} />
+            icon={value ? tblAppCfg.trueIcon ?? 'check' : tblAppCfg.falseIcon ?? 'x'}
+            size={tblAppCfg.booleanIconsSize}
+            stroke={tblAppCfg.booleanIconsStroke}
+          />
         </Box>
       );
     }
@@ -305,9 +286,9 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       width: fieldDef.colWidth ?? undefined,
       textAlign: fieldDef.colTextAlign ?? 'left',
       ellipsis: true,
-      titleStyle: getEmphasis(fieldDef.emphasizeColumn),
-      cellsStyle: () => getEmphasis(fieldDef.emphasizeColumn),
-      footerStyle: getEmphasis(fieldDef.emphasizeColumn),
+      titleClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
+      footerClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
+      cellsClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
       render: renderCell(),
       footer: renderFooter(),
     } as DataTableColumn;

@@ -63,6 +63,7 @@ export interface UnifiedFieldProps {
   footer?: string;
   footerIcon?: string;
   render?: FieldRender;
+  wrapperWidth?: number;
 
   // Form-specific
 

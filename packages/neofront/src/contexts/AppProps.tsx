@@ -30,27 +30,19 @@ interface ListViewsProps {
     horizontalSpacing?: number;
     verticalSpacing?: number;
     shadow?: MantineShadow;
+    wrapperSize?: MantineSize;
+    wrapperStatusWidth?: number;
+    wrapperBooleanWidth?: number;
+    booleanIconsSize?: number;
+    booleanIconsStroke?: number;
+    trueIcon?: string;
+    falseIcon?: string;
     emphasis?: {
       textLight?: string;
       textDark?: string;
       backgroundLight?: string;
       backgroundDark?: string;
-    };
-    wrappers?: {
-      size?: MantineSize;
-      statusWidth?: number;
-      booleanWidth?: number;
-    };
-    booleanIcons?: {
-      size?: number;
-      stroke?: number;
-      trueIcon?: string;
-      falseIcon?: string;
-      trueColorLight?: string;
-      trueColorDark?: string;
-      falseColorLight?: string;
-      falseColorDark?: string;
-    };
+    }
   };
   toolbar: ToolbarThemeProps;
   buttons: {

@@ -74,6 +74,29 @@
   background-color: #2e302b;
 }
 
+/* Boolean icon styles */
+.nf-light .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-teal-6);
+}
+.nf-light .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-6);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-green-4);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-4);
+}
+
+.nf-dark .nf-emphasis {
+  color: var(--mantine-color-green-3);
+  background-color: #4d6d4d30 !important;
+}
+.nf-light .nf-emphasis {
+  color: var(--mantine-color-green-9);
+  background-color: #68b86820 !important;
+}
+
 /* Background styles for view 'empresas' */
 .mantine-Table-table .empresas-2 p {
   opacity: 0.5;

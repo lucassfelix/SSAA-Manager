@@ -110,6 +110,10 @@
           "description": "Custom rendering configuration for the column.",
           "$ref": "#/definitions/fieldRender"
         },
+        "wrapperWidth": {
+          "type": [ "integer" ],
+          "description": "Width of the form field wrapper (badge) for colorWrapper render layout."
+        },
 
         // Form-specific properties (used only by form fields)
 

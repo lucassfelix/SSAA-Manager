@@ -190,27 +190,12 @@
 			"verticalSpacing": 8,
 			"headerHeight": 20,
 			"shadow": "xs",
-			"emphasis": {
-				"textLight": "var(--mantine-color-green-9)",
-				"textDark": "var(--mantine-color-green-3)",
-				"backgroundLight": "#68b86820",
-				"backgroundDark": "#4d6d4d30"
-			},
-			"wrappers": {
-				"size": "md",
-				"statusWidth": 90,
-				"booleanWidth": 50
-			},
-			"booleanIcons": {
-				"size": 26,
-				"stroke": 1,
-				"trueIcon": "circleCheck",
-				"falseIcon": "squareX",
-				"trueColorLight": "var(--mantine-color-teal-6)",
-				"trueColorDark": "var(--mantine-color-green-4)",
-				"falseColorLight": "var(--mantine-color-red-6)",
-				"falseColorDark": "var(--mantine-color-red-4)"
-			}
+			"wrapperSize": "md",
+			"wrapperBooleanWidth": 50,
+			"booleanIconsSize": 26,
+			"booleanIconsStroke": 1,
+			"trueIcon": "circleCheck",
+			"falseIcon": "squareX"
 		},
 		"toolbar": {
 			"horizontalPadding": 24,
@@ -299,17 +284,11 @@
 				"upperBorder": false
 			}
 		},
-		"pageSizes": [
-			5,
-			10,
-			20,
-			50,
-			100
-		],
 		"pagination": {
+			"pageSizes": [ 5, 10, 20, 50, 100 ],
 			"showFirstLast": false,
 			"showPageSizeSelector": true,
-			"showInfo": true
+			"showTotalItems": false
 		},
 		"infiniteScroll": {
 			"enabled": false,
