@@ -91,14 +91,10 @@ export interface AppProps {
   theme: {
     defaultUIScale: number;
     iconFamily: 'tabler' | 'material';
-    typography: {
-      mainFamily?: string | null;
-      headingsFamily?: string | null;
-    };
-    modes: {
-      light: ThemeModeProps;
-      dark: ThemeModeProps;
-    }
+    mainFontFamily?: string | null;
+    headingsFontFamily?: string | null;
+    lightMode: ThemeModeProps;
+    darkMode: ThemeModeProps;
   };
 }
 

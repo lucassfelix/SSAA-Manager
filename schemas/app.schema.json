@@ -502,35 +502,21 @@
           "description": "Default icon family to use in the application.",
           "enum": [ "tabler", "material" ]
         },
-        "typography": {
-          "type": "object",
-          "description": "Typography defaults.",
-          "additionalProperties": false,
-          "properties": {
-            "mainFamily": {
-              "type": [ "string", "null" ],
-              "description": "Primary font family. May be null to use system default."
-            },
-            "headingsFamily": {
-              "type": [ "string", "null" ],
-              "description": "Font family for headings. May be null to use system default."
-            }
-          }
+        "mainFontFamily": {
+          "type": [ "string", "null" ],
+          "description": "Primary font family. May be null to use system default."
         },
-        "modes": {
-          "type": "object",
-          "description": "Light and dark theme modes.",
-          "additionalProperties": false,
-          "properties": {
-            "light": {
-              "description": "Light theme specific settings.",
-              "$ref": "#/definitions/modeProps"
-            },
-            "dark": {
-              "description": "Dark theme specific settings.",
-              "$ref": "#/definitions/modeProps"
-            }
-          }
+        "headingsFontFamily": {
+          "type": [ "string", "null" ],
+          "description": "Font family for headings. May be null to use system default."
+        },
+        "lightMode": {
+          "description": "Light theme specific settings.",
+          "$ref": "#/definitions/modeProps"
+        },
+        "darkMode": {
+          "description": "Dark theme specific settings.",
+          "$ref": "#/definitions/modeProps"
         }
       }
     }

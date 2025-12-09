@@ -94,7 +94,7 @@ export default function Shell() {
   const mainControls = appCfg.mainControls as ControlProps;
   const errStr = appCfg.errorStrings;
   const expandedWidth = shellCfg.navbar.width || 240;
-  const themeCfg = appCfg.theme.modes[userSettings.dark ? 'dark' : 'light'];
+  const themeCfg = userSettings.dark ? appCfg.theme.darkMode : appCfg.theme.lightMode;
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const desktopOpened = !userSettings.navbarCollapsed;
   const collapsible = shellCfg.navbar.collapsible;

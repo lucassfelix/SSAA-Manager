@@ -234,19 +234,15 @@
 	"theme": {
 		"defaultUIScale": 100,
 		"iconFamily": "tabler",
-		"typography": {
-			"mainFamily": null,
-			"headingsFamily": null
+		"mainFontFamily": null,
+		"headingsFontFamily": null,
+		"lightMode": {
+			"expandedLogo": "logo-horiz-light.svg",
+			"collapsedLogo": "logo-symbol.svg"
 		},
-		"modes": {
-			"light": {
-				"expandedLogo": "logo-horiz-light.svg",
-				"collapsedLogo": "logo-symbol.svg"
-			},
-			"dark": {
-				"expandedLogo": "logo-horiz-dark.svg",
-				"collapsedLogo": "logo-symbol.svg"
-			}
+		"darkMode": {
+			"expandedLogo": "logo-horiz-dark.svg",
+			"collapsedLogo": "logo-symbol.svg"
 		}
 	}
 }

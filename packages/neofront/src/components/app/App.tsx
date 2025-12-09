@@ -145,9 +145,9 @@ export default function App(props: MainAppProps) {
       Select: { defaultProps: { comboboxProps: { offset: 2 } } },
       DatePickerInput: { defaultProps: { popoverProps: { offset: 2 } } }
     },
-    fontFamily: `${appCfg.theme.typography.mainFamily || null}, ${DEFAULT_THEME.fontFamily}`,
+    fontFamily: `${appCfg.theme.mainFontFamily || null}, ${DEFAULT_THEME.fontFamily}`,
     headings: {
-      fontFamily: `${appCfg.theme.typography.headingsFamily || null}, ${DEFAULT_THEME.fontFamily}`,
+      fontFamily: `${appCfg.theme.headingsFontFamily || null}, ${DEFAULT_THEME.fontFamily}`,
     },
   });
 
