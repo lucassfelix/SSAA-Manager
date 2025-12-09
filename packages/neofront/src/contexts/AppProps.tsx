@@ -17,7 +17,7 @@ import { ToolbarItem, ToolbarThemeProps } from "@/toolbar/Toolbar";
 type ThemeModeProps = {
   expandedLogo: string;
   collapsedLogo: string;
-}
+};
 
 interface ListViewsProps {
   defaultList: string;
@@ -71,7 +71,7 @@ export interface AppProps {
   topControls: TopControlProps;
   controls: {
     [key: string]: ToolbarItem;
-  }
+  };
   listViews: ListViewsProps;
   menu: MainMenuProps;
   toolbars: ToolbarThemeProps;
@@ -84,7 +84,7 @@ export interface AppProps {
     checkboxTopPadding?: number;
     outlinedSections?: boolean;
     toolbar?: ToolbarThemeProps;
-  }
+  };
   theme: {
     defaultUIScale: number;
     iconFamily: 'tabler' | 'material';
