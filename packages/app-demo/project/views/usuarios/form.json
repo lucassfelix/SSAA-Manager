@@ -15,7 +15,8 @@
                     ],
                     [
                         "email",
-                        "empresa"
+                        "empresa",
+                        "avatar"
                     ]
                 ]
             }

@@ -196,7 +196,7 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal"],
+          "enum": ["link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image"],
           "description": "Rendering layout type."
         },
         "op": {

@@ -28,6 +28,15 @@
             "render": { "layout": "link", "op": "edit" },
             "required": true
         },
+        "avatar": {
+            "colTitle": "",
+            "colWidth": 50,
+            "dataType": "image",
+            "fieldWidth": 200,
+            "label": "Avatar",
+            "placeholder": "Selecione uma imagem",
+            "render": { "layout": "image" }
+        },
         "username": {
             "colTitle": "Usuário",
             "colWidth": 140,

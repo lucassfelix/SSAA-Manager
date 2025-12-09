@@ -340,6 +340,10 @@
             "falseIcon": {
               "type": "string",
               "description": "Icon used for false boolean values."
+            },
+            "imageRadius": {
+              "type": "string",
+              "description": "Border radius for image cells."
             }
           }
         },
@@ -442,6 +446,10 @@
         "outlinedSections": {
           "type": "boolean",
           "description": "Whether form groups should be outlined."
+        },
+        "imageRadius": {
+          "type": "string",
+          "description": "Default border radius for image fields."
         },
         "toolbar": {
           "description": "Toolbar settings for forms. Overrides the toolbar object.",

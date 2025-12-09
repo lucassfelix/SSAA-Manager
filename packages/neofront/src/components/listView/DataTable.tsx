@@ -9,7 +9,7 @@ import "mantine-datatable/styles.css";
 import { JSX, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import dayjs from 'dayjs';
-import { Anchor, Badge, Box, NumberFormatter, Stack, Text } from "@mantine/core";
+import { Anchor, Badge, Box, Image, NumberFormatter, Stack, Text } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
 
 import { AppProps, DataColumnOptions, FormLayoutProps, UnifiedFieldProps } from "context";
@@ -188,6 +188,15 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       );
     }
 
+    function renderImage(value: string): ReactNode {
+      return (
+        <Image
+          radius={tblAppCfg.imageRadius || 'sm'}
+          src={value}
+        />
+      );
+    }
+
     function renderBooleanValue(value?: boolean): ReactNode {
       return String(value ? appCfg.strings.yes : appCfg.strings.no);
     }
@@ -251,6 +260,8 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
           switch (render.layout) {
             case 'booleanIcon':
               return renderBooleanIcon(value);
+            case "image":
+              return renderImage(value);
             case 'booleanWrapper':
               return renderBooleanWrapper(value);
             case 'booleanValue':

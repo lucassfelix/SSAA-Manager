@@ -18,6 +18,7 @@ import NfBooleanField from "./fields/BooleanField";
 import NfSelectField from "./fields/SelectField";
 import NfDateField from "./fields/DateField";
 import NfNumberField from "./fields/NumberField";
+import NfImageField from "./fields/ImageField";
 
 // #endregion
 
@@ -120,6 +121,8 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
         return <NfTextField key={fieldName} props={props} />;
       case 'date':
         return <NfDateField key={fieldName} props={props} />;
+      case 'image':
+        return <NfImageField key={fieldName} props={props} />;
       default:
         console.warn(`No renderer for dataType '${fieldDef.dataType}' in field '${fieldName}'.`);
         return <div key={fieldName}>(No renderer for dataType '{fieldDef.dataType}')</div>;

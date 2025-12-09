@@ -5,7 +5,8 @@
 		"username": "jayres",
 		"email": "joao.ayres18@uol.com.br",
 		"empresa": 8976,
-		"tipo_permissao": "admin"
+		"tipo_permissao": "admin",
+		"avatar": "avatars/avatar_m1.jpg"
 	},
 	{
 		"id": 2209,
@@ -14,7 +15,8 @@
 		"email": "mari_costa@ig.com.br",
 		"empresa": 312,
 		"ativo": false,
-		"tipo_permissao": "usuario"
+		"tipo_permissao": "usuario",
+		"avatar": "avatars/avatar_f1.jpg"
 	},
 	{
 		"id": 980,
@@ -22,7 +24,8 @@
 		"username": "pedroh98",
 		"email": "pedro98@google.com",
 		"empresa": 216,
-		"tipo_permissao": "usuario"
+		"tipo_permissao": "usuario",
+		"avatar": "avatars/avatar_m2.jpg"
 	},
 	{
 		"id": 40,
@@ -31,7 +34,8 @@
 		"email": "marifigueira@google.com",
 		"ativo": true,
 		"empresa": 1212,
-		"tipo_permissao": "usuario"
+		"tipo_permissao": "usuario",
+		"avatar": "avatars/avatar_f2.jpg"
 	},
 	{
 		"id": 195,
@@ -40,7 +44,8 @@
 		"email": "marcelobgoulart77@yahoo.com",
 		"ativo": true,
 		"empresa": 77,
-		"tipo_permissao": "superusuario"
+		"tipo_permissao": "superusuario",
+		"avatar": "avatars/avatar_m3.jpg"
 	},
 	{
 		"id": 340,
@@ -49,6 +54,7 @@
 		"email": "anaschneider21@uol.com.br",
 		"ativo": false,
 		"empresa": 4345,
-		"tipo_permissao": "usuario"
+		"tipo_permissao": "usuario",
+		"avatar": "avatars/avatar_f3.jpg"
 	}
 ]

@@ -6,7 +6,7 @@ import listView from "./listview.json";
 import form from "./form.json";
 import empresas from "./data.json";
 import status_empresa from "./data_status.json";
-import ufs from "../common/data_br_ufs.json";
+import ufs from "../_common/data_br_ufs.json";
 
 export default {
   fields,

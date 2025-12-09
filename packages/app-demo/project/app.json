@@ -204,7 +204,8 @@
 			"booleanIconsSize": 26,
 			"booleanIconsStroke": 1,
 			"trueIcon": "circleCheck",
-			"falseIcon": "squareX"
+			"falseIcon": "squareX",
+			"imageRadius": "sm"
 		},
 		"filterPanel": {
 			"verticalPadding": 12,
@@ -234,6 +235,7 @@
 		"selectionCheck": false,
 		"checkboxTopPadding": 36,
 		"outlinedSections": false,
+		"imageRadius": "sm",
 		"toolbar": {
 			"align": "right",
 			"upperBorder": true

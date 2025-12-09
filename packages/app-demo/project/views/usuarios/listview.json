@@ -16,9 +16,8 @@
 		"plural": "usuários"
 	},
 	"columns": [
-		"id",
+		"avatar",
 		"nome",
-		"tipo_permissao",
 		"empresa",
 		"username",
 		"email",

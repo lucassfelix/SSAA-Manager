@@ -37,6 +37,7 @@ interface ListViewsProps {
     booleanIconsStroke?: number;
     trueIcon?: string;
     falseIcon?: string;
+    imageRadius?: MantineSize;
   };
   filterToolbar?: ToolbarThemeProps;
   filterPanel?: {
@@ -83,6 +84,7 @@ export interface AppProps {
     selectionCheck?: boolean;
     checkboxTopPadding?: number;
     outlinedSections?: boolean;
+    imageRadius?: MantineSize;
     toolbar?: ToolbarThemeProps;
   };
   theme: {
