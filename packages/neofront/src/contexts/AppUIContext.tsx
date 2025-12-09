@@ -6,7 +6,7 @@
 
 import { createContext, useContext } from "react";
 
-import { AppProps, MenuConfig, IconsConfig } from "context";
+import { AppProps, MenuConfig } from "context";
 import { ViewResultProps } from "./FormProps";
 
 // #endregion
@@ -24,7 +24,6 @@ export interface UserSettings {
 interface AppUIContextValue {
   appCfg: AppProps;
   menuCfg: MenuConfig;
-  iconsCfg: IconsConfig;
   userSettings: UserSettings;
   setUserSettings: (val: UserSettings) => void;
   currentView: string;
@@ -41,7 +40,6 @@ interface AppUIContextValue {
 const AppUIContext = createContext<AppUIContextValue>({
   appCfg: {} as AppProps,
   menuCfg: { items: [] },
-  iconsCfg: {},
   userSettings: {} as UserSettings,
   setUserSettings: () => {},
   currentView: '',

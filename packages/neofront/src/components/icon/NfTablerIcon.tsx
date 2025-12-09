@@ -9,20 +9,20 @@ import { ComponentType, JSX } from "react";
 import { type IconProps, IconCircleOff } from "@tabler/icons-react";
 import * as Tabler from '@tabler/icons-react';
 
-import { useAppUI, IconsConfig } from "context";
 import { NfIconProps } from "./NfIcon";
 
 // #endregion
 
 // #region -------------------------------------------------------------------------------- Icon map
 
-function buildIconMap(iconsCfg: IconsConfig, filled: boolean = false) {
-  return Object.entries(iconsCfg).reduce((acc, [key, exportName]) => {
-    (acc as any)[key] = (Tabler as any)[Array.isArray(exportName) ?
-      exportName[filled ? (exportName[1] ? 1 : 0) : 0] : exportName];
-    return acc;
-  }, {} as Record<string, ComponentType<IconProps>>);
-}
+const iconMap = {
+  add: "IconPlus",
+  bank: "IconBuildingBank",
+  filter: "IconFilter2",
+  menu: "IconMenu2",
+  moreVertical: "IconDotsVertical",
+  notification: "IconBellRinging2"
+} as Record<string, string>;
 
 // #endregion
 
@@ -33,13 +33,16 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
   if (!props.icon) {
     return <></>;
   }
+
   const { icon, size, stroke, color, filled, style } = props;
-  const { iconsCfg } = useAppUI();
-  // TODO: Build map only once, not on every render
-  const map = buildIconMap(iconsCfg, filled);
 
   // Prefer explicit mapping; otherwise try to derive Tabler export name automatically
-  let Comp: ComponentType<IconProps> | undefined = map[icon];
+  let Comp: ComponentType<IconProps> | undefined;
+
+  const mappedName = iconMap[icon];
+  if (mappedName) {
+    Comp = (Tabler as any)[mappedName] as ComponentType<IconProps> | undefined;
+  }
   if (!Comp) {
     const toPascal = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
     const base = `Icon${toPascal(icon)}`;

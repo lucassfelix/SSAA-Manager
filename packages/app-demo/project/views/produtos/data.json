@@ -48,19 +48,19 @@
 		"estoque": 31
 	},
 	{
+		"id": "78",
+		"sku": "PC-CLIP01",
+		"descricao": "Clipe de papel",
+		"data_entrada": "2025-07-10",
+		"valor": 0.438,
+		"estoque": 5000
+	},
+	{
 		"id": 1647,
 		"sku": "RZDV200",
 		"descricao": "Mouse pad gamer Razer DeathAdder V2",
 		"data_entrada": "2025-07-10",
 		"valor": 99.9,
 		"estoque": 156
-	},
-	{
-		"id": 782,
-		"sku": "PC-CLIP01",
-		"descricao": "Clipe de papel",
-		"data_entrada": "2025-07-10",
-		"valor": 0.438,
-		"estoque": 5000
 	}
 ]

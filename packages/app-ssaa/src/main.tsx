@@ -7,12 +7,11 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import { App, createViewLoader, AppProps, MenuConfig, IconsConfig } from "@neofront/core";
+import { App, createViewLoader, AppProps, MenuConfig } from "@neofront/core";
 
 // App configuration imports
 import appCfg from "project/app.json";
 import menuCfg from "project/menu.json";
-import iconsCfg from "project/icons.json";
 import viewsCfg from "project/views/views.json";
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -29,7 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App
       appCfg={appCfg as AppProps}
       menuCfg={menuCfg as MenuConfig}
-      iconsCfg={iconsCfg as IconsConfig}
       loadView={createViewLoader(viewsCfg.active, loaderModules)}
     />
   </BrowserRouter>

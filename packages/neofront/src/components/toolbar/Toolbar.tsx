@@ -34,6 +34,9 @@ export interface ToolbarThemeProps {
     radius?: number | string;
     defaultVariant?: string;
     regularVariant?: string;
+    fontSize?: number | string;
+    fontWeight?: number;
+    uppercase?: boolean;
   };
   titles?: {
     size?: number | string;
@@ -100,7 +103,7 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
 
   const iconBtnConfig = cfg.iconButtons;
   const listCfg = viewResult?.listView;
-  const tbCfg = appCfg.forms.toolbar || {} as ToolbarThemeProps;
+  const tbCfg = { ...appCfg.toolbars, ...appCfg.forms.toolbar } as ToolbarThemeProps;
 
   // #endregion
 
@@ -186,6 +189,11 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
             aria-label={it.label ?? name}
             radius={cfg.textButtons?.radius}
             onClick={() => handleClick(it)}
+            fz={cfg.textButtons?.fontSize ?? undefined}
+            fw={cfg.textButtons?.fontWeight ?? undefined}
+            style={{
+              textTransform: cfg.textButtons?.uppercase ? "uppercase" : undefined
+            }}
           >{it.label ?? `[${name}]`}</Button>);
       } else {
         const iconBtnVariant = it.selected ? tbCfg.iconButtons?.selectedVariant || 'filled' :

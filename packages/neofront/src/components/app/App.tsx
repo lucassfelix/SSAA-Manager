@@ -15,7 +15,7 @@ import { DatesProvider } from '@mantine/dates';
 import { createTheme, MantineProvider, DEFAULT_THEME } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
-import { AppUIContext, AppProps, MenuConfig, IconsConfig, UserSettings, ViewResultProps } from "context";
+import { AppUIContext, AppProps, MenuConfig, UserSettings, ViewResultProps } from "context";
 import Shell from "@/shell/Shell";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
 
@@ -26,7 +26,6 @@ import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from 
 interface MainAppProps {
   appCfg: AppProps;
   menuCfg: MenuConfig;
-  iconsCfg: IconsConfig;
   loadView: (viewName: string) => Promise<ViewResultProps> | undefined;
 }
 
@@ -38,7 +37,11 @@ export default function App(props: MainAppProps) {
 
   // #region Hooks and variables
 
-  const { appCfg, menuCfg, iconsCfg, loadView } = props;
+  const { appCfg, menuCfg, loadView } = props;
+
+  if (!appCfg.mainControls || !appCfg.controls) {
+    throw new Error("App: Missing controls / mainControls in app configuration.");
+  }
 
   // Merge strings from standard strings and app config
   appCfg.strings = { ...defaultStrings[appCfg.language], ...appCfg.strings };
@@ -46,12 +49,12 @@ export default function App(props: MainAppProps) {
 
   // Validate projectId
   if (!appCfg.projectId || appCfg.projectId.trim() === '') {
-    throw new Error("Missing required projectId in app configuration.");
+    throw new Error("App: Missing required projectId in app configuration.");
   }
 
   // Validate locale
   if (['en-us', 'es-419', 'pt-br'].includes(appCfg.language) === false) {
-    throw new Error(`Unsupported language locale "${appCfg.language}" in app configuration.`);
+    throw new Error(`App: Unsupported language locale "${appCfg.language}" in app configuration.`);
   }
   document.documentElement.setAttribute('lang', appCfg.language);
   extendDayjs(appCfg.language);
@@ -164,7 +167,6 @@ export default function App(props: MainAppProps) {
         <AppUIContext.Provider value={{
           appCfg,
           menuCfg,
-          iconsCfg,
           userSettings,
           setUserSettings,
           currentView,

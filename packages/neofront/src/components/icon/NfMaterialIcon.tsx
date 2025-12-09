@@ -29,7 +29,7 @@ const iconMap = {
   sun: "wb_sunny",
   user: "person",
   wallet: "account_balance_wallet"
-};
+} as Record<string, string>;
 
 // #endregion
 
@@ -44,7 +44,7 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
   const { icon, size, color, filled, style } = props;
   
   const toSnake = (str: string) => str.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
-  const iconName = (iconMap as Record<string, string>)[icon] ?? toSnake(icon);
+  const iconName = iconMap[icon] ?? toSnake(icon);
 
   // Material Icons font
 

@@ -58,7 +58,7 @@
 		},
 		"endereco": "Av. Atlântica, 4041 — sala 403",
 		"cidade": "São Paulo",
-		"uf": 26,
+		"uf": "sp",
 		"status": 1
 	},
 	{
@@ -82,7 +82,7 @@
 		},
 		"endereco": "Av. Muriel Silva Paes, 884",
 		"cidade": "Belo Horizonte",
-		"uf": "MG",
+		"uf": 11,
 		"status": 2
 	}
 ]

@@ -15,12 +15,6 @@ import { useAppUI } from "context";
 
 // #region ----------------------------------------------------------------------------------- Types
 
-// type LabelProps = {
-//   size?: number | string;
-//   fontWeight?: number | string;
-//   uppercase?: boolean;
-// };
-
 export interface MainMenuProps {
   openSubmenusOnHover?: boolean;
   submenuOffset: number;

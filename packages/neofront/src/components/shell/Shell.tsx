@@ -99,6 +99,7 @@ export default function Shell() {
   const desktopOpened = !userSettings.navbarCollapsed;
   const collapsible = shellCfg.navbar.collapsible;
   const toggleCfg = mainControls.collapseToggle;
+  const iconBtnConfig = appCfg.toolbars.iconButtons;
 
   function handleToggleDesktop(): void {
     try {
@@ -164,6 +165,9 @@ export default function Shell() {
       >
         <NfIcon
           icon="menu"
+          size={iconBtnConfig?.iconSize}
+          stroke={iconBtnConfig?.iconStroke}
+          filled={iconBtnConfig?.filled}
           style={toggleCfg?.rotateIcon ? {
             transform: desktopOpened ? 'rotate(-180deg)' : 'rotate(0deg)',
             transition: 'transform 0.4s ease',

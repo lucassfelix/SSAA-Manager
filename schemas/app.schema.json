@@ -530,9 +530,11 @@
     "shell",
     "menu",
     "toolbars",
+    "mainControls",
     "controls",
-    "theme",
-    "listViews"
+    "listViews",
+    "forms",
+    "theme"
   ],
 
   // Definitions for reusable components
@@ -862,8 +864,20 @@
               "description": "Size of the text button (e.g. 'sm','md','lg')."
             },
             "radius": {
-              "type": "number",
+              "type": ["number", "string"],
               "description": "Border radius of the text button."
+            },
+            "fontSize": {
+              "type": ["number", "string"],
+              "description": "Font size of the button label."
+            },
+            "fontWeight": {
+              "type": ["number", "string"],
+              "description": "Font weight of the button label."
+            },
+            "uppercase": {
+              "type": "boolean",
+              "description": "Whether the button label should be uppercase."
             },
             "defaultVariant": {
               "type": "string",

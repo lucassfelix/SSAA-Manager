@@ -42,17 +42,12 @@ interface ListViewsProps {
   filterPanel?: {
     verticalPadding?: number;
     transitionDuration?: number;
-    // verticalGap?: MantineSpacing;
-    // fullHeight?: boolean;
-    // toolbar?: ToolbarThemeProps;
   };
 }
 
 export interface MenuConfig {
   items: MenuItem[];
 }
-
-export type IconsConfig = Record<string, string | string[]>;
 
 /** 
  * Application configuration structure. Should match the structure of app.json. 

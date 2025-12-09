@@ -23,8 +23,9 @@ export default function ThemeSwitch() {
 
   const { appCfg, userSettings, setUserSettings } = useAppUI();
   const { colorScheme, setColorScheme } = useMantineColorScheme({ keepTransitions: true });
-  const switcherCfg = appCfg.controls.themeSwitch;
+  const switcherCfg = appCfg.mainControls.themeSwitch;
   const label = userSettings.dark ? switcherCfg?.tipLight : switcherCfg?.tipDark;
+  const iconBtnConfig = appCfg.toolbars.iconButtons;
 
   const togggleTheme = (): void => {
     const next = colorScheme === "dark" ? "light" : "dark";
@@ -38,12 +39,17 @@ export default function ThemeSwitch() {
     <Tooltip label={label}>
       <ActionIcon
         variant="default"
-        size={appCfg.forms.toolbar?.iconButtons?.size}
+        size={appCfg.forms.toolbar?.iconButtons?.size ?? appCfg.toolbars?.iconButtons?.size}
         radius={appCfg.forms.toolbar?.iconButtons?.radius}
         aria-label={label}
         onClick={() => togggleTheme()}
       >
-        <NfIcon icon={userSettings.dark ? "sun" : "moon"} stroke={1.5} />
+        <NfIcon
+          icon={userSettings.dark ? "sun" : "moon"}
+          size={iconBtnConfig?.iconSize}
+          stroke={iconBtnConfig?.iconStroke}
+          filled={iconBtnConfig?.filled}
+        />
       </ActionIcon>
     </Tooltip>
   );

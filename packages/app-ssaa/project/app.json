@@ -30,71 +30,124 @@
 			"footer": true,
 			"items": [ "mainMenu" ],
 			"footerItems": [ "logo" ]
-		},
-		"menu": {
-			"clickOnHover": false,
-			"menuItem": {
-				"gap": 16,
-				"radius": 8
-			},
-			"leftIcon": {
-				"filled": false,
-				"size": 26,
-				"stroke": 1.5
-			},
-			"rightIcon": {
-				"icon": "chevronRight",
-				"stroke": 2,
-				"size": 20
-			},
-			"label": {
-				"size": "1rem",
-				"fontWeight": 400
-			},
-			"description": {
-				"size": "0.85rem",
-				"fontWeight": 600
-			},
-			"submenu": {
-				"gap": 6,
-				"offset": 12,
-				"radius": 8,
-				"label": {
-					"size": "0.9rem",
-					"fontWeight": 400
-				},
-				"subtitle": {
-					"label": {
-						"size": "0.65rem",
-						"fontWeight": 700,
-						"uppercase": true
-					}
-				}
-			}
-		},
+		}
+	},
+	"menu": {
+		"items": {
+			"gap": 16,
+			"radius": 8,
+			"labelSize": "1rem",
+			"labelWeight": 400,
+			"iconFilled": false,
+			"iconSize": 26,
+			"iconStroke": 2
+		}
+	},
+	"mainControls": {
 		"mainTitle": {
-			"label": "Sistema Gerencial SSAA"
+			"label": "Aplicação de Exemplo NeoFront"
 		},
-		"toggleNavbar": {
+		"collapseToggle": {
 			"rotateIcon": true,
 			"tipCollapse": "Fechar a barra lateral",
 			"tipExpand": "Abrir a barra lateral"
 		},
-		"themeSwitcher": {
+		"themeSwitch": {
+			"type": "iconButton",
 			"tipLight": "Mudar para o tema claro",
 			"tipDark": "Mudar para o tema escuro"
 		},
 		"logo": {
-			"collapsedWidth": 72,
-			"expandedWidth": 140,
-			"altText": "Logotipo SSAA"
-		},
+			"collapsedHeight": 52,
+			"expandedHeight": 52,
+			"altText": "Logotipo Hypervisual",
+			"link": "/"
+		}
+	},
+	"controls": {
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
 			"icon": "manage_accounts",
 			"action": "openUserSettings",
 			"items": [ ]
+		},
+		"separator": {
+			"type": "separator"
+		},
+		"add": {
+			"type": "iconButton",
+			"tip": "Adicionar {singular}",
+			"icon": "add",
+			"action": "add"
+		},
+		"search": {
+			"type": "iconButton",
+			"tip": "Pesquisar {plural}",
+			"icon": "search",
+			"action": "search"
+		},
+		"send": {
+			"type": "textButton",
+			"label": "Enviar",
+			"action": "send",
+			"default": true
+		},
+		"cancel": {
+			"type": "textButton",
+			"label": "Cancelar",
+			"action": "cancel"
+		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{
+					"name": "exportCSV",
+					"label": "Exportar para planilha",
+					"action": "exportCSV"
+				},
+				{
+					"name": "exportPDF",
+					"label": "Exportar PDF",
+					"action": "exportPDF"
+				},
+				{
+					"type": "separator"
+				},
+				{
+					"name": "print",
+					"label": "Imprimir listagem",
+					"action": "printRecords"
+				}
+			]
+		}
+	},
+	"toolbars": {
+		"horizontalPadding": 10,
+		"verticalPadding": 6,
+		"gap": 16,
+		"align": "left",
+		"iconButtons": {
+			"rotateSelected": true,
+			"size": 36,
+			"radius": 8,
+			"filled": false,
+			"iconSize": 24,
+			"iconStroke": 2
+		},
+		"textButtons": {
+			"size": "sm",
+			"radius": 6,
+			"fontSize": "0.8rem",
+			"fontWeight": 700,
+			"uppercase": true
+		},
+		"titles": {
+			"size": 20,
+			"fontWeight": 500,
+			"width": 120
 		}
 	},
 	"listViews": {
@@ -110,89 +163,12 @@
 			"verticalSpacing": 12,
 			"headerHeight": 20,
 			"shadow": "xs",
-			"wrappers": {
-				"size": "md",
-				"statusWidth": 120,
-				"booleanWidth": 50
-			},
-			"booleanIcons": {
-				"size": 26,
-				"stroke": 1,
-				"trueIcon": "circleCheck",
-				"falseIcon": "squareX",
-				"trueColorLight": "var(--mantine-color-teal-6)",
-				"trueColorDark": "var(--mantine-color-green-4)",
-				"falseColorLight": "var(--mantine-color-red-6)",
-				"falseColorDark": "var(--mantine-color-red-4)"
-			}
-		},
-		"toolbar": {
-			"horizontalPadding": 10,
-			"verticalPadding": 6,
-			"gap": 16,
-			"align": "left",
-			"iconButton": {
-				"rotateSelected": true,
-				"size": 36,
-				"radius": 8,
-				"stroke": 1.5,
-				"filled": false,
-				"icon": {
-					"size": 24,
-					"stroke": 2
-				}
-			},
-			"textButton": {
-				"size": "sm",
-				"radius": 6
-			},
-			"text": {
-				"size": 20,
-				"fontWeight": 500,
-				"width": 120
-			}
-		},
-		"buttons": {
-			"separator": {
-				"type": "separator"
-			},
-			"add": {
-				"type": "iconButton",
-				"tip": "Adicionar {singular}",
-				"icon": "add",
-				"action": "add"
-			},
-			"search": {
-				"type": "iconButton",
-				"tip": "Pesquisar {plural}",
-				"icon": "search",
-				"action": "search"
-			},
-			"more": {
-				"type": "iconButton",
-				"tip": "Mais ações",
-				"icon": "moreVertical",
-				"items": [
-					{
-						"name": "exportCSV",
-						"label": "Exportar para planilha",
-						"action": "exportCSV"
-					},
-					{
-						"name": "exportPDF",
-						"label": "Exportar PDF",
-						"action": "exportPDF"
-					},
-					{
-						"type": "separator"
-					},
-					{
-						"name": "print",
-						"label": "Imprimir listagem",
-						"action": "printRecords"
-					}
-				]
-			}
+			"wrapperSize": "md",
+			"wrapperBooleanWidth": 50,
+			"booleanIconsSize": 26,
+			"booleanIconsStroke": 1,
+			"trueIcon": "circleCheck",
+			"falseIcon": "squareX"
 		}
 	},
 	"forms": {
@@ -204,69 +180,22 @@
 		"checkboxTopPadding": 36,
 		"outlinedSections": false,
 		"toolbar": {
-			"horizontalPadding": 24,
-			"verticalPadding": 6,
-			"gap": 16,
 			"align": "right",
-			"upperBorder": true,
-			"iconButton": {
-				"rotateSelected": true,
-				"size": 36,
-				"radius": 8,
-				"stroke": 1.5,
-				"filled": false,
-				"selectedVariant": "filled",
-				"regularVariant": "default",
-				"icon": {
-					"size": 24,
-					"stroke": 2
-				}
-			},
-			"textButton": {
-				"size": "sm",
-				"radius": 6,
-				"defaultVariant": "filled",
-				"regularVariant": "light"
-			},
-			"text": {
-				"size": 20,
-				"fontWeight": 600,
-				"width": 120
-			}
-		},
-		"buttons": {
-			"separator": {
-				"type": "separator"
-			},
-			"send": {
-				"type": "textButton",
-				"label": "Enviar",
-				"action": "send",
-				"default": true
-			},
-			"cancel": {
-				"type": "textButton",
-				"label": "Cancelar",
-				"action": "cancel"
-			}
+			"upperBorder": true
 		}
 	},
 	"theme": {
 		"defaultUIScale": 100,
-		"iconFamily": "material",
-		"typography": {
-			"mainFamily": "Roboto",
-			"headingsFamily": "Roboto"
+		"iconFamily": "tabler",
+		"mainFontFamily": "Roboto",
+		"headingsFontFamily": "Roboto",
+		"lightMode": {
+			"expandedLogo": "logo-ssaa-light.svg",
+			"collapsedLogo": "logo-ssaa-light.svg"
 		},
-		"modes": {
-			"light": {
-				"expandedLogo": "logo-ssaa-light.svg",
-				"collapsedLogo": "logo-ssaa-light.svg"
-			},
-			"dark": {
-				"expandedLogo": "logo-ssaa-dark.svg",
-				"collapsedLogo": "logo-ssaa-dark.svg"
-			}
+		"darkMode": {
+			"expandedLogo": "logo-ssaa-dark.svg",
+			"collapsedLogo": "logo-ssaa-dark.svg"
 		}
 	}
 }
