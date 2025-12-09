@@ -86,7 +86,6 @@ export interface AppProps {
     checkboxTopPadding?: number;
     outlinedSections?: boolean;
     toolbar?: ToolbarThemeProps;
-    buttons: { [key: string]: ToolbarItem };
   }
   theme: {
     defaultUIScale: number;

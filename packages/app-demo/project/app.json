@@ -1,15 +1,15 @@
 {
 	"$schema": "../../../schemas/app.schema.json",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"language": "pt-br",
-	"comments": "Demo: configuração de projeto",
+	"comments": "Demo: configuração da aplicação",
 	"projectId": "neofront-demo-app",
 	"strings": {
-		"appTitle": "{pageName} | NeoFront {version}",
-		"appVersion": "0.17.2"
+		"appVersion": "0.17.2",
+		"appTitle": "{pageName} | NeoFront {version}"
 	},
 	"errorStrings": {
-		"noRecordsText": "Sem itens a exibir"
+		"noRecordsText": "Não há itens a serem exibidos"
 	},
 	"paths": {
 		"images": "images/"
@@ -39,8 +39,8 @@
 			"radius": 8,
 			"labelSize": "1rem",
 			"labelWeight": 600,
-			"subtitleSize": "0.65rem",
-			"subtitleWeight": 700,
+			"subtitleSize": "0.8rem",
+			"subtitleWeight": null,
 			"subtitleUppercase": true,
 			"descriptionSize": "0.85rem",
 			"descriptionWeight": 600,
@@ -54,7 +54,8 @@
 		"submenuItems": {
 			"gap": 6,
 			"labelSize": "0.9rem",
-			"labelWeight": 400
+			"labelWeight": 400,
+			"subtitleSize": "0.65rem"
 		}
 	},
 	"toolbars": {
@@ -94,16 +95,16 @@
 			"tipCollapse": "Fechar a barra lateral",
 			"tipExpand": "Abrir a barra lateral"
 		},
+		"themeSwitch": {
+			"type": "iconButton",
+			"tipLight": "Mudar para o tema claro",
+			"tipDark": "Mudar para o tema escuro"
+		},
 		"logo": {
 			"collapsedHeight": 52,
 			"expandedHeight": 52,
 			"altText": "Logotipo Hypervisual",
 			"link": "/"
-		},
-		"themeSwitch": {
-			"type": "iconButton",
-			"tipLight": "Mudar para o tema claro",
-			"tipDark": "Mudar para o tema escuro"
 		}
 	},
 	"controls": {
@@ -198,14 +199,14 @@
 			"trueIcon": "circleCheck",
 			"falseIcon": "squareX"
 		},
+		"filterPanel": {
+			"verticalPadding": 12,
+			"transitionDuration": 200
+		},
 		"filterToolbar": {
 			"horizontalPadding": 0,
 			"verticalPadding": 0,
 			"align": "right"
-		},
-		"filterPanel": {
-			"verticalPadding": 12,
-			"transitionDuration": 200
 		},
 		"pagination": {
 			"pageSizes": [ 5, 10, 20, 50, 100 ],

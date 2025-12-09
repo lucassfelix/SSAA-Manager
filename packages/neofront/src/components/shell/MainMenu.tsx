@@ -46,6 +46,8 @@ export interface MainMenuProps {
     radius: number | string;
     labelSize?: number | string;
     labelWeight?: number | string;
+    subtitleSize?: number | string;
+    subtitleWeight?: number | string;
   }
 }
 
@@ -83,13 +85,13 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   const { appCfg, menuCfg, currentView } = useAppUI();
   const [_searchParams, setSearchParams] = useSearchParams();
   const opacityTransition = { opacity: collapsed ? 0 : 1, transition: 'opacity 200ms ease' };
+  const submenuCfg = {...cfg.items, ...cfg.submenuItems };
 
   // #endregion
 
   // #region Renderers
 
   function renderIcon(it: MenuItem, depth: number) {
-
     const iconSize = cfg.items.iconSize;
     const iconComponent = (
       <NfIcon
@@ -136,12 +138,18 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   }
 
   function renderSubtitle(it: MenuItem, depth: number, key: string) {
+
     return depth >= 1 ? (
       <Menu.Label
         key={`${key}-lbl`}
-        fz={cfg.items.subtitleSize}
         style={{
-          textTransform: cfg.items.subtitleUppercase ? "uppercase" : undefined
+          textTransform: submenuCfg.subtitleUppercase ? "uppercase" : undefined
+        }}
+        styles={{
+          label: {
+            fontSize: submenuCfg.subtitleSize,
+            fontWeight: submenuCfg.subtitleWeight
+          }
         }}
       >{it.label}</Menu.Label>
     ) : (
@@ -151,9 +159,14 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
         label={it.label}
         style={{
           ...opacityTransition,
-          textTransform: cfg.items.subtitleUppercase ? "uppercase" : undefined
+          textTransform: cfg.items.subtitleUppercase ? "uppercase" : undefined,
         }}
-        styles={{ label: { size: cfg.items.subtitleSize, weight: cfg.items.subtitleWeight } }}
+        styles={{
+          label: {
+            fontSize: cfg.items.subtitleSize,
+            fontWeight: cfg.items.subtitleWeight
+          }
+        }}
       />
     );
   }
@@ -253,8 +266,8 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
               className={isActive ? 'nf-active' : ''}
               styles={{
                 itemLabel: {
-                  fontSize: cfg.submenuItems.labelSize ?? cfg.items.labelSize,
-                  fontWeight: cfg.submenuItems.labelWeight ?? cfg.items.labelWeight,
+                  fontSize: submenuCfg.labelSize,
+                  fontWeight: submenuCfg.labelWeight,
                 }
               }}
             >

@@ -181,11 +181,11 @@
               "description": "Font weight for menu item labels."
             },
             "subtitleSize": {
-              "type": [ "number", "string" ],
+              "type": [ "number", "string", "null" ],
               "description": "Font size for menu subtitles."
             },
             "subtitleWeight": {
-              "type": [ "number", "string" ],
+              "type": [ "number", "string", "null" ],
               "description": "Font weight for menu subtitles."
             },
             "subtitleUppercase": {
@@ -827,10 +827,6 @@
             "radius": {
               "type": "number",
               "description": "Border radius of the icon button."
-            },
-            "outlineStroke": {
-              "type": "number",
-              "description": "Stroke width of the icon button."
             },
             "filled": {
               "type": "boolean",
