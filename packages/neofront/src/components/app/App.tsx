@@ -39,7 +39,7 @@ export default function App(props: MainAppProps) {
 
   const { appCfg, menuCfg, loadView } = props;
 
-  if (!appCfg.mainControls || !appCfg.controls) {
+  if (!appCfg.topControls || !appCfg.controls) {
     throw new Error("App: Missing controls / mainControls in app configuration.");
   }
 

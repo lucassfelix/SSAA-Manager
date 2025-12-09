@@ -23,7 +23,7 @@ export default function ThemeSwitch() {
 
   const { appCfg, userSettings, setUserSettings } = useAppUI();
   const { colorScheme, setColorScheme } = useMantineColorScheme({ keepTransitions: true });
-  const switcherCfg = appCfg.mainControls.themeSwitch;
+  const switcherCfg = appCfg.topControls.themeSwitch;
   const label = userSettings.dark ? switcherCfg?.tipLight : switcherCfg?.tipDark;
   const iconBtnConfig = appCfg.toolbars.iconButtons;
 

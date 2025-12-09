@@ -50,7 +50,7 @@
 			"iconStroke": 2
 		}
 	},
-	"mainControls": {
+	"topControls": {
 		"mainTitle": {
 			"label": "Aplicação de Exemplo NeoFront"
 		},

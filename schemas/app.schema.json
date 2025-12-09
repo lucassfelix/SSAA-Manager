@@ -191,9 +191,9 @@
       "description": "Toolbar properties for forms and listViews.",
       "$ref": "#/definitions/toolbar"
     },
-    "mainControls": {
+    "topControls": {
       "type": "object",
-      "description": "Default settings for shell controls.",
+      "description": "List of controls used in the application shell.",
       "additionalProperties": false,
       "properties": {
         "mainTitle": {
@@ -491,7 +491,7 @@
     "shell",
     "menu",
     "toolbars",
-    "mainControls",
+    "topControls",
     "controls",
     "listViews",
     "forms",

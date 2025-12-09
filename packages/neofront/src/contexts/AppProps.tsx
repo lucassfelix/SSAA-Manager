@@ -6,7 +6,7 @@
 
 import type { MantineShadow, MantineSize, MantineSpacing } from "@mantine/core";
 
-import { ControlProps, ShellProps } from "@/shell/Shell";
+import { TopControlProps, ShellProps } from "@/shell/Shell";
 import { MainMenuProps, MenuItem } from "@/shell/MainMenu";
 import { ToolbarItem, ToolbarThemeProps } from "@/toolbar/Toolbar";
 
@@ -68,7 +68,7 @@ export interface AppProps {
     images: string;
   };
   shell: ShellProps;
-  mainControls: ControlProps;
+  topControls: TopControlProps;
   controls: {
     [key: string]: ToolbarItem;
   }

@@ -13,7 +13,7 @@ import { useAppUI } from "context";
 import ThemeSwitch from "./ThemeSwitch";
 import FullyCollapsibleLayout from "./FullyCollapsibleLayout";
 import SidebarIconsLayout from "./SidebarIconsLayout";
-import MainMenu, { MainMenuProps } from "./MainMenu";
+import MainMenu from "./MainMenu";
 
 import NfForm, { FormOperationType } from "@/form/Form";
 import ErrorPage from "@/errorpage/ErrorPage";
@@ -47,8 +47,7 @@ export interface ShellProps {
   }
 }
 
-export interface ControlProps {
-  menu: MainMenuProps;
+export interface TopControlProps {
   mainTitle?: {
     label: string;
   };
@@ -91,7 +90,7 @@ export default function Shell() {
   const op = currentOp as FormOperationType;
 
   const shellCfg = appCfg.shell as ShellProps;
-  const mainControls = appCfg.mainControls as ControlProps;
+  const mainControls = appCfg.topControls as TopControlProps;
   const errStr = appCfg.errorStrings;
   const expandedWidth = shellCfg.navbar.width || 240;
   const themeCfg = userSettings.dark ? appCfg.theme.darkMode : appCfg.theme.lightMode;
