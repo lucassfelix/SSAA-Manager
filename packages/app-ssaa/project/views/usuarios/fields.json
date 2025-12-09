@@ -80,7 +80,8 @@
             "options": { "table": "status", "valueAccessor": "value", "labelAccessor": "label" },
             "placeholder": "Selecione uma opção",
             "render": { "layout": "colorWrapper" },
-            "required": true
+            "required": true,
+            "wrapperWidth": 90
         },
         "data_criacao": {
             "colStyles": "sm",
