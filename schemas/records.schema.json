@@ -4,8 +4,10 @@
   "title": "Records data schema",
   "description": "Schema for mock data record files (project/views/*/records.json).",
   "type": "array",
+  "additionalProperties": false,
   "items": {
     "type": "object",
-    "description": "A single record entry. Structure varies by view."
+    "description": "A single record entry. Structure varies by view.",
+    "additionalProperties": true
   }
 }

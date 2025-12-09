@@ -111,12 +111,18 @@ function walk(obj, pathArr, fileText, filePath, out) {
     } else {
       // If this node is a candidate schema object, check for description
       if (isObjectSchemaCandidate(obj, pathArr)) {
-        // If the object declares "properties", ensure additionalProperties is explicitly false
-        if (Object.prototype.hasOwnProperty.call(obj, 'properties')) {
-          // Allow additionalProperties when set to false or when it's an object schema
+        // If the object declares "properties" or explicitly has type: 'object',
+        // ensure additionalProperties is explicitly false (avoid open object schemas).
+        if (obj.type === 'object' || Object.prototype.hasOwnProperty.call(obj, 'properties')) {
+          // additionalProperties must be explicitly present and be either false or
+          // an object schema; previously we also flagged `true`, but caller wants
+          // `true` to be allowed, so only flag when the property is missing or
+          // when it's an invalid non-boolean/non-object value.
+          const hasAp = Object.prototype.hasOwnProperty.call(obj, 'additionalProperties');
           const ap = obj.additionalProperties;
           const apIsObject = ap && typeof ap === 'object';
-          if (ap === true || (ap !== false && !apIsObject)) {
+          const apIsValid = ap === false || ap === true || apIsObject;
+          if (!hasAp || !apIsValid) {
             const objName = pathArr.length ? pathArr[pathArr.length - 1] : '(root)';
             // Skip $ref-only wrappers
             if (!Object.prototype.hasOwnProperty.call(obj, '$ref') && !pathArr.includes('oneOf')) {
@@ -130,8 +136,11 @@ function walk(obj, pathArr, fileText, filePath, out) {
           // object name: use last key in path if available
           const objName = pathArr.length ? pathArr[pathArr.length - 1] : '(root)';
 
-          // Skip some nodes that typically don't need description
-          if (objName === 'definitions') {
+          // Skip nodes under `definitions` entirely — definitions entries
+          // are often schema fragments and need not carry descriptions.
+          if (pathArr.includes('definitions')) {
+            // skip
+          } else if (objName === 'definitions') {
             // skip
           } else if (pathArr.includes('oneOf')) {
             // skip

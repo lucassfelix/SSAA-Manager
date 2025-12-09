@@ -4,6 +4,7 @@
   "title": "Common schema",
   "description": "Schema for information used by several schemas.",
   "type": "object",
+  "additionalProperties": false,
 
   // Definitions for reusable components
 

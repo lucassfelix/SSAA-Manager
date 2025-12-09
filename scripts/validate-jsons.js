@@ -190,7 +190,7 @@ for (const f of files) {
   const validate = ajv.getSchema(schema.$id || `schema:${schemaKey}`) || ajv.compile(schema);
   if (!validate(json)) {
     failures++;
-    output.push(`Errors in ${f} (schema '${schemaKey}'):`);
+    output.push(`Errors in ${path.basename(f)} (schema '${schemaKey}'):`);
     for (const err of validate.errors || []) {
       output.push(`  ${err.instancePath || '/'} ${err.message}`);
     }

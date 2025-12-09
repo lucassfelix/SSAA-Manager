@@ -170,73 +170,12 @@
         "items": {
           "type": "object",
           "description": "Default menu item styling and behavior.",
-          "additionalProperties": false,
-          "properties": {
-            "gap": {
-              "type": "number",
-              "description": "Gap between menu item icon and label."
-            },
-            "radius": {
-              "type": "number",
-              "description": "Border radius for menu items."
-            },
-            "labelSize": {
-              "type": [ "number", "string" ],
-              "description": "Font size for menu item labels."
-            },
-            "labelWeight": {
-              "type": [ "number", "string" ],
-              "description": "Font weight for menu item labels."
-            },
-            "subtitleSize": {
-              "type": [ "number", "string", "null" ],
-              "description": "Font size for menu subtitles."
-            },
-            "subtitleWeight": {
-              "type": [ "number", "string", "null" ],
-              "description": "Font weight for menu subtitles."
-            },
-            "subtitleUppercase": {
-              "type": "boolean",
-              "description": "Whether subtitles should be rendered in uppercase."
-            },
-            "descriptionSize": {
-              "type": [ "number", "string" ],
-              "description": "Font size for menu item descriptions."
-            },
-            "descriptionWeight": {
-              "type": [ "number", "string" ],
-              "description": "Font weight for menu item descriptions."
-            },
-            "iconFilled": {
-              "type": "boolean",
-              "description": "Whether menu icons should be filled (true) or outlined (false)."
-            },
-            "iconSize": {
-              "type": [ "number", "string" ],
-              "description": "Size of menu icons in pixels."
-            },
-            "iconStroke": {
-              "type": "number",
-              "description": "Stroke width for menu icons."
-            },
-            "arrowIcon": {
-              "type": "string",
-              "description": "Icon name for submenu arrows."
-            },
-            "arrowStroke": {
-              "type": "number",
-              "description": "Stroke width for submenu arrow icons."
-            },
-            "arrowSize": {
-              "type": [ "number", "string" ],
-              "description": "Size of submenu arrow icons in pixels."
-            }
-          }
+          "$ref": "#/definitions/menuItemsStyles"
         },
         "submenuItems": {
           "type": "object",
-          "description": "Default submenu styling for menu items."
+          "description": "Default submenu styling for menu items. Inherits from 'items' properties.",
+          "$ref": "#/definitions/menuItemsStyles"
         }
       }
     },
@@ -404,6 +343,7 @@
         },
         "filterPanel": {
           "type": "object",
+          "description": "Filter panel style settings.",
           "additionalProperties": false,
           "properties": {
             "verticalPadding": {
@@ -450,7 +390,18 @@
         },
         "infiniteScroll": {
           "type": "object",
-          "description": "Default infinite scroll settings for list views."
+          "description": "Default infinite scroll settings for list views.",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether infinite scroll is enabled."
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Scroll threshold in pixels to trigger loading more items."
+            }
+          }
         }
       },
       "required": [
@@ -606,6 +557,73 @@
         },
         "link": {
           "$ref": "#/definitions/colorEntry"
+        }
+      }
+    },
+    "menuItemsStyles": {
+      "type": "object",
+      "description": "Default menu item styling and behavior.",
+      "additionalProperties": false,
+      "properties": {
+        "gap": {
+          "type": "number",
+          "description": "Gap between menu item icon and label."
+        },
+        "radius": {
+          "type": "number",
+          "description": "Border radius for menu items."
+        },
+        "labelSize": {
+          "type": [ "number", "string" ],
+          "description": "Font size for menu item labels."
+        },
+        "labelWeight": {
+          "type": [ "number", "string" ],
+          "description": "Font weight for menu item labels."
+        },
+        "subtitleSize": {
+          "type": [ "number", "string", "null" ],
+          "description": "Font size for menu subtitles."
+        },
+        "subtitleWeight": {
+          "type": [ "number", "string", "null" ],
+          "description": "Font weight for menu subtitles."
+        },
+        "subtitleUppercase": {
+          "type": "boolean",
+          "description": "Whether subtitles should be rendered in uppercase."
+        },
+        "descriptionSize": {
+          "type": [ "number", "string" ],
+          "description": "Font size for menu item descriptions."
+        },
+        "descriptionWeight": {
+          "type": [ "number", "string" ],
+          "description": "Font weight for menu item descriptions."
+        },
+        "iconFilled": {
+          "type": "boolean",
+          "description": "Whether menu icons should be filled (true) or outlined (false)."
+        },
+        "iconSize": {
+          "type": [ "number", "string" ],
+          "description": "Size of menu icons in pixels."
+        },
+        "iconStroke": {
+          "type": "number",
+          "description": "Stroke width for menu icons."
+        },
+        "arrowIcon": {
+          "type": "string",
+          "description": "Icon name for submenu arrows."
+        },
+        "arrowStroke": {
+          "type": "number",
+          "description": "Stroke width for submenu arrow icons."
+        },
+        "arrowSize": {
+          "type": [ "number", "string" ],
+          "description": "Size of submenu arrow icons in pixels."
         }
       }
     },
@@ -872,15 +890,15 @@
               "description": "Size of the text button (e.g. 'sm','md','lg')."
             },
             "radius": {
-              "type": ["number", "string"],
+              "type": [ "number", "string" ],
               "description": "Border radius of the text button."
             },
             "fontSize": {
-              "type": ["number", "string"],
+              "type": [ "number", "string" ],
               "description": "Font size of the button label."
             },
             "fontWeight": {
-              "type": ["number", "string"],
+              "type": [ "number", "string" ],
               "description": "Font weight of the button label."
             },
             "uppercase": {
