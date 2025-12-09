@@ -41,6 +41,14 @@
         "description": "A simple string."
       }
     },
+    "errorImages": {
+      "type": "object",
+      "description": "Error image names for various error scenarios.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Name of the image to use for the error."
+      }
+    },
     "paths": {
       "type": "object",
       "description": "Optional path overrides for project resources.",

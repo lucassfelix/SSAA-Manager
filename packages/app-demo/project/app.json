@@ -11,6 +11,13 @@
 	"errorStrings": {
 		"noRecordsText": "Não há itens a serem exibidos"
 	},
+	"errorImages": {
+		"noViewType": "fruit_basket",
+		"viewMissing": "beach_house",
+		"formLayoutMissing": "shipwreck_survivor",
+		"formConfigMissing": "octopus",
+		"formMissing": "forest"
+	},
 	"paths": {
 		"images": "images/"
 	},
@@ -130,6 +137,17 @@
 			"icon": "search",
 			"action": "search"
 		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{ "label": "Exportar para planilha", "action": "exportCSV" },
+				{ "label": "Exportar PDF", "action": "exportPDF" },
+				{ "type": "separator" },
+				{ "label": "Imprimir listagem", "action": "printRecords" }
+			]
+		},
 		"filterPanel": {
 			"type": "iconButton",
 			"toggle": true,
@@ -154,17 +172,6 @@
 			"label": "Pesquisar",
 			"action": "filter",
 			"default": true
-		},
-		"listViewMore": {
-			"type": "iconButton",
-			"tip": "Mais ações",
-			"icon": "moreVertical",
-			"items": [
-				{ "label": "Exportar para planilha", "action": "exportCSV" },
-				{ "label": "Exportar PDF", "action": "exportPDF" },
-				{ "type": "separator" },
-				{ "label": "Imprimir listagem", "action": "printRecords" }
-			]
 		},
 		"filterMore": {
 			"type": "iconButton",

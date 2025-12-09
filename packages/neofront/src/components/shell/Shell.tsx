@@ -186,14 +186,14 @@ export default function Shell() {
           (op ? <NfForm op={op} /> : <NfListView />) : (
             <ErrorPage
               message={errStr.noViewType.replace("{type}", viewResult.listView.type)}
-              image="fruit_basket"
+              image={appCfg.errorImages?.noViewType || "fruit_basket"}
               fullHeight
             />
           )
       ) : (
         <ErrorPage
           message={errStr.viewMissing.replace("{view}", currentView)}
-          image="beach_house"
+          image={appCfg.errorImages?.viewMissing || "beach_house"}
           fullHeight
         />
       )}

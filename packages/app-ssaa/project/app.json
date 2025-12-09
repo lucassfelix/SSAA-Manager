@@ -11,6 +11,13 @@
 	"errorStrings": {
 		"noRecordsText": "Sem itens a exibir"
 	},
+	"errorImages": {
+		"noViewType": "fruit_basket",
+		"viewMissing": "beach_house",
+		"formLayoutMissing": "shipwreck_survivor",
+		"formConfigMissing": "octopus",
+		"formMissing": "forest"
+	},
 	"paths": {
 		"images": "images/"
 	},

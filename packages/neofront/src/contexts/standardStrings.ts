@@ -33,25 +33,25 @@ export const errorStrings = {
     noRecordsText: "No items to display",
     noViewType: "View type <b>{type}</b> is not supported.",
     viewMissing: "View <b>{view}</b> was not found.",
-    formMissing: "Form <b>{type}</b> is not declared for view <b>{view}</b>.",
+    formLayoutMissing: "Form layout is not defined for operation <b>${op}</b>.",
     formConfigMissing: "No configuration was found for this form.",
-    formLayoutMissing: "Form layout is not defined for operation <b>${op}</b>."
+    formMissing: "Form <b>{type}</b> is not declared for view <b>{view}</b>.",
   },
   "pt-br": {
     noRecordsText: "Sem itens a exibir",
     noViewType: "O tipo de visualização <b>{type}</b> não é suportado.",
     viewMissing: "A visualização <b>{view}</b> não foi encontrada.",
-    formMissing: "O form <b>{type}</b> não foi declarado para a view <b>{view}</b>.",
+    formLayoutMissing: "O layout do form não foi definido para a operação <b>${op}</b>.",
     formConfigMissing: "Não foi encontrada uma configuração para este form.",
-    formLayoutMissing: "O layout do form não foi definido para a operação <b>${op}</b>."
+    formMissing: "O form <b>{type}</b> não foi declarado para a view <b>{view}</b>.",
   },
   "es-419": {
     noRecordsText: "Sin elementos para mostrar",
     noViewType: "El tipo de vista <b>{type}</b> no es compatible.",
     viewMissing: "La vista <b>{view}</b> no fue encontrada.",
-    formMissing: "El formulario <b>{type}</b> no está declarado para la vista <b>{view}</b>.",
+    formLayoutMissing: "El diseño del formulario no está definido para la operación <b>${op}</b>.",
     formConfigMissing: "No se encontró configuración para este formulario.",
-    formLayoutMissing: "El diseño del formulario no está definido para la operación <b>${op}</b>."
+    formMissing: "El formulario <b>{type}</b> no está declarado para la vista <b>{view}</b>.",
   }
 };
 

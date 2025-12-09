@@ -43,8 +43,9 @@ export default function NfForm(props: FormProps): JSX.Element {
   if (!viewResult) {
     return (
       <ErrorPage
-        message={appCfg.errorStrings.formMissing.replace("{type}", op).replace("{view}", currentView)}
-        image="forest"
+        message={appCfg.errorStrings.formMissing.replace("{type}", op).replace("{view}",
+          currentView)}
+        image={appCfg.errorImages?.formMissing || "forest"}
       />
     );
   }
@@ -56,7 +57,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     String(currentRecordId)) : undefined;
   const name = record ? getValueByPath(record, nameAccessor) : undefined;
   const navigate = useNavigate();
-  const formCfg = (op === 'filter') ? { ...appCfg.forms, ...appCfg.listViews.filterPanel} : appCfg.forms;
+  const formCfg = (op === 'filter') ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ?
     viewResult.form[op as AllowedOp] : {}) as RecordConfig;
   const toolbar = (op === 'filter') ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
@@ -111,7 +112,7 @@ export default function NfForm(props: FormProps): JSX.Element {
               }
               return btn;
             }).filter(Boolean) ?? []}
-            cfg={{...appCfg.toolbars, ...(op === 'filter' ? appCfg.listViews.filterToolbar : formCfg.toolbar)}}
+            cfg={{ ...appCfg.toolbars, ...(op === 'filter' ? appCfg.listViews.filterToolbar : formCfg.toolbar) }}
             onAction={handleAction}
           />
         </Stack>

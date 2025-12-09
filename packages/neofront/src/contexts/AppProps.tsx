@@ -61,6 +61,9 @@ export interface AppProps {
   errorStrings: {
     [key: string]: string;
   };
+  errorImages: {
+    [key: string]: string;
+  };
   paths: {
     images: string;
   };

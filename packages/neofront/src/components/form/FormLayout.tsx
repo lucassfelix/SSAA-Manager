@@ -40,7 +40,12 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
   const { appCfg, currentView, viewResult } = useAppUI();
 
   if (!recordCfg) {
-    return <ErrorPage message={appCfg.errorStrings.formConfigMissing} image="octopus" />;
+    return (
+      <ErrorPage
+        message={appCfg.errorStrings.formConfigMissing}
+        image={appCfg.errorImages?.formConfigMissing || "octopus"}
+      />
+    );
   }
 
   const isFilter = op === 'filter';
@@ -53,7 +58,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
     return (
       <ErrorPage
         message={appCfg.errorStrings.formLayoutMissing.replace("{op}", op)}
-        image="shipwreck_survivor"
+        image={appCfg.errorImages?.formLayoutMissing || "shipwreck_survivor"}
       />
     );
   }
