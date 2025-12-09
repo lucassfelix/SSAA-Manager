@@ -13,6 +13,8 @@
       "$ref": "./common.schema.json#/definitions/$schema"
     },
     "version": {
+      "description": "Semantic version of the shape used for this file.",
+      "const": "0.3.0",
       "$ref": "./common.schema.json#/definitions/version"
     },
     "language": {
@@ -31,6 +33,12 @@
       "additionalProperties": {
         "type": "string",
         "description": "A simple string."
+      },
+      "properties": {
+        "appVersion": {
+          "description": "Version of this application.",
+          "$ref": "./common.schema.json#/definitions/version"
+        }
       }
     },
     "errorStrings": {
@@ -185,7 +193,7 @@
     },
     "mainControls": {
       "type": "object",
-      "description": "Default settings for various UI controls.",
+      "description": "Default settings for shell controls.",
       "additionalProperties": false,
       "properties": {
         "mainTitle": {
@@ -234,8 +242,11 @@
     },
     "controls": {
       "type": "object",
-      "description": "Generic controls used by toolbar/menu actions.",
-      "additionalProperties": false,
+      "description": "Generic control used by toolbar/menu actions.",
+      "additionalProperties": {
+        "description": "Definition for a control used in this project.",
+        "$ref": "#/definitions/genericControl"
+      },
       "properties": {
         "separator": {
           "type": "object",
@@ -248,16 +259,7 @@
               "description": "Type of control."
             }
           }
-        },
-        "userMenu": { "$ref": "#/definitions/genericControl" },
-        "add": { "$ref": "#/definitions/genericControl" },
-        "search": { "$ref": "#/definitions/genericControl" },
-        "filterPanel": { "$ref": "#/definitions/genericControl" },
-        "send": { "$ref": "#/definitions/genericControl" },
-        "cancel": { "$ref": "#/definitions/genericControl" },
-        "filter": { "$ref": "#/definitions/genericControl" },
-        "listViewMore": { "$ref": "#/definitions/genericControl" },
-        "filterMore": { "$ref": "#/definitions/genericControl" }
+        }
       }
     },
     "listViews": {
@@ -744,7 +746,6 @@
     },
     "genericControl": {
       "type": "object",
-      "description": "Generic control definition used by common controls (iconButton, textButton, etc).",
       "additionalProperties": false,
       "properties": {
         "type": {

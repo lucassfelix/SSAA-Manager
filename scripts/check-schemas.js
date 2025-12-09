@@ -136,10 +136,13 @@ function walk(obj, pathArr, fileText, filePath, out) {
           // object name: use last key in path if available
           const objName = pathArr.length ? pathArr[pathArr.length - 1] : '(root)';
 
-          // Skip nodes under `definitions` entirely — definitions entries
-          // are often schema fragments and need not carry descriptions.
-          if (pathArr.includes('definitions')) {
-            // skip
+          // Skip only the ROOT entries directly under `definitions` (e.g.
+          // `definitions.genericControl`) — those top-level definition objects
+          // may be short descriptors, but their children should still be
+          // validated for descriptions.
+          const defIdx = pathArr.indexOf('definitions');
+          if (defIdx !== -1 && defIdx === pathArr.length - 2) {
+            // this node is the root definition entry (skip)
           } else if (objName === 'definitions') {
             // skip
           } else if (pathArr.includes('oneOf')) {
