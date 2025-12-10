@@ -21,23 +21,14 @@
     },
     "edit": {
         "title": "{name}",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "add": {
         "title": "Novo produto",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "detail": {
         "title": "{name}",
-        "toolbar": [
-            "edit",
-            "close"
-        ]
+        "toolbar": [ "edit", "close" ]
     }
 }

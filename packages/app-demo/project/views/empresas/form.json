@@ -24,22 +24,14 @@
     },
     "edit": {
         "title": "Empresa {name}",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "add": {
         "title": "Nova empresa",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "detail": {
         "title": "Empresa {name}",
-        "toolbar": [
-            "close"
-        ]
+        "toolbar": [ "close" ]
     }
 }

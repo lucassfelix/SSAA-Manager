@@ -23,23 +23,14 @@
     },
     "edit": {
         "title": "Paciente {name}",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "add": {
         "title": "Novo paciente",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "detail": {
         "title": "Paciente {name}",
-        "toolbar": [
-            "edit",
-            "close"
-        ]
+        "toolbar": [ "edit", "close" ]
     }
 }

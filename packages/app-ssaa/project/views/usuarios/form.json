@@ -24,23 +24,14 @@
     },
     "edit": {
         "title": "Usuário {name}",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "add": {
         "title": "Novo usuário",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "detail": {
         "title": "Usuário {name}",
-        "toolbar": [
-            "edit",
-            "close"
-        ]
+        "toolbar": [ "edit", "close" ]
     }
 }

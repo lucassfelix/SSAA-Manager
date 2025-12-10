@@ -19,22 +19,14 @@
     },
     "edit": {
         "title": "Instituição {name}",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "add": {
         "title": "Nova instituição",
-        "toolbar": [
-            "send",
-            "cancel"
-        ]
+        "toolbar": [ "send", "cancel" ]
     },
     "detail": {
         "title": "Instituição {name}",
-        "toolbar": [
-            "close"
-        ]
+        "toolbar": [ "close" ]
     }
 }
