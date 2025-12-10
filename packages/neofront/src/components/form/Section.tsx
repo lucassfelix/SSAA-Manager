@@ -38,7 +38,7 @@ export default function Section(props: SectionProps): JSX.Element {
 
   const validStates = ['collapsed', 'expanded', 'fixed', 'hidden'];
   if (schema.initialState && !validStates.includes(schema.initialState)) {
-    console.warn(`Invalid initialState "${schema.initialState}" in section "${schema.title}".`);
+    console.warn(`Section: Invalid initialState "${schema.initialState}" in section "${schema.title}".`);
   }
 
   if (schema.initialState === 'hidden') {

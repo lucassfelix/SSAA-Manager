@@ -108,7 +108,7 @@ export default function NfForm(props: FormProps): JSX.Element {
             items={toolbar?.map(name => {
               const btn = appCfg.controls[name] as ToolbarItem;
               if (!btn) {
-                console.warn(`Button '${name}' not found in appCfg.controls.`);
+                console.warn(`Form: Button '${name}' not found in appCfg.controls.`);
               }
               return btn;
             }).filter(Boolean) ?? []}

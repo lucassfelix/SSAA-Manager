@@ -57,7 +57,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps; }) {
   const data = (options || [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
     const v = String(o.value);
     if (required && v === clearValue) {
-      console.warn(`NfSelectField: '${clearValue}' should not be used as a regular option value.`);
+      console.warn(`SelectField: '${clearValue}' should not be used as a regular option value.`);
       return [];
     }
     return { value: v, label: o.label ?? v };

@@ -51,7 +51,7 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
   }
 
   if (Comp === undefined) {
-    console.warn(`NfIcon: Icon "${icon}" not found.`);
+    console.warn(`TablerIcon: Icon "${icon}" not found.`);
     return <IconCircleOff size={size} stroke={stroke} color="red" />;
   }
 

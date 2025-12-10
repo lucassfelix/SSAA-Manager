@@ -34,7 +34,7 @@ export interface ShellProps {
     height: number;
     bordered: boolean;
     items: ItemRendererTypes[];
-  },
+  };
   navbar: {
     width: number;
     collapsible: boolean;
@@ -44,7 +44,7 @@ export interface ShellProps {
     footer: boolean;
     items: ItemRendererTypes[];
     footerItems: ItemRendererTypes[];
-  }
+  };
 }
 
 export interface TopControlProps {
@@ -66,7 +66,7 @@ export interface TopControlProps {
     collapsedWidth: number;
     expandedWidth: number;
     altText: string;
-  }
+  };
 }
 
 /** Shell component props */
@@ -126,7 +126,7 @@ export default function Shell() {
   // Render items using the order defined in configuration
   function itemRenderer(items: ItemRendererTypes[], collapsed: boolean): JSX.Element[] {
     if (!items || items?.length === 0) {
-      console.warn(`No items defined in container`);
+      console.warn(`Shell: No items defined in container`);
       return [<span key={`header-item-empty`}>{`[No elements found in container]`}</span>];
     }
     return ((items as ItemRendererTypes[]) || []).map((it, idx) => {
@@ -145,7 +145,7 @@ export default function Shell() {
         case 'mainMenu':
           return <MainMenu key={key} cfg={appCfg.menu} collapsed={collapsed} />;
         default:
-          console.warn(`No header item found for '${it}'`);
+          console.warn(`Shell: No header item found for '${it}'`);
           return <span key={key}>{`[${it}]`}</span>;
       }
     });

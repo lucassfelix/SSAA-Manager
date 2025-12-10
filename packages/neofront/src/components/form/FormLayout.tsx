@@ -54,7 +54,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
 
   if (!layout) {
     if ((op && !isFilter)) {
-      console.warn(`Form layout is missing. Did you check the ${currentView}.ts binder?`);
+      console.warn(`FormLayout: Form layout is missing. Did you check the ${currentView}.ts binder?`);
     }
     return (
       <ErrorPage
@@ -73,7 +73,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
 
     const fieldDef: UnifiedFieldProps = fields[fieldName];
     if (!fieldDef) {
-      console.warn(`Definition for field '${fieldName}' not found.`);
+      console.warn(`FormLayout: Definition for field '${fieldName}' not found.`);
       return null;
     }
 
@@ -124,7 +124,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
       case 'image':
         return <NfImageField key={fieldName} props={props} />;
       default:
-        console.warn(`No renderer for dataType '${fieldDef.dataType}' in field '${fieldName}'.`);
+        console.warn(`FormLayout: No renderer for dataType '${fieldDef.dataType}' in field '${fieldName}'.`);
         return <div key={fieldName}>(No renderer for dataType '{fieldDef.dataType}')</div>;
     }
   };

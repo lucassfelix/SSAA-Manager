@@ -42,7 +42,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
   data: Record<string, unknown[]>, fields: Record<string, UnifiedFieldProps>): DataTableColumn[] {
 
   if (!Array.isArray(tblCfg.columns)) {
-    console.warn(`NfDataTable: No columns defined for table "${currentView}".`);
+    console.warn(`DataTable: No columns defined for table "${currentView}".`);
     return [];
   }
 
@@ -57,7 +57,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
 
     const tableData = data[optionsRef.table];
     if (!tableData || !Array.isArray(tableData)) {
-      console.warn(`Options table "${optionsRef.table}" not found in data.`);
+      console.warn(`DataTable: Options table "${optionsRef.table}" not found in data.`);
       return undefined;
     }
 
@@ -80,7 +80,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
 
     const fieldDef = fields[colName];
     if (!fieldDef) {
-      console.warn(`Field "${colName}" not found in fields definition for table "${currentView}".`);
+      console.warn(`DataTable: Field "${colName}" not found in fields definition for table "${currentView}".`);
       return null;
     }
 
@@ -207,7 +207,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
     function renderLinkCell(value: any, record: Record<string, any>): ReactNode {
 
       if (!tableProps.idAccessor) {
-        console.warn("NfDataTable: Identifier field not defined for table " +
+        console.warn("DataTable: Identifier field not defined for table " +
           `"${currentView}" (column "${colName}").`);
         return renderSingleCell(value, styles, mask);
       }
@@ -280,7 +280,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
             case 'decimal':
               return renderDecimalCell(value);
             default:
-              console.warn(`Unknown render layout "${render.layout}" in column "${colName}".`);
+              console.warn(`DataTable: Unknown render layout "${render.layout}" in column "${colName}".`);
               break;
           }
         } else if (options && options.length > 0) {

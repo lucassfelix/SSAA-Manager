@@ -42,7 +42,7 @@ export interface ViewResultProps {
   form: FormDataConfig;
   data: {
     [key: string]: Record<string, any>[];
-  }
+  };
 }
 
 // #endregion

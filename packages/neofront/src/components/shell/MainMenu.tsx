@@ -42,7 +42,7 @@ export interface MainMenuProps {
     labelWeight?: number | string;
     subtitleSize?: number | string;
     subtitleWeight?: number | string;
-  }
+  };
 }
 
 // Minimal menu item type used by the renderer

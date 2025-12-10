@@ -249,7 +249,7 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
       case 'textButton':
         return renderMenuButton(item, keyName);
       default:
-        console.warn(`Toolbar item ${item.name} type is unknown: "${item.type}"`);
+        console.warn(`Toolbar: Toolbar item ${item.name} type is unknown: "${item.type}"`);
         return <span key={keyName}>[{item.name}]</span>;
     }
   }
