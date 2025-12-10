@@ -1,5 +1,5 @@
 
-# Demo of a parametric framework for web management systems
+# NeoFront: a parametric framework for web management systems
 
 [![English](https://img.shields.io/badge/English-EN-brightgreen)](README.md)
 [![Português (BR)](https://img.shields.io/badge/Português-PT--BR-blue)](README.pt-br.md)
@@ -13,7 +13,7 @@ Developed with React, Mantine UI, and Mantine Data Grid components. Also uses Re
 
 ## About this demo
 
-The sample app includes a menu with lists, filtering and sorting, status indicators, avatars, and placeholders for transactional flows. It also demonstrates configurable preferences such as light/dark mode, list density, and global interface scaling.
+The sample app includes a menu with lists, filtering and sorting, status indicators, avatars, and placeholders for transactional flows. It also demonstrates configurable preferences such as light/dark mode. Hundreds of configuration options are available to customize the UI and behavior without writing any code.
 
 ## Project status
 
