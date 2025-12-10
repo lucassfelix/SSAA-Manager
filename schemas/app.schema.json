@@ -271,10 +271,6 @@
           "type": "string",
           "description": "Name of the default list to show when navigating to /lists."
         },
-        "defaultPageSize": {
-          "type": "number",
-          "description": "Default number of rows per page in list views."
-        },
         "table": {
           "type": "object",
           "description": "Default data table settings for list views.",
@@ -333,6 +329,14 @@
               "type": "number",
               "description": "Stroke width of the boolean icons."
             },
+            "footerIconsSize": {
+              "type": "number",
+              "description": "Size of the footer icons."
+            },
+            "footerIconsStroke": {
+              "type": "number",
+              "description": "Stroke width of the footer icons."
+            },
             "trueIcon": {
               "type": "string",
               "description": "Icon used for true boolean values."
@@ -371,6 +375,10 @@
           "description": "Default pagination settings for list views.",
           "additionalProperties": false,
           "properties": {
+            "defaultPageSize": {
+              "type": "number",
+              "description": "Default number of rows per page in list views."
+            },
             "pageSizes": {
               "type": "array",
               "description": "Available page sizes for list views.",

@@ -21,11 +21,13 @@ const iconMap = {
   activity: "show_chart",
   adjustments: "tune",
   building: "apartment",
+  circleCheck: "check_circle",
   filter: "filter_alt",
   menu: "menu",
   moon: "bedtime",
   moreVertical: "more_vert",
   notification: "notifications",
+  squareX: "disabled_by_default",
   sun: "wb_sunny",
   user: "person",
   wallet: "account_balance_wallet"
@@ -56,6 +58,8 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
         fontSize: size,
         color: color,
         ...style,
+        width: size,
+        overflow: 'hidden',
       }}
     >
       {iconName}

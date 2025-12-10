@@ -188,7 +188,6 @@
 	},
 	"listViews": {
 		"defaultList": "usuarios",
-		"defaultPageSize": 10,
 		"table": {
 			"striped": true,
 			"bordered": true,
@@ -202,7 +201,9 @@
 			"wrapperSize": "md",
 			"wrapperBooleanWidth": 50,
 			"booleanIconsSize": 26,
-			"booleanIconsStroke": 1,
+			"booleanIconsStroke": 1.5,
+			"footerIconsSize": 22,
+			"footerIconsStroke": 2,
 			"trueIcon": "circleCheck",
 			"falseIcon": "squareX",
 			"imageRadius": "sm"
@@ -217,6 +218,7 @@
 			"align": "right"
 		},
 		"pagination": {
+			"defaultPageSize": 10,
 			"pageSizes": [ 5, 10, 20, 50, 100 ],
 			"showFirstLast": false,
 			"showPageSizeSelector": true,

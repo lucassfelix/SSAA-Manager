@@ -159,7 +159,6 @@
 	},
 	"listViews": {
 		"defaultList": "usuarios",
-		"defaultPageSize": 10,
 		"table": {
 			"striped": false,
 			"bordered": false,

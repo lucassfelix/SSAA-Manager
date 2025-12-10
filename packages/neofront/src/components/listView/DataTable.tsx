@@ -101,7 +101,10 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
         return ((name: string): ReactNode => {
           return (
             <Box mb={-4}>
-              <NfIcon icon={name} stroke={2} size={22} />
+              <NfIcon icon={name}
+                size={tblAppCfg.footerIconsSize}
+                stroke={tblAppCfg.footerIconsStroke}
+              />
             </Box>
           );
         })(fieldDef.footerIcon);
