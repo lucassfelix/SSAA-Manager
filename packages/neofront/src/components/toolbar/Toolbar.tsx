@@ -28,6 +28,7 @@ export interface ToolbarThemeProps {
     regularVariant?: string;
     iconSize?: number;
     iconStroke?: number;
+    selectedIcon?: string;
   };
   textButtons?: {
     size?: number | string;
@@ -51,6 +52,7 @@ interface ToolbarItemBase {
   label?: string;
   toggle?: boolean;
   action?: string;
+  selectable?: boolean;
   selected?: boolean;
 }
 
@@ -77,6 +79,7 @@ interface NfToolbarProps {
   items?: (string | ToolbarItem)[];
   cfg: ToolbarThemeProps;
   onAction?: (action: string, payload?: any) => void;
+  isItemSelected?: (itemName: string) => boolean;
 }
 
 // #endregion
@@ -87,7 +90,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
   // #region Hooks and variables
 
-  const { cfg, items, onAction } = props;
+  const { cfg, items, onAction, isItemSelected } = props;
 
   if (!items) {
     console.warn("Toolbar: No items provided.");
@@ -97,7 +100,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   const { viewResult, appCfg } = useAppUI();
 
   const toolbarItems = items.map(item => {
-    if(typeof item === 'object') {
+    if (typeof item === 'object') {
       return item;
     }
     const btn = appCfg.controls[item] as ToolbarItem;
@@ -231,29 +234,41 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       }
     }
 
-    function renderMenuButton(it: ToolbarItem, key: string): JSX.Element {
-      return Array.isArray(it.items) ? (
-        <Menu position="bottom-start" offset={0} key={key}>
-          <Menu.Target>
-            <div style={{ display: 'inline-flex' }}>
-              {renderSimpleButton(it, key)}
-            </div>
-          </Menu.Target>
-          <Menu.Dropdown>
-            {it.items?.map((mi: ToolbarSubItem, idx: number) =>
-              mi.type === 'separator' ? (
-                <Menu.Divider key={`${key}-mdiv-${idx}`} />
-              ) : (
-                <Menu.Item key={`${key}-mitem-${idx}`} onClick={() => handleClick(mi)}>
-                  {mi.label ?? `[${mi.name}]`}
-                </Menu.Item>
-              )
-            )}
-          </Menu.Dropdown>
-        </Menu>
-      ) : (
-        renderSimpleButton(it, key)
-      );
+    function renderDropDownButton(key: string, it: ToolbarItem): JSX.Element {
+      return <Menu position="bottom-start" offset={0} key={key}>
+        <Menu.Target>
+          <div style={{ display: 'inline-flex' }}>
+            {renderSimpleButton(it, key)}
+          </div>
+        </Menu.Target>
+        <Menu.Dropdown>
+          {it.items?.map((mi: ToolbarSubItem, idx: number) => {
+            if (mi.type === 'separator') {
+              return <Menu.Divider key={`${key}-mdiv-${idx}`} />;
+            }
+            return (
+              <Menu.Item
+                key={`${key}-mitem-${idx}`}
+                onClick={() => handleClick(mi)}
+                leftSection={mi.selectable ?
+                  <NfIcon
+                    icon={isItemSelected && isItemSelected(mi.action!) ? 
+                      iconBtnConfig?.selectedIcon || "check" : "_blank"}
+                    size={iconBtnConfig?.iconSize}
+                    stroke={iconBtnConfig?.iconStroke}
+                  />
+                  : undefined}
+              >
+                {mi.label ?? `[${mi.name}]`}
+              </Menu.Item>
+            );
+          })}
+        </Menu.Dropdown>
+      </Menu>;
+    }
+
+    function renderButton(it: ToolbarItem, key: string): JSX.Element {
+      return Array.isArray(it.items) ? renderDropDownButton(key, it) : renderSimpleButton(it, key);
     }
 
     // #endregion
@@ -265,7 +280,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
         return renderText(item, keyName);
       case 'iconButton':
       case 'textButton':
-        return renderMenuButton(item, keyName);
+        return renderButton(item, keyName);
       default:
         console.warn(`Toolbar: Toolbar item ${item.name} type is unknown: "${item.type}"`);
         return <span key={keyName}>[{item.name}]</span>;

@@ -80,7 +80,8 @@
 			"selectedVariant": "filled",
 			"regularVariant": "subtle",
 			"iconSize": 24,
-			"iconStroke": 2
+			"iconStroke": 2,
+			"selectedIcon": "check"
 		},
 		"textButtons": {
 			"size": "sm",
@@ -122,8 +123,9 @@
 			"icon": "user",
 			"items": [ 
 				{ "label": "Preferências", "action": "preferences" },
-				{ "label": "Tema claro", "action": "lightMode" },
-				{ "label": "Tema escuro", "action": "darkMode" },
+				{ "type": "separator" },
+				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
+				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
 				{ "type": "separator" },
 				{ "label": "Sair", "action": "logout" }
 			]

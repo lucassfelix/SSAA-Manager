@@ -121,6 +121,17 @@ export default function Shell(): JSX.Element {
     }
   };
 
+  function isMenuItemSelected(action: string): boolean {
+    switch (action) {
+      case 'darkMode':
+        return userSettings.dark;
+      case 'lightMode':
+        return !userSettings.dark;
+      default:
+        return false;
+    }
+  }
+
   function handleToggleDesktop(): void {
     try {
       // persist collapsed flag (true when closing)
@@ -168,6 +179,7 @@ export default function Shell(): JSX.Element {
         case 'headerToolbar':
           return <NfToolbar key={key} cfg={appCfg.toolbars} items={shellCfg.headerToolbar}
             onAction={actionHandler}
+            isItemSelected={isMenuItemSelected}
           />;
         default:
           console.warn(`Shell: No header item found for '${it}'`);

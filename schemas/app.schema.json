@@ -686,6 +686,10 @@
           "type": [ "string", "number", "boolean" ],
           "description": "Value associated with this item (for options and actions)."
         },
+        "selectable": {
+          "type": "boolean",
+          "description": "Whether the control can be selected/toggled."
+        },
         "items": {
           "type": "array",
           "description": "Nested menu items for submenu structures (recursive).",
@@ -901,6 +905,10 @@
             "iconStroke": {
               "type": "number",
               "description": "Stroke width of the icon."
+            },
+            "selectedIcon": {
+              "type": "string",
+              "description": "Icon name to use when a dropdown item is in selected/toggled state."
             }
           }
         },
