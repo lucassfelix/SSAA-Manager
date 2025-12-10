@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX, ReactNode } from "react";
-import { Space, Tooltip, Title, Box, Group, ActionIcon } from "@mantine/core";
+import { Space, Tooltip, Title, Box, Group, ActionIcon, useMantineColorScheme } from "@mantine/core";
 import { Image } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
 
@@ -19,13 +19,15 @@ import NfForm, { FormOperationType } from "@/form/Form";
 import ErrorPage from "@/errorpage/ErrorPage";
 import NfListView from "@/listView/ListView";
 import NfIcon from "@/icon/NfIcon";
+import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
 
 // #endregion
 
 // #region ----------------------------------------------------------------------------------- Types
 
 /** Types accepted by the item renderer */
-type ItemRendererTypes = 'mainTitle' | 'collapseToggle' | 'logo' | 'spacer' | 'themeSwitch' | 'mainMenu';
+type ItemRendererTypes = 'mainTitle' | 'collapseToggle' | 'logo' | 'spacer' | 'themeSwitch' |
+  'mainMenu' | 'userMenu';
 
 /** Shell layout configuration */
 export interface ShellProps {
@@ -82,7 +84,7 @@ export interface CollapsibleShellProps {
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function Shell() {
+export default function Shell(): JSX.Element {
 
   // #region Hooks and variables
 
@@ -99,6 +101,24 @@ export default function Shell() {
   const collapsible = shellCfg.navbar.collapsible;
   const toggleCfg = mainControls.collapseToggle;
   const iconBtnConfig = appCfg.toolbars.iconButtons;
+
+  const { setColorScheme } = useMantineColorScheme({ keepTransitions: true });
+
+  const actionHandler = (action: string): void => {
+    switch(action) {
+      case 'lightMode':
+        setColorScheme("light");
+        setUserSettings({ ...userSettings, dark: false });
+        break;
+      case 'darkMode':
+        setColorScheme("dark");
+        setUserSettings({ ...userSettings, dark: true });
+        break;
+      default:
+        console.warn(`Shell: No action handler defined for action '${action}'`);
+        return;
+    }
+  };
 
   function handleToggleDesktop(): void {
     try {
@@ -144,6 +164,15 @@ export default function Shell() {
           return <ThemeSwitch key={key} />;
         case 'mainMenu':
           return <MainMenu key={key} cfg={appCfg.menu} collapsed={collapsed} />;
+        case 'userMenu':
+          return <NfToolbar
+            key={key}
+            items={['userMenu']?.map(name => {
+              return appCfg.controls[name] as ToolbarItem;
+            }).filter(Boolean) ?? []}
+            cfg={appCfg.toolbars}
+            onAction={actionHandler}
+          />;
         default:
           console.warn(`Shell: No header item found for '${it}'`);
           return <span key={key}>{`[${it}]`}</span>;

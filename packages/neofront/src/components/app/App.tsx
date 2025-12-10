@@ -181,7 +181,6 @@ export default function App(props: MainAppProps) {
     </MantineProvider>
     // </StrictMode>
   );
-
 }
 
 // #endregion

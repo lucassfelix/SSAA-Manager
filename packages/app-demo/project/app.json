@@ -26,7 +26,7 @@
 			"fullWidth": true,
 			"height": 80,
 			"bordered": true,
-			"items": [ "collapseToggle", "logo", "spacer", "mainTitle", "spacer", "themeSwitch" ]
+			"items": [ "collapseToggle", "logo", "spacer", "mainTitle", "spacer", "themeSwitch", "userMenu" ]
 		},
 		"navbar": {
 			"width": 280,
@@ -118,9 +118,14 @@
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
-			"icon": "manage_accounts",
-			"action": "openUserSettings",
-			"items": [ ]
+			"icon": "user",
+			"items": [ 
+				{ "label": "Preferências", "action": "preferences" },
+				{ "label": "Tema claro", "action": "lightMode" },
+				{ "label": "Tema escuro", "action": "darkMode" },
+				{ "type": "separator" },
+				{ "label": "Sair", "action": "logout" }
+			]
 		},
 		"separator": {
 			"type": "separator"
