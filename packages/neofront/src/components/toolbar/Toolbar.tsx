@@ -1,5 +1,5 @@
 //
-// Toolbar component (metadata-driven).
+// Toolbar component.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -74,7 +74,7 @@ interface ToolbarItemProps {
 }
 
 interface NfToolbarProps {
-  items: ToolbarItem[];
+  items?: (string | ToolbarItem)[];
   cfg: ToolbarThemeProps;
   onAction?: (action: string, payload?: any) => void;
 }
@@ -83,13 +83,31 @@ interface NfToolbarProps {
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX.Element | null {
+export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
   // #region Hooks and variables
 
+  const { cfg, items, onAction } = props;
+
+  if (!items) {
+    console.warn("Toolbar: No items provided.");
+    return null;
+  }
+
   const { viewResult, appCfg } = useAppUI();
 
-  if (!cfg || !items || items.length === 0) {
+  const toolbarItems = items.map(item => {
+    if(typeof item === 'object') {
+      return item;
+    }
+    const btn = appCfg.controls[item] as ToolbarItem;
+    if (!btn) {
+      console.warn(`Toolbar: Control '${item}' not found.`);
+    }
+    return btn;
+  }).filter(Boolean) ?? [];
+
+  if (!cfg || !toolbarItems || toolbarItems.length === 0) {
     return null;
   }
 
@@ -259,7 +277,7 @@ export default function NfToolbar({ items, cfg, onAction }: NfToolbarProps): JSX
   return (
     <Group gap={gap} px={horizontalPadding} py={verticalPadding}
       justify={justifyOptions[align || 'left']}>
-      {items.map((it, idx) => {
+      {toolbarItems.map((it, idx) => {
         const keyName = `toolbar-item-${idx}`;
         return <ToolbarItem
           key={keyName}

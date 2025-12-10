@@ -10,7 +10,7 @@ import { Divider, ScrollArea, Stack, Title } from "@mantine/core";
 
 import { useAppUI } from "context";
 import { getValueByPath } from '@/listView/datatableUtils';
-import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
+import NfToolbar from "@/toolbar/Toolbar";
 import FormLayout from './FormLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
 import { RecordConfig } from 'src/contexts/FormProps';
@@ -105,13 +105,7 @@ export default function NfForm(props: FormProps): JSX.Element {
         <Stack>
           {formCfg.toolbar?.upperBorder && <Divider />}
           <NfToolbar
-            items={toolbar?.map(name => {
-              const btn = appCfg.controls[name] as ToolbarItem;
-              if (!btn) {
-                console.warn(`Form: Button '${name}' not found in appCfg.controls.`);
-              }
-              return btn;
-            }).filter(Boolean) ?? []}
+            items={toolbar}
             cfg={{ ...appCfg.toolbars, ...(op === 'filter' ? appCfg.listViews.filterToolbar : formCfg.toolbar) }}
             onAction={handleAction}
           />

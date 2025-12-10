@@ -19,7 +19,7 @@ import NfForm, { FormOperationType } from "@/form/Form";
 import ErrorPage from "@/errorpage/ErrorPage";
 import NfListView from "@/listView/ListView";
 import NfIcon from "@/icon/NfIcon";
-import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
+import NfToolbar from "@/toolbar/Toolbar";
 
 // #endregion
 
@@ -27,7 +27,7 @@ import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
 
 /** Types accepted by the item renderer */
 type ItemRendererTypes = 'mainTitle' | 'collapseToggle' | 'logo' | 'spacer' | 'themeSwitch' |
-  'mainMenu' | 'userMenu';
+  'mainMenu' | 'headerToolbar';
 
 /** Shell layout configuration */
 export interface ShellProps {
@@ -47,6 +47,7 @@ export interface ShellProps {
     items: ItemRendererTypes[];
     footerItems: ItemRendererTypes[];
   };
+  headerToolbar?: string[];
 }
 
 export interface TopControlProps {
@@ -105,7 +106,7 @@ export default function Shell(): JSX.Element {
   const { setColorScheme } = useMantineColorScheme({ keepTransitions: true });
 
   const actionHandler = (action: string): void => {
-    switch(action) {
+    switch (action) {
       case 'lightMode':
         setColorScheme("light");
         setUserSettings({ ...userSettings, dark: false });
@@ -164,13 +165,8 @@ export default function Shell(): JSX.Element {
           return <ThemeSwitch key={key} />;
         case 'mainMenu':
           return <MainMenu key={key} cfg={appCfg.menu} collapsed={collapsed} />;
-        case 'userMenu':
-          return <NfToolbar
-            key={key}
-            items={['userMenu']?.map(name => {
-              return appCfg.controls[name] as ToolbarItem;
-            }).filter(Boolean) ?? []}
-            cfg={appCfg.toolbars}
+        case 'headerToolbar':
+          return <NfToolbar key={key} cfg={appCfg.toolbars} items={shellCfg.headerToolbar}
             onAction={actionHandler}
           />;
         default:
