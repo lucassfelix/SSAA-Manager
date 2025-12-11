@@ -1,6 +1,5 @@
 //
-// Small typed wrapper for @tabler/icons-react.
-// Exports a mapping of icon names to Tabler icons,
+// Tabler icon component wrapper.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -15,14 +14,17 @@ import { NfIconProps } from "./NfIcon";
 
 // #region -------------------------------------------------------------------------------- Icon map
 
+// See https://tabler.io/icons
+
 const iconMap = {
-  add: "IconPlus",
-  bank: "IconBuildingBank",
-  filter: "IconFilter2",
-  menu: "IconMenu2",
-  moreVertical: "IconDotsVertical",
-  notification: "IconBellRinging2",
-  userSettings: "IconUserCog",
+  add: "Plus",
+  bank: "BuildingBank",
+  chart: "Activity",
+  filter: "Filter2",
+  menu: "Menu2",
+  moreVertical: "DotsVertical",
+  notification: "Bell",
+  userSettings: "UserCog",
 } as Record<string, string>;
 
 // #endregion
@@ -40,7 +42,7 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
   // Prefer explicit mapping; otherwise try to derive Tabler export name automatically
   let Comp: ComponentType<IconProps> | undefined;
 
-  const mappedName = iconMap[icon];
+  const mappedName = `Icon${iconMap[icon]}`;
   if (mappedName) {
     Comp = (Tabler as any)[mappedName] as ComponentType<IconProps> | undefined;
   }

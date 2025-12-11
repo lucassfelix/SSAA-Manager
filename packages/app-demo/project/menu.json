@@ -45,7 +45,7 @@
         {
             "name": "vendas",
             "label": "Vendas",
-            "icon": "activity",
+            "icon": "chart",
             "badge": 22,
             "badgeEmphasis": "orange-7",
             "emphasis": "orange-5"

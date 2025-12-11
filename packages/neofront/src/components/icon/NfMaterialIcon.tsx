@@ -1,6 +1,5 @@
 //
-// Small typed wrapper for @tabler/icons-react.
-// Exports a mapping of icon names to Tabler icons,
+// Material symbol component wrapper.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -18,17 +17,18 @@ import { NfIconProps } from './NfIcon';
 // See https://fonts.google.com/icons
 
 const iconMap = {
-  activity: "show_chart",
+  chart: "show_chart",
   adjustments: "tune",
-  building: "apartment",
+  building: "domain",
   circleCheck: "check_circle",
   dental: "dentistry",
-  filter: "filter_alt",
+  filter: "filter_list",
   menu: "menu",
   moon: "bedtime",
   moreVertical: "more_vert",
   notification: "notifications",
   squareX: "disabled_by_default",
+  sum: "functions",
   sun: "wb_sunny",
   user: "person",
   userSettings: "manage_accounts",
@@ -49,13 +49,11 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
 
   const toSnake = (str: string) => str.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
   const iconName = iconMap[icon] ?? toSnake(icon);
-  const cssPrefix = ".material-symbols-outlined {font-variation-settings: 'FILL' 0, 'wght' ";
-  const cssSuffix = ", 'GRAD' 0, 'opsz' 48}";
-  const strokeSize = ((s?: number) => typeof s === 'number' ? s * 200 : 400)(stroke);
-
+  const strokeSize = ((s?: number) => typeof s === 'number' ? s * 250 : 400)(stroke);
+  // console.log('strokeSize', stroke, strokeSize);
   return (
     <>
-      <style>{cssPrefix + strokeSize + cssSuffix}</style>
+      {/* <style>{cssPrefix + strokeSize + cssSuffix}</style> */}
       <Box
         className={`material-symbols${filled ? '' : '-outlined'}`}
         component="span"
@@ -65,6 +63,7 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
           ...style,
           width: size,
           overflow: 'hidden',
+          fontVariationSettings: `'FILL' 0, 'wght' ${strokeSize}, 'GRAD' 0, 'opsz' 48`
         }}
       >
         {iconName}
