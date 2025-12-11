@@ -98,7 +98,7 @@
               "description": "Ordered list of items to display in the header.",
               "items": {
                 "type": "string",
-                "enum": [ "collapseToggle", "logo", "spacer", "mainTitle", "themeSwitch", "headerToolbar" ]
+                "enum": [ "collapseToggle", "logo", "spacer", "mainTitle", "themeSwitch", "userToolbar" ]
               }
             }
           },
@@ -157,7 +157,7 @@
             }
           }
         },
-        "headerToolbar": {
+        "userToolbar": {
           "type": "array",
           "description": "Ordered list of items to display in the header toolbar.",
           "items": {

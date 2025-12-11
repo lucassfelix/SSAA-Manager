@@ -26,7 +26,7 @@
 			"fullWidth": true,
 			"height": 80,
 			"bordered": true,
-			"items": [ "collapseToggle", "logo", "spacer", "mainTitle", "spacer", "themeSwitch", "headerToolbar" ]
+			"items": [ "collapseToggle", "logo", "spacer", "mainTitle", "spacer", "userToolbar" ]
 		},
 		"navbar": {
 			"width": 280,
@@ -37,7 +37,7 @@
 			"footer": false,
 			"items": [ "mainMenu" ]
 		},
-		"headerToolbar": [ "userMenu" ]
+		"userToolbar": [ "userMenu" ]
 	},
 	"menu": {
 		"openSubmenusOnHover": false,
@@ -121,9 +121,8 @@
 			"type": "iconButton",
 			"name": "userSettings",
 			"icon": "user",
+			"tip": "Configurações do usuário",
 			"items": [ 
-				{ "label": "Preferências", "action": "preferences" },
-				{ "type": "separator" },
 				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
 				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
 				{ "type": "separator" },

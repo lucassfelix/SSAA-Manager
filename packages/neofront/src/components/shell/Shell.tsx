@@ -27,7 +27,7 @@ import NfToolbar from "@/toolbar/Toolbar";
 
 /** Types accepted by the item renderer */
 type ItemRendererTypes = 'mainTitle' | 'collapseToggle' | 'logo' | 'spacer' | 'themeSwitch' |
-  'mainMenu' | 'headerToolbar';
+  'mainMenu' | 'userToolbar';
 
 /** Shell layout configuration */
 export interface ShellProps {
@@ -47,7 +47,7 @@ export interface ShellProps {
     items: ItemRendererTypes[];
     footerItems: ItemRendererTypes[];
   };
-  headerToolbar?: string[];
+  userToolbar?: string[];
 }
 
 export interface TopControlProps {
@@ -116,7 +116,7 @@ export default function Shell(): JSX.Element {
         setUserSettings({ ...userSettings, dark: true });
         break;
       default:
-        console.warn(`Shell: No action handler defined for action '${action}'`);
+        console.log(`Action: '${action}'`);
         return;
     }
   };
@@ -176,8 +176,8 @@ export default function Shell(): JSX.Element {
           return <ThemeSwitch key={key} />;
         case 'mainMenu':
           return <MainMenu key={key} cfg={appCfg.menu} collapsed={collapsed} />;
-        case 'headerToolbar':
-          return <NfToolbar key={key} cfg={appCfg.toolbars} items={shellCfg.headerToolbar}
+        case 'userToolbar':
+          return <NfToolbar key={key} cfg={appCfg.toolbars} items={shellCfg.userToolbar}
             onAction={actionHandler}
             isItemSelected={isMenuItemSelected}
           />;
