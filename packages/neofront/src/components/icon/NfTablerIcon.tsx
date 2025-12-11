@@ -21,7 +21,8 @@ const iconMap = {
   filter: "IconFilter2",
   menu: "IconMenu2",
   moreVertical: "IconDotsVertical",
-  notification: "IconBellRinging2"
+  notification: "IconBellRinging2",
+  userSettings: "IconUserCog",
 } as Record<string, string>;
 
 // #endregion

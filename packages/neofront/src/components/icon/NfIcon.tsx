@@ -18,7 +18,7 @@ import { Box } from "@mantine/core";
 export interface NfIconProps {
   icon: string | null;
   size?: number | string;
-  stroke?: number | string;
+  stroke?: number;
   color?: string;
   filled?: boolean;
   style?: CSSProperties;

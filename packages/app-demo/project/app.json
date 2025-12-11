@@ -123,8 +123,8 @@
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
-			"icon": "user",
-			"tip": "Configurações do usuário",
+			"icon": "userSettings",
+			"tip": "Opções do usuário",
 			"items": [ 
 				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
 				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },

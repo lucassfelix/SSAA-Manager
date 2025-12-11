@@ -26,7 +26,7 @@
 			"fullWidth": true,
 			"height": 80,
 			"bordered": true,
-			"items": [ "collapseToggle", "mainTitle", "spacer", "themeSwitch" ]
+			"items": [ "collapseToggle", "mainTitle", "spacer", "userToolbar" ]
 		},
 		"navbar": {
 			"width": 200,
@@ -37,7 +37,8 @@
 			"footer": true,
 			"items": [ "mainMenu" ],
 			"footerItems": [ "logo" ]
-		}
+		},
+		"userToolbar": [ { "type": "text", "text": "Usuário" }, "userMenu" ]
 	},
 	"menu": {
 		"items": {
@@ -75,9 +76,14 @@
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
-			"icon": "manage_accounts",
-			"action": "openUserSettings",
-			"items": [ ]
+			"icon": "userSettings",
+			"tip": "Opções do usuário",
+			"items": [ 
+				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
+				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
+				{ "type": "separator" },
+				{ "label": "Sair", "action": "logout" }
+			]
 		},
 		"separator": {
 			"type": "separator"
@@ -192,7 +198,7 @@
 	},
 	"theme": {
 		"defaultUIScale": 100,
-		"iconFamily": "tabler",
+		"iconFamily": "material",
 		"mainFontFamily": "Roboto",
 		"headingsFontFamily": "Roboto",
 		"lightMode": {
