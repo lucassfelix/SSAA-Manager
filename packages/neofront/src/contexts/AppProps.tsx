@@ -43,6 +43,7 @@ interface ListViewsProps {
   };
   filterToolbar?: ToolbarThemeProps;
   filterPanel?: {
+    labelPosition?: 'top' | 'none';
     verticalPadding?: number;
     transitionDuration?: number;
   };

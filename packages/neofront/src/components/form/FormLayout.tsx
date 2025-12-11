@@ -97,7 +97,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
     const props: FormFieldProps = {
       name: fieldName,
       dataType: fieldDef.dataType || 'string',
-      label: fieldDef.label,
+      label: isFilter && appCfg.listViews.filterPanel?.labelPosition === "none" ? undefined : fieldDef.label,
       initialValue,
       width: isFilter ? fieldDef.filterWidth || fieldDef.fieldWidth : fieldDef.fieldWidth,
       size: appCfg.forms.fieldSize,

@@ -219,6 +219,7 @@
 			"imageRadius": "sm"
 		},
 		"filterPanel": {
+			"labelPosition": "none",
 			"verticalPadding": 12,
 			"transitionDuration": 200
 		},

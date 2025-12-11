@@ -363,9 +363,14 @@
           "description": "Filter panel style settings.",
           "additionalProperties": false,
           "properties": {
+            "labelPosition": {
+              "type": "string",
+              "description": "Position of labels in the filter panels: 'top' or 'none'.",
+              "enum": [ "top", "left", "none" ]
+            },
             "verticalPadding": {
               "type": "number",
-              "description": "Vertical padding for the filter panel."
+              "description": "Vertical padding for the filter panels."
             },
             "transitionDuration": {
               "type": "number",
