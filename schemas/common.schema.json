@@ -102,7 +102,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [ "text", "title", "iconButton", "textButton", "separator" ],
+          "enum": [ "text", "title", "iconButton", "textButton", "separator", "spacer" ],
           "description": "Type of toolbar item."
         },
         "name": {
@@ -153,9 +153,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "separator"
-          ],
+          "enum": [ "separator" ],
           "description": "Menu item type (optional, used for separators)."
         },
         "name": {

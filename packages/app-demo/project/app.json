@@ -166,6 +166,18 @@
 			"icon": "filter",
 			"action": "toggleFilterPanel"
 		},
+		"previous": {
+			"type": "iconButton",
+			"icon": "arrowLeft",
+			"tip": "Anterior",
+			"action": "previous"
+		},
+		"next": {
+			"type": "iconButton",
+			"icon": "arrowRight",
+			"tip": "Próximo",
+			"action": "next"
+		},
 		"send": {
 			"type": "textButton",
 			"label": "Enviar",
@@ -253,7 +265,8 @@
 		"toolbar": {
 			"align": "right",
 			"upperBorder": true,
-			"position": "right"
+			"position": "bottom",
+			"horizontalPadding": 0
 		}
 	},
 	"theme": {

@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX, useState } from "react";
-import { ActionIcon, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
+import { ActionIcon, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
 import NfIcon from "@/icon/NfIcon";
 import { useAppUI } from "context";
 
@@ -60,6 +60,7 @@ interface ToolbarItemBase {
   action?: string;
   selectable?: boolean;
   selected?: boolean;
+  disabled?: boolean;
 }
 
 interface ToolbarSubItem extends ToolbarItemBase {
@@ -67,7 +68,7 @@ interface ToolbarSubItem extends ToolbarItemBase {
 }
 
 export interface ToolbarItem extends ToolbarItemBase {
-  type?: 'text' | 'title' | 'iconButton' | 'textButton' | 'separator';
+  type?: 'text' | 'title' | 'iconButton' | 'textButton' | 'separator' | 'spacer';
   icon?: string;
   tip?: string;
   selectedTip?: string;
@@ -166,6 +167,10 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       return <Divider key={key} orientation="vertical" />;
     }
 
+    function renderSpacer(key: string): JSX.Element {
+      return <Box key={key} flex="1" />;
+    }
+
     function renderText(it: ToolbarItem, key: string): JSX.Element {
       return (
         <Text
@@ -206,7 +211,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     }
 
     function renderTooltip(it: ToolbarItem, key: string, node: JSX.Element) {
-      return (it.tip) ? (
+      return (it.tip && !it.disabled) ? (
         <Tooltip
           key={key}
           label={<span dangerouslySetInnerHTML={{
@@ -233,6 +238,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             aria-label={it.label ?? name}
             radius={cfg.textButtons?.radius}
             onClick={() => handleClick(it)}
+            disabled={it.disabled === true}
             fz={cfg.textButtons?.fontSize ?? undefined}
             fw={cfg.textButtons?.fontWeight ?? undefined}
             style={{
@@ -250,6 +256,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             aria-label={name ?? it.icon}
             radius={iconBtnConfig?.radius}
             onClick={() => handleClick(it)}
+            disabled={it.disabled === true}
           >
             {renderIcon(it.icon!, it.selected)}
           </ActionIcon>
@@ -273,6 +280,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
               <Menu.Item
                 key={`${key}-mitem-${idx}`}
                 onClick={() => handleClick(mi)}
+                disabled={mi.disabled === true}
                 leftSection={mi.selectable ?
                   <NfIcon
                     icon={isItemSelected && isItemSelected(mi.action!) ?
@@ -299,6 +307,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     switch (item.type) {
       case 'separator':
         return renderSeparator(keyName);
+      case 'spacer':
+        return renderSpacer(keyName);
       case 'text':
         return renderText(item, keyName);
       case 'title':

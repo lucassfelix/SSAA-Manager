@@ -39,7 +39,7 @@
           "type": "array",
           "description": "Toolbar items for the operation.",
           "items": {
-            "type": "string"
+            "$ref": "./common.schema.json#/definitions/toolbarItem"
           }
         }
       },

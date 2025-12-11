@@ -26,7 +26,16 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "off",
 
       "@stylistic/member-delimiter-style": "warn",
-      "@stylistic/semi": ["warn", "always"]
+      "@stylistic/semi": ["warn", "always"],
+      "@stylistic/curly-newline": ["warn", {
+        "IfStatementConsequent": "always",
+        "IfStatementAlternate": "always",
+        "DoWhileStatement": "always",
+        "ForInStatement": "always",
+        "ForOfStatement": "always",
+        "ForStatement": "always",
+        "WhileStatement": "always"
+      }],
     },
   }
 ]);

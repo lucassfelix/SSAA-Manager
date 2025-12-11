@@ -24,7 +24,7 @@
     },
     "edit": {
         "title": "Empresa {name}",
-        "toolbar": [ "send", "cancel" ]
+        "toolbar": [ "previous", "next", { "type": "spacer" }, "send", "cancel" ]
     },
     "add": {
         "title": "Nova empresa",
