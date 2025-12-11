@@ -18,7 +18,6 @@ import { NfIconProps } from "./NfIcon";
 
 const iconMap = {
   add: "Plus",
-  bank: "BuildingBank",
   chart: "Activity",
   filter: "Filter2",
   menu: "Menu2",

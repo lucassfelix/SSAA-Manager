@@ -19,7 +19,8 @@ import { NfIconProps } from './NfIcon';
 const iconMap = {
   chart: "show_chart",
   adjustments: "tune",
-  building: "domain",
+  building: "apartment",
+  buildings: "domain",
   circleCheck: "check_circle",
   dental: "dentistry",
   filter: "filter_list",
