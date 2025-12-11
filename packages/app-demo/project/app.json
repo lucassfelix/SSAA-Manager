@@ -262,6 +262,7 @@
 		"checkboxTopPadding": 36,
 		"outlinedSections": false,
 		"imageRadius": "sm",
+		"imageHeight": 80,
 		"toolbar": {
 			"align": "right",
 			"upperBorder": true,

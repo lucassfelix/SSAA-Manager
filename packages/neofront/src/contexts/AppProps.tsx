@@ -88,6 +88,7 @@ export interface AppProps {
     checkboxTopPadding?: number;
     outlinedSections?: boolean;
     imageRadius?: MantineSize;
+    imageHeight?: number;
     toolbar?: ToolbarThemeProps;
   };
   theme: {

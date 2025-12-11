@@ -471,6 +471,10 @@
           "type": "string",
           "description": "Default border radius for image fields."
         },
+        "imageHeight": {
+          "type": "number",
+          "description": "Default component height for image fields."
+        },
         "toolbar": {
           "description": "Toolbar settings for forms. Overrides the toolbar object.",
           "$ref": "#/definitions/toolbar"

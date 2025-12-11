@@ -25,7 +25,7 @@ export default function NfImageField({ props }: { props: FormFieldProps }) {
 
   // TODO: Implement upload and edit with https://mantine.dev/x/dropzone/
   return (
-    <Group style={{ alignItems: 'flex-start', gap: 16 }}>
+    <Group style={{ alignItems: 'flex-start', gap: 16, height: formsCfg.imageHeight || 100 }}>
       <NfTextField
         props={{ ...props, readOnly: true } }
       />
