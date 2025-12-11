@@ -219,14 +219,15 @@
 			"imageRadius": "sm"
 		},
 		"filterPanel": {
-			"labelPosition": "none",
+			"labelPosition": "top",
 			"verticalPadding": 12,
 			"transitionDuration": 200
 		},
 		"filterToolbar": {
 			"horizontalPadding": 0,
 			"verticalPadding": 0,
-			"align": "right"
+			"align": "right",
+			"inline": true
 		},
 		"pagination": {
 			"defaultPageSize": 10,

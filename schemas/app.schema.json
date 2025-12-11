@@ -872,6 +872,10 @@
           "type": "boolean",
           "description": "Whether the toolbar should have an upper border."
         },
+        "inline": {
+          "type": "boolean",
+          "description": "Whether the toolbar should be displayed beside the form."
+        },
         "iconButtons": {
           "type": "object",
           "description": "Default settings for icon buttons in toolbars.",

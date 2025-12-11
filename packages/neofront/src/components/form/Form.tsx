@@ -6,7 +6,7 @@
 
 import type { JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Divider, ScrollArea, Stack, Title } from "@mantine/core";
+import { Box, Divider, Group, ScrollArea, Stack, Title } from "@mantine/core";
 
 import { useAppUI } from "context";
 import { getValueByPath } from '@/listView/datatableUtils';
@@ -57,11 +57,13 @@ export default function NfForm(props: FormProps): JSX.Element {
     String(currentRecordId)) : undefined;
   const name = record ? getValueByPath(record, nameAccessor) : undefined;
   const navigate = useNavigate();
-  const formCfg = (op === 'filter') ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
+  const isFilter = op === 'filter';
+  const formCfg = isFilter ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ?
     viewResult.form[op as AllowedOp] : {}) as RecordConfig;
-  const toolbar = (op === 'filter') ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
+  const toolbar = isFilter ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
   const hasToolbar = Boolean(toolbar?.length);
+  const filterToolbar = appCfg.listViews.filterToolbar;
 
   // Build form schema with initial values prefilled from record
 
@@ -82,6 +84,21 @@ export default function NfForm(props: FormProps): JSX.Element {
     }
   };
 
+  const toolbarComponent = (
+    <NfToolbar
+      items={toolbar}
+      cfg={{ ...appCfg.toolbars, ...(isFilter ? filterToolbar : formCfg.toolbar) }}
+      onAction={handleAction} />
+  );
+
+  const formLayoutComponent = (
+    <FormLayout
+      key={currentRecordId || 'new'}
+      op={op}
+      recordCfg={recordCfg}
+      record={record} />
+  );
+
   // #endregion
 
   return (
@@ -92,23 +109,21 @@ export default function NfForm(props: FormProps): JSX.Element {
 
       {/* Form layout */}
       <ScrollArea>
-        <FormLayout
-          key={currentRecordId || 'new'}
-          op={op}
-          recordCfg={recordCfg}
-          record={record}
-        />
+        {isFilter && hasToolbar && filterToolbar?.inline ? (
+          <Group align="flex-end">
+            {formLayoutComponent}
+            {/* Inline toolbar */}
+            <Box flex={1} />
+            {hasToolbar ? toolbarComponent : null}
+          </Group>
+        ) : formLayoutComponent}
       </ScrollArea>
 
       {/* Toolbar */}
-      {hasToolbar ? (
+      {hasToolbar && !(isFilter && filterToolbar?.inline) ? (
         <Stack>
           {formCfg.toolbar?.upperBorder && <Divider />}
-          <NfToolbar
-            items={toolbar}
-            cfg={{ ...appCfg.toolbars, ...(op === 'filter' ? appCfg.listViews.filterToolbar : formCfg.toolbar) }}
-            onAction={handleAction}
-          />
+          {toolbarComponent}
         </Stack>
       ) : null}
     </Stack>
