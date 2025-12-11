@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import type { JSX } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Divider, Group, ScrollArea, Stack, Title } from "@mantine/core";
 
 import { useAppUI } from "context";
@@ -43,8 +43,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   if (!viewResult) {
     return (
       <ErrorPage
-        message={appCfg.errorStrings.formMissing.replace("{type}", op).replace("{view}",
-          currentView)}
+        message={appCfg.errorStrings.formMissing.replace("{type}", op).replace("{view}", currentView)}
         image={appCfg.errorImages?.formMissing || "forest"}
       />
     );
@@ -57,6 +56,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     String(currentRecordId)) : undefined;
   const name = record ? getValueByPath(record, nameAccessor) : undefined;
   const navigate = useNavigate();
+  const location = useLocation();
   const isFilter = op === 'filter';
   const formCfg = isFilter ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ?
@@ -67,7 +67,8 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   // Compute whether previous/next records exist and prepare toolbar items
   const recordsList = records ?? [];
-  const curIndex = currentRecordId ? recordsList.findIndex(r => String(getValueByPath(r, idAccessor)) === String(currentRecordId)) : -1;
+  const curIndex = currentRecordId ? recordsList.findIndex(r =>
+    String(getValueByPath(r, idAccessor)) === String(currentRecordId)) : -1;
   const hasPrev = curIndex > 0;
   const hasNext = curIndex !== -1 && curIndex < recordsList.length - 1;
 
@@ -82,8 +83,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       const copy = { ...btn } as any;
       if (it === 'previous') {
         copy.disabled = !hasPrev;
-      };
-      if (it === 'next') {
+      } else if (it === 'next') {
         copy.disabled = !hasNext;
       };
       return copy;
@@ -92,8 +92,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     const copy = { ...(it as object) } as any;
     if (copy.action === 'previous') {
       copy.disabled = !hasPrev;
-    };
-    if (copy.action === 'next') {
+    } else if (copy.action === 'next') {
       copy.disabled = !hasNext;
     };
     return copy;
@@ -120,22 +119,32 @@ export default function NfForm(props: FormProps): JSX.Element {
     }
   }
 
+  // Navigate back to list view by removing op and id parameters
+  function navigateToListView() {
+    const params = new URLSearchParams(location.search);
+    params.delete('op');
+    params.delete('id');
+    const target = location.pathname + (params.toString() ? `?${params.toString()}` : '');
+    navigate(target, { replace: true });
+  }
+
   // Handler for toolbar actions
   const handleAction = (action: string) => {
     switch (action) {
-      case 'cancel':
-        navigate(-1);
+      case 'cancel': {
+        navigateToListView();
+        break;
+      }
+      case 'send':
+        // TODO: fetch the current field values
+        console.log(`Action: ${action}`);
+        navigateToListView();
         break;
       case 'previous':
         navigateToAdjacent(-1);
         break;
       case 'next':
-        navigateToAdjacent(1);
-        break;
-      case 'send':
-        // TODO: fetch the current field values
-        console.log(`Action: ${action}`);
-        navigate(-1);
+        navigateToAdjacent(+1);
         break;
       default:
         onAction?.(action);
@@ -159,7 +168,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   );
 
   function getToolbarPosition(): "top" | "bottom" | "right" | null {
-    if(!hasToolbar) {
+    if (!hasToolbar) {
       return null;
     }
     if (toolbarCfg?.position === "top") {
