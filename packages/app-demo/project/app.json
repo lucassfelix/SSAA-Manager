@@ -227,7 +227,7 @@
 			"horizontalPadding": 0,
 			"verticalPadding": 0,
 			"align": "right",
-			"inline": true
+			"position": "right"
 		},
 		"pagination": {
 			"defaultPageSize": 10,
@@ -252,7 +252,8 @@
 		"imageRadius": "sm",
 		"toolbar": {
 			"align": "right",
-			"upperBorder": true
+			"upperBorder": true,
+			"position": "right"
 		}
 	},
 	"theme": {

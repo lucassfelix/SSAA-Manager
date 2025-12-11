@@ -34,7 +34,6 @@ interface FormProps {
 // #region ------------------------------------------------------------------------------- Component
 
 export default function NfForm(props: FormProps): JSX.Element {
-
   // #region Hooks and context
 
   const { op, onAction } = props;
@@ -61,9 +60,9 @@ export default function NfForm(props: FormProps): JSX.Element {
   const formCfg = isFilter ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ?
     viewResult.form[op as AllowedOp] : {}) as RecordConfig;
-  const toolbar = isFilter ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
-  const hasToolbar = Boolean(toolbar?.length);
-  const filterToolbar = appCfg.listViews.filterToolbar;
+  const toolbarCfg = isFilter ? { ...formCfg.toolbar, ...appCfg.listViews.filterToolbar } : formCfg.toolbar;
+  const toolbarItems = isFilter ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
+  const hasToolbar = Boolean(toolbarItems?.length);
 
   // Build form schema with initial values prefilled from record
 
@@ -86,8 +85,8 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   const toolbarComponent = (
     <NfToolbar
-      items={toolbar}
-      cfg={{ ...appCfg.toolbars, ...(isFilter ? filterToolbar : formCfg.toolbar) }}
+      items={toolbarItems}
+      cfg={{ ...appCfg.toolbars, ...toolbarCfg }}
       onAction={handleAction} />
   );
 
@@ -101,15 +100,39 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   // #endregion
 
+  function getToolbarPosition(): "top" | "bottom" | "right" | null {
+    if(!hasToolbar) {
+      return null;
+    }
+    if (toolbarCfg?.position === "top") {
+      return "top";
+    } else if (isFilter && toolbarCfg?.position === "right") {
+      return "right";
+    } else {
+      return "bottom";
+    }
+  }
+
+  const toolbarPosition = getToolbarPosition();
+  console.log(isFilter, toolbarPosition);
+
   return (
     <Stack gap={formCfg.verticalGap} h={formCfg.fullHeight ? "100%" : "auto"}>
 
       {/* Title */}
       {recordCfg.title && <Title order={4}>{recordCfg.title.replace("{name}", name)}</Title>}
 
+      {/* Toolbar */}
+      {toolbarPosition === "top" ? (
+        <Stack>
+          {toolbarComponent}
+          {formCfg.toolbar?.upperBorder && <Divider />}
+        </Stack>
+      ) : null}
+
       {/* Form layout */}
       <ScrollArea>
-        {isFilter && hasToolbar && filterToolbar?.inline ? (
+        {toolbarPosition === "right" ? (
           <Group align="flex-end">
             {formLayoutComponent}
             {/* Inline toolbar */}
@@ -120,7 +143,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       </ScrollArea>
 
       {/* Toolbar */}
-      {hasToolbar && !(isFilter && filterToolbar?.inline) ? (
+      {toolbarPosition === "bottom" ? (
         <Stack>
           {formCfg.toolbar?.upperBorder && <Divider />}
           {toolbarComponent}

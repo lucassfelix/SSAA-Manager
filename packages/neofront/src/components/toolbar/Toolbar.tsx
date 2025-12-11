@@ -19,7 +19,7 @@ export interface ToolbarThemeProps {
   gap: number;
   upperBorder?: boolean;
   align?: 'left' | 'center' | 'right' | 'apart';
-  inline?: boolean;
+  position?: 'top' | 'bottom' | 'right';
   iconButtons?: {
     rotateSelected?: boolean;
     size?: number | string;

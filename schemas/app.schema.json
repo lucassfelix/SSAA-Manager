@@ -872,9 +872,10 @@
           "type": "boolean",
           "description": "Whether the toolbar should have an upper border."
         },
-        "inline": {
-          "type": "boolean",
-          "description": "Whether the toolbar should be displayed beside the form."
+        "position": {
+          "type": "string",
+          "description": "Position of the toolbar relative to the form. \"right\" is not allowed for record forms.",
+          "enum": [ "top", "bottom", "right" ]
         },
         "iconButtons": {
           "type": "object",
