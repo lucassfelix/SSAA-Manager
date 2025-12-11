@@ -21,7 +21,7 @@ import { getValueByPath } from "@/listView/datatableUtils";
 // #region ------------------------------------------------------------------------------- Functions
 
 /** Set document title based on current URL and view metadata. */
-export function setDocumentTitle(appCfg: AppProps, currentView: string, 
+export function setDocumentTitle(appCfg: AppProps, currentView: string,
   viewResult: ViewResultProps | undefined, searchParams: URLSearchParams) {
 
   let pageName = currentView;
@@ -47,12 +47,10 @@ export function setDocumentTitle(appCfg: AppProps, currentView: string,
       break;
     case 'detail':
       break;
-    default:
-      {
-        const viewTitle = listView?.toolbar?.find((it) => it.type === 'text');
-        if (viewTitle?.type === 'text' && viewTitle?.text) {
-          pageName = viewTitle.text;
-        }
+    default:  // listView
+      const viewTitle = listView?.toolbar?.find((it) => it.type === 'title');
+      if (viewTitle?.text) {
+        pageName = viewTitle.text;
       }
       break;
   }
@@ -188,7 +186,7 @@ export function extendDayjs(locale: string) {
   dayjs.extend(relativeTime);
 
   // Fix for Brazilian Portuguese weekdays abbreviations
-  if(locale == 'pt-br') {
+  if (locale == 'pt-br') {
     dayjs.extend(updateLocale);
     dayjs.updateLocale(locale, { weekdaysMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'] });
   }
