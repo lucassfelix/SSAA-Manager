@@ -28,12 +28,12 @@
             "render": { "layout": "link", "op": "edit" },
             "required": true
         },
-        "avatar": {
+        "foto": {
             "colTitle": "",
             "colWidth": 50,
             "dataType": "image",
             "fieldWidth": 200,
-            "label": "Avatar",
+            "label": "Foto",
             "placeholder": "Selecione uma imagem",
             "render": { "layout": "image" }
         },

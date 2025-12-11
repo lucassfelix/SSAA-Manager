@@ -6,7 +6,7 @@
 		"email": "joao.ayres18@uol.com.br",
 		"empresa": 8976,
 		"tipo_permissao": "admin",
-		"avatar": "avatars/avatar_m1.jpg"
+		"foto": "avatars/avatar_m1.jpg"
 	},
 	{
 		"id": 2209,
@@ -16,7 +16,7 @@
 		"empresa": 312,
 		"ativo": false,
 		"tipo_permissao": "usuario",
-		"avatar": "avatars/avatar_f1.jpg"
+		"foto": "avatars/avatar_f1.jpg"
 	},
 	{
 		"id": 980,
@@ -25,7 +25,7 @@
 		"email": "pedro98@google.com",
 		"empresa": 216,
 		"tipo_permissao": "usuario",
-		"avatar": "avatars/avatar_m2.jpg"
+		"foto": "avatars/avatar_m2.jpg"
 	},
 	{
 		"id": 40,
@@ -35,7 +35,7 @@
 		"ativo": true,
 		"empresa": 1212,
 		"tipo_permissao": "usuario",
-		"avatar": "avatars/avatar_f2.jpg"
+		"foto": "avatars/avatar_f2.jpg"
 	},
 	{
 		"id": 195,
@@ -45,7 +45,7 @@
 		"ativo": true,
 		"empresa": 77,
 		"tipo_permissao": "superusuario",
-		"avatar": "avatars/avatar_m3.jpg"
+		"foto": "avatars/avatar_m3.jpg"
 	},
 	{
 		"id": 340,
@@ -55,6 +55,6 @@
 		"ativo": false,
 		"empresa": 4345,
 		"tipo_permissao": "usuario",
-		"avatar": "avatars/avatar_f3.jpg"
+		"foto": "avatars/avatar_f3.jpg"
 	}
 ]
