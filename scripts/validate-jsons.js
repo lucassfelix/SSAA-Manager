@@ -187,7 +187,16 @@ for (const f of files) {
     output.push(`No schema for ${path.basename(f)} (tried '${schemaKey}'), skipping.`);
     continue;
   }
-  const validate = ajv.getSchema(schema.$id || `schema:${schemaKey}`) || ajv.compile(schema);
+
+  let validate;
+  try {
+    validate = ajv.getSchema(schema.$id || `schema:${schemaKey}`) || ajv.compile(schema);
+  } catch (e) {
+    failures++;
+    output.push(`Failed to compile schema '${schemaKey}' for ${path.basename(f)}: ${e && e.message ? e.message : String(e)}`);
+    continue;
+  }
+
   if (!validate(json)) {
     failures++;
     output.push(`Errors in ${path.basename(f)} (schema '${schemaKey}'):`);

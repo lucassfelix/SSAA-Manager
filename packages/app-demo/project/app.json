@@ -37,7 +37,7 @@
 			"footer": false,
 			"items": [ "mainMenu" ]
 		},
-		"userToolbar": [ "userMenu" ]
+		"userToolbar": [ { "type": "text", "text": "Usuário" }, "userMenu" ]
 	},
 	"menu": {
 		"openSubmenusOnHover": false,
@@ -88,6 +88,9 @@
 			"radius": 6,
 			"defaultVariant": "filled",
 			"regularVariant": "light"
+		},
+		"texts": {
+			"fontWeight": 600
 		},
 		"titles": {
 			"size": 20,

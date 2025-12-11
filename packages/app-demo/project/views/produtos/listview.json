@@ -23,7 +23,7 @@
         "valor"
     ],
     "toolbar": [
-        { "type": "text", "text": "Produtos" },
+        { "type": "title", "text": "Produtos" },
         "add",
         "separator",
         "search",

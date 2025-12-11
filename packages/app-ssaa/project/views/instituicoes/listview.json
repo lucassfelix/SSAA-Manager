@@ -22,7 +22,7 @@
 		"data_expiracao"
 	],
 	"toolbar": [
-		{ "type": "text", "text": "Instituições" },
+		{ "type": "title", "text": "Instituições" },
 		"add"
 	]
 }

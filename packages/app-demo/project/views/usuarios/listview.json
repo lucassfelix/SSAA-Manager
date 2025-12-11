@@ -24,7 +24,7 @@
 		"ativo"
 	],
 	"toolbar": [
-		{ "type": "text", "text": "Usuários" },
+		{ "type": "title", "text": "Usuários" },
 		"add",
 		"separator",
 		"search",

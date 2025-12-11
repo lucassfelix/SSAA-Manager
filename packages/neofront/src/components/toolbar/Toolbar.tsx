@@ -39,6 +39,11 @@ export interface ToolbarThemeProps {
     fontWeight?: number;
     uppercase?: boolean;
   };
+  texts?: {
+    size?: number | string;
+    fontWeight: number;
+    width?: number;
+  };
   titles?: {
     size?: number | string;
     fontWeight: number;
@@ -61,7 +66,7 @@ interface ToolbarSubItem extends ToolbarItemBase {
 }
 
 export interface ToolbarItem extends ToolbarItemBase {
-  type?: 'text' | 'iconButton' | 'textButton' | 'separator';
+  type?: 'text' | 'title' | 'iconButton' | 'textButton' | 'separator';
   icon?: string;
   tip?: string;
   selectedTip?: string;
@@ -162,8 +167,25 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
     function renderText(it: ToolbarItem, key: string): JSX.Element {
       return (
-        <Text key={key} fw={cfg.titles?.fontWeight} styles={{ root: { fontSize: cfg.titles?.size } }}
-          style={cfg.titles?.width ? { minWidth: cfg.titles.width } : undefined}>
+        <Text
+          key={key}
+          fw={cfg.texts?.fontWeight}
+          styles={{ root: { fontSize: cfg.texts?.size } }}
+          style={cfg.texts?.width ? { minWidth: cfg.texts.width } : undefined}
+        >
+          {it.text}
+        </Text>
+      );
+    }
+
+    function renderTitle(it: ToolbarItem, key: string): JSX.Element {
+      return (
+        <Text
+          key={key}
+          fw={cfg.titles?.fontWeight}
+          styles={{ root: { fontSize: cfg.titles?.size } }}
+          style={cfg.titles?.width ? { minWidth: cfg.titles.width } : undefined}
+        >
           {it.text}
         </Text>
       );
@@ -252,7 +274,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
                 onClick={() => handleClick(mi)}
                 leftSection={mi.selectable ?
                   <NfIcon
-                    icon={isItemSelected && isItemSelected(mi.action!) ? 
+                    icon={isItemSelected && isItemSelected(mi.action!) ?
                       iconBtnConfig?.selectedIcon || "check" : "_blank"}
                     size={iconBtnConfig?.iconSize}
                     stroke={iconBtnConfig?.iconStroke}
@@ -278,6 +300,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
         return renderSeparator(keyName);
       case 'text':
         return renderText(item, keyName);
+      case 'title':
+        return renderTitle(item, keyName);
       case 'iconButton':
       case 'textButton':
         return renderButton(item, keyName);

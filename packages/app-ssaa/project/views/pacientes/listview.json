@@ -22,7 +22,7 @@
 		"status"
 	],
 	"toolbar": [
-		{ "type": "text", "text": "Pacientes" },
+		{ "type": "title", "text": "Pacientes" },
 		"add"
 	]
 }

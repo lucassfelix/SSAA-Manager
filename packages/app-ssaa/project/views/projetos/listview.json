@@ -22,7 +22,7 @@
         "status"
     ],
     "toolbar": [
-        { "type": "text", "text": "Projetos" },
+        { "type": "title", "text": "Projetos" },
         "add"
     ]
 }

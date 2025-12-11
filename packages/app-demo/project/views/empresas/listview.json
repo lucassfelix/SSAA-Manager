@@ -25,7 +25,7 @@
 		"status"
 	],
 	"toolbar": [
-		{ "type": "text", "text": "Empresas" },
+		{ "type": "title", "text": "Empresas" },
 		"add",
 		"separator",
 		"search",

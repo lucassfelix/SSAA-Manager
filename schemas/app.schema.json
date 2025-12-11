@@ -161,7 +161,7 @@
           "type": "array",
           "description": "Ordered list of items to display in the header toolbar.",
           "items": {
-            "type": "string"
+            "$ref": "./common.schema.json#/definitions/toolbarItem"
           }
         }
       },
@@ -949,7 +949,7 @@
             }
           }
         },
-        "titles": {
+        "texts": {
           "type": "object",
           "description": "Default settings for text elements in toolbars.",
           "additionalProperties": false,
@@ -965,6 +965,25 @@
             "width": {
               "type": "number",
               "description": "Width of the text element."
+            }
+          }
+        },
+        "titles": {
+          "type": "object",
+          "description": "Default settings for title elements in toolbars.",
+          "additionalProperties": false,
+          "properties": {
+            "size": {
+              "type": "number",
+              "description": "Font size of the title."
+            },
+            "fontWeight": {
+              "type": "number",
+              "description": "Font weight of the title."
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the title element."
             }
           }
         }
