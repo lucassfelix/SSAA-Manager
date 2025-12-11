@@ -19,10 +19,12 @@
 		"foto",
 		"nome",
 		"empresa",
-		"username",
 		"email",
-		"ativo"
+		"username",
+		"ativo",
+		"commands"
 	],
+	"actions": [ "record_detail", "record_edit", "record_delete" ],
 	"toolbar": [
 		{ "type": "title", "text": "Usuários" },
 		"add",

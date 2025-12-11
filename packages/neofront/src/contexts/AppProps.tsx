@@ -42,6 +42,7 @@ interface ListViewsProps {
     imageRadius?: MantineSize;
   };
   filterToolbar?: ToolbarThemeProps;
+  actionToolbar?: ToolbarThemeProps;
   filterPanel?: {
     labelPosition?: 'top' | 'none';
     verticalPadding?: number;

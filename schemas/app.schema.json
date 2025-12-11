@@ -252,7 +252,7 @@
       "description": "Generic control used by toolbar/menu actions.",
       "additionalProperties": {
         "description": "Definition for a control used in this project.",
-        "$ref": "#/definitions/genericControl"
+        "$ref": "#/definitions/control"
       },
       "properties": {
         "separator": {
@@ -380,6 +380,10 @@
         },
         "filterToolbar": {
           "description": "Toolbar settings for filter panel. Overrides the toolbar object.",
+          "$ref": "#/definitions/toolbar"
+        },
+        "actionToolbar": {
+          "description": "Settings for the action toolbar used for individual records. Overrides the toolbar object.",
           "$ref": "#/definitions/toolbar"
         },
         "pagination": {
@@ -780,7 +784,7 @@
         }
       }
     },
-    "genericControl": {
+    "control": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -829,6 +833,10 @@
           "type": "array",
           "description": "Optional nested menu items for dropdown controls.",
           "items": { "$ref": "#/definitions/menuItem" }
+        },
+        "class": {
+          "type": "string",
+          "description": "Optional CSS class name(s) to apply to the control."
         }
       }
     },

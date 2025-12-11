@@ -156,7 +156,8 @@ export default function NfForm(props: FormProps): JSX.Element {
     <NfToolbar
       items={resolvedToolbarItems}
       cfg={{ ...appCfg.toolbars, ...toolbarCfg }}
-      onAction={handleAction} />
+      onAction={handleAction}
+    />
   );
 
   const formLayoutComponent = (
@@ -164,7 +165,8 @@ export default function NfForm(props: FormProps): JSX.Element {
       key={currentRecordId || 'new'}
       op={op}
       recordCfg={recordCfg}
-      record={record} />
+      record={record}
+    />
   );
 
   function getToolbarPosition(): "top" | "bottom" | "right" | null {

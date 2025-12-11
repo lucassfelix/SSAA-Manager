@@ -5,9 +5,11 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX, useState } from "react";
+import { clsx } from "clsx";
 import { ActionIcon, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
-import NfIcon from "@/icon/NfIcon";
+
 import { useAppUI } from "context";
+import NfIcon from "@/icon/NfIcon";
 
 // #endregion
 
@@ -61,6 +63,7 @@ interface ToolbarItemBase {
   selectable?: boolean;
   selected?: boolean;
   disabled?: boolean;
+  class?: string;
 }
 
 interface ToolbarSubItem extends ToolbarItemBase {
@@ -87,6 +90,7 @@ interface NfToolbarProps {
   cfg: ToolbarThemeProps;
   onAction?: (action: string, payload?: any) => void;
   isItemSelected?: (itemName: string) => boolean;
+  className?: string;
 }
 
 // #endregion
@@ -234,7 +238,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             key={key}
             size={cfg.textButtons?.size ? String(cfg.textButtons.size) : undefined}
             variant={textBtnVariant}
-            className={`nf-Button-${textBtnVariant}`}
+            className={clsx(`nf-Button-${textBtnVariant}`, it.class ? `nf-${it.class}` : undefined)}
             aria-label={it.label ?? name}
             radius={cfg.textButtons?.radius}
             onClick={() => handleClick(it)}
@@ -257,6 +261,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             radius={iconBtnConfig?.radius}
             onClick={() => handleClick(it)}
             disabled={it.disabled === true}
+            className={it.class ? `nf-${it.class}` : undefined}
           >
             {renderIcon(it.icon!, it.selected)}
           </ActionIcon>
@@ -325,8 +330,14 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   // #endregion
 
   return (
-    <Group gap={gap} px={horizontalPadding} py={verticalPadding}
-      justify={justifyOptions[align || 'left']}>
+    <Group
+      wrap="nowrap"
+      gap={gap}
+      px={horizontalPadding}
+      py={verticalPadding}
+      justify={justifyOptions[align || 'left']}
+      className={clsx("nf-toolbar", props.className)}
+    >
       {toolbarItems.map((it, idx) => {
         const keyName = `toolbar-item-${idx}`;
         return <ToolbarItem

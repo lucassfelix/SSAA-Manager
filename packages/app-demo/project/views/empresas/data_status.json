@@ -7,7 +7,7 @@
     {
         "value": 2,
         "label": "Inativa",
-        "className": "warning"
+        "className": "default"
     },
     {
         "value": 3,

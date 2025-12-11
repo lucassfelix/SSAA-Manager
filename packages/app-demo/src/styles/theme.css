@@ -118,22 +118,40 @@
 .mantine-Badge-root.nf-success {
   background-color: var(--mantine-color-teal-8);
 }
-.mantine-Badge-root.nf-warning {
+.mantine-Badge-root.nf-default {
   background-color: var(--mantine-color-gray-7);
 }
 .mantine-Badge-root.nf-error {
   background-color: var(--mantine-color-red-6);
 }
 
+/* Action button styles */
+.nf-light .nf-actions-toolbar .nf-warning {
+  color: var(--mantine-color-red-7);
+}
+.nf-dark .nf-actions-toolbar .nf-warning {
+  color: var(--mantine-color-red-5);
+}
+
+tr .nf-actions-toolbar {
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+tr:hover .nf-actions-toolbar {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+
 /* #endregion */
 
 /* #region ------------------------------------------------------------------ Form element styles */
 
 /* Text button styles */
-.nf-light .mantine-Button-root.nf-Button-filled  {
+.nf-light .mantine-Button-root.nf-Button-filled {
   background-color: var(--mantine-color-teal-5);
 }
-.nf-dark .mantine-Button-root.nf-Button-filled  {
+.nf-dark .mantine-Button-root.nf-Button-filled {
   background-color: var(--mantine-color-teal-8);
 }
 

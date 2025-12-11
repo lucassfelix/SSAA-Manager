@@ -137,7 +137,7 @@ function walk(obj, pathArr, fileText, filePath, out) {
           const objName = pathArr.length ? pathArr[pathArr.length - 1] : '(root)';
 
           // Skip only the ROOT entries directly under `definitions` (e.g.
-          // `definitions.genericControl`) — those top-level definition objects
+          // `definitions.control`) — those top-level definition objects
           // may be short descriptors, but their children should still be
           // validated for descriptions.
           const defIdx = pathArr.indexOf('definitions');

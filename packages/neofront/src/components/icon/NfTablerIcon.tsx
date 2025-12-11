@@ -24,6 +24,7 @@ const iconMap = {
   moreVertical: "DotsVertical",
   notification: "Bell",
   userSettings: "UserCog",
+  view: "Eye",
 } as Record<string, string>;
 
 // #endregion

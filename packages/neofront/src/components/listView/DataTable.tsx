@@ -7,7 +7,7 @@
 import "mantine-datatable/styles.css";
 
 import { JSX, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Anchor, Badge, Box, Image, NumberFormatter, Stack, Text } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
@@ -18,6 +18,7 @@ import { ListViewProps, useAppUI } from "context";
 import NfIcon from '@/icon/NfIcon';
 import { getValueByPath, replaceMacros, getStyles } from "./datatableUtils";
 import { applyMask, MaskSpec } from "@/form/fields/createMask";
+import NfToolbar from "@/toolbar/Toolbar";
 
 // #endregion
 
@@ -37,9 +38,15 @@ export interface FilterPanelConfig {
 
 // #region ------------------------------------------------------------------------------- Functions
 
-function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
-  records: Record<string, unknown>[], currentView: string,
-  data: Record<string, unknown[]>, fields: Record<string, UnifiedFieldProps>): DataTableColumn[] {
+function getColumns(
+  appCfg: AppProps,
+  tblCfg: ListViewProps,
+  isDark: boolean,
+  records: Record<string, unknown>[],
+  currentView: string,
+  data: Record<string, unknown[]>,
+  fields: Record<string, UnifiedFieldProps>,
+): DataTableColumn[] {
 
   if (!Array.isArray(tblCfg.columns)) {
     console.warn(`DataTable: No columns defined for table "${currentView}".`);
@@ -48,7 +55,7 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
 
   const tblAppCfg = appCfg.listViews.table ?? {};
   const tableProps = tblCfg.config as ListViewProps["config"];
-
+const navigate = useNavigate();
   // Resolve options from table reference
   function resolveOptions(optionsRef?: FieldOptionsRef): DataColumnOptions[] | undefined {
     if (!optionsRef) {
@@ -253,6 +260,33 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
       );
     }
 
+    function renderActionsCell(record: Record<string, any>): ReactNode {
+
+      const idAccessor = tblCfg.config.idAccessor ?? tableProps.idAccessor ?? 'id';
+      const idVal = String(getValueByPath(record, idAccessor) ?? '');
+
+      function handleAction(action: string): void {
+        switch(action) {
+          case 'edit':
+            navigate(`?v=${currentView}&op=edit&${idAccessor}=${idVal}`);
+            break;
+          case 'detail':
+            navigate(`?v=${currentView}&op=detail&${idAccessor}=${idVal}`);
+            break;
+          default:
+            console.log(`DataTable: Action "${action}" clicked for record ID ${idVal}.`);
+            break;
+        }
+      }
+
+      return <NfToolbar
+        className="nf-actions-toolbar"
+        items={tblCfg.actions}
+        cfg={{ ...appCfg.toolbars, ...appCfg.listViews.actionToolbar }}
+        onAction={handleAction}
+      />;
+    }
+
     function renderCell(): ((r: Record<string, unknown>) => ReactNode) | undefined {
 
       return (record: Record<string, any>) => {
@@ -261,6 +295,8 @@ function getColumns(appCfg: AppProps, tblCfg: ListViewProps, isDark: boolean,
 
         if (render) {
           switch (render.layout) {
+            case 'actions':
+              return renderActionsCell(record);
             case 'booleanIcon':
               return renderBooleanIcon(value);
             case "image":

@@ -81,6 +81,15 @@
         "description": "Field name to display as a column."
       }
     },
+    "actions": {
+      "type": "array",
+      "description": "List of record actions available (e.g. record_detail, record_edit, record_delete).",
+      "items": {
+        "type": "string",
+        "description": "Action name.",
+        "enum": [ "record_detail", "record_edit", "record_delete" ]
+      }
+    },
     "toolbar": {
       "$ref": "#/definitions/toolbar"
     },

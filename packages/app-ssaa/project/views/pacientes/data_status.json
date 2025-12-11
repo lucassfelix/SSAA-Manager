@@ -7,6 +7,6 @@
     {
         "value": 2,
         "label": "Inativo",
-        "className": "warning"
+        "className": "default"
     }
 ]

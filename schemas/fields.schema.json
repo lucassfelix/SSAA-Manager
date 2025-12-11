@@ -159,8 +159,7 @@
           "description": "Whether the field is enabled. Defaults to true.",
           "default": true
         }
-      },
-      "required": ["dataType"]
+      }
     },
     "colStyle": {
       "type": "string",
@@ -196,7 +195,7 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image"],
+          "enum": ["link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions"],
           "description": "Rendering layout type."
         },
         "op": {

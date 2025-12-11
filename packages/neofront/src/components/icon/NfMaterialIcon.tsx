@@ -31,8 +31,10 @@ const iconMap = {
   squareX: "disabled_by_default",
   sum: "functions",
   sun: "wb_sunny",
+  trash: "delete",
   user: "person",
   userSettings: "manage_accounts",
+  view: "visibility",
   wallet: "account_balance_wallet"
 } as Record<string, string>;
 

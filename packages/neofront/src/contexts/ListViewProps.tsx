@@ -64,14 +64,15 @@ export interface ListViewProps {
   config: {
     header?: boolean;
     footer?: boolean;
-    rowClassAccessor?: string;
     idAccessor?: string;
     nameAccessor?: string;
+    rowClassAccessor?: string;
   };
   strings: {
     [key: string]: string;
   };
   columns: string[];
+  actions: string[];
   toolbar?: ToolbarItem[];
   filterPanel?: FilterPanelConfig;
 }

@@ -63,6 +63,10 @@ export default function NfListView(): JSX.Element {
       case 'toggleFilterPanel':
         toggleFilterPanelState();
         return;
+      case 'edit':
+        console.log(currentView);
+        navigate(`?v=${currentView}&op=edit&id=${_payload}`);
+        return;
       case 'closeFilterPanel':
         if (filterOpen) {
           toggleFilterPanelState();

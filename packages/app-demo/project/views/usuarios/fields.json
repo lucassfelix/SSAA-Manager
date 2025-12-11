@@ -84,6 +84,12 @@
             "fieldWidth": 80,
             "label": "Ativo",
             "render": { "layout": "booleanIcon" }
+        },
+        "commands": {
+            "colTitle": "Comandos",
+            "colTextAlign": "center",
+            "colWidth": 120,
+            "render": { "layout": "actions" }
         }
     }
 }

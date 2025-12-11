@@ -147,6 +147,25 @@
 			"icon": "search",
 			"action": "search"
 		},
+		"record_detail": {
+			"type": "iconButton",
+			"tip": "Ver detalhes do {singular}",
+			"icon": "view",
+			"action": "detail"
+		},
+		"record_edit": {
+			"type": "iconButton",
+			"tip": "Editar {singular}",
+			"icon": "edit",
+			"action": "edit"
+		},
+		"record_delete": {
+			"type": "iconButton",
+			"tip": "Excluir {singular}",
+			"icon": "trash",
+			"action": "delete",
+			"class": "warning"
+		},
 		"listViewMore": {
 			"type": "iconButton",
 			"tip": "Mais ações",
@@ -188,6 +207,17 @@
 			"type": "textButton",
 			"label": "Cancelar",
 			"action": "cancel"
+		},
+		"close": {
+			"type": "textButton",
+			"label": "Fechar",
+			"action": "cancel",
+			"default": true
+		},
+		"edit": {
+			"type": "textButton",
+			"label": "Editar",
+			"action": "edit"
 		},
 		"filter": {
 			"type": "textButton",
@@ -241,6 +271,14 @@
 			"align": "right",
 			"position": "right"
 		},
+		"actionToolbar": {
+			"horizontalPadding": 12,
+			"gap": 4,
+			"align": "center",
+			"iconButtons": {
+				"iconSize": 22
+			}
+		},
 		"pagination": {
 			"defaultPageSize": 10,
 			"pageSizes": [ 5, 10, 20, 50, 100 ],
@@ -272,7 +310,7 @@
 	},
 	"theme": {
 		"defaultUIScale": 100,
-		"iconFamily": "tabler",
+		"iconFamily": "material",
 		"mainFontFamily": null,
 		"headingsFontFamily": null,
 		"lightMode": {
