@@ -57,17 +57,17 @@ header h4 {
 }
 
 /* Wrapper (badge) styles */
-.mantine-Badge-root.nf-normal {
+.mantine-Badge-root.nf-default {
   background-color: transparent;
 }
 .mantine-Badge-root.nf-success {
   background-color: var(--mantine-color-teal-8);
 }
-.mantine-Badge-root.nf-warning {
-  background-color: var(--mantine-color-gray-7);
-}
 .mantine-Badge-root.nf-error {
   background-color: var(--mantine-color-red-6);
+}
+.mantine-Badge-root.nf-warning {
+  background-color: var(--mantine-color-orange-7);
 }
 
 /* Badge text style adjustments (for Roboto font) */

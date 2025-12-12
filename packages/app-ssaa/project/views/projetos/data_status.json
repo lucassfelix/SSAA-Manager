@@ -2,7 +2,7 @@
     {
         "value": 1,
         "label": "Aberto",
-        "className": "normal"
+        "className": "default"
     },
     {
         "value": 2,
@@ -12,7 +12,7 @@
     {
         "value": 3,
         "label": "Pausado",
-        "className": "default"
+        "className": "warning"
     },
     {
         "value": 4,
