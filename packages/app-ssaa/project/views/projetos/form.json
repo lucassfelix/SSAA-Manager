@@ -29,6 +29,6 @@
     },
     "detail": {
         "title": "{name}",
-        "toolbar": [ "edit", "close" ]
+        "toolbar": [ "close" ]
     }
 }

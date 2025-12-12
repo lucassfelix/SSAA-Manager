@@ -22,7 +22,7 @@
             "label": "Nome da instituicao",
             "placeholder": "Nome completo da instituicao",
             "required": true,
-            "render": { "layout": "link", "op": "edit" }
+            "render": { "layout": "link", "op": "detail" }
         },
         "nome_abreviado": {
             "header": "Abreviado",
@@ -61,6 +61,11 @@
             "placeholder": "Selecione",
             "render": { "layout": "date", "format": "relative" },
             "required": true
+        },
+        "commands": {
+            "colTextAlign": "center",
+            "colWidth": 100,
+            "render": { "layout": "actions" }
         }
     }
 }

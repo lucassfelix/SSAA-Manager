@@ -32,6 +32,6 @@
     },
     "detail": {
         "title": "Usuário {name}",
-        "toolbar": [ "edit", "close" ]
+        "toolbar": [ "close" ]
     }
 }

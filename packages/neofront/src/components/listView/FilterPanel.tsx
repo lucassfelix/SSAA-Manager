@@ -54,13 +54,11 @@ export default function FilterPanel({ schema, open, onAction }: FilterPanelProps
         transitionDuration={transitionMs}
         keepMounted
       >
-        <Box
-          style={{
-            opacity: open ? 1 : 0,
-            transition: `opacity ${transitionMs}ms ease`,
-            overflow: 'hidden'
-          }}
-        >
+        <Box style={{
+          opacity: open ? 1 : 0,
+          transition: `opacity ${transitionMs}ms ease`,
+          overflow: 'hidden'
+        }}>
           <NfForm
             op="filter"
             onAction={onAction}

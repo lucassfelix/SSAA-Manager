@@ -75,6 +75,16 @@ header h4 {
   padding-top: 0.1rem;
 }
 
+/* Shows actions toolbar only on row hover */
+tr .nf-actions-toolbar {
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+tr:hover .nf-actions-toolbar {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
 /* #endregion */
 
 /* #region ------------------------------------------------------------------ Form element styles */

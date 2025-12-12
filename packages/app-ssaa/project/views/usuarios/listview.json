@@ -21,8 +21,10 @@
 		"instituicao",
 		"data_criacao",
 		"data_expiracao",
-		"status"
+		"status",
+		"commands"
 	],
+	"actions": [ "record_edit", "record_delete" ],
 	"toolbar": [
 		{ "type": "title", "text": "Usuários" },
 		"add"

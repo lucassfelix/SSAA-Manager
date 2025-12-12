@@ -133,6 +133,7 @@
   color: var(--mantine-color-red-5);
 }
 
+/* Shows actions toolbar only on row hover */
 tr .nf-actions-toolbar {
   opacity: 0;
   transition: opacity 80ms ease;

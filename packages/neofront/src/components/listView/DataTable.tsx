@@ -116,9 +116,10 @@ function getColumns(
           );
         })(fieldDef.footerIcon);
       }
-      if (fieldDef.footer) {
+      if (fieldDef.footer !== null && fieldDef.footer !== undefined) {
         return replaceMacros(fieldDef.footer, accessor, records);
       }
+      return '';
     }
 
     function renderHeader(): ReactNode | undefined {
@@ -137,9 +138,10 @@ function getColumns(
           );
         })(fieldDef.headerIcon);
       }
-      if (fieldDef.header) {
+      if (fieldDef.header !== null && fieldDef.header !== undefined) {
         return replaceMacros(fieldDef.header, accessor, records);
       }
+      return '';
     }
 
     function renderSingleCell(value: string | number | ReactNode, cellStyles?: string[],

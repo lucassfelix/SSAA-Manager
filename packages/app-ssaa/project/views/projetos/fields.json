@@ -22,7 +22,7 @@
             "footer": "{count} projetos",
             "label": "Nome",
             "placeholder": "Nome do projeto",
-            "render": { "layout": "link", "op": "edit" },
+            "render": { "layout": "link", "op": "detail" },
             "required": true
         },
         "instituicao": {
@@ -60,7 +60,7 @@
         "status": {
             "colTextAlign": "center",
             "header": "Status",
-            "colWidth": 140,
+            "colWidth": 100,
             "dataType": "select",
             "defaultValue": 1,
             "fieldWidth": 240,
@@ -70,6 +70,11 @@
             "render": { "layout": "colorWrapper" },
             "required": true,
             "wrapperWidth": 90
+        },
+        "commands": {
+            "colTextAlign": "center",
+            "colWidth": 100,
+            "render": { "layout": "actions" }
         }
     }
 }

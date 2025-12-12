@@ -5,8 +5,8 @@
 	"comments": "SSAA: configuração de projeto",
 	"projectId": "ssaa-smile-manager",
 	"strings": {
-		"appTitle": "{pageName} | SSAA",
-		"appVersion": "0.10.0"
+		"appVersion": "0.10.0",
+		"appTitle": "{pageName} | SSAA"
 	},
 	"errorStrings": {
 		"noRecordsText": "Sem itens a exibir"
@@ -49,6 +49,32 @@
 			"iconFilled": false,
 			"iconSize": 26,
 			"iconStroke": 2
+		}
+	},
+	"toolbars": {
+		"horizontalPadding": 10,
+		"verticalPadding": 6,
+		"gap": 16,
+		"align": "left",
+		"iconButtons": {
+			"rotateSelected": true,
+			"size": 36,
+			"radius": 8,
+			"filled": false,
+			"iconSize": 24,
+			"iconStroke": 2
+		},
+		"textButtons": {
+			"size": "sm",
+			"radius": 6,
+			"fontSize": "0.82rem",
+			"fontWeight": 700,
+			"uppercase": true
+		},
+		"titles": {
+			"size": 20,
+			"fontWeight": 500,
+			"width": 120
 		}
 	},
 	"topControls": {
@@ -100,6 +126,25 @@
 			"icon": "search",
 			"action": "search"
 		},
+		"record_detail": {
+			"type": "iconButton",
+			"tip": "Ver detalhes do {singular}",
+			"icon": "view",
+			"action": "detail"
+		},
+		"record_edit": {
+			"type": "iconButton",
+			"tip": "Editar {singular}",
+			"icon": "edit",
+			"action": "edit"
+		},
+		"record_delete": {
+			"type": "iconButton",
+			"tip": "Excluir {singular}",
+			"icon": "trash",
+			"action": "delete",
+			"class": "warning"
+		},
 		"send": {
 			"type": "textButton",
 			"label": "Enviar",
@@ -110,6 +155,17 @@
 			"type": "textButton",
 			"label": "Cancelar",
 			"action": "cancel"
+		},
+		"close": {
+			"type": "textButton",
+			"label": "Fechar",
+			"action": "cancel",
+			"default": true
+		},
+		"edit": {
+			"type": "textButton",
+			"label": "Editar",
+			"action": "edit"
 		},
 		"listViewMore": {
 			"type": "iconButton",
@@ -137,32 +193,6 @@
 			]
 		}
 	},
-	"toolbars": {
-		"horizontalPadding": 10,
-		"verticalPadding": 6,
-		"gap": 16,
-		"align": "left",
-		"iconButtons": {
-			"rotateSelected": true,
-			"size": 36,
-			"radius": 8,
-			"filled": false,
-			"iconSize": 24,
-			"iconStroke": 2
-		},
-		"textButtons": {
-			"size": "sm",
-			"radius": 6,
-			"fontSize": "0.82rem",
-			"fontWeight": 700,
-			"uppercase": true
-		},
-		"titles": {
-			"size": 20,
-			"fontWeight": 500,
-			"width": 120
-		}
-	},
 	"listViews": {
 		"defaultList": "usuarios",
 		"table": {
@@ -178,9 +208,38 @@
 			"wrapperSize": "md",
 			"wrapperBooleanWidth": 50,
 			"booleanIconsSize": 26,
-			"booleanIconsStroke": 1,
-			"trueIcon": "circleCheck",
-			"falseIcon": "squareX"
+			"booleanIconsStroke": 1
+		},
+		"filterPanel": {
+			"labelPosition": "top",
+			"verticalPadding": 12,
+			"transitionDuration": 200
+		},
+		"filterToolbar": {
+			"horizontalPadding": 0,
+			"verticalPadding": 0,
+			"align": "right",
+			"position": "right"
+		},
+		"actionToolbar": {
+			"horizontalPadding": 12,
+			"verticalPadding": 0,
+			"gap": 4,
+			"align": "center",
+			"iconButtons": {
+				"iconSize": 22
+			}
+		},
+		"pagination": {
+			"defaultPageSize": 10,
+			"pageSizes": [ 5, 10, 20, 50, 100 ],
+			"showFirstLast": false,
+			"showPageSizeSelector": true,
+			"showTotalItems": false
+		},
+		"infiniteScroll": {
+			"enabled": false,
+			"threshold": 300
 		}
 	},
 	"forms": {
@@ -193,7 +252,9 @@
 		"outlinedSections": false,
 		"toolbar": {
 			"align": "right",
-			"upperBorder": true
+			"upperBorder": true,
+			"position": "bottom",
+			"horizontalPadding": 0
 		}
 	},
 	"theme": {

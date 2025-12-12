@@ -8,7 +8,7 @@
 	},
 	{
 		"id": 2,
-		"nome_completo": "Sofia Oliveira Pereira",
+		"nome_completo": "Sofia de Oliveira Pereira",
 		"username": "maricosta",
 		"instituicao": 2,
 		"status": 1,
@@ -24,7 +24,7 @@
 	},
 	{
 		"id": 4,
-		"nome_completo": "Beatriz Lima de Andrade",
+		"nome_completo": "Beatriz Lima Andrade",
 		"username": "maria_fig",
 		"status": 1,
 		"instituicao": 7,

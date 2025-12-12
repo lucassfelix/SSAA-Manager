@@ -31,6 +31,6 @@
     },
     "detail": {
         "title": "Paciente {name}",
-        "toolbar": [ "edit", "close" ]
+        "toolbar": [ "close" ]
     }
 }

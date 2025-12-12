@@ -19,7 +19,7 @@
             "dataType": "string",
             "label": "Nome",
             "placeholder": "Nome completo",
-            "render": { "layout": "link", "op": "edit" },
+            "render": { "layout": "link", "op": "detail" },
             "required": true
         },
         "username": {
@@ -65,7 +65,7 @@
         "status": {
             "colTextAlign": "center",
             "header": "Status",
-            "colWidth": 140,
+            "colWidth": 90,
             "dataType": "select",
             "defaultValue": 1,
             "fieldWidth": 240,
@@ -75,6 +75,11 @@
             "render": { "layout": "colorWrapper" },
             "required": true,
             "wrapperWidth": 70
+        },
+        "commands": {
+            "colTextAlign": "center",
+            "colWidth": 100,
+            "render": { "layout": "actions" }
         }
     }
 }

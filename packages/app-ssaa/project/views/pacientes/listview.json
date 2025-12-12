@@ -19,8 +19,10 @@
 		"nome_completo",
 		"instituicao",
 		"data_criacao",
-		"status"
+		"status",
+		"commands"
 	],
+	"actions": [ "record_edit", "record_delete" ],
 	"toolbar": [
 		{ "type": "title", "text": "Pacientes" },
 		"add"

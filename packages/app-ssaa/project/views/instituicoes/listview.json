@@ -19,8 +19,10 @@
 		"nome",
 		"nome_abreviado",
 		"data_criacao",
-		"data_expiracao"
+		"data_expiracao",
+		"commands"
 	],
+	"actions": [ "record_edit", "record_delete" ],
 	"toolbar": [
 		{ "type": "title", "text": "Instituições" },
 		"add"

@@ -125,7 +125,7 @@
 			"name": "userSettings",
 			"icon": "userSettings",
 			"tip": "Opções do usuário",
-			"items": [ 
+			"items": [
 				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
 				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
 				{ "type": "separator" },
@@ -166,37 +166,6 @@
 			"action": "delete",
 			"class": "warning"
 		},
-		"listViewMore": {
-			"type": "iconButton",
-			"tip": "Mais ações",
-			"icon": "moreVertical",
-			"items": [
-				{ "label": "Exportar para planilha", "action": "exportCSV" },
-				{ "label": "Exportar PDF", "action": "exportPDF" },
-				{ "type": "separator" },
-				{ "label": "Imprimir listagem", "action": "printRecords" }
-			]
-		},
-		"filterPanel": {
-			"type": "iconButton",
-			"toggle": true,
-			"tip": "Abrir painel de pesquisa",
-			"selectedTip": "Fechar painel de pesquisa",
-			"icon": "filter",
-			"action": "toggleFilterPanel"
-		},
-		"previous": {
-			"type": "iconButton",
-			"icon": "arrowLeft",
-			"tip": "Anterior",
-			"action": "previous"
-		},
-		"next": {
-			"type": "iconButton",
-			"icon": "arrowRight",
-			"tip": "Próximo",
-			"action": "next"
-		},
 		"send": {
 			"type": "textButton",
 			"label": "Enviar",
@@ -218,6 +187,37 @@
 			"type": "textButton",
 			"label": "Editar",
 			"action": "edit"
+		},
+		"previous": {
+			"type": "iconButton",
+			"icon": "arrowLeft",
+			"tip": "Anterior",
+			"action": "previous"
+		},
+		"next": {
+			"type": "iconButton",
+			"icon": "arrowRight",
+			"tip": "Próximo",
+			"action": "next"
+		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{ "label": "Exportar para planilha", "action": "exportCSV" },
+				{ "label": "Exportar PDF", "action": "exportPDF" },
+				{ "type": "separator" },
+				{ "label": "Imprimir listagem", "action": "printRecords" }
+			]
+		},
+		"filterPanel": {
+			"type": "iconButton",
+			"toggle": true,
+			"tip": "Abrir painel de pesquisa",
+			"selectedTip": "Fechar painel de pesquisa",
+			"icon": "filter",
+			"action": "toggleFilterPanel"
 		},
 		"filter": {
 			"type": "textButton",
@@ -275,6 +275,7 @@
 		},
 		"actionToolbar": {
 			"horizontalPadding": 12,
+			"verticalPadding": 0,
 			"gap": 4,
 			"align": "center",
 			"iconButtons": {

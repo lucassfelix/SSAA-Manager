@@ -75,13 +75,13 @@ export interface AppProps {
     images: string;
   };
   shell: ShellProps;
+  menu: MainMenuProps;
+  toolbars: ToolbarThemeProps;
   topControls: TopControlProps;
   controls: {
     [key: string]: ToolbarItem;
   };
   listViews: ListViewsProps;
-  menu: MainMenuProps;
-  toolbars: ToolbarThemeProps;
   forms: {
     fieldSize?: MantineSize;
     verticalGap?: MantineSpacing;

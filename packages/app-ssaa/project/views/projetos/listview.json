@@ -19,9 +19,11 @@
         "instituicao",
         "data_criacao",
         "ultima_edicao",
-        "status"
+        "status",
+		"commands"
     ],
-    "toolbar": [
+    "actions": [ "record_edit", "record_delete" ],
+	"toolbar": [
         { "type": "title", "text": "Projetos" },
         "add"
     ]
