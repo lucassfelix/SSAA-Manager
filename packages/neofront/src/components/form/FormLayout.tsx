@@ -50,6 +50,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
   }
 
   const isFilter = op === 'filter';
+  const isDetail = op === 'detail';
   const layout = isFilter ? viewResult.listView.filterPanel?.layout : viewResult.form.layout;
 
   if (!layout) {
@@ -101,8 +102,8 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
       initialValue,
       width: isFilter ? fieldDef.filterWidth || fieldDef.fieldWidth : fieldDef.fieldWidth,
       size: appCfg.forms.fieldSize,
-      required: isFilter ? undefined : fieldDef.required,
-      readOnly: isFilter ? undefined : fieldDef.readOnly || op === 'detail',
+      required: isFilter || isDetail ? undefined : fieldDef.required,
+      readOnly: isDetail ? true : isFilter ? undefined : fieldDef.readOnly,
       placeholder: isFilter ? fieldDef.filterPlaceholder || fieldDef.placeholder : fieldDef.placeholder,
       enabled: fieldDef.enabled !== undefined ? fieldDef.enabled : true,
       mask: fieldDef.mask,

@@ -5,11 +5,10 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { useState } from 'react';
-import { ComboboxItem, Select, type ComboboxData } from '@mantine/core';
+import { ComboboxItem, InputBase, Select, type ComboboxData } from '@mantine/core';
 
 import { FormFieldProps, useAppUI } from 'context';
 import NfIcon from '@/icon/NfIcon';
-import NfTextField from './TextField';
 
 // #endregion
 
@@ -28,22 +27,18 @@ export default function NfSelectField({ props }: { props: FormFieldProps; }) {
   const [value, setValue] = useState<string | null>(initNorm != null ? String(initNorm) : null);
 
   // If select field is read-only, render as text field showing the option label
-  if (props.readOnly) {
-    const initValue = props.options?.find(o => String(o.value) ===
+  if (readOnly) {
+    const initValue = options?.find(o => String(o.value) ===
       String(initNorm))?.label ?? (initNorm != null ? String(initNorm) : undefined);
     return (
-      <NfTextField
-        props={{
-          name: props.name,
-          dataType: props.dataType,
-          label: props.label,
-          initialValue: initValue,
-          width: props.width,
-          size: props.size,
-          enabled: props.enabled,
-          required: false,
-          readOnly: true,
-        }}
+      <InputBase
+          name= {name}
+          label={label}
+          size={size}
+          readOnly
+          defaultValue={initValue}
+          w={width}
+          className="nf-field nf-readonly"
       />
     );
   }

@@ -18,6 +18,7 @@ import { NfIconProps } from './NfIcon';
 // See https://fonts.google.com/icons
 
 const iconMap = {
+  calendar: "calendar_today",
   chart: "show_chart",
   adjustments: "tune",
   building: "apartment",
