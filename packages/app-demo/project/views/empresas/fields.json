@@ -6,7 +6,7 @@
     "fields": {
         "id": {
             "colStyles": ["semibold", "tabular"],
-            "colTitle": "Nº",
+            "header": "Nº",
             "colWidth": 40,
             "dataType": "string",
             "fieldWidth": 60,
@@ -18,7 +18,7 @@
         },
         "nome": {
             "accessor": "empresa.nome",
-            "colTitle": "Empresa",
+            "header": "Empresa",
             "colWidth": 300,
             "dataType": "string",
             "fieldWidth": "70%",
@@ -39,7 +39,7 @@
         },
         "nome_abreviado": {
             "accessor": "empresa.nome_abreviado",
-            "colTitle": "Abreviado",
+            "header": "Abreviado",
             "colWidth": 100,
             "dataType": "string",
             "fieldWidth": 240,
@@ -64,14 +64,14 @@
             "placeholder": "Opcional"
         },
         "endereco": {
-            "colTitle": "Endereço",
+            "header": "Endereço",
             "colWidth": 180,
             "dataType": "string",
             "fieldWidth": "100%",
             "label": "Endereço"
         },
         "cidade": {
-            "colTitle": "Cidade",
+            "header": "Cidade",
             "colWidth": 100,
             "dataType": "string",
             "fieldWidth": 300,
@@ -80,7 +80,7 @@
         },
         "uf": {
             "colTextAlign": "center",
-            "colTitle": "UF",
+            "header": "UF",
             "colWidth": 40,
             "dataType": "select",
             "emphasizeColumn": true,
@@ -91,7 +91,7 @@
         },
         "status": {
             "colTextAlign": "center",
-            "colTitle": "Status",
+            "header": "Status",
             "colWidth": 100,
             "dataType": "select",
             "defaultValue": 1,

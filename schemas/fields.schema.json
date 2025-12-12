@@ -74,10 +74,6 @@
 
         // Column-specific properties (used only by listview columns)
 
-        "colTitle": {
-          "type": "string",
-          "description": "Column header text displayed in the table."
-        },
         "colWidth": {
           "type": [ "integer", "string" ],
           "description": "Column width in pixels or percentage."
@@ -105,6 +101,14 @@
         "footerIcon": {
           "type": "string",
           "description": "Icon name to show in the column footer cell instead of text."
+        },
+        "header": {
+          "type": "string",
+          "description": "Column header text template. Supports macros: {count}, {unique}, {sum}."
+        },
+        "headerIcon": {
+          "type": "string",
+          "description": "Icon name to show in the column header cell next to the title."
         },
         "render": {
           "description": "Custom rendering configuration for the column.",
@@ -200,7 +204,7 @@
         },
         "op": {
           "type": "string",
-          "enum": ["edit", "email"],
+          "enum": ["edit", "detail", "email"],
           "description": "Operation for 'link' layout. 'edit' opens the record, 'email' opens mailto."
         },
         "format": {

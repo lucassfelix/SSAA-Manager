@@ -344,6 +344,14 @@
               "type": "number",
               "description": "Stroke width of the footer icons."
             },
+            "headerIconsSize": {
+              "type": "number",
+              "description": "Size of the header icons."
+            },
+            "headerIconsStroke": {
+              "type": "number",
+              "description": "Stroke width of the header icons."
+            },
             "trueIcon": {
               "type": "string",
               "description": "Icon used for true boolean values."

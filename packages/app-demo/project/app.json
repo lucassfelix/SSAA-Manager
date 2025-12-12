@@ -256,6 +256,8 @@
 			"booleanIconsStroke": 1.5,
 			"footerIconsSize": 22,
 			"footerIconsStroke": 2,
+			"headerIconsSize": 18,
+			"headerIconsStroke": 2.5,
 			"trueIcon": "circleCheck",
 			"falseIcon": "squareX",
 			"imageRadius": "sm"
@@ -310,7 +312,7 @@
 	},
 	"theme": {
 		"defaultUIScale": 100,
-		"iconFamily": "material",
+		"iconFamily": "tabler",
 		"mainFontFamily": null,
 		"headingsFontFamily": null,
 		"lightMode": {

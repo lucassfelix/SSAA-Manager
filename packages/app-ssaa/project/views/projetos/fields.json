@@ -6,7 +6,7 @@
     "fields": {
         "id": {
             "colStyles": "tabular",
-            "colTitle": "Nº",
+            "header": "Nº",
             "colWidth": 60,
             "dataType": "string",
             "fieldWidth": 60,
@@ -16,7 +16,7 @@
             "readOnly": true
         },
         "nome": {
-            "colTitle": "Nome",
+            "header": "Nome",
             "dataType": "string",
             "fieldWidth": "100%",
             "footer": "{count} projetos",
@@ -26,7 +26,7 @@
             "required": true
         },
         "instituicao": {
-            "colTitle": "Instituição",
+            "header": "Instituição",
             "colWidth": 180,
             "dataType": "select",
             "fieldWidth": 200,
@@ -37,7 +37,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "colTitle": "Entrada",
+            "header": "Entrada",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -48,7 +48,7 @@
         },
         "ultima_edicao": {
             "colStyles": "sm",
-            "colTitle": "Últ. edição",
+            "header": "Últ. edição",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -59,7 +59,7 @@
         },
         "status": {
             "colTextAlign": "center",
-            "colTitle": "Status",
+            "header": "Status",
             "colWidth": 140,
             "dataType": "select",
             "defaultValue": 1,

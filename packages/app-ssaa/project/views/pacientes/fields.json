@@ -6,7 +6,7 @@
     "fields": {
         "id": {
             "colStyles": "tabular",
-            "colTitle": "Nº",
+            "header": "Nº",
             "colWidth": 60,
             "dataType": "string",
             "fieldWidth": 60,
@@ -15,7 +15,7 @@
             "readOnly": true
         },
         "nome_completo": {
-            "colTitle": "Nome completo",
+            "header": "Nome completo",
             "dataType": "string",
             "label": "Nome",
             "placeholder": "Nome completo",
@@ -23,7 +23,7 @@
             "required": true
         },
         "username": {
-            "colTitle": "Usuário",
+            "header": "Usuário",
             "colWidth": 140,
             "dataType": "string",
             "fieldWidth": 200,
@@ -32,7 +32,7 @@
             "required": true
         },
         "tipo_permissao": {
-            "colTitle": "Permissões",
+            "header": "Permissões",
             "colWidth": 160,
             "dataType": "select",
             "defaultValue": "usuario",
@@ -43,7 +43,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "colTitle": "Entrada",
+            "header": "Entrada",
             "colWidth": 120,
             "dataType": "date",
             "fieldWidth": 140,
@@ -53,7 +53,7 @@
             "required": true
         },
         "instituicao": {
-            "colTitle": "Instituição",
+            "header": "Instituição",
             "colWidth": 180,
             "dataType": "select",
             "fieldWidth": 200,
@@ -64,7 +64,7 @@
         },
         "status": {
             "colTextAlign": "center",
-            "colTitle": "Status",
+            "header": "Status",
             "colWidth": 140,
             "dataType": "select",
             "defaultValue": 1,

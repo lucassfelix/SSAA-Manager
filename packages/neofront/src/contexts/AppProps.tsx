@@ -37,6 +37,8 @@ interface ListViewsProps {
     booleanIconsStroke?: number;
     footerIconsSize?: number;
     footerIconsStroke?: number;
+    headerIconsSize?: number;
+    headerIconsStroke?: number;
     trueIcon?: string;
     falseIcon?: string;
     imageRadius?: MantineSize;

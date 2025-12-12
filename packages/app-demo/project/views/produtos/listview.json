@@ -20,8 +20,10 @@
         "descricao",
         "data_entrada",
         "estoque",
-        "valor"
+        "valor",
+		"commands"
     ],
+    "actions": [ "record_edit" ],
     "toolbar": [
         { "type": "title", "text": "Produtos" },
         "add",

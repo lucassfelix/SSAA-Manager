@@ -6,7 +6,7 @@
     "fields": {
         "id": {
             "colStyles": "tabular",
-            "colTitle": "Nº",
+            "header": "Nº",
             "colWidth": "60",
             "dataType": "string",
             "fieldWidth": 60,
@@ -15,7 +15,7 @@
             "readOnly": true
         },
         "nome_completo": {
-            "colTitle": "Nome completo",
+            "header": "Nome completo",
             "colWidth": "100%",
             "dataType": "string",
             "label": "Nome",
@@ -24,7 +24,7 @@
             "required": true
         },
         "nome_abreviado": {
-            "colTitle": "Nome abreviado",
+            "header": "Nome abreviado",
             "colWidth": 200,
             "dataType": "string",
             "label": "Nome abreviado",
@@ -32,7 +32,7 @@
             "required": true
         },
         "username": {
-            "colTitle": "Usuário",
+            "header": "Usuário",
             "colWidth": 140,
             "dataType": "string",
             "fieldWidth": 200,
@@ -41,7 +41,7 @@
             "required": true
         },
         "tipo_permissao": {
-            "colTitle": "Permissões",
+            "header": "Permissões",
             "colWidth": 160,
             "dataType": "select",
             "defaultValue": "usuario",
@@ -51,7 +51,7 @@
             "placeholder": "Selecione uma opção"
         },
         "email": {
-            "colTitle": "E-mail",
+            "header": "E-mail",
             "colWidth": 220,
             "dataType": "string",
             "fieldWidth": "100%",
@@ -60,7 +60,7 @@
             "render": { "layout": "link", "op": "email" }
         },
         "instituicao": {
-            "colTitle": "Instituição",
+            "header": "Instituição",
             "colWidth": 180,
             "dataType": "select",
             "fieldWidth": 200,
@@ -71,7 +71,7 @@
         },
         "status": {
             "colTextAlign": "center",
-            "colTitle": "Status",
+            "header": "Status",
             "colWidth": 140,
             "dataType": "select",
             "defaultValue": 1,
@@ -85,7 +85,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "colTitle": "Criado",
+            "header": "Criado",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -96,7 +96,7 @@
         },
         "data_expiracao": {
             "colStyles": "sm",
-            "colTitle": "Expira",
+            "header": "Expira",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,

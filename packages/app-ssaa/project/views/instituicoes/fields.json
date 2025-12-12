@@ -6,7 +6,7 @@
     "fields": {
         "id": {
             "colStyles": ["semibold", "tabular"],
-            "colTitle": "Nº",
+            "header": "Nº",
             "colWidth": 40,
             "dataType": "string",
             "fieldWidth": 60,
@@ -15,7 +15,7 @@
             "readOnly": true
         },
         "nome": {
-            "colTitle": "Nome completo",
+            "header": "Nome completo",
             "colWidth": "100%",
             "dataType": "string",
             "fieldWidth": "70%",
@@ -25,7 +25,7 @@
             "render": { "layout": "link", "op": "edit" }
         },
         "nome_abreviado": {
-            "colTitle": "Abreviado",
+            "header": "Abreviado",
             "colWidth": 180,
             "dataType": "string",
             "fieldWidth": 240,
@@ -42,7 +42,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "colTitle": "Criado",
+            "header": "Criado",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -53,7 +53,7 @@
         },
         "data_expiracao": {
             "colStyles": "sm",
-            "colTitle": "Expira",
+            "header": "Expira",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,

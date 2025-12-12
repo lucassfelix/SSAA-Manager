@@ -57,11 +57,12 @@ export interface UnifiedFieldProps {
 
   colStyles?: colStyles | colStyles[];
   colTextAlign?: HorizAlignmentType;
-  colTitle?: string;
   colWidth?: number | string;
   emphasizeColumn?: boolean;
   footer?: string;
   footerIcon?: string;
+  header?: string;
+  headerIcon?: string;
   render?: FieldRender;
   wrapperWidth?: number;
 

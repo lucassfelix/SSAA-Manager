@@ -55,7 +55,7 @@ function getColumns(
 
   const tblAppCfg = appCfg.listViews.table ?? {};
   const tableProps = tblCfg.config as ListViewProps["config"];
-const navigate = useNavigate();
+  const navigate = useNavigate();
   // Resolve options from table reference
   function resolveOptions(optionsRef?: FieldOptionsRef): DataColumnOptions[] | undefined {
     if (!optionsRef) {
@@ -118,6 +118,27 @@ const navigate = useNavigate();
       }
       if (fieldDef.footer) {
         return replaceMacros(fieldDef.footer, accessor, records);
+      }
+    }
+
+    function renderHeader(): ReactNode | undefined {
+      if (!tableProps?.header) {
+        return undefined;
+      }
+      if (fieldDef.headerIcon) {
+        return ((name: string): ReactNode => {
+          return (
+            <Box mb={-4}>
+              <NfIcon icon={name}
+                size={tblAppCfg.headerIconsSize}
+                stroke={tblAppCfg.headerIconsStroke}
+              />
+            </Box>
+          );
+        })(fieldDef.headerIcon);
+      }
+      if (fieldDef.header) {
+        return replaceMacros(fieldDef.header, accessor, records);
       }
     }
 
@@ -266,7 +287,7 @@ const navigate = useNavigate();
       const idVal = String(getValueByPath(record, idAccessor) ?? '');
 
       function handleAction(action: string): void {
-        switch(action) {
+        switch (action) {
           case 'edit':
             navigate(`?v=${currentView}&op=edit&${idAccessor}=${idVal}`);
             break;
@@ -332,7 +353,6 @@ const navigate = useNavigate();
 
     return {
       accessor,
-      title: fieldDef.colTitle ?? colName,
       width: fieldDef.colWidth ?? undefined,
       textAlign: fieldDef.colTextAlign ?? 'left',
       ellipsis: true,
@@ -340,6 +360,7 @@ const navigate = useNavigate();
       footerClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
       cellsClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
       render: renderCell(),
+      title: renderHeader(),
       footer: renderFooter(),
     } as DataTableColumn;
   }).filter((col) => col !== null);
