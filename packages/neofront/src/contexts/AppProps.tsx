@@ -101,6 +101,8 @@ export interface AppProps {
     headingsFontFamily?: string | null;
     lightMode: ThemeModeProps;
     darkMode: ThemeModeProps;
+    iconMapMaterial?: { [key: string]: string };
+    iconMapTabler?: { [key: string]: string };
   };
 }
 

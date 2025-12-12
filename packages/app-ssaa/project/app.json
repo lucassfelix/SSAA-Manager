@@ -78,7 +78,7 @@
 			"name": "userSettings",
 			"icon": "userSettings",
 			"tip": "Opções do usuário",
-			"items": [ 
+			"items": [
 				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
 				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
 				{ "type": "separator" },
@@ -153,7 +153,7 @@
 		"textButtons": {
 			"size": "sm",
 			"radius": 6,
-			"fontSize": "0.8rem",
+			"fontSize": "0.82rem",
 			"fontWeight": 700,
 			"uppercase": true
 		},
@@ -208,6 +208,9 @@
 		"darkMode": {
 			"expandedLogo": "logo-ssaa-dark.svg",
 			"collapsedLogo": "logo-ssaa-dark.svg"
+		},
+		"iconMapMaterial": {
+			"dental": "dentistry"
 		}
 	}
 }

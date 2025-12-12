@@ -522,6 +522,22 @@
         "darkMode": {
           "description": "Dark theme specific settings.",
           "$ref": "#/definitions/modeProps"
+        },
+        "iconMapMaterial": {
+          "type": "object",
+          "description": "Mapping of custom icon names to Material Syymbol icon names for this project.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Name of the Material Syymbol icon."
+          }
+        },
+        "iconMapTabler": {
+          "type": "object",
+          "description": "Mapping of custom icon names to Tabler icon names for this project.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Name of the Tabler icon."
+          }
         }
       }
     }

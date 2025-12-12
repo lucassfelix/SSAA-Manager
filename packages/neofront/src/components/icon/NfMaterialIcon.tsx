@@ -1,5 +1,5 @@
 //
-// Material symbol component wrapper.
+// Wrapper for Material Symbol icons.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -7,6 +7,7 @@
 import { JSX } from 'react';
 import 'material-symbols';
 
+import { useAppUI } from 'context';
 import { Box } from '@mantine/core';
 import { NfIconProps } from './NfIcon';
 
@@ -22,7 +23,6 @@ const iconMap = {
   building: "apartment",
   buildings: "domain",
   circleCheck: "check_circle",
-  dental: "dentistry",
   edit: "edit_square",
   filter: "filter_list",
   menu: "menu",
@@ -50,15 +50,15 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
     return <></>;
   }
 
+  const { appCfg } = useAppUI();
   const { icon, size, color, filled, style, stroke } = props;
 
   const toSnake = (str: string) => str.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
-  const iconName = iconMap[icon] ?? toSnake(icon);
+  const iconName = {...iconMap, ...appCfg.theme.iconMapMaterial}[icon] ?? toSnake(icon);
   const strokeSize = ((s?: number) => typeof s === 'number' ? s * 250 : 400)(stroke);
-  // console.log('strokeSize', stroke, strokeSize);
+
   return (
     <>
-      {/* <style>{cssPrefix + strokeSize + cssSuffix}</style> */}
       <Box
         className={`material-symbols${filled ? '' : '-outlined'}`}
         component="span"

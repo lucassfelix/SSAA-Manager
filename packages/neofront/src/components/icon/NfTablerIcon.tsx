@@ -1,5 +1,5 @@
 //
-// Tabler icon component wrapper.
+// Wrapper for Tabler icons.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -8,11 +8,12 @@ import { ComponentType, JSX } from "react";
 import { type IconProps, IconCircleOff } from "@tabler/icons-react";
 import * as Tabler from '@tabler/icons-react';
 
+import { useAppUI } from "context";
 import { NfIconProps } from "./NfIcon";
 
 // #endregion
 
-// #region -------------------------------------------------------------------------------- Icon map
+// #region ------------------------------------------------------------------------------- Constants
 
 // See https://tabler.io/icons
 
@@ -37,15 +38,15 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
     return <></>;
   }
 
+  const { appCfg } = useAppUI();
   const { icon, size, stroke, color, filled, style } = props;
 
-  // Prefer explicit mapping; otherwise try to derive Tabler export name automatically
   let Comp: ComponentType<IconProps> | undefined;
-
-  const mappedName = `Icon${iconMap[icon]}`;
+  const mappedName = `Icon${{...iconMap, ...appCfg.theme.iconMapTabler}[icon]}`;
   if (mappedName) {
     Comp = (Tabler as any)[mappedName] as ComponentType<IconProps> | undefined;
   }
+
   if (!Comp) {
     const toPascal = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
     const base = `Icon${toPascal(icon)}`;

@@ -70,7 +70,7 @@ header h4 {
   background-color: var(--mantine-color-red-6);
 }
 
-/* Badge text style fix (for Roboto font) */
+/* Badge text style adjustments (for Roboto font) */
 .mantine-Badge-root span {
   padding-top: 0.1rem;
 }
@@ -112,9 +112,10 @@ header h4 {
   border-bottom: 1px solid var(--mantine-color-gray-8);
 }
 
-/* Button text style fix (for Roboto font) */
+/* Button text style adjustments (for Roboto font) */
 .mantine-Button-inner span {
-  padding-top: 0.2rem;
+  padding-top: 0.1rem;
+  letter-spacing: 0.02rem;
 }
 
 /* #endregion */
