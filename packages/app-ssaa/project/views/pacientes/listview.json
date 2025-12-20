@@ -13,7 +13,8 @@
 	},
 	"strings": {
 		"singular": "paciente",
-		"plural": "pacientes"
+		"plural": "pacientes",
+		"therecord": "o/a paciente"
 	},
 	"columns": [
 		"nome_completo",

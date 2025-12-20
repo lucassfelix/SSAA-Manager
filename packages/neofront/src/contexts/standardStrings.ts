@@ -10,21 +10,27 @@ export const defaultStrings = {
     yes: "Yes",
     defaultDateFormat: "MM/DD/YYYY",
     decimalSeparator: ".",
-    thousandSeparator: ","
+    thousandSeparator: ",",
+    deleteItemTitle: "Delete item",
+    deleteItemConfirm: "Are you sure you want to delete {name}?"
   },
   "pt-br": {
     no: "Não",
     yes: "Sim",
     defaultDateFormat: "DD/MM/YYYY",
     decimalSeparator: ",",
-    thousandSeparator: "."
+    thousandSeparator: ".",
+    deleteItemTitle: "Excluir item",
+    deleteItemConfirm: "Tem certeza de que deseja excluir {name}?"
   },
   "es-419": {
     no: "No",
     yes: "Sí",
     defaultDateFormat: "DD/MM/YYYY",
     decimalSeparator: ",",
-    thousandSeparator: "."
+    thousandSeparator: ".",
+    deleteItemTitle: "Borrar elemento",
+    deleteItemConfirm: "¿Está seguro de que desea borrar {name}?"
   }
 };
 

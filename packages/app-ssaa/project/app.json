@@ -6,7 +6,8 @@
 	"projectId": "ssaa-smile-manager",
 	"strings": {
 		"appVersion": "0.10.0",
-		"appTitle": "{pageName} | SSAA"
+		"appTitle": "{pageName} | SSAA",
+	    "deleteItemConfirm": "Deseja excluir {therecord} {name}?"
 	},
 	"errorStrings": {
 		"noRecordsText": "Sem itens a exibir"
@@ -156,6 +157,13 @@
 			"label": "Cancelar",
 			"action": "cancel"
 		},
+		"delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"class": "error",
+			"default": true
+		},
 		"close": {
 			"type": "textButton",
 			"label": "Fechar",
@@ -230,6 +238,15 @@
 				"iconSize": 22
 			}
 		},
+		"modalToolbar": {
+			"horizontalPadding": 0,
+			"verticalPadding": "xs",
+			"gap": 16,
+			"upperBorder": true,
+			"texts": {
+				"size": "sm"
+			}
+		},
 		"pagination": {
 			"defaultPageSize": 10,
 			"pageSizes": [ 5, 10, 20, 50, 100 ],
@@ -240,7 +257,8 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
-		}
+		},
+		"deleteControls": [ "delete", "cancel" ]
 	},
 	"forms": {
 		"fieldSize": "sm",

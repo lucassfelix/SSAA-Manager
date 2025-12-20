@@ -29,6 +29,7 @@ export function setDocumentTitle(appCfg: AppProps, currentView: string,
   const op = searchParams.get('op');
 
   switch (op) {
+    case 'detail':
     case 'edit':
       if (viewResult?.data) {
         const nameAccessor = listView?.config?.nameAccessor ?? 'name';
@@ -44,8 +45,6 @@ export function setDocumentTitle(appCfg: AppProps, currentView: string,
       if (viewResult?.form.add.title) {
         pageName = viewResult?.form.add.title;
       }
-      break;
-    case 'detail':
       break;
     default:  // listView
       const viewTitle = listView?.toolbar?.find((it) => it.type === 'title');

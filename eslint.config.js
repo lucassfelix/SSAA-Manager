@@ -27,15 +27,23 @@ export default defineConfig([
 
       "@stylistic/member-delimiter-style": "warn",
       "@stylistic/semi": ["warn", "always"],
-      "@stylistic/curly-newline": ["warn", {
-        "IfStatementConsequent": "always",
-        "IfStatementAlternate": "always",
-        "DoWhileStatement": "always",
-        "ForInStatement": "always",
-        "ForOfStatement": "always",
-        "ForStatement": "always",
-        "WhileStatement": "always"
-      }],
+      "@stylistic/curly-newline": [
+        "warn", {
+          "FunctionDeclaration": "always",
+          "FunctionExpression": "always",
+          "ArrowFunctionExpression": { "consistent": true },
+          "IfStatementConsequent": "always",
+          "IfStatementAlternative": "always",
+          "DoWhileStatement": "always",
+          "ForInStatement": "always",
+          "ForOfStatement": "always",
+          "ForStatement": "always",
+          "SwitchStatement": "always",
+          "WhileStatement": "always",
+          "TryStatementBlock": "always",
+          "TryStatementHandler": "always"
+        }
+      ],
     },
   }
 ]);

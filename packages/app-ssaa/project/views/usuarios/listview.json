@@ -13,7 +13,8 @@
 	},
 	"strings": {
 		"singular": "usuário",
-		"plural": "usuários"
+		"plural": "usuários",
+		"therecord": "o usuário"
 	},
 	"columns": [
 		"nome_completo",

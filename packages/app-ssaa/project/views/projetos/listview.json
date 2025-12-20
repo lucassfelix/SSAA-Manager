@@ -12,7 +12,8 @@
     },
     "strings": {
         "singular": "projeto",
-        "plural": "projetos"
+        "plural": "projetos",
+        "therecord": "o projeto"
     },
     "columns": [
         "nome",

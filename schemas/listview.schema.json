@@ -43,8 +43,13 @@
         "plural": {
           "type": "string",
           "description": "Plural form of the entity name."
+        },
+        "therecord": {
+          "type": "string",
+          "description": "Phrase used to refer to a single record (e.g. 'the user')."
         }
-      }
+      },
+      "required": [ "singular", "plural", "therecord" ]
     },
     "config": {
       "type": "object",
@@ -91,7 +96,10 @@
       }
     },
     "toolbar": {
-      "$ref": "#/definitions/toolbar"
+      "description": "Toolbar configuration for the listview.",
+      "items": {
+        "$ref": "./common.schema.json#/definitions/toolbarItem"
+      }
     },
     "filterPanel": {
       "type": "object",
@@ -121,17 +129,5 @@
     "config",
     "strings",
     "columns"
-  ],
-
-  // Definitions for reusable components
-
-  "definitions": {
-    "toolbar": {
-      "type": "array",
-      "description": "Toolbar configuration for the listview.",
-      "items": {
-        "$ref": "./common.schema.json#/definitions/toolbarItem"
-      }
-    }
-  }
+  ]
 }

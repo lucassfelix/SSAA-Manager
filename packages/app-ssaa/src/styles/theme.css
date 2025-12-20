@@ -122,6 +122,10 @@ tr:hover .nf-actions-toolbar {
   border-bottom: 1px solid var(--mantine-color-gray-8);
 }
 
+.nf-Button-filled.nf-error {
+  background-color: var(--mantine-color-red-6);
+}
+
 /* Button text style adjustments (for Roboto font) */
 .mantine-Button-inner span {
   padding-top: 0.1rem;

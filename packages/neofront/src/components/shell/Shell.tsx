@@ -219,7 +219,11 @@ export default function Shell(): JSX.Element {
     <Box p={16} h="100%" miw={800}>
       {viewResult?.listView ? (
         viewResult.listView.type === 'listView' ?
-          (op ? <NfForm op={op} /> : <NfListView />) : (
+          (op ? (
+            <NfForm op={op} />
+          ) : (
+            <NfListView />
+          )) : (
             <ErrorPage
               message={errStr.noViewType.replace("{type}", viewResult.listView.type)}
               image={appCfg.errorImages?.noViewType || "fruit_basket"}

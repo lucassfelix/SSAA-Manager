@@ -377,7 +377,7 @@
               "enum": [ "top", "left", "none" ]
             },
             "verticalPadding": {
-              "type": "number",
+              "type": [ "string", "number" ],
               "description": "Vertical padding for the filter panels."
             },
             "transitionDuration": {
@@ -392,6 +392,10 @@
         },
         "actionToolbar": {
           "description": "Settings for the action toolbar used for individual records. Overrides the toolbar object.",
+          "$ref": "#/definitions/toolbar"
+        },
+        "modalToolbar": {
+          "description": "Settings for the modal toolbar used for record actions. Overrides the toolbar object.",
           "$ref": "#/definitions/toolbar"
         },
         "pagination": {
@@ -440,11 +444,15 @@
               "description": "Scroll threshold in pixels to trigger loading more items."
             }
           }
+        },
+        "deleteControls": {
+          "description": "Toolbar configuration for the delete message box.",
+          "items": {
+            "$ref": "./common.schema.json#/definitions/toolbarItem"
+          }
         }
       },
-      "required": [
-        "defaultList"
-      ]
+      "required": [ "defaultList", "deleteControls" ]
     },
     "forms": {
       "type": "object",
@@ -888,7 +896,7 @@
           "description": "Horizontal padding for the toolbar."
         },
         "verticalPadding": {
-          "type": "number",
+          "type": [ "string", "number" ],
           "description": "Vertical padding for the toolbar."
         },
         "gap": {
@@ -1001,11 +1009,11 @@
           "additionalProperties": false,
           "properties": {
             "size": {
-              "type": "number",
+              "type": [ "string", "number" ],
               "description": "Font size of the text."
             },
             "fontWeight": {
-              "type": "number",
+              "type": [ "string", "number" ],
               "description": "Font weight of the text."
             },
             "width": {

@@ -6,7 +6,7 @@
 
 import "mantine-datatable/styles.css";
 
-import { JSX, ReactNode } from "react";
+import { JSX, ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { Anchor, Badge, Box, Image, NumberFormatter, Stack, Text } from "@mantine/core";
@@ -19,6 +19,7 @@ import NfIcon from '@/icon/NfIcon';
 import { getValueByPath, replaceMacros, getStyles } from "./datatableUtils";
 import { applyMask, MaskSpec } from "@/form/fields/createMask";
 import NfToolbar from "@/toolbar/Toolbar";
+import MessageBox from "@/messageBox/MessageBox";
 
 // #endregion
 
@@ -46,6 +47,7 @@ function getColumns(
   currentView: string,
   data: Record<string, unknown[]>,
   fields: Record<string, UnifiedFieldProps>,
+  onRequestDelete: (record: Record<string, any>) => void,
 ): DataTableColumn[] {
 
   if (!Array.isArray(tblCfg.columns)) {
@@ -288,13 +290,16 @@ function getColumns(
       const idAccessor = tblCfg.config.idAccessor ?? tableProps.idAccessor ?? 'id';
       const idVal = String(getValueByPath(record, idAccessor) ?? '');
 
-      function handleAction(action: string): void {
+      function handleAction(action: string): void | JSX.Element {
         switch (action) {
           case 'edit':
             navigate(`?v=${currentView}&op=edit&${idAccessor}=${idVal}`);
             break;
           case 'detail':
             navigate(`?v=${currentView}&op=detail&${idAccessor}=${idVal}`);
+            break;
+          case 'delete':
+            onRequestDelete(record);
             break;
           default:
             console.log(`DataTable: Action "${action}" clicked for record ID ${idVal}.`);
@@ -377,6 +382,7 @@ export default function NfDataTable(): JSX.Element {
   // #region Hooks and context
 
   const { userSettings, appCfg, viewResult, currentView } = useAppUI();
+  const [deleteRequest, setDeleteRequest] = useState<Record<string, any> | null>(null);
 
   const tblAppCfg = appCfg.listViews.table ?? {};
   const isDark = userSettings.dark;
@@ -384,44 +390,66 @@ export default function NfDataTable(): JSX.Element {
   const tableCfg = (table.config as ListViewProps["config"]) ?? {};
   const fields = viewResult.fields?.fields ?? {};
 
+  function replaceVars(str: string, record: Record<string, any>): string {
+    return str
+      .replace("{name}", record[tableCfg.nameAccessor!])
+      .replace("{id}", record[tableCfg.idAccessor!])
+      .replace("{therecord}", table.strings.therecord)
+      .replace("{singular}", table.strings.singular)
+      ;
+  }
+
   // #endregion
 
   return (
-    <DataTable
+    <>
+      <DataTable
 
-      // Invariant properties
-      highlightOnHover={true}
-      verticalAlign="center"
-      height="100%"
+        // Invariant properties
+        highlightOnHover={true}
+        verticalAlign="center"
+        height="100%"
 
-      // Global dynamic properties
-      striped={tblAppCfg.striped!}
-      withTableBorder={tblAppCfg.bordered!}
-      withRowBorders={tblAppCfg.rowBorders!}
-      withColumnBorders={tblAppCfg.colBorders!}
-      borderRadius={tblAppCfg.borderRadius ?? 'sm'}
-      horizontalSpacing={tblAppCfg.horizontalSpacing ?? 'xs'}
-      verticalSpacing={tblAppCfg.verticalSpacing ?? 'xs'}
-      shadow={tblAppCfg.shadow ?? "none"}
-      noRecordsText={appCfg.errorStrings.noRecordsText}
+        // Global dynamic properties
+        striped={tblAppCfg.striped!}
+        withTableBorder={tblAppCfg.bordered!}
+        withRowBorders={tblAppCfg.rowBorders!}
+        withColumnBorders={tblAppCfg.colBorders!}
+        borderRadius={tblAppCfg.borderRadius ?? 'sm'}
+        horizontalSpacing={tblAppCfg.horizontalSpacing ?? 'xs'}
+        verticalSpacing={tblAppCfg.verticalSpacing ?? 'xs'}
+        shadow={tblAppCfg.shadow ?? "none"}
+        noRecordsText={appCfg.errorStrings.noRecordsText}
 
-      // Row class names based on rules
+        // Row class names based on rules
 
-      rowClassName={row => {
-        if (!tableCfg.rowClassAccessor) {
-          return '';
-        }
-        const rc = getValueByPath(row, tableCfg.rowClassAccessor) ?? '';
-        return `${currentView}-${rc}`;
-      }}
+        rowClassName={row => {
+          if (!tableCfg.rowClassAccessor) {
+            return '';
+          }
+          const rc = getValueByPath(row, tableCfg.rowClassAccessor) ?? '';
+          return `${currentView}-${rc}`;
+        }}
 
-      // Dynamic properties per table
+        // Dynamic properties per table
 
-      noHeader={!tableCfg.header}
-      columns={getColumns(appCfg, table, isDark, viewResult.data[currentView] ?? [],
-        currentView, viewResult.data, fields)}
-      records={(viewResult?.data[currentView] ?? [])}
-    />
+        noHeader={!tableCfg.header}
+        columns={getColumns(appCfg, table, isDark, viewResult.data[currentView] ?? [],
+          currentView, viewResult.data, fields, (rec) => setDeleteRequest(rec))}
+        records={(viewResult?.data[currentView] ?? [])}
+      />
+
+      {/* Delete action */}
+      {deleteRequest ? (
+        <MessageBox
+          title={appCfg.strings.deleteItemTitle}
+          message={replaceVars(appCfg.strings.deleteItemConfirm ?? "", deleteRequest)}
+          items={appCfg.listViews.deleteControls}
+          onClose={() => setDeleteRequest(null)}
+          onDelete={() => {console.log("delete", deleteRequest);}}
+        />
+      ) : null}
+    </>
   );
 
 }

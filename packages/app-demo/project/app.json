@@ -292,7 +292,8 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
-		}
+		},
+		"deleteControls": [ "send", "cancel" ]
 	},
 	"forms": {
 		"fieldSize": "sm",

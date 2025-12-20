@@ -131,10 +131,9 @@ export default function NfForm(props: FormProps): JSX.Element {
   // Handler for toolbar actions
   const handleAction = (action: string) => {
     switch (action) {
-      case 'cancel': {
+      case 'cancel':
         navigateToListView();
         break;
-      }
       case 'send':
         // TODO: fetch the current field values
         console.log(`Action: ${action}`);

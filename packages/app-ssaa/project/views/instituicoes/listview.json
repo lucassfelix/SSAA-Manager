@@ -13,7 +13,8 @@
 	},
 	"strings": {
 		"singular": "instituição",
-		"plural": "instituições"
+		"plural": "instituições",
+		"therecord": "a instituição"
 	},
 	"columns": [
 		"nome",
