@@ -143,7 +143,6 @@ tr:hover .nf-actions-toolbar {
   transition: opacity 0s;
 }
 
-
 /* #endregion */
 
 /* #region ------------------------------------------------------------------ Form element styles */
@@ -187,6 +186,21 @@ tr:hover .nf-actions-toolbar {
 }
 .nf-dark .mantine-Accordion-control {
   border-bottom: 1px solid var(--mantine-color-gray-8);
+}
+
+/* #region ----------------------------------------------------------- Message box element styles */
+
+/* Critical action button */
+.mantine-Modal-body .nf-Button-filled.nf-critical {
+  background-color: var(--mantine-color-red-6);
+}
+
+/* Warning icon color */
+.nf-light .mantine-Modal-body svg.nf-warning {
+  color: var(--mantine-color-orange-6);
+}
+.nf-dark .mantine-Modal-body svg.nf-warning {
+  color: var(--mantine-color-orange-4);
 }
 
 /* #endregion */

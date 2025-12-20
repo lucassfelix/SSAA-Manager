@@ -73,7 +73,7 @@
         "commands": {
             "headerIcon": "tools",
             "colTextAlign": "center",
-            "colWidth": 60,
+            "colWidth": 80,
             "render": { "layout": "actions" }
         }
     }

@@ -6,7 +6,8 @@
 	"projectId": "neofront-demo-app",
 	"strings": {
 		"appVersion": "0.17.2",
-		"appTitle": "{pageName} | NeoFront {version}"
+		"appTitle": "{pageName} | NeoFront {version}",
+		"deleteItemConfirm": "Tem certeza que você deseja excluir {therecord} {name}?"
 	},
 	"errorStrings": {
 		"noRecordsText": "Não há itens a serem exibidos"
@@ -177,6 +178,13 @@
 			"label": "Cancelar",
 			"action": "cancel"
 		},
+		"delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"class": "critical",
+			"default": true
+		},
 		"close": {
 			"type": "textButton",
 			"label": "Fechar",
@@ -282,6 +290,24 @@
 				"iconSize": 22
 			}
 		},
+		"messageBox": {
+			"icon": {
+				"size": 48,
+				"stroke": 1.5,
+				"filled": false
+			},
+			"toolbar": {
+				"align": "right",
+				"horizontalPadding": 0,
+				"verticalPadding": "xs",
+				"gap": 16,
+				"upperBorder": false,
+				"texts": {
+					"size": "sm"
+				}
+			},
+			"deleteControls": [ "delete", "cancel" ]
+		},
 		"pagination": {
 			"defaultPageSize": 10,
 			"pageSizes": [ 5, 10, 20, 50, 100 ],
@@ -292,8 +318,7 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
-		},
-		"deleteControls": [ "send", "cancel" ]
+		}
 	},
 	"forms": {
 		"fieldSize": "sm",

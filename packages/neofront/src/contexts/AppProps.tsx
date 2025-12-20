@@ -45,8 +45,15 @@ interface ListViewsProps {
   };
   filterToolbar?: ToolbarThemeProps;
   actionToolbar?: ToolbarThemeProps;
-  modalToolbar: ToolbarThemeProps;
-  deleteControls: ToolbarItem[];
+  messageBox: {
+    icon?: {
+      size?: MantineSize;
+      stroke?: number;
+      filled?: boolean;
+    };
+    toolbar: ToolbarThemeProps;
+    deleteControls: ToolbarItem[];
+  };
   filterPanel?: {
     labelPosition?: 'top' | 'none';
     verticalPadding?: number;

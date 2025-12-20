@@ -13,7 +13,8 @@
 	},
 	"strings": {
 		"singular": "empresa",
-		"plural": "empresas"
+		"plural": "empresas",
+		"therecord": "a empresa"
 	},
 	"columns": [
 		"id",

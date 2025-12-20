@@ -22,12 +22,6 @@ export interface ToolbarThemeProps {
   upperBorder?: boolean;
   align?: 'left' | 'center' | 'right' | 'apart';
   position?: 'top' | 'bottom' | 'right';
-  icon?: {
-    size?: number | string;
-    stroke?: number;
-    filled?: boolean;
-    className?: string;
-  };
   iconButtons?: {
     rotateSelected?: boolean;
     size?: number | string;

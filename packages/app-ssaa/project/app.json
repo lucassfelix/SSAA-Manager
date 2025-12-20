@@ -7,7 +7,7 @@
 	"strings": {
 		"appVersion": "0.10.0",
 		"appTitle": "{pageName} | SSAA",
-	    "deleteItemConfirm": "Deseja excluir {therecord} {name}?"
+		"deleteItemConfirm": "Deseja excluir {therecord} {name}?"
 	},
 	"errorStrings": {
 		"noRecordsText": "Sem itens a exibir"
@@ -238,18 +238,23 @@
 				"iconSize": 22
 			}
 		},
-		"modalToolbar": {
-			"align": "right",
-			"horizontalPadding": 0,
-			"verticalPadding": "xs",
-			"gap": 16,
-			"upperBorder": false,
-			"texts": {
-				"size": "sm"
-			},
+		"messageBox": {
 			"icon": {
-				"size": 32
-			}
+				"size": 32,
+				"stroke": 1.5,
+				"filled": false
+			},
+			"toolbar": {
+				"align": "right",
+				"horizontalPadding": 0,
+				"verticalPadding": "xs",
+				"gap": 16,
+				"upperBorder": false,
+				"texts": {
+					"size": "sm"
+				}
+			},
+			"deleteControls": [ "delete", "cancel" ]
 		},
 		"pagination": {
 			"defaultPageSize": 10,
@@ -261,8 +266,7 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
-		},
-		"deleteControls": [ "delete", "cancel" ]
+		}
 	},
 	"forms": {
 		"fieldSize": "sm",

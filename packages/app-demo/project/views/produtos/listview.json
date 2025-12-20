@@ -12,7 +12,8 @@
     },
     "strings": {
         "singular": "produto",
-        "plural": "produtos"
+        "plural": "produtos",
+        "therecord": "o produto"
     },
     "columns": [
         "id",
@@ -23,7 +24,7 @@
         "valor",
 		"commands"
     ],
-    "actions": [ "record_edit" ],
+    "actions": [ "record_edit", "record_delete" ],
     "toolbar": [
         { "type": "title", "text": "Produtos" },
         "add",

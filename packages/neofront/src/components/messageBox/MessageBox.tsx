@@ -36,7 +36,8 @@ export default function MessageBox(props: NfModalProps): JSX.Element {
   const { title, message, items, icon, iconClass, onClose, onDelete } = props;
   const [opened, { open, close }] = useDisclosure(false);
   const { appCfg } = useAppUI();
-  const cfg = appCfg.listViews.modalToolbar;
+  const cfg = appCfg.listViews.messageBox.toolbar;
+  const iconCfg = appCfg.listViews.messageBox.icon;
 
   // Open modal when mounted
   useEffect(() => { open(); }, []);
@@ -58,13 +59,13 @@ export default function MessageBox(props: NfModalProps): JSX.Element {
       onClose={() => { handleAction('close'); }}
     >
       <>
-        <Group mt="sm" mb="lg" >
+        <Group wrap="nowrap" mt="sm" mb="lg" >
           {icon && (
             <NfIcon
               icon={icon}
-              size={cfg.icon?.size || 32}
-              stroke={cfg.icon?.stroke}
-              filled={cfg.icon?.filled}
+              size={iconCfg?.size || 32}
+              stroke={iconCfg?.stroke}
+              filled={iconCfg?.filled}
               className={iconClass}
             />
           )}
