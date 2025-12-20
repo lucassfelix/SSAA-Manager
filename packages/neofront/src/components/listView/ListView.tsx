@@ -8,27 +8,32 @@ import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Stack } from "@mantine/core";
 
-import { useAppUI } from "context";
+import { ListViewProps, useAppUI } from "context";
 import NfToolbar, { ToolbarItem } from "@/toolbar/Toolbar";
 import NfDataTable from "@/listView/DataTable";
 import FilterPanel from "@/listView/FilterPanel";
 
 // #endregion
 
+interface NfListViewProps {
+  viewSchema: ListViewProps;
+  records: Record<string, any>[];
+};
+
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfListView(): JSX.Element {
+export default function NfListView(props: NfListViewProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { appCfg, viewResult, userSettings, setUserSettings, currentView } = useAppUI();
-  const listViewSchema = viewResult?.listView;
-  const withPanel = listViewSchema?.filterPanel;
+  const { appCfg, userSettings, setUserSettings, currentView } = useAppUI();
+  const { viewSchema, records } = props;
+  const withPanel = viewSchema?.filterPanel;
   const navigate = useNavigate();
   const filterOpen = userSettings.views?.[currentView!]?.filterPanelOpen ?? false;
 
   // Map toolbar items: strings to appCfg.lists.buttons, objects as-is
-  const toolbarItems: ToolbarItem[] = (listViewSchema?.toolbar ?? []).map(
+  const toolbarItems: ToolbarItem[] = (viewSchema?.toolbar ?? []).map(
     (item: string | ToolbarItem) => {
       if (typeof item === 'string') {
         const btn = appCfg.controls?.[item];
@@ -95,14 +100,14 @@ export default function NfListView(): JSX.Element {
 
       {/* Filter panel */}
       <FilterPanel
-        schema={withPanel ? listViewSchema.filterPanel : undefined}
+        schema={withPanel ? viewSchema.filterPanel : undefined}
         open={filterOpen}
         onAction={handleAction}
       />
 
       {/* Data table (the Box assures smooth transition when the filter panel is present) */}
       <Box style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
-        <NfDataTable />
+        <NfDataTable viewSchema={viewSchema} records={records} />
       </Box>
 
     </Stack>

@@ -59,7 +59,7 @@
             "placeholder": "Preencha o e-mail",
             "render": { "layout": "link", "op": "email" }
         },
-        "instituicao": {
+        "instituicao_id": {
             "header": "Instituição",
             "colWidth": 180,
             "dataType": "select",

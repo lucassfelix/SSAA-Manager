@@ -222,7 +222,10 @@ export default function Shell(): JSX.Element {
           (op ? (
             <NfForm op={op} />
           ) : (
-            <NfListView />
+            <NfListView
+              viewSchema={viewResult.listView}
+              records={viewResult.data[currentView]}
+            />
           )) : (
             <ErrorPage
               message={errStr.noViewType.replace("{type}", viewResult.listView.type)}

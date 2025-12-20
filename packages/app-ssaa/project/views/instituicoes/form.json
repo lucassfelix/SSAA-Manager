@@ -3,7 +3,7 @@
     "comment": "Generated manually",
     "name": "instituicoes",
     "language": "ptBR",
-    "layout": {
+    "__old_layout": {
         "sections": [
             {
                 "initialState": "noheader",
@@ -17,7 +17,7 @@
             }
         ]
     },
-    "__layout": {
+    "layout": {
         "tabs": [
             {
                 "label": "Cadastro",
@@ -36,41 +36,28 @@
             },
             {
                 "label": "Usuários",
-                "sections": [
-                    {
-                        "initialState": "noheader",
-                        "columns": [
-                            {
-                                "type": "listView",
-                                "name": "usuarios",
-                                "config": {
-                                    "header": true,
-                                    "footer": false,
-                                    "idAccessor": "id",
-                                    "nameAccessor": "nome_abreviado",
-                                    "rowClassAccessor": "none"
-                                },
-                                "strings": {
-                                    "singular": "usuário",
-                                    "plural": "usuários",
-                                    "therecord": "o usuário"
-                                },
-                                "columns": [
-                                    "nome_abreviado",
-                                    "data_criacao",
-                                    "data_expiracao",
-                                    "status",
-                                    "commands"
-                                ],
-                                "actions": [ "record_edit", "record_delete" ],
-                                "toolbar": [
-                                    { "type": "title", "text": "Usuários" },
-                                    "add"
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                "listView": {
+                    "name": "usuarios",
+                    "config": {
+                        "header": true,
+                        "idAccessor": "id",
+                        "nameAccessor": "nome_abreviado",
+                        "rowClassAccessor": "none"
+                    },
+                    "strings": {
+                        "singular": "usuário",
+                        "plural": "usuários",
+                        "therecord": "o usuário"
+                    },
+                    "columns": [
+                        "nome_completo",
+                        "nome_abreviado",
+                        "data_criacao",
+                        "data_expiracao",
+                        "status"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ]
+                }
             }
         ]
     },

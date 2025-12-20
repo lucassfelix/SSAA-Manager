@@ -13,6 +13,7 @@ import Section, { SectionSchema } from "@/form/Section";
 import ErrorPage from "@/errorpage/ErrorPage";
 import { getValueByPath } from "@/listView/datatableUtils";
 
+import { FormLayoutSchema } from "context";
 import NfTextField from "./fields/TextField";
 import NfBooleanField from "./fields/BooleanField";
 import NfSelectField from "./fields/SelectField";
@@ -28,16 +29,18 @@ interface FormLayoutProps {
   op: FormOperationType;
   recordCfg: RecordConfig;
   record?: Record<string, any>;
+  formLayout: FormLayoutSchema;
 }
 
 // #endregion
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): JSX.Element {
+export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
   // #region Hooks and variables
 
+  const { op, recordCfg, record, formLayout } = props;
   const { appCfg, currentView, viewResult } = useAppUI();
 
   if (!recordCfg) {
@@ -51,7 +54,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
 
   const isFilter = op === 'filter';
   const isDetail = op === 'detail';
-  const layout = isFilter ? viewResult.listView.filterPanel?.layout : viewResult.form.layout;
+  const layout = isFilter ? viewResult.listView.filterPanel?.layout : formLayout;
 
   if (!layout) {
     if ((op && !isFilter)) {
@@ -67,7 +70,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
 
   const headerFields = layout.header || [];
   const sections = layout.sections || [];
-  const fields = viewResult.fields?.fields ?? {};
+  const fields = viewResult.fieldConfig[currentView]?.fields ?? {};
 
   // Render a single field based on the fields section
   const renderField = (fieldName: string) => {
@@ -135,7 +138,7 @@ export default function FormLayout({ op, recordCfg, record }: FormLayoutProps): 
   return (
     <Stack gap={appCfg.forms.verticalGap}>
 
-      {/* Header row */}
+      {/* Header row, if any */}
 
       {headerFields.length > 0 && (
         <Group wrap="nowrap" gap="md">

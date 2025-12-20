@@ -1,20 +1,23 @@
 
 // Metadata and data loader
 
-import fields from "./fields.json";
 import listView from "./listview.json";
 import form from "./form.json";
+
 import projetos from "./data.json";
+import projetosFields from "./fields.json";
 import instituicoes from "../instituicoes/data.json";
 import status from "./data_status.json";
 
 export default {
-    fields,
     listView,
     form,
+    fieldConfig: {
+        projetos: projetosFields
+    },
     data: {
         projetos,
         instituicoes,
         status
-    }
+    },
 };

@@ -12,6 +12,7 @@ import { useAppUI } from "context";
 import { getValueByPath } from '@/listView/datatableUtils';
 import NfToolbar from "@/toolbar/Toolbar";
 import FormLayout from './FormLayout';
+import TabbedLayout from './TabbedLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
 import { RecordConfig } from 'src/contexts/FormProps';
 
@@ -159,12 +160,24 @@ export default function NfForm(props: FormProps): JSX.Element {
     />
   );
 
-  const formLayoutComponent = (
+  // Choose TabbedLayout if layout has tabs, otherwise FormLayout
+  const layout = isFilter ? viewResult.listView.filterPanel?.layout : viewResult.form.layout;
+  const hasTabs = layout?.tabs && Array.isArray(layout.tabs) && layout.tabs.length > 0;
+
+  const formLayoutComponent = hasTabs ? (
+    <TabbedLayout
+      key={currentRecordId || 'new'}
+      op={op}
+      recordCfg={recordCfg}
+      record={record}
+    />
+  ) : (
     <FormLayout
       key={currentRecordId || 'new'}
       op={op}
       recordCfg={recordCfg}
       record={record}
+      formLayout={viewResult.form.layout}
     />
   );
 

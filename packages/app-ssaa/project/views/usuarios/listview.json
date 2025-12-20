@@ -19,7 +19,7 @@
 	"columns": [
 		"nome_completo",
 		"nome_abreviado",
-		"instituicao",
+		"instituicao_id",
 		"data_criacao",
 		"data_expiracao",
 		"status",

@@ -14,7 +14,7 @@
                         "email"
                     ],
                     [
-                        "instituicao",
+                        "instituicao_id",
                         ["data_criacao", "data_expiracao"],
                         "status"
                     ]

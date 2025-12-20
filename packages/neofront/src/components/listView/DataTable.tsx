@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { Anchor, Badge, Box, Image, NumberFormatter, Stack, Text } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
 
-import { AppProps, DataColumnOptions, FormLayoutProps, UnifiedFieldProps } from "context";
+import { AppProps, DataColumnOptions, FormLayoutSchema, UnifiedFieldProps } from "context";
 import { FieldOptionsRef } from "context";
 import { ListViewProps, useAppUI } from "context";
 import NfIcon from '@/icon/NfIcon';
@@ -32,7 +32,12 @@ export interface FormatOptions {
 export interface FilterPanelConfig {
   title?: string;
   toolbar?: string[];
-  layout: FormLayoutProps;
+  layout: FormLayoutSchema;
+}
+
+interface NfDataTableProps {
+  viewSchema: ListViewProps;
+  records: Record<string, any>[];
 }
 
 // #endregion
@@ -87,7 +92,7 @@ function getColumns(
   // Map column names to field definitions
   return tblCfg.columns.map((colName: string) => {
 
-    const fieldDef = fields[colName];
+    const fieldDef = fields?.[colName];
     if (!fieldDef) {
       console.warn(`DataTable: Field "${colName}" not found in fields definition for table "${currentView}".`);
       return null;
@@ -377,25 +382,32 @@ function getColumns(
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfDataTable(): JSX.Element {
+export default function NfDataTable(props: NfDataTableProps): JSX.Element {
 
   // #region Hooks and context
+
+  const { viewSchema, records } = props;
+  if (!viewSchema || viewSchema.config == null) {
+    return <></>;
+  }
 
   const { userSettings, appCfg, viewResult, currentView } = useAppUI();
   const [deleteRequest, setDeleteRequest] = useState<Record<string, any> | null>(null);
 
-  const tblAppCfg = appCfg.listViews.table ?? {};
+  const tblAppCfg = appCfg.listViews.table;
   const isDark = userSettings.dark;
-  const table = (viewResult.listView as ListViewProps) ?? ({} as ListViewProps);
-  const tableCfg = (table.config as ListViewProps["config"]) ?? {};
-  const fields = viewResult.fields?.fields ?? {};
+  const tableCfg = viewSchema.config;
+  const fields = viewResult.fieldConfig?.[viewSchema.name]?.fields;
+  if(!fields) {
+    console.warn(`DataTable: No field definitions found for table "${currentView}". Is loader.js configured correctly?`);
+  }
 
   function replaceVars(str: string, record: Record<string, any>): string {
     return str
       .replace("{name}", record[tableCfg.nameAccessor!])
       .replace("{id}", record[tableCfg.idAccessor!])
-      .replace("{therecord}", table.strings.therecord)
-      .replace("{singular}", table.strings.singular)
+      .replace("{therecord}", viewSchema.strings.therecord)
+      .replace("{singular}", viewSchema.strings.singular)
       ;
   }
 
@@ -434,9 +446,9 @@ export default function NfDataTable(): JSX.Element {
         // Dynamic properties per table
 
         noHeader={!tableCfg.header}
-        columns={getColumns(appCfg, table, isDark, viewResult.data[currentView] ?? [],
-          currentView, viewResult.data, fields, (rec) => setDeleteRequest(rec))}
-        records={(viewResult?.data[currentView] ?? [])}
+        columns={getColumns(appCfg, viewSchema, isDark, records,
+          viewSchema.name, viewResult.data, fields, (rec) => setDeleteRequest(rec))}
+        records={records}
       />
 
       {/* Delete action */}
@@ -448,7 +460,7 @@ export default function NfDataTable(): JSX.Element {
           icon={"help"}
           iconClass="warning"
           onClose={() => setDeleteRequest(null)}
-          onDelete={() => {console.log("delete", deleteRequest);}}
+          onDelete={() => { console.log("delete", deleteRequest); }}
         />
       ) : null}
     </>

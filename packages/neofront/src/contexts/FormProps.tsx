@@ -7,6 +7,7 @@
 import { ListViewProps } from "context";
 import { SectionSchema } from "@/form/Section";
 import { FieldsConfig } from "./FieldProps";
+import { TabSchema } from "@/form/TabbedLayout";
 
 // #endregion
 
@@ -17,9 +18,10 @@ export interface RecordConfig {
   toolbar?: string[];
 };
 
-export interface FormLayoutProps {
+export interface FormLayoutSchema {
   header?: string[];
   sections: SectionSchema[];
+  tabs?: TabSchema[];
 }
 
 /**
@@ -27,7 +29,7 @@ export interface FormLayoutProps {
  */
 export interface FormDataConfig {
   name: string;
-  layout: FormLayoutProps;
+  layout: FormLayoutSchema;
   edit: RecordConfig;
   add: RecordConfig;
   detail: RecordConfig;
@@ -37,9 +39,11 @@ export interface FormDataConfig {
  * View result passed to the form via binders, including list view config and data.
  */
 export interface ViewResultProps {
-  fields: FieldsConfig;
   listView: ListViewProps;
   form: FormDataConfig;
+  fieldConfig: {
+    [key: string]: FieldsConfig;
+  };
   data: {
     [key: string]: Record<string, any>[];
   };
