@@ -5,7 +5,7 @@
     "layout": {
         "sections": [
             {
-                "initialState": "hidden",
+                "initialState": "noheader",
                 "columns": [
                     [
                         "nome",

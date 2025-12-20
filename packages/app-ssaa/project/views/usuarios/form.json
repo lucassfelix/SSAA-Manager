@@ -6,7 +6,7 @@
     "layout": {
         "sections": [
             {
-                "initialState": "hidden",
+                "initialState": "noheader",
                 "columns": [
                     [
                         [ "username" ],

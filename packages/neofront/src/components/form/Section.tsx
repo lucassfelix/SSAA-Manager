@@ -16,7 +16,7 @@ import { useAppUI } from "context";
 export interface SectionSchema {
   columns: string[][];
   title?: string;
-  initialState?: "collapsed" | "expanded" | "fixed" | "hidden";
+  initialState?: "collapsed" | "expanded" | "fixed" | "noheader";
 }
 
 interface SectionProps {
@@ -36,12 +36,12 @@ export default function Section(props: SectionProps): JSX.Element {
   const { appCfg } = useAppUI();
   const outlined = appCfg?.forms.outlinedSections;
 
-  const validStates = ['collapsed', 'expanded', 'fixed', 'hidden'];
+  const validStates = ['collapsed', 'expanded', 'fixed', 'noheader'];
   if (schema.initialState && !validStates.includes(schema.initialState)) {
     console.warn(`Section: Invalid initialState "${schema.initialState}" in section "${schema.title}".`);
   }
 
-  if (schema.initialState === 'hidden') {
+  if (schema.initialState === 'noheader') {
     return <>{contents}</>;
   }
 

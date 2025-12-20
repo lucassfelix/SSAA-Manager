@@ -137,12 +137,4 @@ tr:hover .nf-actions-toolbar {
   background-color: var(--mantine-color-red-6);
 }
 
-/* Warning icon color */
-.nf-light .mantine-Modal-body svg.nf-warning {
-  color: var(--mantine-color-orange-6);
-}
-.nf-dark .mantine-Modal-body svg.nf-warning {
-  color: var(--mantine-color-orange-4);
-}
-
 /* #endregion */

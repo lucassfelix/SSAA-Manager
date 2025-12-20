@@ -57,7 +57,7 @@
                   "collapsed",
                   "expanded",
                   "fixed",
-                  "hidden"
+                  "noheader"
                 ],
                 "description": "Initial state of the section (accordion)."
               },
