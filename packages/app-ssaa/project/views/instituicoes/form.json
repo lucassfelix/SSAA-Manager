@@ -3,20 +3,6 @@
     "comment": "Generated manually",
     "name": "instituicoes",
     "language": "ptBR",
-    "__old_layout": {
-        "sections": [
-            {
-                "initialState": "noheader",
-                "columns": [
-                    [ "nome", "nome_abreviado" ],
-                    [
-                        [ "data_criacao", "data_expiracao" ],
-                        "cnpj"
-                    ]
-                ]
-            }
-        ]
-    },
     "layout": {
         "tabs": [
             {
