@@ -161,7 +161,7 @@
 			"type": "textButton",
 			"label": "Excluir",
 			"action": "delete",
-			"class": "error",
+			"class": "critical",
 			"default": true
 		},
 		"close": {
@@ -239,12 +239,16 @@
 			}
 		},
 		"modalToolbar": {
+			"align": "right",
 			"horizontalPadding": 0,
 			"verticalPadding": "xs",
 			"gap": 16,
-			"upperBorder": true,
+			"upperBorder": false,
 			"texts": {
 				"size": "sm"
+			},
+			"icon": {
+				"size": 32
 			}
 		},
 		"pagination": {
@@ -277,7 +281,7 @@
 	},
 	"theme": {
 		"defaultUIScale": 100,
-		"iconFamily": "material",
+		"iconFamily": "tabler",
 		"mainFontFamily": "Roboto",
 		"headingsFontFamily": "Roboto",
 		"lightMode": {

@@ -39,7 +39,7 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
   }
 
   const { appCfg } = useAppUI();
-  const { icon, size, stroke, color, filled, style } = props;
+  const { icon, size, stroke, color, filled, style, className } = props;
 
   let Comp: ComponentType<IconProps> | undefined;
   const mappedName = `Icon${{...iconMap, ...appCfg.theme.iconMapTabler}[icon]}`;
@@ -59,7 +59,7 @@ export default function NfTablerIcon(props: NfIconProps): JSX.Element {
     return <IconCircleOff size={size} stroke={stroke} color="red" />;
   }
 
-  return <Comp size={size} stroke={stroke} color={color} style={style} />;
+  return <Comp size={size} stroke={stroke} color={color} style={style} className={`nf-${className}`} />;
 }
 
 // #endregion

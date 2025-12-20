@@ -21,6 +21,7 @@ export interface NfIconProps {
   stroke?: number;
   color?: string;
   filled?: boolean;
+  className?: string;
   style?: CSSProperties;
 }
 
@@ -31,7 +32,6 @@ export interface NfIconProps {
 export default function NfIcon(props: NfIconProps): JSX.Element {
 
   const { icon, size, color, filled, style } = props;
-
   if (icon == '_blank') {
     return <Box
       className={`material-icons-${filled ? '' : 'outlined'}`}
@@ -39,9 +39,9 @@ export default function NfIcon(props: NfIconProps): JSX.Element {
       style={{
         fontSize: size,
         color: color,
-        ...style,
         width: size,
         overflow: 'hidden',
+        ...style,
       }}
     />;
   }

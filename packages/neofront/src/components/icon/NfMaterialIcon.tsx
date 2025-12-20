@@ -6,6 +6,7 @@
 
 import { JSX } from 'react';
 import 'material-symbols';
+import clsx from 'clsx';
 
 import { useAppUI } from 'context';
 import { Box } from '@mantine/core';
@@ -52,7 +53,7 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
   }
 
   const { appCfg } = useAppUI();
-  const { icon, size, color, filled, style, stroke } = props;
+  const { icon, size, color, filled, style, stroke, className } = props;
 
   const toSnake = (str: string) => str.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
   const iconName = {...iconMap, ...appCfg.theme.iconMapMaterial}[icon] ?? toSnake(icon);
@@ -61,7 +62,7 @@ export default function NfMaterialIcon(props: NfIconProps): JSX.Element {
   return (
     <>
       <Box
-        className={`material-symbols${filled ? '' : '-outlined'}`}
+        className={clsx(`nf-${className}`, `material-symbols${filled ? '' : '-outlined'}`)}
         component="span"
         style={{
           fontSize: size,

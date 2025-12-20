@@ -445,6 +445,8 @@ export default function NfDataTable(): JSX.Element {
           title={appCfg.strings.deleteItemTitle}
           message={replaceVars(appCfg.strings.deleteItemConfirm ?? "", deleteRequest)}
           items={appCfg.listViews.deleteControls}
+          icon={"help"}
+          iconClass="warning"
           onClose={() => setDeleteRequest(null)}
           onDelete={() => {console.log("delete", deleteRequest);}}
         />
