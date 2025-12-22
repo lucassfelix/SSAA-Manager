@@ -130,7 +130,7 @@ function getColumns(
     }
 
     function renderHeader(): ReactNode | undefined {
-      if (!tableProps?.header) {
+      if (tableProps.header === false) {
         return undefined;
       }
       if (fieldDef.headerIcon) {
@@ -420,7 +420,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
         // Invariant properties
         highlightOnHover={true}
         verticalAlign="center"
-        height="100%"
+        minHeight={records?.length ? undefined : 150} // For "No records" text
 
         // Global dynamic properties
         striped={tblAppCfg.striped!}
@@ -445,7 +445,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
 
         // Dynamic properties per table
 
-        noHeader={!tableCfg.header}
+        noHeader={tableCfg.header === false}
         columns={getColumns(appCfg, viewSchema, isDark, records,
           viewSchema.name, viewResult.data, fields, (rec) => setDeleteRequest(rec))}
         records={records}

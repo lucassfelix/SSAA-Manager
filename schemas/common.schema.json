@@ -108,9 +108,17 @@
                 "type": "string",
                 "description": "Logical name of the tab."
               },
+              "textColor": {
+                "type": "string",
+                "description": "Optional text color for the tab label."
+              },
               "icon": {
                 "type": "string",
                 "description": "Optional name of icon to display in the tab."
+              },
+              "iconColor": {
+                "type": "string",
+                "description": "Optional color for the tab icon."
               },
               "header": {
                 "type": "array",
@@ -325,7 +333,8 @@
           },
           "additionalProperties": false
         }
-      }
+      },
+      "required": [ "name", "config", "columns" ]
     }
   }
 }

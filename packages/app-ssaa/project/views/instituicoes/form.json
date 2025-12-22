@@ -24,8 +24,8 @@
             {
                 "label": "Usuários",
                 "name": "usuarios",
-                "textColor": "var(--mantine-primary-color-5)",
                 "icon": "users",
+                "iconColor": "var(--mantine-primary-color-5)",
                 "listView": {
                     "name": "usuarios",
                     "config": {
@@ -45,8 +45,8 @@
             {
                 "label": "Pacientes",
                 "name": "pacientes",
-                "textColor": "var(--mantine-primary-color-5)",
                 "icon": "dental",
+                "iconColor": "var(--mantine-primary-color-5)",
                 "listView": {
                     "name": "pacientes",
                     "config": {
@@ -64,8 +64,8 @@
             {
                 "label": "Projetos",
                 "name": "projetos",
-                "textColor": "var(--mantine-primary-color-5)",
                 "icon": "folderOpen",
+                "iconColor": "var(--mantine-primary-color-5)",
                 "listView": {
                     "name": "projetos",
                     "config": {

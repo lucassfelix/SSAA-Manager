@@ -24,6 +24,8 @@ export interface TabSchema {
   label: string;
   name: string;
   icon?: string;
+  textColor?: string;
+  iconColor?: string;
   header?: string[];
   sections?: SectionSchema[];
   listView?: ListViewProps;
@@ -31,7 +33,7 @@ export interface TabSchema {
 
 export interface TabThemeProps {
   justify?: Property.JustifyContent;
-  color?: string; 
+  color?: string;
   variant?: 'default' | 'outline' | 'pills';
   radius?: MantineRadius;
   iconSize?: string | number;
@@ -83,7 +85,12 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
           <Tabs.Tab
             key={tab.name}
             value={tab.name}
-            leftSection={ tab.icon ? <NfIcon icon={tab.icon} size={tabsTheme.iconSize || 16} /> : undefined }
+            styles={{tabLabel: { color: tab.textColor }}}
+            leftSection={tab.icon ? <NfIcon
+              icon={tab.icon}
+              color={tab.iconColor}
+              size={tabsTheme.iconSize || 16}
+            /> : undefined}
           >
             {tab.label}
           </Tabs.Tab>
