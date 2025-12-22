@@ -4,12 +4,12 @@
         {
             "name": "instituicoes",
             "label": "Instituições",
-            "icon": "building"
+            "icon": "buildings"
         },
         {
             "name": "usuarios",
             "label": "Usuários",
-            "icon": "user"
+            "icon": "users"
         },
         {
             "name": "pacientes",

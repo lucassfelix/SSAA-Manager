@@ -276,6 +276,12 @@
 		"selectionCheck": false,
 		"checkboxTopPadding": 36,
 		"outlinedSections": false,
+		"tabs": {
+			"justify": "start",
+			"variant": "outline",
+			"radius": "md",
+			"iconSize": 16
+		},
 		"toolbar": {
 			"align": "right",
 			"upperBorder": true,

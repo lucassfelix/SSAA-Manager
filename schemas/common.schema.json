@@ -108,6 +108,10 @@
                 "type": "string",
                 "description": "Logical name of the tab."
               },
+              "icon": {
+                "type": "string",
+                "description": "Optional name of icon to display in the tab."
+              },
               "header": {
                 "type": "array",
                 "description": "List of field names to render in the header row of this tab.",

@@ -9,6 +9,7 @@ import type { MantineShadow, MantineSize, MantineSpacing } from "@mantine/core";
 import { TopControlProps, ShellProps } from "@/shell/Shell";
 import { MainMenuProps, MenuItem } from "@/shell/MainMenu";
 import { ToolbarItem, ToolbarThemeProps } from "@/toolbar/Toolbar";
+import { TabThemeProps } from "@/form/TabbedLayout";
 
 // #endregion
 
@@ -101,6 +102,7 @@ export interface AppProps {
     outlinedSections?: boolean;
     imageRadius?: MantineSize;
     imageHeight?: number;
+    tabs?: TabThemeProps;
     toolbar?: ToolbarThemeProps;
   };
   theme: {

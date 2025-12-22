@@ -37,6 +37,7 @@ const iconMap = {
   trash: "delete",
   tools: "design_services",
   user: "person",
+  users: "group",
   userSettings: "manage_accounts",
   view: "visibility",
   wallet: "account_balance_wallet"

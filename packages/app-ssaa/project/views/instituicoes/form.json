@@ -24,6 +24,7 @@
             {
                 "label": "Usuários",
                 "name": "usuarios",
+                "icon": "users",
                 "listView": {
                     "name": "usuarios",
                     "config": {

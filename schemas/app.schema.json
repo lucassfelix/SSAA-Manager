@@ -521,6 +521,35 @@
           "type": "number",
           "description": "Default component height for image fields."
         },
+        "tabs": {
+          "type": "object",
+          "description": "Default tab layout settings for forms.",
+          "additionalProperties": false,
+          "properties": {
+            "justify": {
+              "type": "string",
+              "description": "Tabs justification type.",
+              "enum": [ "flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "start", "end"]
+            },
+            "color": {
+              "type": "string",
+              "description": "Color theme for the tabs."
+            },
+            "variant": {
+              "type": "string",
+              "description": "Variant style for the tabs.",
+              "enum": [ "default", "outline", "pills" ]
+            },
+            "radius": {
+              "type": [ "string", "number" ],
+              "description": "Border radius for the tabs."
+            },
+            "iconSize": {
+              "type": [ "string", "number" ],
+              "description": "Size of the icons used in the tabs."
+            }
+          }
+        },
         "toolbar": {
           "description": "Toolbar settings for forms. Overrides the toolbar object.",
           "$ref": "#/definitions/toolbar"
