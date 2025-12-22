@@ -104,6 +104,10 @@
                 "type": "string",
                 "description": "Tab label displayed in the tab bar."
               },
+              "name": {
+                "type": "string",
+                "description": "Logical name of the tab."
+              },
               "header": {
                 "type": "array",
                 "description": "List of field names to render in the header row of this tab.",

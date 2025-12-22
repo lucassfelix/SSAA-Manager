@@ -4,7 +4,8 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { JSX, useState } from "react";
+import { JSX } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Tabs } from "@mantine/core";
 
 import { ListViewProps, RecordConfig, useAppUI } from "context";
@@ -19,6 +20,7 @@ import NfListView from "@/listView/ListView";
 
 export interface TabSchema {
   label: string;
+  name: string;
   header?: string[];
   sections?: SectionSchema[];
   listView?: ListViewProps;
@@ -40,25 +42,37 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
 
   const { op, recordCfg, record } = props;
   const { viewResult } = useAppUI();
-  const [activeTab, setActiveTab] = useState<string | null>("0");
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const layout = viewResult.form.layout;
   const tabs: TabSchema[] = layout?.tabs ?? [];
 
+  // Get active tab from URL or default to first tab's name
+  const tabParam = searchParams.get("tab");
+  const activeTab = tabs.find(t => t.name === tabParam)?.name ?? tabs[0]?.name ?? "";
+
   // #endregion
 
   return (
-    <Tabs value={activeTab} onChange={setActiveTab}>
+    <Tabs
+      value={activeTab}
+      onChange={(value) => {
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set("tab", value!);
+        navigate(`?${newParams.toString()}`, { replace: true });
+      }}
+    >
       <Tabs.List>
-        {tabs.map((tab, idx) => (
-          <Tabs.Tab key={idx} value={String(idx)}>
+        {tabs.map((tab) => (
+          <Tabs.Tab key={tab.name} value={tab.name}>
             {tab.label}
           </Tabs.Tab>
         ))}
       </Tabs.List>
 
-      {tabs.map((tab, idx) => (
-        <Tabs.Panel key={idx} value={String(idx)} pt="md">
+      {tabs.map((tab) => (
+        <Tabs.Panel key={tab.name} value={tab.name} pt="md">
           {tab.listView ? (
             <NfListView
               viewSchema={tab.listView}
