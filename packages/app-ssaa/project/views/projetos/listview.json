@@ -17,7 +17,7 @@
     },
     "columns": [
         "nome",
-        "instituicao",
+        "instituicao_id",
         "data_criacao",
         "ultima_edicao",
         "status",

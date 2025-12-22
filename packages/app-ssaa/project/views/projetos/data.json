@@ -4,7 +4,7 @@
 		"nome": "Original",
 		"data_criacao": "2025-01-15",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 3,
+		"instituicao_id": 3,
 		"status": 1
 	},
 	{
@@ -13,7 +13,7 @@
 		"nome": "Teste com proporção áurea",
 		"data_criacao": "2025-12-02",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 1,
+		"instituicao_id": 1,
 		"status": 1
 	},
 	{
@@ -21,7 +21,7 @@
 		"nome": "Teste 3 com Lysippus (75%), mais claro",
 		"data_criacao": "2025-03-10",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 1,
+		"instituicao_id": 1,
 		"status": 2
 	},
 	{
@@ -29,7 +29,7 @@
 		"nome": "Teste 3 com Lysippus (75%), mais escuro",
 		"data_criacao": "2026-04-05",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 1,
+		"instituicao_id": 1,
 		"status": 1
 	},
 	{
@@ -37,7 +37,7 @@
 		"nome": "Teste 2",
 		"data_criacao": "2025-05-18",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 6,
+		"instituicao_id": 6,
 		"status": 3
 	},
 	{
@@ -45,7 +45,7 @@
 		"nome": "Teste 3",
 		"data_criacao": "2025-11-20",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 3,
+		"instituicao_id": 3,
 		"status": 2
 	},
 	{
@@ -53,7 +53,7 @@
 		"nome": "Teste 3",
 		"data_criacao": "2025-07-10",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 1,
+		"instituicao_id": 1,
 		"status": 1
 	},
 	{
@@ -61,7 +61,7 @@
 		"nome": "Mais um teste",
 		"data_criacao": "2025-07-10",
 		"ultima_edicao": "2025-02-20",
-		"instituicao": 2,
+		"instituicao_id": 2,
 		"status": 4
 	}
 ]

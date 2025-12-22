@@ -24,19 +24,14 @@
             {
                 "label": "Usuários",
                 "name": "usuarios",
+                "textColor": "var(--mantine-primary-color-5)",
                 "icon": "users",
                 "listView": {
                     "name": "usuarios",
                     "config": {
-                        "header": true,
                         "idAccessor": "id",
                         "nameAccessor": "nome_abreviado",
                         "rowClassAccessor": "none"
-                    },
-                    "strings": {
-                        "singular": "usuário",
-                        "plural": "usuários",
-                        "therecord": "o usuário"
                     },
                     "columns": [
                         "nome_completo",
@@ -44,8 +39,46 @@
                         "data_criacao",
                         "data_expiracao",
                         "status"
-                    ],
-                    "actions": [ "record_edit", "record_delete" ]
+                    ]
+                }
+            },
+            {
+                "label": "Pacientes",
+                "name": "pacientes",
+                "textColor": "var(--mantine-primary-color-5)",
+                "icon": "dental",
+                "listView": {
+                    "name": "pacientes",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome_completo",
+                        "data_criacao",
+                        "status"
+                    ]
+                }
+            },
+            {
+                "label": "Projetos",
+                "name": "projetos",
+                "textColor": "var(--mantine-primary-color-5)",
+                "icon": "folderOpen",
+                "listView": {
+                    "name": "projetos",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome",
+                        "data_criacao",
+                        "ultima_edicao",
+                        "status"
+                    ]
                 }
             }
         ]

@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"nome_completo": "Carlos Alberto Silva",
-		"instituicao": 1,
+		"instituicao_id": 1,
 		"data_criacao": "2025-01-10",
 		"status": 2
 	},
@@ -10,7 +10,7 @@
 		"id": 2,
 		"nome_completo": "Sofia de Oliveira Pereira",
 		"username": "maricosta",
-		"instituicao": 2,
+		"instituicao_id": 2,
 		"status": 1,
 		"data_criacao": "2025-01-10"
 	},
@@ -19,7 +19,7 @@
 		"nome_completo": "Lucas Madeira Olivetti",
 		"username": "pedroh98",
 		"status": 2,
-		"instituicao": 2,
+		"instituicao_id": 2,
 		"data_criacao": "2025-01-10"
 	},
 	{
@@ -27,7 +27,7 @@
 		"nome_completo": "Beatriz Lima Andrade",
 		"username": "maria_fig",
 		"status": 1,
-		"instituicao": 7,
+		"instituicao_id": 7,
 		"data_criacao": "2025-01-10"
 	},
 	{
@@ -35,7 +35,7 @@
 		"nome_completo": "Rafael Costa Moreira Filho",
 		"username": "mar33",
 		"status": 1,
-		"instituicao": 7,
+		"instituicao_id": 4,
 		"data_criacao": "2025-01-10"
 	},
 	{
@@ -43,7 +43,7 @@
 		"nome_completo": "Fernanda de Almeida Rocha",
 		"username": "anafer21",
 		"status": 1,
-		"instituicao": 5,
+		"instituicao_id": 5,
 		"data_criacao": "2025-01-10"
 	}
 ]

@@ -12,7 +12,7 @@
                         [ "data_criacao", "ultima_edicao" ]
                     ],
                     [
-                        "instituicao",
+                        "instituicao_id",
                         "status"
                     ]
                 ]

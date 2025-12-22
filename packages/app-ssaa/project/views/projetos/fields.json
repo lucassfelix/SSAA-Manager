@@ -25,7 +25,7 @@
             "render": { "layout": "link", "op": "detail" },
             "required": true
         },
-        "instituicao": {
+        "instituicao_id": {
             "header": "Instituição",
             "colWidth": 180,
             "dataType": "select",
@@ -37,7 +37,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "header": "Entrada",
+            "header": "Criado",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -48,14 +48,14 @@
         },
         "ultima_edicao": {
             "colStyles": "sm",
-            "header": "Últ. edição",
+            "header": "Editado",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
             "label": "Última edição",
             "placeholder": "Selecione",
             "render": { "layout": "date", "format": "relative" },
-            "required": true
+            "readOnly": true
         },
         "status": {
             "colTextAlign": "center",

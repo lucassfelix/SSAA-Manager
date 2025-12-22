@@ -18,7 +18,7 @@
 	},
 	"columns": [
 		"nome_completo",
-		"instituicao",
+		"instituicao_id",
 		"data_criacao",
 		"status",
 		"commands"
