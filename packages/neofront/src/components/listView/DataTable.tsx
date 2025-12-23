@@ -9,12 +9,11 @@ import "mantine-datatable/styles.css";
 import { JSX, ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
-import { Anchor, Badge, Box, Image, Indicator, NumberFormatter, Stack, Text } from "@mantine/core";
+import { Anchor, Badge, Box, Image, Indicator, NumberFormatter, Stack, Text, Tooltip } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
 
-import { AppProps, DataColumnOptions, FormLayoutSchema, UnifiedFieldProps } from "context";
-import { FieldOptionsRef } from "context";
-import { ListViewProps, useAppUI } from "context";
+import { AppProps, DataColumnOptions, FieldsConfig, FormLayoutSchema } from "context";
+import { FieldOptionsRef, ListViewProps, useAppUI, UnifiedFieldProps } from "context";
 import NfIcon from '@/icon/NfIcon';
 import { getValueByPath, replaceMacros, getStyles } from "./datatableUtils";
 import { applyMask, MaskSpec } from "@/form/fields/createMask";
@@ -51,6 +50,7 @@ function getColumns(
   records: Record<string, unknown>[],
   currentView: string,
   data: Record<string, unknown[]>,
+  fieldConfig: Record<string, FieldsConfig>,
   fields: Record<string, UnifiedFieldProps>,
   onRequestDelete: (record: Record<string, any>) => void,
 ): DataTableColumn[] {
@@ -72,7 +72,7 @@ function getColumns(
 
     const tableData = data[optionsRef.table];
     if (!tableData || !Array.isArray(tableData)) {
-      console.warn(`DataTable: Options table "${optionsRef.table}" not found in data.`);
+      console.warn(`DataTable: Options table "${optionsRef.table}" not found in data. Did you configure loader.js correctly?`);
       return undefined;
     }
 
@@ -217,18 +217,24 @@ function getColumns(
       const idVal = String(getValueByPath(record, idAccessor) ?? '');
 
       const indicator = (
-        <Indicator
-          inline
-          label={values.length}
-          size={16}
-          className="nf-numeric-icon-wrapper"
+        <Tooltip
+          label={`${values.length} ${fieldConfig[colName]?.strings?.[values.length > 1 ?
+            'plural' : 'singular'] || '[item(s)]'}`}
+          transitionProps={{ enterDelay: 500 }}
         >
-          <NfIcon
-            icon={fieldDef.icon || 'circle'}
-            color={fieldDef.iconColor}
-            size={20}
-          />
-        </Indicator>
+          <Indicator
+            inline
+            label={values.length}
+            size={16}
+            className="nf-numeric-icon-wrapper"
+          >
+            <NfIcon
+              icon={fieldDef.icon || 'circle'}
+              color={fieldDef.iconColor}
+              size={20}
+            />
+          </Indicator>
+        </Tooltip>
       );
 
       if (!op || !tableProps.idAccessor || !idVal) {
@@ -455,7 +461,9 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
   const tblAppCfg = appCfg.listViews.table;
   const isDark = userSettings.dark;
   const tableCfg = viewSchema.config;
-  const fields = viewResult.fieldConfig?.[viewSchema.name]?.fields;
+  const fieldConfig = viewResult.fieldConfig;
+  const fields = fieldConfig?.[viewSchema.name]?.fields;
+
   if (!fields) {
     console.warn(`DataTable: No field definitions found for table "${currentView}". Is loader.js configured correctly?`);
   }
@@ -505,7 +513,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
 
         noHeader={tableCfg.header === false}
         columns={getColumns(appCfg, viewSchema, isDark, records,
-          viewSchema.name, viewResult.data, fields, (rec) => setDeleteRequest(rec))}
+          viewSchema.name, viewResult.data, fieldConfig, fields, (rec) => setDeleteRequest(rec))}
         records={records}
       />
 

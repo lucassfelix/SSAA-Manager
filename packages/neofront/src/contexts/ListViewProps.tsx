@@ -69,7 +69,9 @@ export interface ListViewProps {
     rowClassAccessor?: string;
   };
   strings: {
-    [key: string]: string;
+    singular: string;
+    plural: string;
+    therecord: string;
   };
   columns: string[];
   actions: string[];

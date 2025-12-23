@@ -28,6 +28,26 @@
       "type": "string",
       "description": "Locale code used in this file (e.g. 'ptBR', 'enUS')."
     },
+    "strings": {
+      "type": "object",
+      "description": "Localized strings for this view.",
+      "additionalProperties": false,
+      "properties": {
+        "singular": {
+          "type": "string",
+          "description": "Singular form of the entity name."
+        },
+        "plural": {
+          "type": "string",
+          "description": "Plural form of the entity name."
+        },
+        "therecord": {
+          "type": "string",
+          "description": "Phrase used to refer to a single record (e.g. 'the user')."
+        }
+      },
+      "required": [ "singular", "plural", "therecord" ]
+    },
     "fields": {
       "type": "object",
       "description": "Field definitions keyed by field name.",
@@ -41,6 +61,7 @@
 
   "required": [
     "name",
+    "strings",
     "fields"
   ],
 
@@ -57,7 +78,7 @@
 
         "dataType": {
           "type": "string",
-          "enum": ["string", "integer", "decimal", "boolean", "select", "image", "date"],
+          "enum": [ "string", "integer", "decimal", "boolean", "select", "image", "date" ],
           "description": "Data type of the field."
         },
         "accessor": {
@@ -87,7 +108,7 @@
         },
         "colTextAlign": {
           "type": "string",
-          "enum": ["left", "center", "right"],
+          "enum": [ "left", "center", "right" ],
           "description": "Text alignment within the column."
         },
         "emphasizeColumn": {
@@ -176,7 +197,7 @@
     "colStyle": {
       "type": "string",
       "description": "Style keyword for column cells.",
-      "enum": ["light", "normal", "semibold", "bold", "italic", "xs", "sm", "md", "lg", "xl", "smallest", "largest", "smaller", "small", "large", "larger", "tabular"]
+      "enum": [ "light", "normal", "semibold", "bold", "italic", "xs", "sm", "md", "lg", "xl", "smallest", "largest", "smaller", "small", "large", "larger", "tabular" ]
     },
     "optionsRef": {
       "type": "object",
@@ -198,7 +219,7 @@
           "default": "label"
         }
       },
-      "required": ["table"]
+      "required": [ "table" ]
     },
     "fieldRender": {
       "type": "object",
@@ -207,12 +228,12 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["blank", "link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions", "numericIcon"],
+          "enum": [ "blank", "link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions", "numericIcon" ],
           "description": "Rendering layout type."
         },
         "op": {
           "type": "string",
-          "enum": ["edit", "detail", "email"],
+          "enum": [ "edit", "detail", "email" ],
           "description": "Operation for 'link' and 'numericIcon' layouts."
         },
         "format": {
@@ -231,7 +252,7 @@
           "description": "Tab name to append when using the 'numericIcon' layout."
         }
       },
-      "required": ["layout"]
+      "required": [ "layout" ]
     },
     "fieldRenderValue": {
       "type": "object",
@@ -269,7 +290,7 @@
           "description": "Total number of digits expected in the value."
         }
       },
-      "required": ["pattern"]
+      "required": [ "pattern" ]
     }
   }
 }

@@ -105,6 +105,11 @@ export interface FormFieldProps {
  */
 export interface FieldsConfig {
   name: string;
+  strings: {
+    singular: string;
+    plural: string;
+    therecord: string;
+  };
   language?: string;
   fields: Record<string, UnifiedFieldProps>;
 }
