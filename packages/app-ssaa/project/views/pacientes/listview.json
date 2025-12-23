@@ -19,9 +19,12 @@
 	"columns": [
 		"nome_completo",
 		"instituicao_id",
+		"projetos",
+		"spacer",
+		"usuario_id",
 		"data_criacao",
 		"status",
-		"commands"
+		"actions"
 	],
 	"actions": [ "record_edit", "record_delete" ],
 	"toolbar": [

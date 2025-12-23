@@ -3,6 +3,11 @@
     "comment": "Generated manually",
     "name": "usuarios",
     "language": "ptBR",
+    "strings": {
+        "singular": "usuário",
+        "plural": "usuários",
+        "therecord": "o usuário"
+    },
     "fields": {
         "id": {
             "colStyles": "tabular",
@@ -105,7 +110,7 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
-        "commands": {
+        "actions": {
             "colTextAlign": "center",
             "colWidth": 100,
             "render": { "layout": "actions" }

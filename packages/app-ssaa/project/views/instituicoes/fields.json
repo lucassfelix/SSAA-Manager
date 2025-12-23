@@ -1,8 +1,13 @@
 {
     "$schema": "../../../../../schemas/fields.schema.json",
     "comment": "Generated from listview.json and form.json",
-    "name": "instituicaos",
+    "name": "instituicoes",
     "language": "ptBR",
+    "strings": {
+        "singular": "instituição",
+        "plural": "instituições",
+        "therecord": "a instituição"
+    },
     "fields": {
         "id": {
             "colStyles": ["semibold", "tabular"],

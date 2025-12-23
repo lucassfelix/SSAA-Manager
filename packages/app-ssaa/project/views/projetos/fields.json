@@ -3,6 +3,11 @@
     "comment": "Generated from listview.json and form.json",
     "name": "projetos",
     "language": "ptBR",
+    "strings": {
+        "singular": "projeto",
+        "plural": "projetos",
+        "therecord": "o projeto"
+    },
     "fields": {
         "id": {
             "colStyles": "tabular",

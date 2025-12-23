@@ -4,22 +4,49 @@
     "name": "pacientes",
     "language": "ptBR",
     "layout": {
-        "sections": [
+        "tabs": [
             {
-                "initialState": "noheader",
-                "columns": [
-                    [
-                        [ "username" ],
-                        "nome_completo",
-                        [ "tipo_permissao" ]
-                    ],
-                    [
-                        "data_criacao",
-                        "instituicao_id"
-                    ]
+                "label": "Cadastro",
+                "name": "cadastro",
+                "sections": [
+                    {
+                        "initialState": "noheader",
+                        "columns": [
+                            [
+                                [ "username" ],
+                                "nome_completo",
+                                [ "tipo_permissao" ]
+                            ],
+                            [
+                                "data_criacao",
+                                "instituicao_id"
+                            ]
+                        ]
+                    }
                 ]
+            },
+            {
+                "label": "Projetos",
+                "name": "projetos",
+                "icon": "folderOpen",
+                "iconColor": "var(--mantine-primary-color-5)",
+                "listView": {
+                    "name": "projetos",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome",
+                        "instituicao_id",
+                        "data_criacao",
+                        "status"
+                    ]
+                }
             }
         ]
+
     },
     "edit": {
         "title": "Paciente {name}",
