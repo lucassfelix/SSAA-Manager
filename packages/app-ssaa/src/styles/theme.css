@@ -85,6 +85,11 @@ tr:hover .nf-actions-toolbar {
   transition: opacity 0s;
 }
 
+/* Shows numeric wrapper indicator only on mouseover */
+.nf-numeric-icon-wrapper:not(:hover) .mantine-Indicator-indicator {
+  display: none;
+}
+
 /* #endregion */
 
 /* #region ------------------------------------------------------------------ Form element styles */

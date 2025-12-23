@@ -26,7 +26,7 @@
         },
         "nome_abreviado": {
             "header": "Abreviado",
-            "colWidth": 180,
+            "colWidth": 150,
             "dataType": "string",
             "fieldWidth": 240,
             "label": "Nome abreviado",
@@ -62,10 +62,35 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
-        "commands": {
+        "actions": {
             "colTextAlign": "center",
             "colWidth": 100,
             "render": { "layout": "actions" }
+        },
+        "spacer": {
+            "colWidth": 40,
+            "render": { "layout": "blank" }
+        },
+        "usuarios": {
+            "icon": "users",
+            "iconColor": "var(--mantine-color-orange-5)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "numericIcon", "op": "detail", "tab": "usuarios" }
+        },
+        "pacientes": {
+            "icon": "dental",
+            "iconColor": "var(--mantine-color-orange-5)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
+        },
+        "projetos": {
+            "icon": "folderOpen",
+            "iconColor": "var(--mantine-color-orange-5)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "numericIcon", "op": "detail", "tab": "projetos" }
         }
     }
 }

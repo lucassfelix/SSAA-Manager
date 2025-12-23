@@ -12,7 +12,7 @@ type FieldDataType = "string" | "integer" | "decimal" | "boolean" | "select" | "
 type HorizAlignmentType = "left" | "center" | "right";
 
 type RenderLayout = 'colorWrapper' | 'booleanValue' | 'booleanWrapper' | 'booleanIcon'
-  | 'stacked' | 'link' | 'date' | 'decimal' | 'image' | 'actions';
+  | 'stacked' | 'link' | 'date' | 'decimal' | 'image' | 'actions' | 'numericIcon' | 'blank';
 
 type colStyles = 'light' | 'normal' | 'semibold' | 'bold' | 'italic' | 'xs' | 'sm' | 'md' | 'lg' |
   'xl' | 'smallest' | 'largest' | 'smaller' | 'small' | 'large' | 'larger';
@@ -27,6 +27,7 @@ interface FieldRender {
   layout: RenderLayout;
   format?: string;
   op?: string;
+  tab?: string;
   values?: FieldRenderValue[];
 }
 
@@ -59,6 +60,8 @@ export interface UnifiedFieldProps {
   colTextAlign?: HorizAlignmentType;
   colWidth?: number | string;
   emphasizeColumn?: boolean;
+  icon?: string;
+  iconColor?: string;
   footer?: string;
   footerIcon?: string;
   header?: string;

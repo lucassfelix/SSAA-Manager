@@ -9,7 +9,7 @@ import "mantine-datatable/styles.css";
 import { JSX, ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
-import { Anchor, Badge, Box, Image, NumberFormatter, Stack, Text } from "@mantine/core";
+import { Anchor, Badge, Box, Image, Indicator, NumberFormatter, Stack, Text } from "@mantine/core";
 import { DataTable, DataTableColumn } from "mantine-datatable";
 
 import { AppProps, DataColumnOptions, FormLayoutSchema, UnifiedFieldProps } from "context";
@@ -63,6 +63,7 @@ function getColumns(
   const tblAppCfg = appCfg.listViews.table ?? {};
   const tableProps = tblCfg.config as ListViewProps["config"];
   const navigate = useNavigate();
+
   // Resolve options from table reference
   function resolveOptions(optionsRef?: FieldOptionsRef): DataColumnOptions[] | undefined {
     if (!optionsRef) {
@@ -204,6 +205,59 @@ function getColumns(
       );
     }
 
+    function renderNumericIcon(values: (Record<string, unknown>)[], record: Record<string, any>): ReactNode {
+
+      if (!values || !values.length) {
+        return "";
+      }
+
+      const op = render?.op as string | undefined;
+      const tabName = render?.tab as string | undefined;
+      const idAccessor = tblCfg.config.idAccessor ?? tableProps.idAccessor ?? 'id';
+      const idVal = String(getValueByPath(record, idAccessor) ?? '');
+
+      const indicator = (
+        <Indicator
+          inline
+          label={values.length}
+          size={16}
+          className="nf-numeric-icon-wrapper"
+        >
+          <NfIcon
+            icon={fieldDef.icon || 'circle'}
+            color={fieldDef.iconColor}
+            size={20}
+          />
+        </Indicator>
+      );
+
+      if (!op || !tableProps.idAccessor || !idVal) {
+        return indicator;
+      }
+
+      // Prepare link to record with specified operation
+
+      const params = new URLSearchParams();
+      params.set('v', currentView);
+      params.set('op', op);
+      params.set(idAccessor, idVal);
+
+      if (tabName) {
+        params.set('tab', tabName);
+      }
+
+      return (
+        <Anchor
+          key={accessor}
+          component={Link}
+          to={`?${params.toString()}`}
+          {...getStyles(styles)}
+        >
+          {indicator}
+        </Anchor>
+      );
+    }
+
     function renderBooleanWrapper(value?: boolean): ReactNode {
       return (
         <Badge
@@ -320,6 +374,8 @@ function getColumns(
       />;
     }
 
+    // #endregion
+
     function renderCell(): ((r: Record<string, unknown>) => ReactNode) | undefined {
 
       return (record: Record<string, any>) => {
@@ -348,6 +404,10 @@ function getColumns(
               return renderDateCell(value);
             case 'decimal':
               return renderDecimalCell(value);
+            case 'numericIcon':
+              return renderNumericIcon(value, record);
+            case 'blank':
+              return "";
             default:
               console.warn(`DataTable: Unknown render layout "${render.layout}" in column "${colName}".`);
               break;
@@ -360,8 +420,6 @@ function getColumns(
         return renderSingleCell(value, styles, mask);
       };
     }
-
-    // #endregion
 
     return {
       accessor,
@@ -398,7 +456,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
   const isDark = userSettings.dark;
   const tableCfg = viewSchema.config;
   const fields = viewResult.fieldConfig?.[viewSchema.name]?.fields;
-  if(!fields) {
+  if (!fields) {
     console.warn(`DataTable: No field definitions found for table "${currentView}". Is loader.js configured correctly?`);
   }
 
