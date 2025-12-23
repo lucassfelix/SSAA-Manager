@@ -24,7 +24,7 @@
             "required": true
         },
         "nome_abreviado": {
-            "header": "Nome abreviado",
+            "header": "Abreviado",
             "colWidth": 200,
             "dataType": "string",
             "label": "Nome abreviado",
@@ -61,7 +61,7 @@
         },
         "instituicao_id": {
             "header": "Instituição",
-            "colWidth": 180,
+            "colWidth": 150,
             "dataType": "select",
             "fieldWidth": 200,
             "label": "Instituição",
@@ -109,6 +109,24 @@
             "colTextAlign": "center",
             "colWidth": 100,
             "render": { "layout": "actions" }
+        },
+        "spacer": {
+            "colWidth": 40,
+            "render": { "layout": "blank" }
+        },
+        "pacientes": {
+            "icon": "dental",
+            "iconColor": "var(--mantine-color-orange-5)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
+        },
+        "projetos": {
+            "icon": "folderOpen",
+            "iconColor": "var(--mantine-color-orange-5)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "numericIcon", "op": "detail", "tab": "projetos" }
         }
     }
 }
