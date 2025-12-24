@@ -6,7 +6,7 @@
 
 import { JSX, useState } from "react";
 import { clsx } from "clsx";
-import { ActionIcon, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
+import { ActionIcon, Anchor, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
 
 import { FieldsConfig, useAppUI } from "context";
 import NfIcon from "@/icon/NfIcon";
@@ -63,6 +63,7 @@ interface ToolbarItemBase {
   selectable?: boolean;
   selected?: boolean;
   disabled?: boolean;
+  fullWidth?: boolean;
   class?: string;
 }
 
@@ -71,7 +72,7 @@ interface ToolbarSubItem extends ToolbarItemBase {
 }
 
 export interface ToolbarItem extends ToolbarItemBase {
-  type?: 'text' | 'title' | 'iconButton' | 'textButton' | 'separator' | 'spacer';
+  type?: 'text' | 'title' | 'iconButton' | 'textButton' | 'separator' | 'spacer' | 'link';
   icon?: string;
   tip?: string;
   selectedTip?: string;
@@ -91,6 +92,7 @@ interface NfToolbarProps {
   onAction?: (action: string, payload?: any) => void;
   isItemSelected?: (itemName: string) => boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 // #endregion
@@ -101,7 +103,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
   // #region Hooks and variables
 
-  const { cfg, items, onAction, isItemSelected } = props;
+  const { cfg, items, onAction, isItemSelected, style } = props;
 
   if (!items) {
     console.warn("Toolbar: No items provided.");
@@ -246,6 +248,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             disabled={it.disabled === true}
             fz={cfg.textButtons?.fontSize ?? undefined}
             fw={cfg.textButtons?.fontWeight ?? undefined}
+            fullWidth={it.fullWidth === true}
             style={{
               textTransform: cfg.textButtons?.uppercase ? "uppercase" : undefined
             }}
@@ -308,6 +311,17 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       return Array.isArray(it.items) ? renderDropDownButton(key, it) : renderSimpleButton(it, key);
     }
 
+    function renderLink(it: ToolbarItem, key: string): JSX.Element {
+      return <Anchor  
+        key={key}
+        href={it.action ?? '#'}
+        rel="noopener noreferrer"
+        className={it.class ? `nf-${it.class}` : undefined}
+      >
+        {it.label ?? `[${it.name}]`}
+      </Anchor>;
+    }
+
     // #endregion
 
     switch (item.type) {
@@ -322,9 +336,11 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       case 'iconButton':
       case 'textButton':
         return renderButton(item, keyName);
+      case 'link':
+        return renderLink(item, keyName);
       default:
         console.warn(`Toolbar: Toolbar item ${item.name} type is unknown: "${item.type}"`);
-        return <span key={keyName}>[{item.name}]</span>;
+        return <span key={keyName}>[{item.label ?? item.name ?? "unknown"}]</span>;
     }
   }
 
@@ -338,6 +354,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       py={verticalPadding}
       justify={justifyOptions[align || 'left']}
       className={clsx("nf-toolbar", props.className)}
+      style={style}
     >
       {toolbarItems.map((it, idx) => {
         const keyName = `toolbar-item-${idx}`;

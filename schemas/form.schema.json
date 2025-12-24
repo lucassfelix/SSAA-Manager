@@ -32,6 +32,10 @@
         "fullHeight": {
           "type": "boolean",
           "description": "If true, the form will take the full available height."
+        },
+        "width": {
+          "type": [ "string", "number" ],
+          "description": "Width of the form. Can be a number (pixels) or a string (CSS value)."
         }
       }
     },

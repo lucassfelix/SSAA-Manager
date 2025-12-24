@@ -4,7 +4,8 @@
     "name": "login",
     "language": "ptBR",
     "options": {
-        "fullHeight": true
+        "fullHeight": true,
+        "width": 480
     },
     "layout": {
         "sections": [
@@ -20,7 +21,7 @@
             }
         ]
     },
-    "add": {
+    "edit": {
         "title": "Boas-vindas ao SSAA",
         "toolbar": [ "login", "forgotPassword" ]
     }

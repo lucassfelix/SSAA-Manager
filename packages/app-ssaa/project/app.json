@@ -203,12 +203,27 @@
 		"login": {
 			"type": "textButton",
 			"label": "Entrar",
-			"action": "login"
+			"action": "login",
+			"fullWidth": true
 		},
 		"forgotPassword": {
-			"type": "textButton",
+			"type": "link",
 			"label": "Esqueci minha senha",
 			"action": "forgotPassword"
+		}
+	},
+	"fields": {
+		"username": {
+			"dataType": "string",
+			"label": "Nome de usuário",
+			"placeholder": "Digite seu nome de usuário",
+			"required": true
+		},
+		"passwordInput": {
+			"dataType": "passwordInput",
+			"label": "Senha",
+			"placeholder": "Digite sua senha",
+			"required": true
 		}
 	},
 	"listViews": {
@@ -276,20 +291,6 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
-		}
-	},
-	"fields": {
-		"username": {
-			"dataType": "string",
-			"label": "Nome de usuário",
-			"placeholder": "Digite seu nome de usuário",
-			"required": true
-		},
-		"passwordInput": {
-			"dataType": "passwordInput",
-			"label": "Senha",
-			"placeholder": "Digite sua senha",
-			"required": true
 		}
 	},
 	"forms": {

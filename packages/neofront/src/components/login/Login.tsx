@@ -23,10 +23,12 @@ export default function Login(): JSX.Element {
   const { appCfg, loginCfg } = useAppUI();
   const navigate = useNavigate();
   const loginConfig = loginCfg!;
-  const headerHeight = appCfg.shell.header.height;
   const fullHeight = loginConfig.options?.fullHeight;
+  const width = loginConfig.options?.width;
+  const op = 'edit';  // Always "edit" for login forms
 
-  const resolvedToolbarItems = (loginConfig?.add?.toolbar ?? []).map((it: any) => {
+  // Resolve toolbar items
+  const resolvedToolbarItems = (loginConfig?.[op]?.toolbar ?? []).map((it: any) => {
     if (typeof it === 'string') {
       return appCfg.controls[it] as any;
     }
@@ -58,16 +60,16 @@ export default function Login(): JSX.Element {
   // #endregion
 
   return (
-    <Center h={fullHeight ? `calc(100vh - ${headerHeight}px)` : undefined} w="100%">
-      <Stack gap="xl">
+    <Center h={fullHeight ? "100vh" : undefined} w="100%">
+      <Stack gap="xl" w={width}>
 
         {/* Title */}
-        <Title order={4}>{loginConfig?.add?.title}</Title>
+        <Title order={4}>{loginConfig?.[op]?.title}</Title>
 
         {/* Form layout */}
         <FormLayout
-          op="add"
-          recordCfg={loginConfig.add as RecordConfig}
+          op={op}
+          recordCfg={loginConfig[op] as RecordConfig}
           formLayout={loginConfig.layout!}
           fields={appCfg.fields}
         />
@@ -79,6 +81,7 @@ export default function Login(): JSX.Element {
           items={resolvedToolbarItems}
           cfg={{ ...appCfg.toolbars, ...appCfg.forms.toolbar }}
           onAction={handleAction}
+          style={{flexDirection: 'column'}}
         />
 
       </Stack>

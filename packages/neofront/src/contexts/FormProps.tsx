@@ -31,6 +31,7 @@ export interface FormDataConfig {
   name: string;
   options?: {
     fullHeight?: boolean;
+    width?: string | number;
   };
   layout: FormLayoutSchema;
   edit?: RecordConfig;

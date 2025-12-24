@@ -269,6 +269,13 @@
         }
       }
     },
+    "fields": {
+      "type": "object",
+      "description": "Field definitions keyed by field name.",
+      "additionalProperties": {
+        "$ref": "./common.schema.json#/definitions/field"
+      }
+    },
     "listViews": {
       "type": "object",
       "description": "Default settings for list views and data tables.",
@@ -479,13 +486,6 @@
         }
       },
       "required": [ "defaultList", "messageBox" ]
-    },
-    "fields": {
-      "type": "object",
-      "description": "Field definitions keyed by field name.",
-      "additionalProperties": {
-        "$ref": "./common.schema.json#/definitions/field"
-      }
     },
     "forms": {
       "type": "object",
@@ -885,7 +885,7 @@
         "type": {
           "type": "string",
           "description": "Type of control element.",
-          "enum": [ "iconButton", "textButton", "separator" ]
+          "enum": [ "iconButton", "textButton", "separator", "link" ]
         },
         "name": {
           "type": "string",
@@ -931,6 +931,10 @@
         "class": {
           "type": "string",
           "description": "Optional CSS class name(s) to apply to the control."
+        },
+        "fullWidth": {
+          "type": "boolean",
+          "description": "Whether the control should take full width of its container."
         }
       }
     },
