@@ -136,6 +136,11 @@ tr:hover .nf-actions-toolbar {
   letter-spacing: 0.02rem;
 }
 
+/* Link text styles for login form */
+.nf-login .mantine-Stack-root .mantine-Anchor-root {
+  font-size: 82%;
+}
+
 /* #endregion */
 
 /* #region ----------------------------------------------------------- Message box element styles */

@@ -60,7 +60,7 @@ export default function Login(): JSX.Element {
   // #endregion
 
   return (
-    <Center h={fullHeight ? "100vh" : undefined} w="100%">
+    <Center h={fullHeight ? "100vh" : undefined} w="100%" className="nf-login">
       <Stack gap="xl" w={width}>
 
         {/* Title */}
@@ -81,7 +81,7 @@ export default function Login(): JSX.Element {
           items={resolvedToolbarItems}
           cfg={{ ...appCfg.toolbars, ...appCfg.forms.toolbar }}
           onAction={handleAction}
-          style={{flexDirection: 'column'}}
+          style={{ flexDirection: 'column' }}
         />
 
       </Stack>
