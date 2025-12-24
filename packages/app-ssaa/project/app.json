@@ -204,7 +204,7 @@
 			"type": "textButton",
 			"label": "Entrar",
 			"action": "login",
-			"fullWidth": true
+			"width": "100%"
 		},
 		"forgotPassword": {
 			"type": "link",

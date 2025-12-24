@@ -932,9 +932,9 @@
           "type": "string",
           "description": "Optional CSS class name(s) to apply to the control."
         },
-        "fullWidth": {
-          "type": "boolean",
-          "description": "Whether the control should take full width of its container."
+        "width": {
+          "type": [ "string", "number" ],
+          "description": "Width of the control; can be a CSS size value or number of pixels."
         }
       }
     },

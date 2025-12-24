@@ -63,7 +63,7 @@ interface ToolbarItemBase {
   selectable?: boolean;
   selected?: boolean;
   disabled?: boolean;
-  fullWidth?: boolean;
+  width?: string | number;
   class?: string;
 }
 
@@ -248,8 +248,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
             disabled={it.disabled === true}
             fz={cfg.textButtons?.fontSize ?? undefined}
             fw={cfg.textButtons?.fontWeight ?? undefined}
-            fullWidth={it.fullWidth === true}
             style={{
+              width: it.width ? it.width : undefined,
               textTransform: cfg.textButtons?.uppercase ? "uppercase" : undefined
             }}
           >{it.label ?? `[${name}]`}</Button>);
