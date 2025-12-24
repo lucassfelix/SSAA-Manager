@@ -86,7 +86,7 @@
             "label": "Ativo",
             "render": { "layout": "booleanIcon" }
         },
-        "commands": {
+        "actions": {
             "header": "Comandos",
             "colTextAlign": "center",
             "colWidth": 120,

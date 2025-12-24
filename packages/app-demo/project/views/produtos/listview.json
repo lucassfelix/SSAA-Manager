@@ -22,7 +22,7 @@
         "data_entrada",
         "estoque",
         "valor",
-		"commands"
+		"actions"
     ],
     "actions": [ "record_edit", "record_delete" ],
     "toolbar": [

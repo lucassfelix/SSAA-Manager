@@ -23,7 +23,7 @@
 		"email",
 		"username",
 		"ativo",
-		"commands"
+		"actions"
 	],
 	"actions": [ "record_detail", "record_edit", "record_delete" ],
 	"toolbar": [

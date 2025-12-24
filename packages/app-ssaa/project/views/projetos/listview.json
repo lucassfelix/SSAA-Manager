@@ -21,7 +21,7 @@
         "data_criacao",
         "ultima_edicao",
         "status",
-		"commands"
+		"actions"
     ],
     "actions": [ "record_edit", "record_delete" ],
 	"toolbar": [

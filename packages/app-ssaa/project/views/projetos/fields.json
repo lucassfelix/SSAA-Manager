@@ -99,7 +99,7 @@
             "required": true,
             "wrapperWidth": 90
         },
-        "commands": {
+        "actions": {
             "colTextAlign": "center",
             "colWidth": 100,
             "render": { "layout": "actions" }
