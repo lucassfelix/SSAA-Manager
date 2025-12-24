@@ -38,7 +38,30 @@
             "label": "Instituição",
             "options": { "table": "instituicoes", "valueAccessor": "id",
                 "labelAccessor": "nome_abreviado" },
-            "placeholder": "Selecione uma opção"
+            "placeholder": "Selecione uma opção",
+            "readOnly": true
+        },
+        "usuario_id": {
+            "header": "Responsável",
+            "colWidth": 200,
+            "dataType": "select",
+            "fieldWidth": 240,
+            "label": "Usuário responsável",
+            "options": { "table": "usuarios", "valueAccessor": "id",
+                "labelAccessor": "nome_abreviado" },
+            "placeholder": "Selecione uma opção",
+            "readOnly": true
+        },
+        "paciente_id": {
+            "header": "Paciente",
+            "colWidth": 200,
+            "dataType": "select",
+            "fieldWidth": 240,
+            "label": "Paciente",
+            "options": { "table": "pacientes", "valueAccessor": "id",
+                "labelAccessor": "nome_completo" },
+            "placeholder": "Selecione uma opção",
+            "readOnly": true
         },
         "data_criacao": {
             "colStyles": "sm",

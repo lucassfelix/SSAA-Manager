@@ -14,7 +14,7 @@ import NfIcon from '@/icon/NfIcon';
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfSelectField({ props }: { props: FormFieldProps; }) {
+export default function NfSelectField({ props }: { props: FormFieldProps }) {
 
   // #region Hooks and variables
 
@@ -25,6 +25,10 @@ export default function NfSelectField({ props }: { props: FormFieldProps; }) {
   const raw: any = initialValue as any;
   const initNorm = (raw && typeof raw === 'object') ? (raw.id ?? raw.value ?? null) : raw;
   const [value, setValue] = useState<string | null>(initNorm != null ? String(initNorm) : null);
+
+  if(!options) {
+    console.warn(`SelectField: No options provided for field '${name}'. You must make sure the relevant tables are imported in loader.js.`);
+  }
 
   // If select field is read-only, render as text field showing the option label
   if (readOnly) {
@@ -49,7 +53,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps; }) {
   const selectionCheck = formsCfg.selectionCheck ?? false;
 
   // Make sure values are in correct format
-  const data = (options || [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
+  const data = (options ?? [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
     const v = String(o.value);
     if (required && v === clearValue) {
       console.warn(`SelectField: '${clearValue}' should not be used as a regular option value.`);

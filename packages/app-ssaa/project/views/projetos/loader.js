@@ -9,6 +9,8 @@ import projetosFields from "./fields.json";
 
 import instituicoes from "../instituicoes/data.json";
 import status from "./data_status.json";
+import usuarios from "../usuarios/data.json";
+import pacientes from "../pacientes/data.json";
 
 export default {
   listView,
@@ -19,6 +21,8 @@ export default {
   data: {
     projetos,
     instituicoes,
-    status
+    status,
+    usuarios,
+    pacientes
   },
 };
