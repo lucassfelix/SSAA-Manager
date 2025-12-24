@@ -20,7 +20,7 @@ import NfSelectField from "./fields/SelectField";
 import NfDateField from "./fields/DateField";
 import NfNumberField from "./fields/NumberField";
 import NfImageField from "./fields/ImageField";
-import NfPasswordField from "./fields/PasswordField";
+import NfPasswordInputField from "./fields/PasswordInputField";
 
 // #endregion
 
@@ -127,7 +127,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       case 'password':
         return <NfTextField key={fieldName} props={props} />;
       case 'passwordInput':
-        return <NfPasswordField key={fieldName} props={props} />;
+        return <NfPasswordInputField key={fieldName} props={props} />;
       case 'date':
         return <NfDateField key={fieldName} props={props} />;
       case 'image':

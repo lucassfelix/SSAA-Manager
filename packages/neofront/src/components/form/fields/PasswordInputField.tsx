@@ -5,25 +5,30 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { clsx } from "clsx";
-import { PasswordInput } from "@mantine/core";
+import { PasswordInput, Tooltip } from "@mantine/core";
 
-import { FormFieldProps } from "context";
+import { FormFieldProps, useAppUI } from "context";
 import { useMask } from './createMask';
+import NfIcon from "@/icon/NfIcon";
 
 // #endregion
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfPasswordField({ props }: { props: FormFieldProps }) {
+export default function NfPasswordInputField({ props }: { props: FormFieldProps }) {
 
   // #region Hooks and variables
 
   const { name, enabled, label, initialValue, width, size, required, readOnly,
     placeholder, mask } = props;
+  const { appCfg } = useAppUI();
+
+  // Apply mask if applicable
 
   let defValue = initialValue;
   const result = useMask(initialValue, mask);
   defValue = result.defValue;
+  const btnCfg = appCfg.toolbars.iconButtons;
 
   // #endregion
 
@@ -40,6 +45,16 @@ export default function NfPasswordField({ props }: { props: FormFieldProps }) {
       w={width}
       className={clsx('nf-field', readOnly ? "nf-readonly" : '')}
       wrapperProps={{ 'data-field-props': name }}
+      visibilityToggleIcon={({ reveal }) =>
+        <Tooltip label={reveal ? appCfg.strings.hidePassword : appCfg.strings.showPassword}>
+          <NfIcon
+            icon={reveal ? "eyeOff" : "eyeCheck"}
+            size={btnCfg?.iconSize}
+            stroke={btnCfg?.iconStroke}
+            filled={btnCfg?.filled}
+          />
+        </Tooltip>
+      }
     />
   );
 };

@@ -4,7 +4,8 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { CSSProperties, JSX } from "react";
+import { CSSProperties, JSX, forwardRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 import NfTablerIcon from "./NfTablerIcon";
 import NfMaterialIcon from "./NfMaterialIcon";
@@ -15,7 +16,7 @@ import { Box } from "@mantine/core";
 
 // #region ----------------------------------------------------------------------------------- Types
 
-export interface NfIconProps {
+export interface NfIconProps extends ComponentPropsWithoutRef<'span'> {
   icon: string | null;
   size?: number | string;
   stroke?: number;
@@ -29,32 +30,45 @@ export interface NfIconProps {
 
 // #region ------------------------------------------------------------------------------- Component
 
-export default function NfIcon(props: NfIconProps): JSX.Element {
+const NfIcon = forwardRef<HTMLSpanElement, NfIconProps>(function NfIcon(props, ref): JSX.Element {
 
-  const { icon, size, color, filled, style } = props;
+  const { icon, size, color, filled, style, className, stroke, ...spanProps } = props;
+
   if (icon == '_blank') {
-    return <Box
-      className={`material-icons-${filled ? '' : 'outlined'}`}
-      component="span"
-      style={{
-        fontSize: size,
-        color: color,
-        width: size,
-        overflow: 'hidden',
-        ...style,
-      }}
-    />;
+    return (
+      <Box
+        {...spanProps}
+        ref={ref}
+        className={`material-icons-${filled ? '' : 'outlined'}`}
+        component="span"
+        style={{
+          fontSize: size,
+          color: color,
+          width: size,
+          overflow: 'hidden',
+          ...style,
+        }}
+      />
+    );
   }
 
   const { appCfg } = useAppUI();
+  const iconProps = { icon, size, stroke, color, filled, style, className };
 
-  switch (appCfg.theme.iconFamily) {
-    case 'material':
-      return <NfMaterialIcon {...props} />;
-    case 'tabler':
-    default:
-      return <NfTablerIcon {...props} />;
-  }
-}
+  return (
+    <Box
+      {...spanProps}
+      ref={ref}
+      component="span"
+      style={{ display: 'inline-flex' }}
+    >
+      {appCfg.theme.iconFamily === 'material' ?
+        <NfMaterialIcon {...iconProps} /> :
+        <NfTablerIcon {...iconProps} />}
+    </Box>
+  );
+});
+
+export default NfIcon;
 
 // #endregion

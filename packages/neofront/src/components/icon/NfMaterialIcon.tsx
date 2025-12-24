@@ -28,6 +28,8 @@ const iconMap = {
   clipboard: "content_paste",
   clipboardText: "assignment",
   edit: "edit_square",
+  eyeOff: "visibility_off",
+  eyeCheck: "visibility",
   filter: "filter_list",
   menu: "menu",
   moon: "bedtime",
