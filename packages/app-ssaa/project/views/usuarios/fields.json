@@ -127,7 +127,7 @@
             "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
         },
         "projetos": {
-            "icon": "folderOpen",
+            "icon": "clipboardText",
             "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",

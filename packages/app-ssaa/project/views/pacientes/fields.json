@@ -101,7 +101,7 @@
             "render": { "layout": "blank" }
         },
         "projetos": {
-            "icon": "folderOpen",
+            "icon": "clipboardText",
             "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",

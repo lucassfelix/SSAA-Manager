@@ -48,7 +48,7 @@
             {
                 "label": "Projetos",
                 "name": "projetos",
-                "icon": "folderOpen",
+                "icon": "clipboardText",
                 "iconColor": "var(--nf-secondary-color)",
                 "listView": {
                     "name": "projetos",

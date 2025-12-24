@@ -25,6 +25,8 @@ const iconMap = {
   building: "apartment",
   buildings: "domain",
   circleCheck: "check_circle",
+  clipboard: "content_paste",
+  clipboardText: "assignment",
   edit: "edit_square",
   filter: "filter_list",
   menu: "menu",

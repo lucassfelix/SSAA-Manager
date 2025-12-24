@@ -19,7 +19,7 @@
         {
             "name": "projetos",
             "label": "Projetos",
-            "icon": "folderOpen"
+            "icon": "clipboard"
         }
     ]
 }
