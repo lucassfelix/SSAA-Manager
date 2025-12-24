@@ -48,7 +48,7 @@ interface ListViewsProps {
   actionToolbar?: ToolbarThemeProps;
   messageBox: {
     icon?: {
-      size?: MantineSize;
+      size?: number | MantineSize;
       stroke?: number;
       filled?: boolean;
     };

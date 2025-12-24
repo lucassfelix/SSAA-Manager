@@ -13,13 +13,10 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                [ "username" ],
-                                "nome_completo",
-                                [ "tipo_permissao" ]
+                                "nome_completo"
                             ],
                             [
-                                "data_criacao",
-                                "instituicao_id"
+                                [ "data_criacao", "usuario_id", "instituicao_id" ]
                             ]
                         ]
                     }

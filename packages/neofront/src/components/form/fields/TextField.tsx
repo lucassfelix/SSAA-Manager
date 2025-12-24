@@ -4,8 +4,8 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { IMaskInput } from 'react-imask';
 import { clsx } from "clsx";
+import { IMaskInput } from 'react-imask';
 import { InputBase } from "@mantine/core";
 
 import { FormFieldProps } from "context";
@@ -16,15 +16,15 @@ import { useMask } from './createMask';
 // #region ------------------------------------------------------------------------------- Component
 
 export default function NfTextField({ props }: { props: FormFieldProps }) {
-
   // #region Hooks and variables
 
   const { name, enabled, label, initialValue, width, size, required, readOnly,
-    placeholder, mask } = props;
+    placeholder, mask, dataType } = props;
 
   let defValue = initialValue;
   const result = useMask(initialValue, mask);
-  defValue = result.defValue;
+  const isPassword = dataType === 'password';
+  defValue = isPassword ? "********" : result.defValue;
 
   // #endregion
 
@@ -39,8 +39,9 @@ export default function NfTextField({ props }: { props: FormFieldProps }) {
       placeholder={readOnly ? undefined : placeholder}
       defaultValue={defValue}
       w={width}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '')}
-      component={result.imaskConfig ? IMaskInput : undefined}
+      className={clsx('nf-field', readOnly ? "nf-readonly" : '', isPassword ? 'nf-password' : '')}
+      component={isPassword ? "input" : (result.imaskConfig ? IMaskInput : undefined)}
+      type={isPassword ? "password" : undefined}
       mask={result.imaskConfig}
       wrapperProps={{ 'data-field-props': name }}
     />

@@ -122,6 +122,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       case 'decimal':
         return <NfNumberField key={fieldName} props={props} />;
       case 'string':
+      case 'password':
         return <NfTextField key={fieldName} props={props} />;
       case 'date':
         return <NfDateField key={fieldName} props={props} />;

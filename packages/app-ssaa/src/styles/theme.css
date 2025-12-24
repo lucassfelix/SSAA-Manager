@@ -100,6 +100,11 @@ tr:hover .nf-actions-toolbar {
   background-color: #4d5d8050;
 }
 
+/* Password field styles */
+.nf-password input {
+  font-size: 150%;
+}
+
 /* Accordion form element styles */
 .mantine-Accordion-control {
   margin-bottom: 0;

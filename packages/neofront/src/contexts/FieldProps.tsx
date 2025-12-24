@@ -7,7 +7,8 @@ import { MaskSpec } from "@/form/fields/createMask";
 
 // #region ----------------------------------------------------------------------------------- Types
 
-type FieldDataType = "string" | "integer" | "decimal" | "boolean" | "select" | "image" | "date";
+type FieldDataType = "string" | "integer" | "decimal" | "boolean" | "select" | "image" |
+  "date" | "password";
 
 type HorizAlignmentType = "left" | "center" | "right";
 
@@ -17,7 +18,7 @@ type RenderLayout = 'colorWrapper' | 'booleanValue' | 'booleanWrapper' | 'boolea
 type colStyles = 'light' | 'normal' | 'semibold' | 'bold' | 'italic' | 'xs' | 'sm' | 'md' | 'lg' |
   'xl' | 'smallest' | 'largest' | 'smaller' | 'small' | 'large' | 'larger';
 
-  interface FieldRenderValue {
+interface FieldRenderValue {
   accessor?: string;
   styles?: string | string[];
   mask?: MaskSpec;

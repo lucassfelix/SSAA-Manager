@@ -45,6 +45,14 @@
             "placeholder": "Username",
             "required": true
         },
+        "senha": {
+            "header": "Senha",
+            "colWidth": 140,
+            "dataType": "password",
+            "fieldWidth": 240,
+            "label": "Senha",
+            "readOnly": true
+        },
         "tipo_permissao": {
             "header": "Permissões",
             "colWidth": 160,

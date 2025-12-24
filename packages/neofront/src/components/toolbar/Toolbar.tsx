@@ -8,7 +8,7 @@ import { JSX, useState } from "react";
 import { clsx } from "clsx";
 import { ActionIcon, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
 
-import { useAppUI } from "context";
+import { FieldsConfig, useAppUI } from "context";
 import NfIcon from "@/icon/NfIcon";
 
 // #endregion
@@ -134,7 +134,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   };
 
   const iconBtnConfig = cfg.iconButtons;
-  const fieldsCfg = viewResult.fieldConfig[currentView];
+  const fieldsCfg = viewResult.fieldConfig ? viewResult.fieldConfig[currentView] :
+    {} as FieldsConfig;
   const tbCfg = { ...appCfg.toolbars, ...appCfg.forms.toolbar } as ToolbarThemeProps;
 
   // #endregion
@@ -161,10 +162,10 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     };
 
     function replaceVars(str: string): string {
-      return str
+      return fieldsCfg?.strings ? str
         .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
         .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
-        ;
+        : str;
     }
 
     function renderSeparator(key: string): JSX.Element {

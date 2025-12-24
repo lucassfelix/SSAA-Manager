@@ -78,7 +78,7 @@
 
         "dataType": {
           "type": "string",
-          "enum": [ "string", "integer", "decimal", "boolean", "select", "image", "date" ],
+          "enum": [ "string", "integer", "decimal", "boolean", "select", "image", "date", "password" ],
           "description": "Data type of the field."
         },
         "accessor": {

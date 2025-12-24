@@ -60,8 +60,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   const location = useLocation();
   const isFilter = op === 'filter';
   const formCfg = isFilter ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
-  const recordCfg = (allowedOps.includes(op as AllowedOp) ?
-    viewResult.form[op as AllowedOp] : {}) as RecordConfig;
+  const recordCfg = (allowedOps.includes(op as AllowedOp) ? viewResult.form[op as AllowedOp] : {}) as RecordConfig;
   const toolbarCfg = isFilter ? { ...formCfg.toolbar, ...appCfg.listViews.filterToolbar } : formCfg.toolbar;
   const toolbarItems = isFilter ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
   const hasToolbar = Boolean(toolbarItems?.length);
