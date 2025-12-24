@@ -78,21 +78,21 @@
         },
         "usuarios": {
             "icon": "users",
-            "iconColor": "var(--mantine-color-orange-5)",
+            "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",
             "render": { "layout": "numericIcon", "op": "detail", "tab": "usuarios" }
         },
         "pacientes": {
             "icon": "dental",
-            "iconColor": "var(--mantine-color-orange-5)",
+            "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",
             "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
         },
         "projetos": {
             "icon": "folderOpen",
-            "iconColor": "var(--mantine-color-orange-5)",
+            "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",
             "render": { "layout": "numericIcon", "op": "detail", "tab": "projetos" }

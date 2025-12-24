@@ -29,7 +29,7 @@
                 "label": "Projetos",
                 "name": "projetos",
                 "icon": "folderOpen",
-                "iconColor": "var(--mantine-primary-color-5)",
+                "iconColor": "var(--nf-secondary-color)",
                 "listView": {
                     "name": "projetos",
                     "config": {

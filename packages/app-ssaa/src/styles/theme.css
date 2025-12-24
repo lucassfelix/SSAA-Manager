@@ -8,6 +8,7 @@
 body.nf-light {
   --nf-background-color: #f9faff;
   --nf-primary-color: #1f82da;
+  --nf-secondary-color: #eba016ff;
 
   --mantine-color-body: var(--nf-background-color);
   --mantine-primary-color-light-color: var(--nf-primary-color);
@@ -16,6 +17,7 @@ body.nf-light {
 body.nf-dark {
   --nf-background-color: #242930;
   --nf-primary-color: #3fa6ff;
+  --nf-secondary-color: #ffbc3fff;
   --mantine-color-dark-6: #191d22;
   
   --mantine-color-body: var(--nf-background-color);
@@ -75,19 +77,15 @@ header h4 {
   padding-top: 0.1rem;
 }
 
-/* Shows actions toolbar only on row hover */
-tr .nf-actions-toolbar {
+/* Shows actions toolbar and numeric wrapper indicators only on row hover */
+tr .nf-actions-toolbar,
+tr:not(:hover) .nf-numeric-icon-wrapper .mantine-Indicator-indicator {
   opacity: 0;
   transition: opacity 80ms ease;
 }
 tr:hover .nf-actions-toolbar {
   opacity: 1;
   transition: opacity 0s;
-}
-
-/* Shows numeric wrapper indicator only on mouseover */
-.nf-numeric-icon-wrapper:not(:hover) .mantine-Indicator-indicator {
-  display: none;
 }
 
 /* #endregion */
