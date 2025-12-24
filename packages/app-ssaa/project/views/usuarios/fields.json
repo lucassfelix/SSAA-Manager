@@ -6,7 +6,7 @@
     "strings": {
         "singular": "usuário",
         "plural": "usuários",
-        "therecord": "o usuário"
+        "theItem": "o usuário"
     },
     "fields": {
         "id": {

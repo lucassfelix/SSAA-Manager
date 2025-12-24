@@ -7,7 +7,7 @@
 	"strings": {
 		"appVersion": "0.10.0",
 		"appTitle": "{pageName} | SSAA",
-		"deleteItemConfirm": "Deseja excluir {therecord} {name}?"
+		"deleteItemConfirm": "Deseja excluir {theItem} {name}?"
 	},
 	"errorStrings": {
 		"noRecordsText": "Sem itens a exibir"

@@ -41,12 +41,12 @@
           "type": "string",
           "description": "Plural form of the entity name."
         },
-        "therecord": {
+        "theItem": {
           "type": "string",
           "description": "Phrase used to refer to a single record (e.g. 'the user')."
         }
       },
-      "required": [ "singular", "plural", "therecord" ]
+      "required": [ "singular", "plural", "theItem" ]
     },
     "fields": {
       "type": "object",

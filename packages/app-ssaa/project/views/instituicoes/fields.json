@@ -6,7 +6,7 @@
     "strings": {
         "singular": "instituição",
         "plural": "instituições",
-        "therecord": "a instituição"
+        "theItem": "a instituição"
     },
     "fields": {
         "id": {

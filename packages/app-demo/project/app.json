@@ -7,7 +7,7 @@
 	"strings": {
 		"appVersion": "0.17.2",
 		"appTitle": "{pageName} | NeoFront {version}",
-		"deleteItemConfirm": "Tem certeza que você deseja excluir {therecord} {name}?"
+		"deleteItemConfirm": "Tem certeza que você deseja excluir {theItem} {name}?"
 	},
 	"errorStrings": {
 		"noRecordsText": "Não há itens a serem exibidos"

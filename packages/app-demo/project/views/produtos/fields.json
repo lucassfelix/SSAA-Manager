@@ -3,6 +3,11 @@
     "comment": "Generated from listview.json and form.json",
     "name": "produtos",
     "language": "ptBR",
+    "strings": {
+        "singular": "produto",
+        "plural": "produtos",
+        "theItem": "o produto"
+    },
     "fields": {
         "id": {
             "colStyles": "tabular",

@@ -473,7 +473,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
     return str
       .replace("{name}", record[tableCfg.nameAccessor!])
       .replace("{id}", record[tableCfg.idAccessor!])
-      .replace("{therecord}", fieldsCfg.strings.therecord)
+      .replace("{theItem}", fieldsCfg.strings.theItem)
       .replace("{singular}", fieldsCfg.strings.singular)
       ;
   }

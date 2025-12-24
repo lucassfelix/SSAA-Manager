@@ -3,6 +3,11 @@
     "comment": "Generated manually",
     "name": "usuarios",
     "language": "ptBR",
+    "strings": {
+        "singular": "produto",
+        "plural": "produtos",
+        "theItem": "o produto"
+    },
     "fields": {
         "id": {
             "colStyles": "tabular",

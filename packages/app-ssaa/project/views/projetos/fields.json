@@ -6,7 +6,7 @@
     "strings": {
         "singular": "projeto",
         "plural": "projetos",
-        "therecord": "o projeto"
+        "theItem": "o projeto"
     },
     "fields": {
         "id": {

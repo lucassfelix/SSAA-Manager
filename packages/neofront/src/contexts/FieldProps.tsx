@@ -108,7 +108,7 @@ export interface FieldsConfig {
   strings: {
     singular: string;
     plural: string;
-    therecord: string;
+    theItem: string;
   };
   language?: string;
   fields: Record<string, UnifiedFieldProps>;
