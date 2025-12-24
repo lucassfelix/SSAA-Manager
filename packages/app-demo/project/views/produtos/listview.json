@@ -10,11 +10,6 @@
         "nameAccessor": "descricao",
         "rowClassAccessor": "none"
     },
-    "strings": {
-        "singular": "produto",
-        "plural": "produtos",
-        "therecord": "o produto"
-    },
     "columns": [
         "id",
         "sku",

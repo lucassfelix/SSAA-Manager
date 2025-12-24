@@ -108,7 +108,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     return null;
   }
 
-  const { viewResult, appCfg } = useAppUI();
+  const { viewResult, appCfg, currentView } = useAppUI();
 
   const toolbarItems = items.map(item => {
     if (typeof item === 'object') {
@@ -134,7 +134,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   };
 
   const iconBtnConfig = cfg.iconButtons;
-  const listCfg = viewResult?.listView;
+  const fieldsCfg = viewResult.fieldConfig[currentView];
   const tbCfg = { ...appCfg.toolbars, ...appCfg.forms.toolbar } as ToolbarThemeProps;
 
   // #endregion
@@ -162,8 +162,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
     function replaceVars(str: string): string {
       return str
-        .replace('{singular}', listCfg?.strings?.singular || listCfg?.name)
-        .replace('{plural}', listCfg?.strings?.plural || listCfg?.name)
+        .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
+        .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
         ;
     }
 

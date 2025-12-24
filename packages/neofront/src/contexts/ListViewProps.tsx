@@ -68,11 +68,6 @@ export interface ListViewProps {
     nameAccessor?: string;
     rowClassAccessor?: string;
   };
-  strings: {
-    singular: string;
-    plural: string;
-    therecord: string;
-  };
   columns: string[];
   actions: string[];
   toolbar?: ToolbarItem[];

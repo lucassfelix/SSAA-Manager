@@ -463,6 +463,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
   const tableCfg = viewSchema.config;
   const fieldConfig = viewResult.fieldConfig;
   const fields = fieldConfig?.[viewSchema.name]?.fields;
+  const fieldsCfg = viewResult.fieldConfig[currentView];
 
   if (!fields) {
     console.warn(`DataTable: No field definitions found for table "${currentView}". Is loader.js configured correctly?`);
@@ -472,8 +473,8 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
     return str
       .replace("{name}", record[tableCfg.nameAccessor!])
       .replace("{id}", record[tableCfg.idAccessor!])
-      .replace("{therecord}", viewSchema.strings.therecord)
-      .replace("{singular}", viewSchema.strings.singular)
+      .replace("{therecord}", fieldsCfg.strings.therecord)
+      .replace("{singular}", fieldsCfg.strings.singular)
       ;
   }
 

@@ -11,11 +11,6 @@
 		"nameAccessor": "nome",
 		"rowClassAccessor": "none"
 	},
-	"strings": {
-		"singular": "usuário",
-		"plural": "usuários",
-		"therecord": "o usuário"
-	},
 	"columns": [
 		"foto",
 		"nome",

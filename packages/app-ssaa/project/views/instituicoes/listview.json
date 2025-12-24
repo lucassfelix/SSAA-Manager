@@ -11,11 +11,6 @@
 		"nameAccessor": "nome_abreviado",
 		"rowClassAccessor": "status"
 	},
-	"strings": {
-		"singular": "instituição",
-		"plural": "instituições",
-		"therecord": "a instituição"
-	},
 	"columns": [
 		"nome",
 		"nome_abreviado",

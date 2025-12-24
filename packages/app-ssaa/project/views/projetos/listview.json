@@ -10,11 +10,6 @@
         "nameAccessor": "nome",
         "rowClassAccessor": "none"
     },
-    "strings": {
-        "singular": "projeto",
-        "plural": "projetos",
-        "therecord": "o projeto"
-    },
     "columns": [
         "nome",
         "instituicao_id",

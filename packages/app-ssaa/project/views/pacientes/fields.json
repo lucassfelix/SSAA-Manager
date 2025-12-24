@@ -6,7 +6,7 @@
     "strings": {
         "singular": "paciente",
         "plural": "pacientes",
-        "therecord": "o paciente"
+        "therecord": "o/a paciente"
     },
     "fields": {
         "id": {

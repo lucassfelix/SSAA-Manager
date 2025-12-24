@@ -6,7 +6,5 @@
 
   "allOf": [
     { "$ref": "./common.schema.json#/definitions/listView" }
-  ],
-
-  "required": [ "name", "type", "config", "strings", "columns" ]
+  ]
 }

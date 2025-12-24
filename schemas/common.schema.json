@@ -245,26 +245,6 @@
           "type": "string",
           "description": "Logical name of the listview."
         },
-        "strings": {
-          "type": "object",
-          "description": "Localized strings for this view.",
-          "additionalProperties": false,
-          "properties": {
-            "singular": {
-              "type": "string",
-              "description": "Singular form of the entity name."
-            },
-            "plural": {
-              "type": "string",
-              "description": "Plural form of the entity name."
-            },
-            "therecord": {
-              "type": "string",
-              "description": "Phrase used to refer to a single record (e.g. 'the user')."
-            }
-          },
-          "required": [ "singular", "plural", "therecord" ]
-        },
         "config": {
           "type": "object",
           "description": "Configuration options for the listview.",

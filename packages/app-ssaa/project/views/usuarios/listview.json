@@ -11,11 +11,6 @@
 		"nameAccessor": "nome_abreviado",
 		"rowClassAccessor": "none"
 	},
-	"strings": {
-		"singular": "usuário",
-		"plural": "usuários",
-		"therecord": "o usuário"
-	},
 	"columns": [
 		"nome_completo",
 		"nome_abreviado",

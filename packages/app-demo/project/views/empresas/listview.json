@@ -11,11 +11,6 @@
 		"nameAccessor": "empresa.nome_abreviado",
 		"rowClassAccessor": "status"
 	},
-	"strings": {
-		"singular": "empresa",
-		"plural": "empresas",
-		"therecord": "a empresa"
-	},
 	"columns": [
 		"id",
 		"nome",

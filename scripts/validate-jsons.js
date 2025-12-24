@@ -199,9 +199,9 @@ for (const f of files) {
 
   if (!validate(json)) {
     failures++;
-    output.push(`Errors in ${path.basename(f)} (schema '${schemaKey}'):`);
+    output.push(colors.red(`Errors in ${path.basename(f)} (schema '${schemaKey}'):`));
     for (const err of validate.errors || []) {
-      output.push(`  ${err.instancePath || '/'} ${err.message}`);
+      output.push(colors.yellow(`  ${err.instancePath || '/'} ${err.message}`));
     }
   }
 }
@@ -215,7 +215,7 @@ if (logFile) {
   fs.writeFileSync(logFile, logContent + EOL, 'utf8');
   console.log(colors.cyan(`Log written to ${path.basename(logFile)}.`));
 }
-console.log(`Validation complete: ${colors.yellow(files.length)} files, ` +
+console.log(`Validation complete: ${colors.cyan(files.length)} files, ` +
   (failures > 0 ? colors.red(failures) : colors.green(failures)) + ` failed.` + EOL);
 
 // Exit with code 3 if there were validation failures
