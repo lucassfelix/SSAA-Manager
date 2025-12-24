@@ -20,6 +20,7 @@ import NfSelectField from "./fields/SelectField";
 import NfDateField from "./fields/DateField";
 import NfNumberField from "./fields/NumberField";
 import NfImageField from "./fields/ImageField";
+import NfPasswordField from "./fields/PasswordField";
 
 // #endregion
 
@@ -30,6 +31,7 @@ interface FormLayoutProps {
   recordCfg: RecordConfig;
   record?: Record<string, any>;
   formLayout: FormLayoutSchema;
+  fields?: Record<string, UnifiedFieldProps>;
 }
 
 // #endregion
@@ -40,7 +42,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { op, recordCfg, record, formLayout } = props;
+  const { op, recordCfg, record, formLayout, fields } = props;
   const { appCfg, currentView, viewResult } = useAppUI();
 
   if (!recordCfg) {
@@ -70,12 +72,12 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
   const headerFields = layout.header || [];
   const sections = layout.sections || [];
-  const fields = viewResult.fieldConfig[currentView]?.fields ?? {};
+  const resolvedFields = fields ?? viewResult.fieldConfig[currentView]?.fields ?? {};
 
   // Render a single field based on the fields section
   const renderField = (fieldName: string) => {
 
-    const fieldDef: UnifiedFieldProps = fields[fieldName];
+    const fieldDef: UnifiedFieldProps = resolvedFields[fieldName];
     if (!fieldDef) {
       console.warn(`FormLayout: Definition for field '${fieldName}' not found.`);
       return null;
@@ -124,6 +126,8 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       case 'string':
       case 'password':
         return <NfTextField key={fieldName} props={props} />;
+      case 'passwordInput':
+        return <NfPasswordField key={fieldName} props={props} />;
       case 'date':
         return <NfDateField key={fieldName} props={props} />;
       case 'image':

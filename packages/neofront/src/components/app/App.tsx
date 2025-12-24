@@ -6,18 +6,19 @@
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-import { defaultStrings, errorStrings } from "context";
+import { defaultStrings, errorStrings, FormDataConfig } from "context";
 
 // import { StrictMode } from "react";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { DatesProvider } from '@mantine/dates';
 import { createTheme, MantineProvider, DEFAULT_THEME } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
 import { AppUIContext, AppProps, MenuConfig, UserSettings, ViewResultProps } from "context";
-import Shell from "@/shell/Shell";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
+import Shell from "@/shell/Shell";
+import Login from "@/login/Login";
 
 // #endregion
 
@@ -26,6 +27,7 @@ import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from 
 interface MainAppProps {
   appCfg: AppProps;
   menuCfg: MenuConfig;
+  loginCfg?: FormDataConfig;
   loadView: (viewName: string) => Promise<ViewResultProps> | undefined;
 }
 
@@ -37,7 +39,7 @@ export default function App(props: MainAppProps) {
 
   // #region Hooks and variables
 
-  const { appCfg, menuCfg, loadView } = props;
+  const { appCfg, menuCfg, loginCfg, loadView } = props;
 
   if (!appCfg.topControls || !appCfg.controls) {
     throw new Error("App: Missing controls / mainControls in app configuration.");
@@ -73,6 +75,8 @@ export default function App(props: MainAppProps) {
 
   // Derive current view from URL (?v=...) with fallback
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const isLogin = location.pathname === '/login' || location.pathname === '/login/';
   const urlView = searchParams.get('v') ?? appCfg.listViews.defaultList;
   const urlOp = searchParams.get('op') ?? '';
 
@@ -114,6 +118,9 @@ export default function App(props: MainAppProps) {
 
   // Load view schema and data when URL view changes
   useEffect(() => {
+    if (isLogin) {
+      return;
+    }
     if (!searchParams.get('v')) {
       setSearchParams({ v: urlView }, { replace: true });
     }
@@ -128,12 +135,15 @@ export default function App(props: MainAppProps) {
     } else {
       setLoaded({ view: urlView, op: urlOp, recordId: '', result: {} as ViewResultProps });
     }
-  }, [urlView, urlOp, setSearchParams, searchParams]);
+  }, [isLogin, urlView, urlOp, setSearchParams, searchParams]);
 
   // Update document title when view or record changes
   useEffect(() => {
+    if (isLogin) {
+      return;
+    }
     setDocumentTitle(appCfg, currentView, viewResult, searchParams);
-  }, [searchParams, currentView, viewResult, currentRecordId]);
+  }, [isLogin, searchParams, currentView, viewResult, currentRecordId]);
 
   // Sync body class with theme for global CSS
   useToggleClass((typeof document !== 'undefined' ? document.body : null),
@@ -167,6 +177,7 @@ export default function App(props: MainAppProps) {
         <AppUIContext.Provider value={{
           appCfg,
           menuCfg,
+          loginCfg,
           userSettings,
           setUserSettings,
           currentView,
@@ -175,7 +186,7 @@ export default function App(props: MainAppProps) {
           currentRecordId,
           isReady: Boolean(loaded.view),
         }}>
-          <Shell />
+          {isLogin ? <Login /> : <Shell />}
         </AppUIContext.Provider>
       </DatesProvider>
     </MantineProvider>

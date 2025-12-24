@@ -8,7 +8,7 @@ import { MaskSpec } from "@/form/fields/createMask";
 // #region ----------------------------------------------------------------------------------- Types
 
 type FieldDataType = "string" | "integer" | "decimal" | "boolean" | "select" | "image" |
-  "date" | "password";
+  "date" | "password" | "passwordInput";
 
 type HorizAlignmentType = "left" | "center" | "right";
 

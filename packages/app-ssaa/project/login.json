@@ -1,0 +1,27 @@
+{
+    "$schema": "../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "login",
+    "language": "ptBR",
+    "options": {
+        "fullHeight": true
+    },
+    "layout": {
+        "sections": [
+            {
+                "title": "Informe seus dados",
+                "initialState": "fixed",
+                "columns": [
+                    [
+                        "username",
+                        "passwordInput"
+                    ]
+                ]
+            }
+        ]
+    },
+    "add": {
+        "title": "Boas-vindas ao SSAA",
+        "toolbar": [ "login", "forgotPassword" ]
+    }
+}

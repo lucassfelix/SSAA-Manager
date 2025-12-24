@@ -315,6 +315,230 @@
         }
       },
       "required": [ "name", "config", "columns" ]
+    },
+    "field": {
+      "type": "object",
+      "description": "Unified field definition for both listview columns and form fields.",
+      "additionalProperties": false,
+      "properties": {
+
+        // Common properties (used by both columns and forms)
+
+        "dataType": {
+          "type": "string",
+          "enum": [ "string", "integer", "decimal", "boolean", "select", "image", "date", "password", "passwordInput" ],
+          "description": "Data type of the field."
+        },
+        "accessor": {
+          "type": "string",
+          "description": "Dot-notation path to the value in the record (e.g. 'empresa.nome')."
+        },
+        "options": {
+          "description": "Reference to an options table for select fields.",
+          "$ref": "#/definitions/optionsRef"
+        },
+        "mask": {
+          "$ref": "#/definitions/mask"
+        },
+
+        // Column-specific properties (used only by listview columns)
+
+        "colWidth": {
+          "type": [ "integer", "string" ],
+          "description": "Column width in pixels or percentage."
+        },
+        "colStyles": {
+          "description": "Style keyword or list of style keywords for the column cells.",
+          "oneOf": [
+            { "$ref": "#/definitions/colStyle" },
+            { "type": "array", "items": { "$ref": "#/definitions/colStyle" } }
+          ]
+        },
+        "colTextAlign": {
+          "type": "string",
+          "enum": [ "left", "center", "right" ],
+          "description": "Text alignment within the column."
+        },
+        "emphasizeColumn": {
+          "type": "boolean",
+          "description": "Whether to visually emphasize this column with special styling."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name to show in the column header next to the title."
+        },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon in the column header. Can be a CSS color or design system variable."
+        },
+        "footer": {
+          "type": "string",
+          "description": "Column footer text template. Supports macros: {count}, {unique}, {sum}."
+        },
+        "footerIcon": {
+          "type": "string",
+          "description": "Icon name to show in the column footer cell instead of text."
+        },
+        "header": {
+          "type": "string",
+          "description": "Column header text template. Supports macros: {count}, {unique}, {sum}."
+        },
+        "headerIcon": {
+          "type": "string",
+          "description": "Icon name to show in the column header cell next to the title."
+        },
+        "render": {
+          "description": "Custom rendering configuration for the column.",
+          "$ref": "#/definitions/fieldRender"
+        },
+        "wrapperWidth": {
+          "type": [ "integer" ],
+          "description": "Width of the form field wrapper (badge) for colorWrapper render layout."
+        },
+
+        // Form-specific properties (used only by form fields)
+
+        "label": {
+          "type": "string",
+          "description": "Label text displayed above the input field."
+        },
+        "fieldWidth": {
+          "description": "Width of the form field. Can be a number (pixels) or percentage string.",
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "string" }
+          ]
+        },
+        "filterWidth": {
+          "description": "Width of the filter field. Can be a number (pixels) or percentage string. If not given, 'fieldWidth' is used.",
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "string" }
+          ]
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Placeholder text shown when the field is empty."
+        },
+        "filterPlaceholder": {
+          "type": "string",
+          "description": "Placeholder text for filter inputs. If not given, 'placeholder' is used."
+        },
+        "defaultValue": {
+          "description": "Default field value for new records."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the field is required for form submission."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Whether the field is read-only (not editable)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the field is enabled. Defaults to true.",
+          "default": true
+        }
+      }
+    },
+    "fieldRender": {
+      "type": "object",
+      "description": "Custom rendering configuration for a column.",
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": [ "blank", "link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions", "numericIcon" ],
+          "description": "Rendering layout type."
+        },
+        "op": {
+          "type": "string",
+          "enum": [ "edit", "detail", "email" ],
+          "description": "Operation for 'link' and 'numericIcon' layouts."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format string for 'date' layout (e.g. 'DD/MM/YY', 'YYYY-MM-DD')."
+        },
+        "values": {
+          "type": "array",
+          "description": "Values to render in 'stacked' layout.",
+          "items": {
+            "$ref": "#/definitions/fieldRenderValue"
+          }
+        },
+        "tab": {
+          "type": "string",
+          "description": "Tab name to append when using the 'numericIcon' layout."
+        }
+      },
+      "required": [ "layout" ]
+    },
+    "fieldRenderValue": {
+      "type": "object",
+      "description": "A value entry for stacked column rendering.",
+      "additionalProperties": false,
+      "properties": {
+        "accessor": {
+          "type": "string",
+          "description": "Dot-notation path to the value in the record."
+        },
+        "styles": {
+          "description": "CSS class names or style keywords (e.g. 'bold', 'italic', 'small').",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "mask": {
+          "description": "Mask configuration for formatting this stacked value.",
+          "$ref": "#/definitions/mask"
+        }
+      }
+    },
+    "optionsRef": {
+      "type": "object",
+      "description": "Reference to an options table for populating select fields.",
+      "additionalProperties": false,
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Name of the data table containing the options."
+        },
+        "valueAccessor": {
+          "type": "string",
+          "description": "Dot-notation path to the value field. Defaults to 'value'.",
+          "default": "value"
+        },
+        "labelAccessor": {
+          "type": "string",
+          "description": "Dot-notation path to the label field. Defaults to 'label'.",
+          "default": "label"
+        }
+      },
+      "required": [ "table" ]
+    },
+    "colStyle": {
+      "type": "string",
+      "description": "Style keyword for column cells.",
+      "enum": [ "light", "normal", "semibold", "bold", "italic", "xs", "sm", "md", "lg", "xl", "smallest", "largest", "smaller", "small", "large", "larger", "tabular" ]
+    },
+    "mask": {
+      "type": "object",
+      "description": "Mask configuration for formatting string values.",
+      "additionalProperties": false,
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Mask pattern where '0' represents a digit (e.g. '0000' or '0.00-0')."
+        },
+        "digits": {
+          "type": "integer",
+          "description": "Total number of digits expected in the value."
+        }
+      },
+      "required": [ "pattern" ]
     }
   }
 }

@@ -8,6 +8,7 @@ import { JSX, ReactNode } from "react";
 import { Space, Tooltip, Title, Box, Group, ActionIcon, useMantineColorScheme } from "@mantine/core";
 import { Image } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
+import { useNavigate } from "react-router-dom";
 
 import { useAppUI } from "context";
 import ThemeSwitch from "./ThemeSwitch";
@@ -90,6 +91,7 @@ export default function Shell(): JSX.Element {
   // #region Hooks and variables
 
   const { appCfg, userSettings, setUserSettings, currentView, currentOp, viewResult } = useAppUI();
+  const navigate = useNavigate();
   const op = currentOp as FormOperationType;
 
   const shellCfg = appCfg.shell as ShellProps;
@@ -115,6 +117,14 @@ export default function Shell(): JSX.Element {
         setColorScheme("dark");
         setUserSettings({ ...userSettings, dark: true });
         break;
+      case 'logout':
+        try {
+          sessionStorage.removeItem('__nf_loaded_cache');
+        } catch (_e) {
+          /* ignore */
+        }
+        navigate('/login', { replace: true });
+        return;
       default:
         console.log(`Action: '${action}'`);
         return;

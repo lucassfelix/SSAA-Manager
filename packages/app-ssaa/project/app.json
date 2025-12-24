@@ -199,10 +199,20 @@
 					"action": "printRecords"
 				}
 			]
+		},
+		"login": {
+			"type": "textButton",
+			"label": "Entrar",
+			"action": "login"
+		},
+		"forgotPassword": {
+			"type": "textButton",
+			"label": "Esqueci minha senha",
+			"action": "forgotPassword"
 		}
 	},
 	"listViews": {
-		"defaultList": "usuarios",
+		"defaultList": "instituicoes",
 		"table": {
 			"striped": false,
 			"bordered": false,
@@ -266,6 +276,20 @@
 		"infiniteScroll": {
 			"enabled": false,
 			"threshold": 300
+		}
+	},
+	"fields": {
+		"username": {
+			"dataType": "string",
+			"label": "Nome de usuário",
+			"placeholder": "Digite seu nome de usuário",
+			"required": true
+		},
+		"passwordInput": {
+			"dataType": "passwordInput",
+			"label": "Senha",
+			"placeholder": "Digite sua senha",
+			"required": true
 		}
 	},
 	"forms": {

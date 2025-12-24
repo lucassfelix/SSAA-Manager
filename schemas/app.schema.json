@@ -480,6 +480,13 @@
       },
       "required": [ "defaultList", "messageBox" ]
     },
+    "fields": {
+      "type": "object",
+      "description": "Field definitions keyed by field name.",
+      "additionalProperties": {
+        "$ref": "./common.schema.json#/definitions/field"
+      }
+    },
     "forms": {
       "type": "object",
       "description": "Default settings for forms and form toolbars.",

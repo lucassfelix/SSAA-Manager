@@ -20,7 +20,7 @@
                             [
                                 "instituicao_id",
                                 [ "data_criacao", "data_expiracao" ],
-                                "status"
+                                [ "status", "senha" ]
                             ]
                         ]
                     }

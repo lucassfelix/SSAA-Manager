@@ -10,6 +10,7 @@ import { TopControlProps, ShellProps } from "@/shell/Shell";
 import { MainMenuProps, MenuItem } from "@/shell/MainMenu";
 import { ToolbarItem, ToolbarThemeProps } from "@/toolbar/Toolbar";
 import { TabThemeProps } from "@/form/TabbedLayout";
+import { UnifiedFieldProps } from "./FieldProps";
 
 // #endregion
 
@@ -90,6 +91,9 @@ export interface AppProps {
   topControls: TopControlProps;
   controls: {
     [key: string]: ToolbarItem;
+  };
+  fields: {
+    [key: string]: UnifiedFieldProps;
   };
   listViews: ListViewsProps;
   forms: {

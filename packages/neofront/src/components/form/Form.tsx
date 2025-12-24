@@ -230,6 +230,7 @@ export default function NfForm(props: FormProps): JSX.Element {
           {toolbarComponent}
         </Stack>
       ) : null}
+
     </Stack>
   );
 }

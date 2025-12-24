@@ -29,10 +29,13 @@ export interface FormLayoutSchema {
  */
 export interface FormDataConfig {
   name: string;
+  options?: {
+    fullHeight?: boolean;
+  };
   layout: FormLayoutSchema;
-  edit: RecordConfig;
-  add: RecordConfig;
-  detail: RecordConfig;
+  edit?: RecordConfig;
+  add?: RecordConfig;
+  detail?: RecordConfig;
 }
 
 /**

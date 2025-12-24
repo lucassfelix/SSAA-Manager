@@ -24,6 +24,17 @@
       "type": "string",
       "description": "Locale code used in this file."
     },
+    "options": {
+      "type": "object",
+      "description": "General options for the form.",
+      "additionalProperties": false,
+      "properties": {
+        "fullHeight": {
+          "type": "boolean",
+          "description": "If true, the form will take the full available height."
+        }
+      }
+    },
     "layout": {
       "$ref": "./common.schema.json#/definitions/formLayout"
     },
