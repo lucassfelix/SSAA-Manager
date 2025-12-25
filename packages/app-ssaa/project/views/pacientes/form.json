@@ -13,7 +13,8 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                "nome_completo"
+                                "nome_completo",
+                                "status"
                             ],
                             [
                                 [ "data_criacao", "usuario_id", "instituicao_id" ]

@@ -68,8 +68,10 @@
             "defaultValue": 1,
             "fieldWidth": 240,
             "label": "Status",
-            "options": { "table": "status", "valueAccessor": "value", "labelAccessor": "label" },
+            "options": { "table": "status_paciente", "valueAccessor": "value",
+                "labelAccessor": "label" },
             "placeholder": "Selecione uma opção",
+            "render": { "layout": "colorWrapper" },
             "readOnly": true
         },
         "actions": {

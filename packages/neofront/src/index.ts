@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Exports
 
 export { default as App } from "./components/app/App";
-export { createViewLoader } from "./components/app/viewLoader";
+export { createViewLoader, getRoot } from "./components/app/mainUtils";
 export * from "./contexts";
 
 // #endregion

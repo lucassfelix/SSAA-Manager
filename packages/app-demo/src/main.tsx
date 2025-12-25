@@ -4,10 +4,8 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-
-import { App, createViewLoader, AppProps, MenuConfig, FormDataConfig } from "@neofront/core";
+import { App, AppProps, createViewLoader, MenuConfig, FormDataConfig, getRoot } from "@neofront/core";
 
 // App configuration imports
 import appCfg from "project/app.json";
@@ -21,20 +19,16 @@ import "./styles/app.css";
 
 // #region ----------------------------------------------------------------------------- Entry point
 
-// Vite glob import must be at module level
-const loaderModules = import.meta.glob("../project/views/*/loader.js");
+import metadata from "../project/views/metadataloader.js";
+import data from "../project/views/dataloader.js";
 
-// Reuse existing root to prevent full remount during HMR
-const container = document.getElementById("root")!;
-const root = (window as any).__nf_root || ((window as any).__nf_root = ReactDOM.createRoot(container));
-
-root.render(
+(getRoot()).render(
   <BrowserRouter>
     <App
       appCfg={appCfg as AppProps}
       menuCfg={menuCfg as MenuConfig}
       loginCfg={loginCfg as FormDataConfig}
-      loadView={createViewLoader(viewsCfg.active, loaderModules)}
+      loadView={(viewName: string) => createViewLoader(viewsCfg.active, viewName, metadata, data)}
     />
   </BrowserRouter>
 );
