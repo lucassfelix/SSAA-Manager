@@ -96,7 +96,7 @@ export interface AppProps {
     fullHeight?: boolean;
     width?: number;
     themeSwitch?: boolean;
-    logo: {
+    logo?: {
       height?: number;
       width?: number;
       altText?: string;

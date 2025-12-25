@@ -26,7 +26,7 @@ export default function Login(): JSX.Element {
   const loginOptions = appCfg.login;
   const fullHeight = loginOptions.fullHeight;
   const width = loginOptions.width;
-  const themeCfg = userSettings.dark ? loginOptions.logo.darkMode : loginOptions.logo.lightMode;
+  const themeCfg = userSettings.dark ? loginOptions.logo?.darkMode : loginOptions.logo?.lightMode;
   const op = 'edit';  // Always "edit" for login forms
 
   // Resolve toolbar items
@@ -75,15 +75,17 @@ export default function Login(): JSX.Element {
         <Title order={4}>{loginCfg?.[op]?.title}</Title>
 
         {/* Logo */}
-        <Group justify="center">
-          <Image
-            src={appCfg.paths.images + themeCfg.image}
-            alt={loginOptions?.logo?.altText ?? "Logo"}
-            h={loginOptions?.logo?.height}
-            w={loginOptions?.logo?.width}
-            fit="contain"
-          />
-        </Group>
+        {loginOptions.logo && (
+          <Group justify="center">
+            <Image
+              src={appCfg.paths.images + themeCfg?.image}
+              alt={loginOptions?.logo?.altText ?? "Logo"}
+              h={loginOptions?.logo?.height}
+              w={loginOptions?.logo?.width}
+              fit="contain"
+            />
+          </Group>
+        )}
 
         {/* Form layout */}
         <FormLayout
