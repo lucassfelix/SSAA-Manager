@@ -308,24 +308,24 @@
               "description": "Logo configuration for light mode.",
               "additionalProperties": false,
               "properties": {
-                "logo": {
+                "image": {
                   "type": "string",
                   "description": "Filename of the login image to use in light mode."
                 }
               },
-              "required": [ "logo" ]
+              "required": [ "image" ]
             },
             "darkMode": {
               "type": "object",
               "description": "Logo configuration for dark mode.",
               "additionalProperties": false,
               "properties": {
-                "logo": {
+                "image": {
                   "type": "string",
                   "description": "Filename of the login image to use in dark mode."
                 }
               },
-              "required": [ "logo" ]
+              "required": [ "image" ]
             }
           }
         },
