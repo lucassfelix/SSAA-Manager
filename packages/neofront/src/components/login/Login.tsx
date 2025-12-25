@@ -8,7 +8,7 @@ import { JSX } from "react";
 import { Center, Divider, Stack, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
-import { RecordConfig, useAppUI } from "context";
+import { FormLayoutSchema, RecordConfig, useAppUI } from "context";
 import NfToolbar from "@/toolbar/Toolbar";
 import FormLayout from "@/form/FormLayout";
 import ThemeSwitch from "@/shell/ThemeSwitch";
@@ -23,13 +23,13 @@ export default function Login(): JSX.Element {
 
   const { appCfg, loginCfg } = useAppUI();
   const navigate = useNavigate();
-  const loginConfig = loginCfg!;
-  const fullHeight = loginConfig.options?.fullHeight;
-  const width = loginConfig.options?.width;
+  const loginOptions = appCfg.login;
+  const fullHeight = loginOptions.fullHeight;
+  const width = loginOptions.width;
   const op = 'edit';  // Always "edit" for login forms
 
   // Resolve toolbar items
-  const resolvedToolbarItems = (loginConfig?.[op]?.toolbar ?? []).map((it: any) => {
+  const resolvedToolbarItems = (loginCfg?.[op]?.toolbar ?? []).map((it: any) => {
     if (typeof it === 'string') {
       return appCfg.controls[it] as any;
     }
@@ -71,17 +71,18 @@ export default function Login(): JSX.Element {
       <Stack gap="xl" w={width}>
 
         {/* Title */}
-        <Title order={4}>{loginConfig?.[op]?.title}</Title>
+        <Title order={4}>{loginCfg?.[op]?.title}</Title>
 
         {/* Form layout */}
         <FormLayout
           op={op}
-          recordCfg={loginConfig[op] as RecordConfig}
-          formLayout={loginConfig.layout!}
-          fields={appCfg.fields}
+          recordCfg={loginCfg?.[op] as RecordConfig}
+          formLayout={loginCfg?.layout as FormLayoutSchema}
+          fields={loginOptions.fields}
         />
 
-        <Divider />
+        {/* Separator */}
+        {loginOptions.toolbar?.upperBorder && <Divider />}
 
         {/* Toolbar */}
         <NfToolbar
@@ -93,7 +94,7 @@ export default function Login(): JSX.Element {
 
       </Stack>
 
-      {appCfg.topControls?.themeSwitch &&
+      {appCfg.login.themeSwitch &&
         <ThemeSwitch style={{ position: "absolute", top: 10, right: 10 }} />
       }
 

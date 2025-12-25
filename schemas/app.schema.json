@@ -269,11 +269,41 @@
         }
       }
     },
-    "fields": {
+    "login": {
       "type": "object",
-      "description": "Field definitions keyed by field name.",
-      "additionalProperties": {
-        "$ref": "./common.schema.json#/definitions/field"
+      "description": "Configuration for the login form.",
+      "additionalProperties": false,
+      "properties": {
+        "fullHeight": {
+          "type": "boolean",
+          "description": "If true, the form will take the full available height."
+        },
+        "width": {
+          "type": [ "string", "number" ],
+          "description": "Width of the form. Can be a number (pixels) or a string (CSS value)."
+        },
+        "themeSwitch": {
+          "type": "boolean",
+          "description": "If true, shows a theme switch control on the login form."
+        },
+        "toolbar": {
+          "type": "object",
+          "description": "Configuration for the login form toolbar.",
+          "additionalProperties": false,
+          "properties": {
+            "upperBorder": {
+              "type": "boolean",
+              "description": "If true, shows a border line above the toolbar."
+            }
+          }
+        },
+        "fields": {
+          "type": "object",
+          "description": "Field definitions for the login form.",
+          "additionalProperties": {
+            "$ref": "./common.schema.json#/definitions/field"
+          }
+        }
       }
     },
     "listViews": {
@@ -536,7 +566,7 @@
             "justify": {
               "type": "string",
               "description": "Tabs justification type.",
-              "enum": [ "flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "start", "end"]
+              "enum": [ "flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "start", "end" ]
             },
             "color": {
               "type": "string",

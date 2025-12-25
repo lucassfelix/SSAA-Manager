@@ -7,11 +7,12 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import { App, createViewLoader, AppProps, MenuConfig } from "@neofront/core";
+import { App, createViewLoader, AppProps, MenuConfig, FormDataConfig } from "@neofront/core";
 
 // App configuration imports
 import appCfg from "project/app.json";
 import menuCfg from "project/menu.json";
+import loginCfg from "project/login.json";
 import viewsCfg from "project/views/views.json";
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -32,6 +33,7 @@ root.render(
     <App
       appCfg={appCfg as AppProps}
       menuCfg={menuCfg as MenuConfig}
+      loginCfg={loginCfg as FormDataConfig}
       loadView={createViewLoader(viewsCfg.active, loaderModules)}
     />
   </BrowserRouter>

@@ -92,8 +92,16 @@ export interface AppProps {
   controls: {
     [key: string]: ToolbarItem;
   };
-  fields: {
-    [key: string]: UnifiedFieldProps;
+  login: {
+    fullHeight?: boolean;
+    width?: number;
+    themeSwitch?: boolean;
+    toolbar?: {
+      upperBorder?: boolean;
+    };
+    fields: {
+      [key: string]: UnifiedFieldProps;
+    };
   };
   listViews: ListViewsProps;
   forms: {

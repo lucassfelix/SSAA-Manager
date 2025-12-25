@@ -244,6 +244,39 @@
 				{ "label": "Fechar painel", "action": "closeFilterPanel" },
 				{ "label": "Limpar filtros", "action": "clearForm" }
 			]
+		},
+		"login": {
+			"type": "textButton",
+			"label": "Entrar",
+			"action": "login",
+			"width": "100%"
+		},
+		"forgotPassword": {
+			"type": "link",
+			"label": "Esqueci minha senha",
+			"action": "forgotPassword"
+		}
+	},
+	"login": {
+		"fullHeight": true,
+        "width": 480,
+		"themeSwitch": true,
+		"toolbar": {
+			"upperBorder": true
+		},
+		"fields": {
+			"username": {
+				"dataType": "string",
+				"label": "Nome de usuário",
+				"placeholder": "Digite seu nome de usuário",
+				"required": true
+			},
+			"passwordInput": {
+				"dataType": "passwordInput",
+				"label": "Senha",
+				"placeholder": "Digite sua senha",
+				"required": true
+			}
 		}
 	},
 	"listViews": {

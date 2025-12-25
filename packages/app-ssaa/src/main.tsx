@@ -24,7 +24,11 @@ import "./styles/app.css";
 // Vite glob import must be at module level
 const loaderModules = import.meta.glob("../project/views/*/loader.js");
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+// Reuse existing root to prevent full remount during HMR
+const container = document.getElementById("root")!;
+const root = (window as any).__nf_root || ((window as any).__nf_root = ReactDOM.createRoot(container));
+
+root.render(
   <BrowserRouter>
     <App
       appCfg={appCfg as AppProps}

@@ -3,10 +3,6 @@
     "comment": "Generated manually",
     "name": "login",
     "language": "ptBR",
-    "options": {
-        "fullHeight": true,
-        "width": 480
-    },
     "layout": {
         "sections": [
             {

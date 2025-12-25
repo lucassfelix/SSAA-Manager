@@ -24,21 +24,6 @@
       "type": "string",
       "description": "Locale code used in this file."
     },
-    "options": {
-      "type": "object",
-      "description": "General options for the form.",
-      "additionalProperties": false,
-      "properties": {
-        "fullHeight": {
-          "type": "boolean",
-          "description": "If true, the form will take the full available height."
-        },
-        "width": {
-          "type": [ "string", "number" ],
-          "description": "Width of the form. Can be a number (pixels) or a string (CSS value)."
-        }
-      }
-    },
     "layout": {
       "$ref": "./common.schema.json#/definitions/formLayout"
     },
