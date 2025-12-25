@@ -59,7 +59,7 @@
             "defaultValue": "usuario",
             "fieldWidth": 180,
             "label": "Tipo de permissão",
-            "options": { "table": "permissoes" },
+            "options": { "table": "permissoes_usuario" },
             "placeholder": "Selecione uma opção"
         },
         "email": {

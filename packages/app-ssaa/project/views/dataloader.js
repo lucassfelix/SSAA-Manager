@@ -1,5 +1,5 @@
 
-// Carrega metadados e mock data
+// Carrega os mock data
 
 import instituicoes from "./instituicoes/data.json";
 import status_instituicoes from "./instituicoes/status_instituicao.json";
@@ -48,5 +48,5 @@ export default {
   status_paciente,
 
   projetos,
-  status_projeto
+  status_projeto,
 };

@@ -6,10 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w @neofront/app-ssaa",
-    "build": "npm run build -w @neofront/app-ssaa",
+    "dev": "npm run dev -w @neofront/app-demo",
+    "build": "npm run build -w @neofront/app-demo",
     "check-schemas": "node scripts/check-schemas ./schemas --out ./check-schemas.log",
-    "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/app-ssaa/project --log ./validate-jsons-ssaa.log"
+    "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/app-demo/project --log ./validate-jsons-demo.log"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

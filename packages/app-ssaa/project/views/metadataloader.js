@@ -1,5 +1,5 @@
 
-// Carrega metadados e mock data
+// Carrega os metadados
 
 import list_instituicoes from "./instituicoes/listview.json";
 import list_usuarios from "./usuarios/listview.json";
