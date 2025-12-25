@@ -53,16 +53,6 @@
             "label": "Senha",
             "readOnly": true
         },
-        "tipo_permissao": {
-            "header": "Permissões",
-            "colWidth": 160,
-            "dataType": "select",
-            "defaultValue": "usuario",
-            "fieldWidth": 180,
-            "label": "Tipo de permissão",
-            "options": { "table": "permissoes" },
-            "placeholder": "Selecione uma opção"
-        },
         "email": {
             "header": "E-mail",
             "colWidth": 220,
@@ -133,13 +123,6 @@
             "colWidth": 40,
             "colTextAlign": "center",
             "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
-        },
-        "projetos": {
-            "icon": "clipboardText",
-            "iconColor": "var(--nf-secondary-color)",
-            "colWidth": 40,
-            "colTextAlign": "center",
-            "render": { "layout": "numericIcon", "op": "detail", "tab": "projetos" }
         }
     }
 }

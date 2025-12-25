@@ -12,7 +12,9 @@
     },
     "columns": [
         "nome",
+        "paciente_id",
         "instituicao_id",
+        "usuario_id",
         "data_criacao",
         "ultima_edicao",
         "status",

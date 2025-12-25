@@ -5,8 +5,6 @@
 		"data_criacao": "2025-01-15",
 		"ultima_edicao": "2025-02-20",
 		"status": 1,
-		"instituicao_id": 3,
-		"usuario_id": 2209,
 		"paciente_id": 1
 	},
 	{
@@ -16,8 +14,6 @@
 		"data_criacao": "2025-12-02",
 		"ultima_edicao": "2025-02-20",
 		"status": 1,
-		"instituicao_id": 1,
-		"usuario_id": 2209,
 		"paciente_id": 1
 	},
 	{
@@ -26,8 +22,6 @@
 		"data_criacao": "2025-03-10",
 		"ultima_edicao": "2025-02-20",
 		"status": 2,
-		"instituicao_id": 1,
-		"usuario_id": 2209,
 		"paciente_id": 1
 	},
 	{
@@ -36,8 +30,6 @@
 		"data_criacao": "2026-04-05",
 		"ultima_edicao": "2025-02-20",
 		"status": 1,
-		"instituicao_id": 1,
-		"usuario_id": 340,
 		"paciente_id": 6
 	},
 	{
@@ -46,8 +38,6 @@
 		"data_criacao": "2025-05-18",
 		"ultima_edicao": "2025-02-20",
 		"status": 3,
-		"instituicao_id": 6,
-		"usuario_id": 2209,
 		"paciente_id": 5
 	},
 	{
@@ -56,8 +46,6 @@
 		"data_criacao": "2025-11-20",
 		"ultima_edicao": "2025-02-20",
 		"status": 2,
-		"instituicao_id": 3,
-		"usuario_id": 195,
 		"paciente_id": 5
 	},
 	{
@@ -66,8 +54,6 @@
 		"data_criacao": "2025-07-10",
 		"ultima_edicao": "2025-02-20",
 		"status": 1,
-		"instituicao_id": 1,
-		"usuario_id": 106,
 		"paciente_id": 1
 	},
 	{
@@ -76,8 +62,6 @@
 		"data_criacao": "2025-07-10",
 		"ultima_edicao": "2025-02-20",
 		"status": 4,
-		"instituicao_id": 2,
-		"usuario_id": 2209,
 		"paciente_id": 4
 	}
 ]

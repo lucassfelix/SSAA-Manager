@@ -16,7 +16,6 @@
 		"nome_abreviado",
 		"instituicao_id",
 		"pacientes",
-		"projetos",
 		"spacer",
 		"data_criacao",
 		"data_expiracao",

@@ -54,7 +54,7 @@
         },
         "paciente_id": {
             "header": "Paciente",
-            "colWidth": 200,
+            "colWidth": 240,
             "dataType": "select",
             "fieldWidth": 240,
             "label": "Paciente",

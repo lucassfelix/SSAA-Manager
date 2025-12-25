@@ -14,9 +14,14 @@ import usuarios from "../usuarios/data.json";
 import projetos from "../projetos/data.json";
 import projetosFields from "../projetos/fields.json";
 
-// Acrescenta os registros-filhos à tabela principal
+// Acrescenta os registros-filhos à tabela principal dinamicamente
 pacientes.forEach(p => {
   p.projetos = projetos.filter(pr => pr.paciente_id === p.id);
+  p.instituicao_id = usuarios.find(u => u.id === p.usuario_id).instituicao_id;
+});
+projetos.forEach(pr => {
+  pr.usuario_id = pacientes.find(p => p.id === pr.paciente_id).usuario_id;
+  pr.instituicao_id = usuarios.find(u => u.id === pr.usuario_id).instituicao_id;
 });
 
 export default {

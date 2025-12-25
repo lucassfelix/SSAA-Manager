@@ -38,7 +38,6 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
-        
         "instituicao_id": {
             "header": "Instituição",
             "colWidth": 150,

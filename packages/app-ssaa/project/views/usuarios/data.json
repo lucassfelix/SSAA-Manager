@@ -8,7 +8,6 @@
 		"instituicao_id": 1,
 		"status": 2,
 		"senha": "1234567890",
-		"tipo_permissao": "admin",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -21,7 +20,6 @@
 		"instituicao_id": 2,
 		"senha": "1234567890",
 		"status": 1,
-		"tipo_permissao": "usuario",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -33,7 +31,6 @@
 		"email": "pedro98@google.com",
 		"instituicao_id": 3,
 		"status": 3,
-		"tipo_permissao": "usuario",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -46,7 +43,6 @@
 		"senha": "1234567890",
 		"status": 1,
 		"instituicao_id": 5,
-		"tipo_permissao": "usuario",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -58,7 +54,6 @@
 		"email": "marcelobgoulart77@yahoo.com",
 		"status": 1,
 		"instituicao_id": 7,
-		"tipo_permissao": "superusuario",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -71,7 +66,6 @@
 		"senha": "1234567890",
 		"status": 1,
 		"instituicao_id": 5,
-		"tipo_permissao": "usuario",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	}

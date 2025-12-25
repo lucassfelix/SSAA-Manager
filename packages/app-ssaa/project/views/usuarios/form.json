@@ -44,25 +44,6 @@
                         "status"
                     ]
                 }
-            },
-            {
-                "label": "Projetos",
-                "name": "projetos",
-                "icon": "clipboardText",
-                "iconColor": "var(--nf-secondary-color)",
-                "listView": {
-                    "name": "projetos",
-                    "config": {
-                        "idAccessor": "id",
-                        "nameAccessor": "nome",
-                        "rowClassAccessor": "none"
-                    },
-                    "columns": [
-                        "nome",
-                        "data_criacao",
-                        "status"
-                    ]
-                }
             }
         ]
     },

@@ -4,7 +4,6 @@
 		"nome_completo": "Carlos Alberto Silva",
 		"data_criacao": "2025-01-10",
 		"status": 2,
-		"instituicao_id": 1,
 		"usuario_id": 106
 	},
 	{
@@ -13,7 +12,6 @@
 		"username": "maricosta",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"instituicao_id": 2,
 		"usuario_id": 2209
 	},
 	{
@@ -22,8 +20,7 @@
 		"username": "pedroh98",
 		"status": 2,
 		"data_criacao": "2025-01-10",
-		"instituicao_id": 2,
-		"usuario_id": 980
+		"usuario_id": 340
 	},
 	{
 		"id": 4,
@@ -31,7 +28,6 @@
 		"username": "maria_fig",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"instituicao_id": 195,
 		"usuario_id": 340
 	},
 	{
@@ -40,7 +36,6 @@
 		"username": "mar33",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"instituicao_id": 4,
 		"usuario_id": 195
 	},
 	{
@@ -49,7 +44,6 @@
 		"username": "anafer21",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"instituicao_id": 5,
 		"usuario_id": 340
 	}
 ]

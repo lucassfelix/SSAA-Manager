@@ -9,7 +9,6 @@ import usuariosFields from "./fields.json";
 
 import status from "./data_status.json";
 import instituicoes from "../instituicoes/data.json";
-import permissoes from "./data_permissoes.json";
 import pacientes from "../pacientes/data.json";
 import pacientesFields from "../pacientes/fields.json";
 import projetos from "../projetos/data.json";
@@ -32,7 +31,6 @@ export default {
   data: {
     usuarios,
     instituicoes,
-    permissoes,
     status
   },
 };
