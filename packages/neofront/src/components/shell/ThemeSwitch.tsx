@@ -4,12 +4,17 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
+import { CSSProperties, JSX } from "react";
 import { useMantineColorScheme, Tooltip, ActionIcon } from "@mantine/core";
 
 import { useAppUI } from "context";
-import NfIcon from "../icon/NfIcon";
+import NfIcon from "@/icon/NfIcon";
 
 // #endregion
+
+interface ThemeSwitchProps {
+  style?: CSSProperties;
+}
 
 // #region ------------------------------------------------------------------------------- Component
 
@@ -17,10 +22,11 @@ import NfIcon from "../icon/NfIcon";
  * Switch between light and dark themes.
  * @returns The theme switch component.
  */
-export default function ThemeSwitch() {
+export default function ThemeSwitch(props: ThemeSwitchProps): JSX.Element {
 
   // #region Hooks and variables
 
+  const { style } = props;
   const { appCfg, userSettings, setUserSettings } = useAppUI();
   const { colorScheme, setColorScheme } = useMantineColorScheme({ keepTransitions: true });
   const switcherCfg = appCfg.topControls.themeSwitch;
@@ -43,6 +49,7 @@ export default function ThemeSwitch() {
         radius={appCfg.forms.toolbar?.iconButtons?.radius}
         aria-label={label}
         onClick={() => togggleTheme()}
+        style={style}
       >
         <NfIcon
           icon={userSettings.dark ? "sun" : "moon"}

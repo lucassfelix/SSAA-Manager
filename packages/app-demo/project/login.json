@@ -22,7 +22,7 @@
         ]
     },
     "edit": {
-        "title": "Boas-vindas ao SSAA",
-        "toolbar": [ "login" ]
+        "title": "Boas-vindas",
+        "toolbar": [ "login", "forgotPassword" ]
     }
 }

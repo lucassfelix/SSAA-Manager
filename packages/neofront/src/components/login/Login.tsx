@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { RecordConfig, useAppUI } from "context";
 import NfToolbar from "@/toolbar/Toolbar";
 import FormLayout from "@/form/FormLayout";
+import ThemeSwitch from "@/shell/ThemeSwitch";
 
 // #endregion
 
@@ -60,7 +61,13 @@ export default function Login(): JSX.Element {
   // #endregion
 
   return (
-    <Center h={fullHeight ? "100vh" : undefined} w="100%" className="nf-login">
+    <Center
+      h={fullHeight ? "100vh" : undefined}
+      w="100%"
+      className="nf-login"
+      style={{ position: "relative" }}
+    >
+
       <Stack gap="xl" w={width}>
 
         {/* Title */}
@@ -85,7 +92,13 @@ export default function Login(): JSX.Element {
         />
 
       </Stack>
+
+      {appCfg.topControls?.themeSwitch &&
+        <ThemeSwitch style={{ position: "absolute", top: 10, right: 10 }} />
+      }
+
     </Center>
+
   );
 }
 
