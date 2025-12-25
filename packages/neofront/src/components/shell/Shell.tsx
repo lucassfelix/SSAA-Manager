@@ -94,8 +94,8 @@ export default function Shell(): JSX.Element {
   const navigate = useNavigate();
   const op = currentOp as FormOperationType;
 
-  const shellCfg = appCfg.shell as ShellProps;
-  const mainControls = appCfg.topControls as TopControlProps;
+  const shellCfg = appCfg.shell;
+  const mainControls = appCfg.topControls;
   const errStr = appCfg.errorStrings;
   const expandedWidth = shellCfg.navbar.width || 240;
   const themeCfg = userSettings.dark ? appCfg.theme.darkMode : appCfg.theme.lightMode;

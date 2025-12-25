@@ -6,8 +6,7 @@
     "layout": {
         "sections": [
             {
-                "title": "Informe seus dados",
-                "initialState": "fixed",
+                "initialState": "noheader",
                 "columns": [
                     [
                         "username",
@@ -18,7 +17,7 @@
         ]
     },
     "edit": {
-        "title": "Boas-vindas ao SSAA",
+        "title": "Sistema administrativo SSAA",
         "toolbar": [ "login" ]
     }
 }

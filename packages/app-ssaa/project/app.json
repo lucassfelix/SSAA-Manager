@@ -97,7 +97,7 @@
 		"logo": {
 			"collapsedHeight": 52,
 			"expandedHeight": 52,
-			"altText": "Logotipo Hypervisual",
+			"altText": "Logotipo SSAA",
 			"link": "/"
 		}
 	},
@@ -211,8 +211,19 @@
 	},
 	"login": {
 		"fullHeight": true,
-        "width": 480,
+		"width": 480,
 		"themeSwitch": true,
+		"logo": {
+			"height": 240,
+			"width": 400,
+			"altText": "Logotipo SSAA",
+			"lightMode": {
+				"image": "logo-ssaa-light.svg"
+			},
+			"darkMode": {
+				"image": "logo-ssaa-dark.svg"
+			}
+		},
 		"toolbar": {
 			"upperBorder": true
 		},

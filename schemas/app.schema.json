@@ -286,6 +286,49 @@
           "type": "boolean",
           "description": "If true, shows a theme switch control on the login form."
         },
+        "logo": {
+          "type": "object",
+          "description": "Logo configuration for the login form.",
+          "additionalProperties": false,
+          "properties": {
+            "height": {
+              "type": "number",
+              "description": "Height of the logo image in pixels (optional)."
+            },
+            "width": {
+              "type": "number",
+              "description": "Width of the logo image in pixels (optional)."
+            },
+            "altText": {
+              "type": "string",
+              "description": "Alternative text for the logo image."
+            },
+            "lightMode": {
+              "type": "object",
+              "description": "Logo configuration for light mode.",
+              "additionalProperties": false,
+              "properties": {
+                "logo": {
+                  "type": "string",
+                  "description": "Filename of the login image to use in light mode."
+                }
+              },
+              "required": [ "logo" ]
+            },
+            "darkMode": {
+              "type": "object",
+              "description": "Logo configuration for dark mode.",
+              "additionalProperties": false,
+              "properties": {
+                "logo": {
+                  "type": "string",
+                  "description": "Filename of the login image to use in dark mode."
+                }
+              },
+              "required": [ "logo" ]
+            }
+          }
+        },
         "toolbar": {
           "type": "object",
           "description": "Configuration for the login form toolbar.",

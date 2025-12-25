@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { JSX } from "react";
-import { Center, Divider, Stack, Title } from "@mantine/core";
+import { Center, Divider, Group, Image, Stack, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 import { FormLayoutSchema, RecordConfig, useAppUI } from "context";
@@ -21,11 +21,12 @@ export default function Login(): JSX.Element {
 
   // #region Hooks and variables
 
-  const { appCfg, loginCfg } = useAppUI();
+  const { appCfg, loginCfg, userSettings } = useAppUI();
   const navigate = useNavigate();
   const loginOptions = appCfg.login;
   const fullHeight = loginOptions.fullHeight;
   const width = loginOptions.width;
+  const themeCfg = userSettings.dark ? loginOptions.logo.darkMode : loginOptions.logo.lightMode;
   const op = 'edit';  // Always "edit" for login forms
 
   // Resolve toolbar items
@@ -72,6 +73,17 @@ export default function Login(): JSX.Element {
 
         {/* Title */}
         <Title order={4}>{loginCfg?.[op]?.title}</Title>
+
+        {/* Logo */}
+        <Group justify="center">
+          <Image
+            src={appCfg.paths.images + themeCfg.image}
+            alt={loginOptions?.logo?.altText ?? "Logo"}
+            h={loginOptions?.logo?.height}
+            w={loginOptions?.logo?.width}
+            fit="contain"
+          />
+        </Group>
 
         {/* Form layout */}
         <FormLayout

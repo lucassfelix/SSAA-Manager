@@ -96,6 +96,17 @@ export interface AppProps {
     fullHeight?: boolean;
     width?: number;
     themeSwitch?: boolean;
+    logo: {
+      height?: number;
+      width?: number;
+      altText?: string;
+      lightMode: {
+        image: string;
+      };
+      darkMode: {
+        image: string;
+      };
+    };
     toolbar?: {
       upperBorder?: boolean;
     };
