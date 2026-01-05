@@ -62,13 +62,13 @@
             "placeholder": "Preencha o e-mail",
             "render": { "layout": "link", "op": "email" }
         },
-        "instituicao_id": {
-            "header": "Instituição",
+        "clinica_id": {
+            "header": "Clínica",
             "colWidth": 150,
             "dataType": "select",
             "fieldWidth": 200,
-            "label": "Instituição",
-            "options": { "table": "instituicoes", "valueAccessor": "id",
+            "label": "Clínica",
+            "options": { "table": "clinicas", "valueAccessor": "id",
                 "labelAccessor": "nome_abreviado" },
             "placeholder": "Selecione uma opção"
         },

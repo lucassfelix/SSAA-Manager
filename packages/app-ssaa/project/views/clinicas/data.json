@@ -1,6 +1,16 @@
 [
 	{
 		"id": 1,
+		"nome": "Clínica Teichert",
+		"nome_abreviado": "Teichert",
+		"cnpj": "12.345.678/0001-90",
+		"data_criacao": "2020-01-10",
+		"data_expiracao": "2099-12-31",
+		"status": 1,
+		"ativo": true
+	},
+	{
+		"id": 2,
 		"nome": "Companhia AlfaDent",
 		"nome_abreviado": "AlfaDent",
 		"cnpj": "12.345.678/0001-90",
@@ -10,7 +20,7 @@
 		"ativo": true
 	},
 	{
-		"id": 2,
+		"id": 3,
 		"nome": "Beta Dentária Ltda.",
 		"nome_abreviado": "Beta Dentária",
 		"cnpj": "7765432000101",
@@ -20,16 +30,16 @@
 		"ativo": false
 	},
 	{
-		"id": 3,
-		"nome": "Delta Dentes",
-		"nome_abreviado": "Delta Dentes",
+		"id": 4,
+		"nome": "Delta Teeth Serviços Odontológicos",
+		"nome_abreviado": "Delta Teeth",
 		"cnpj": 49505234000103,
 		"data_criacao": "2021-06-10",
 		"data_expiracao": "2026-06-10",
 		"status": 3
 	},
 	{
-		"id": 4,
+		"id": 5,
 		"nome": "Clínica Gamalon Solutions",
 		"nome_abreviado": "Gamalon",
 		"cnpj": "15.987.654/0001-32",
@@ -38,7 +48,7 @@
 		"status": 1
 	},
 	{
-		"id": 5,
+		"id": 6,
 		"nome": "ZetaTech Odontologia Avançada",
 		"nome_abreviado": "ZetaTech",
 		"cnpj": 76000187,
@@ -47,7 +57,7 @@
 		"status": 1
 	},
 	{
-		"id": 6,
+		"id": 7,
 		"nome": "Sigma Comércio e Serviços Dentários Ltda.",
 		"nome_abreviado": "Sigma",
 		"cnpj": "92.834.352/0001-08",
@@ -56,7 +66,7 @@
 		"status": 3
 	},
 	{
-		"id": 7,
+		"id": 8,
 		"nome": "Ômega Serviços Odontológicos Integrados",
 		"nome_abreviado": "Ômega",
 		"cnpj": "9.213.671/0001-09",

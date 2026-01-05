@@ -17,7 +17,7 @@
                                 "status"
                             ],
                             [
-                                [ "data_criacao", "usuario_id", "instituicao_id" ]
+                                [ "data_criacao", "usuario_id", "clinica_id" ]
                             ]
                         ]
                     }
@@ -37,7 +37,7 @@
                     },
                     "columns": [
                         "nome",
-                        "instituicao_id",
+                        "clinica_id",
                         "data_criacao",
                         "status"
                     ]

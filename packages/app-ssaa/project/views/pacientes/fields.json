@@ -38,13 +38,13 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
-        "instituicao_id": {
-            "header": "Instituição",
+        "clinica_id": {
+            "header": "Clínica",
             "colWidth": 150,
             "dataType": "select",
             "fieldWidth": 200,
-            "label": "Instituição",
-            "options": { "table": "instituicoes", "valueAccessor": "id",
+            "label": "Clínica",
+            "options": { "table": "clinicas", "valueAccessor": "id",
                 "labelAccessor": "nome_abreviado" },
             "placeholder": "Selecione uma opção",
             "readOnly": true

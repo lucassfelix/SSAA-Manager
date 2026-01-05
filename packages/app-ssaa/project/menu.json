@@ -2,8 +2,8 @@
     "$schema": "../../../schemas/menu.schema.json",
     "items": [
         {
-            "name": "instituicoes",
-            "label": "Instituições",
+            "name": "clinicas",
+            "label": "Clínicas",
             "icon": "buildings"
         },
         {

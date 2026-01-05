@@ -13,7 +13,7 @@
                     ],
                     [
                         [ "data_criacao", "ultima_edicao" ],
-                        [ "instituicao_id", "status" ]
+                        [ "clinica_id", "status" ]
                     ]
                 ]
             }

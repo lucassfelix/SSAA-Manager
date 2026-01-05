@@ -13,7 +13,7 @@
 	},
 	"columns": [
 		"nome_completo",
-		"instituicao_id",
+		"clinica_id",
 		"projetos",
 		"spacer",
 		"usuario_id",

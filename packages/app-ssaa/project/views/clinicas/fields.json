@@ -1,12 +1,12 @@
 {
     "$schema": "../../../../../schemas/fields.schema.json",
     "comment": "Generated from listview.json and form.json",
-    "name": "instituicoes",
+    "name": "clinicas",
     "language": "ptBR",
     "strings": {
-        "singular": "instituição",
-        "plural": "instituições",
-        "theItem": "a instituição"
+        "singular": "clínica",
+        "plural": "clínicas",
+        "theItem": "a clínica"
     },
     "fields": {
         "id": {
@@ -24,8 +24,8 @@
             "colWidth": "100%",
             "dataType": "string",
             "fieldWidth": "70%",
-            "label": "Nome da instituicao",
-            "placeholder": "Nome completo da instituicao",
+            "label": "Nome da clínica",
+            "placeholder": "Nome completo da clínica",
             "required": true,
             "render": { "layout": "link", "op": "detail" }
         },
@@ -35,7 +35,7 @@
             "dataType": "string",
             "fieldWidth": 240,
             "label": "Nome abreviado",
-            "placeholder": "Nome curto da instituicao",
+            "placeholder": "Nome curto da clínica",
             "required": true
         },
         "cnpj": {
@@ -43,7 +43,7 @@
             "fieldWidth": 180,
             "label": "CNPJ",
             "mask": { "pattern": "00.000.000/0000-00", "digits": 14 },
-            "placeholder": "CNPJ da instituicao"
+            "placeholder": "CNPJ da clínica"
         },
         "data_criacao": {
             "colStyles": "sm",

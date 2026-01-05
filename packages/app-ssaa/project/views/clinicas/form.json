@@ -1,7 +1,7 @@
 {
     "$schema": "../../../../../schemas/form.schema.json",
     "comment": "Generated manually",
-    "name": "instituicoes",
+    "name": "clinicas",
     "language": "ptBR",
     "layout": {
         "tabs": [
@@ -64,15 +64,15 @@
         ]
     },
     "edit": {
-        "title": "Instituição {name}",
+        "title": "Clínica {name}",
         "toolbar": [ "send", "cancel" ]
     },
     "add": {
-        "title": "Nova instituição",
+        "title": "Nova clínica",
         "toolbar": [ "send", "cancel" ]
     },
     "detail": {
-        "title": "Instituição {name}",
+        "title": "Clínica {name}",
         "toolbar": [ "close" ]
     }
 }

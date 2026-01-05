@@ -1,8 +1,8 @@
 
 // Carrega os mock data
 
-import instituicoes from "./instituicoes/data.json";
-import status_instituicoes from "./instituicoes/status_instituicao.json";
+import clinicas from "./clinicas/data.json";
+import status_clinicas from "./clinicas/status_clinica.json";
 
 import usuarios from "./usuarios/data.json";
 import status_usuario from "./usuarios/status_usuario.json";
@@ -16,13 +16,13 @@ import status_projeto from "./projetos/status_projeto.json";
 // Acrescenta dinamicamente registros-filhos e campos adicionais às tabelas
 
 projetos.forEach(pr => {
-  pr.usuario_id = pacientes.find(p => p.id === pr.paciente_id).usuario_id;
-  pr.instituicao_id = usuarios.find(u => u.id === pr.usuario_id).instituicao_id;
+  pr.usuario_id = pacientes.find(p => p.id === pr.paciente_id)?.usuario_id;
+  pr.clinica_id = usuarios.find(u => u.id === pr.usuario_id)?.clinica_id;
 });
 
 pacientes.forEach(p => {
   p.projetos = projetos.filter(pr => pr.paciente_id === p.id);
-  p.instituicao_id = usuarios.find(u => u.id === p.usuario_id).instituicao_id;
+  p.clinica_id = usuarios.find(u => u.id === p.usuario_id)?.clinica_id;
 });
 
 usuarios.forEach(u => {
@@ -30,16 +30,16 @@ usuarios.forEach(u => {
   u.projetos = projetos.filter(i => i.usuario_id === u.id);
 });
 
-instituicoes.forEach(i => {
-  i.usuarios = usuarios.filter(u => u.instituicao_id === i.id);
+clinicas.forEach(i => {
+  i.usuarios = usuarios.filter(u => u.clinica_id === i.id);
   i.usuarios.forEach(u => {
     i.pacientes = (i.pacientes || []).concat(pacientes.filter(p => p.usuario_id === u.id));
   });
 });
 
 export default {
-  instituicoes,
-  status_instituicoes,
+  clinicas,
+  status_clinicas,
 
   usuarios,
   status_usuario,

@@ -1,11 +1,23 @@
 [
 	{
-		"id": 106,
-		"nome_completo": "João Luís Machado Ayres Filho",
-		"nome_abreviado": "João Luís Filho",
+		"id": 1,
+		"nome_completo": "Ruy Teichert Filho",
+		"nome_abreviado": "Ruy Teichert Fº",
+		"username": "ruy_teichert",
+		"email": "ruyteichert@gmail.com",
+		"clinica_id": 1,
+		"status": 1,
+		"senha": "1234567890",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2099-12-31"
+	},
+	{
+		"id": 107,
+		"nome_completo": "João Carlos Ayres Guimarães",
+		"nome_abreviado": "João Carlos Guimarães",
 		"username": "jayres",
 		"email": "joao.ayres18@uol.com.br",
-		"instituicao_id": 1,
+		"clinica_id": 8,
 		"status": 2,
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
@@ -17,7 +29,7 @@
 		"nome_abreviado": "Mariana Duarte",
 		"username": "maricosta",
 		"email": "mari_costa@ig.com.br",
-		"instituicao_id": 2,
+		"clinica_id": 2,
 		"senha": "1234567890",
 		"status": 1,
 		"data_criacao": "2025-01-10",
@@ -29,7 +41,7 @@
 		"nome_abreviado": "Pedro Machado",
 		"username": "pedroh98",
 		"email": "pedro98@google.com",
-		"instituicao_id": 3,
+		"clinica_id": 3,
 		"status": 3,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
@@ -42,7 +54,7 @@
 		"email": "marifigueira@google.com",
 		"senha": "1234567890",
 		"status": 1,
-		"instituicao_id": 5,
+		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -53,7 +65,7 @@
 		"username": "mar33",
 		"email": "marcelobgoulart77@yahoo.com",
 		"status": 1,
-		"instituicao_id": 7,
+		"clinica_id": 7,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	},
@@ -65,7 +77,7 @@
 		"email": "anaschneider21@uol.com.br",
 		"senha": "1234567890",
 		"status": 1,
-		"instituicao_id": 5,
+		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31"
 	}

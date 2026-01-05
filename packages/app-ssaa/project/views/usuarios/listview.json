@@ -14,7 +14,7 @@
 	"columns": [
 		"nome_completo",
 		"nome_abreviado",
-		"instituicao_id",
+		"clinica_id",
 		"pacientes",
 		"spacer",
 		"data_criacao",

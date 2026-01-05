@@ -18,7 +18,7 @@
                                 "email"
                             ],
                             [
-                                "instituicao_id",
+                                "clinica_id",
                                 [ "data_criacao", "data_expiracao" ],
                                 [ "status", "senha" ]
                             ]

@@ -1,7 +1,7 @@
 {
     "$schema": "../../../../schemas/views.schema.json",
     "active": [
-        "instituicoes",
+        "clinicas",
         "usuarios",
         "pacientes",
         "projetos"
