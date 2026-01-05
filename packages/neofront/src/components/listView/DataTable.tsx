@@ -43,6 +43,23 @@ interface NfDataTableProps {
 
 // #region ------------------------------------------------------------------------------- Functions
 
+function getRelativeTime(date: any, language: string): string {
+
+  const targetDate = dayjs(date);
+
+  if (Math.abs((dayjs()).diff(targetDate, 'year')) >= 500) {
+    switch(language) {
+      case 'pt-br':
+      case 'es-419':
+        return 'nunca';
+      default:
+        return 'never';
+    }
+  }
+
+  return targetDate.fromNow();
+}
+
 function getColumns(
   appCfg: AppProps,
   tblCfg: ListViewProps,
@@ -332,7 +349,7 @@ function getColumns(
 
     function renderDateCell(value: string | number): ReactNode {
       if (render?.format === 'relative') {
-        return renderSingleCell((dayjs(value)).fromNow(), styles, undefined);
+        return renderSingleCell(getRelativeTime(value, appCfg.language), styles, undefined);
       }
       return renderSingleCell((dayjs(value)).format(String(render?.format ??
         appCfg.strings.defaultDateFormat ?? 'YYYY-MM-DD')), styles, undefined);

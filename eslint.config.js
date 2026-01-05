@@ -39,6 +39,7 @@ export default defineConfig([
           "ForOfStatement": "always",
           "ForStatement": "always",
           "SwitchStatement": "always",
+          "SwitchCase": { "consistent": true },
           "WhileStatement": "always",
           "TryStatementBlock": "always",
           "TryStatementHandler": "always"

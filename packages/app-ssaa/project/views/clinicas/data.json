@@ -5,7 +5,7 @@
 		"nome_abreviado": "Teichert",
 		"cnpj": "12.345.678/0001-90",
 		"data_criacao": "2020-01-10",
-		"data_expiracao": "2099-12-31",
+		"data_expiracao": "9999-12-31",
 		"status": 1,
 		"ativo": true
 	},

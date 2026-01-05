@@ -42,16 +42,17 @@ export function setDocumentTitle(appCfg: AppProps, currentView: string,
       }
       break;
     case 'add':
-      if (viewResult?.form.add.title) {
+      if (viewResult?.form.add?.title) {
         pageName = viewResult?.form.add.title;
       }
       break;
-    default:  // listView
+    default: { // listView
       const viewTitle = listView?.toolbar?.find((it) => it.type === 'title');
       if (viewTitle?.text) {
         pageName = viewTitle.text;
       }
       break;
+    }
   }
 
   // Build title from template

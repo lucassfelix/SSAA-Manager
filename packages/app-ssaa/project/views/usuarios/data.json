@@ -9,7 +9,7 @@
 		"status": 1,
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2099-12-31"
+		"data_expiracao": "9999-12-31"
 	},
 	{
 		"id": 107,
