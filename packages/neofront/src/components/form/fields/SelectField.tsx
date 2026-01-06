@@ -5,7 +5,8 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { useState } from 'react';
-import { ComboboxItem, InputBase, Select, MultiSelect, type ComboboxData } from '@mantine/core';
+import { ComboboxItem, Group, InputBase, Select, MultiSelect, Pill } from '@mantine/core';
+import { type ComboboxData } from '@mantine/core';
 
 import { FormFieldProps, useAppUI } from 'context';
 import NfIcon from '@/icon/NfIcon';
@@ -39,34 +40,47 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
     return initNorm != null ? String(initNorm) : null;
   });
 
-  if(!options) {
+  if (!options) {
     console.warn(`SelectField: No options provided for field '${name}'. Make sure the relevant tables are imported in loader.js.`);
   }
 
   // If select field is read-only, render as text field showing the option label
   if (readOnly) {
-    const initValue = multiple ? (
-      (Array.isArray(initNorm) ? initNorm : (initNorm != null ? [initNorm] : []))
-        .map(v => options?.find(o => String(o.value) === String(v))?.label ?? String(v))
-        .join(', ')
-    ) : (
-      options?.find(o => String(o.value) === String(initNorm))?.label ?? (initNorm != null ? String(initNorm) : undefined)
-    );
-    return (
+    const initLabels = (Array.isArray(initNorm) ? initNorm : (initNorm != null ? [initNorm] : []))
+      .map(v => options?.find(o => String(o.value) === String(v))?.label ?? String(v));
+
+    const initValue = options?.find(o => String(o.value) === String(initNorm))?.label ??
+      (initNorm != null ? String(initNorm) : undefined);
+
+    return multiple ? (
       <InputBase
-          name= {name}
-          label={label}
-          size={size}
-          readOnly
-          defaultValue={initValue}
-          w={width}
-          className="nf-field nf-readonly"
+        component="div"
+        label={label}
+        size={size}
+        w={width}
+        className="nf-field nf-readonly"
+      >
+        <Group gap={6} style={{ flexWrap: 'wrap', height: '100%' }}>
+          {initLabels.map((txt, idx) => (
+            <Pill key={`${name}-${idx}`} variant="contrast">{txt}</Pill>
+          ))}
+        </Group>
+      </InputBase>
+    ) : (
+      <InputBase
+        name={name}
+        label={label}
+        size={size}
+        w={width}
+        readOnly
+        defaultValue={initValue}
+        className="nf-field nf-readonly"
       />
     );
   }
 
   // Make sure values are in correct format
-  const data = (options ?? [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
+  const data = (options ?? [{ value: 1, label: "(Empty)" }])?.flatMap((o) => {
     const v = String(o.value);
     if (required && v === clearValue) {
       console.warn(`SelectField: '${clearValue}' should not be used as a regular option value.`);

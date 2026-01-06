@@ -106,14 +106,6 @@ tr:hover .nf-actions-toolbar {
 
 /* #region ------------------------------------------------------------------ Form element styles */
 
-/* Read-only field styles */
-.nf-light .nf-readonly input {
-  background-color: #7585aa50;
-}
-.nf-dark .nf-readonly input {
-  background-color: #4d5d8050;
-}
-
 /* Password field styles */
 .nf-password input {
   font-size: 150%;

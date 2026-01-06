@@ -155,14 +155,6 @@ tr:hover .nf-actions-toolbar {
   background-color: var(--mantine-color-teal-8);
 }
 
-/* Read-only field styles */
-.nf-light .nf-readonly input {
-  background-color: #7585aa50;
-}
-.nf-dark .nf-readonly input {
-  background-color: #4d5d8050;
-}
-
 /* Accordion form element styles */
 .mantine-Accordion-control {
   margin-bottom: 0;

@@ -88,13 +88,13 @@
 }
 
 /* Read-only field styles */
-.nf-readonly input {
+.nf-readonly .mantine-Input-input {
   border-color: transparent;
 }
-.nf-light .nf-readonly input {
+.nf-light .nf-readonly .mantine-Input-input {
   background-color: var(--mantine-color-gray-light-hover);
 }
-.nf-dark .nf-readonly input {
+.nf-dark .nf-readonly .mantine-Input-input {
   background-color: var(--mantine-color-gray-outline-hover);
 }
 
