@@ -19,6 +19,7 @@
 		"spacer",
 		"data_criacao",
 		"data_expiracao",
+		"ativa",
 		"actions"
 	],
 	"actions": [ "record_edit", "record_delete" ],

@@ -12,7 +12,7 @@
                     {
                         "initialState": "noheader",
                         "columns": [
-                            [ "nome", "nome_abreviado" ],
+                            [ "nome", "nome_abreviado", "ativa" ],
                             [
                                 [ "data_criacao", "data_expiracao" ],
                                 "cnpj"

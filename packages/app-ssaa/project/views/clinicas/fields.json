@@ -47,7 +47,7 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "header": "Criado",
+            "header": "Criada",
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
@@ -66,6 +66,14 @@
             "placeholder": "Selecione",
             "render": { "layout": "date", "format": "relative" },
             "required": true
+        },
+        "ativa": {
+            "header": "Ativa",
+            "colWidth": 60,
+            "dataType": "boolean",
+            "fieldWidth": 80,
+            "label": "Ativa",
+            "render": { "layout": "booleanIcon" }
         },
         "actions": {
             "colTextAlign": "center",

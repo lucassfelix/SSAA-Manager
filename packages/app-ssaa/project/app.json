@@ -258,7 +258,7 @@
 			"wrapperSize": "md",
 			"wrapperBooleanWidth": 50,
 			"booleanIconsSize": 26,
-			"booleanIconsStroke": 1
+			"booleanIconsStroke": 2
 		},
 		"filterPanel": {
 			"labelPosition": "top",

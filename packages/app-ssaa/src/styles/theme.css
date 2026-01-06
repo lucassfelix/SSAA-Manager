@@ -58,6 +58,20 @@ header h4 {
   font-weight: 600;
 }
 
+/* Boolean icon styles */
+.nf-light .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-teal-6);
+}
+.nf-light .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-6);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-green-4);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-4);
+}
+
 /* Wrapper (badge) styles */
 .mantine-Badge-root.nf-default {
   background-color: transparent;

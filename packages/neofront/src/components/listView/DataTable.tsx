@@ -282,6 +282,9 @@ function getColumns(
     }
 
     function renderBooleanWrapper(value?: boolean): ReactNode {
+      if(value === undefined || value === null) {
+        return '';
+      }
       return (
         <Badge
           color={value ? (isDark ? 'green' : 'teal') : (isDark ? 'red' : 'gray')}
@@ -294,6 +297,9 @@ function getColumns(
     }
 
     function renderBooleanIcon(value?: boolean): ReactNode {
+      if(value === undefined || value === null) {
+        return '';
+      }
       return (
         <Box mt={-2} mb={-7} className={`nf-boolean-icon nf-boolean-${value ? 'true' : 'false'}`}>
           <NfIcon
@@ -305,6 +311,13 @@ function getColumns(
       );
     }
 
+    function renderBooleanValue(value?: boolean): ReactNode {
+      if(value === undefined || value === null) {
+        return '';
+      }
+      return String(value ? appCfg.strings.yes : appCfg.strings.no);
+    }
+
     function renderImage(value: string): ReactNode {
       return (
         <Image
@@ -312,10 +325,6 @@ function getColumns(
           src={value}
         />
       );
-    }
-
-    function renderBooleanValue(value?: boolean): ReactNode {
-      return String(value ? appCfg.strings.yes : appCfg.strings.no);
     }
 
     function renderLinkCell(value: any, record: Record<string, any>): ReactNode {
