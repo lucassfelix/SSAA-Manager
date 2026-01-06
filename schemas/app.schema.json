@@ -282,6 +282,11 @@
           "type": [ "string", "number" ],
           "description": "Width of the form. Can be a number (pixels) or a string (CSS value)."
         },
+        "alignItems": {
+          "type": "string",
+          "description": "Alignment of the form contents.",
+          "enum": [ "flex-start", "center", "flex-end" ]
+        },
         "themeSwitch": {
           "type": "boolean",
           "description": "If true, shows a theme switch control on the login form."

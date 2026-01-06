@@ -4,7 +4,7 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { JSX } from "react";
+import { CSSProperties, JSX } from "react";
 import { Group, Stack, SimpleGrid } from "@mantine/core";
 
 import { RecordConfig, UnifiedFieldProps, useAppUI, FormFieldProps, SelectFieldOption } from "context";
@@ -32,6 +32,7 @@ interface FormLayoutProps {
   record?: Record<string, any>;
   formLayout: FormLayoutSchema;
   fields?: Record<string, UnifiedFieldProps>;
+  style?: CSSProperties;
 }
 
 // #endregion
@@ -42,7 +43,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { op, recordCfg, record, formLayout, fields } = props;
+  const { op, recordCfg, record, formLayout, fields, style } = props;
   const { appCfg, currentView, viewResult } = useAppUI();
 
   if (!recordCfg) {
@@ -141,7 +142,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
   // #endregion
 
   return (
-    <Stack gap={appCfg.forms.verticalGap}>
+    <Stack gap={appCfg.forms.verticalGap} style={style}>
 
       {/* Header row, if any */}
 

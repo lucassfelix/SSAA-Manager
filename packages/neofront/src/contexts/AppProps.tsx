@@ -95,6 +95,7 @@ export interface AppProps {
   login: {
     fullHeight?: boolean;
     width?: number;
+    alignItems?: 'flex-start' | 'center' | 'flex-end';
     themeSwitch?: boolean;
     logo?: {
       height?: number;

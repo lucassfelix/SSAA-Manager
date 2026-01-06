@@ -212,6 +212,7 @@
 	"login": {
 		"fullHeight": true,
 		"width": 480,
+		"alignItems": "center",
 		"themeSwitch": true,
 		"logo": {
 			"height": 240,

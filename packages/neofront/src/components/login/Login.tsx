@@ -25,7 +25,6 @@ export default function Login(): JSX.Element {
   const navigate = useNavigate();
   const loginOptions = appCfg.login;
   const fullHeight = loginOptions.fullHeight;
-  const width = loginOptions.width;
   const themeCfg = userSettings.dark ? loginOptions.logo?.darkMode : loginOptions.logo?.lightMode;
   const op = 'edit';  // Always "edit" for login forms
 
@@ -69,14 +68,18 @@ export default function Login(): JSX.Element {
       style={{ position: "relative" }}
     >
 
-      <Stack gap="xl" w={width}>
+      <Stack
+        gap="xl"
+        w={loginOptions.width}
+        style={{ alignItems: loginOptions.alignItems ?? 'flex-start' }}
+      >
 
         {/* Title */}
         <Title order={4}>{loginCfg?.[op]?.title}</Title>
 
         {/* Logo */}
         {loginOptions.logo && (
-          <Group justify="center">
+          <Group justify="center" style={{ width: '100%' }}>
             <Image
               src={appCfg.paths.images + themeCfg?.image}
               alt={loginOptions?.logo?.altText ?? "Logo"}
@@ -93,6 +96,7 @@ export default function Login(): JSX.Element {
           recordCfg={loginCfg?.[op] as RecordConfig}
           formLayout={loginCfg?.layout as FormLayoutSchema}
           fields={loginOptions.fields}
+          style={{ width: '100%' }}
         />
 
         {/* Separator */}
@@ -103,7 +107,7 @@ export default function Login(): JSX.Element {
           items={resolvedToolbarItems}
           cfg={{ ...appCfg.toolbars, ...appCfg.forms.toolbar }}
           onAction={handleAction}
-          style={{ flexDirection: 'column' }}
+          style={{ width: '100%', flexDirection: 'column' }}
         />
 
       </Stack>
@@ -113,7 +117,6 @@ export default function Login(): JSX.Element {
       }
 
     </Center>
-
   );
 }
 
