@@ -139,6 +139,9 @@ export default function NfForm(props: FormProps): JSX.Element {
         console.log(`Action: ${action}`);
         navigateToListView();
         break;
+      case 'edit':
+        navigate(`/?v=${currentView}&op=edit&id=${currentRecordId}`);
+        break;
       case 'previous':
         navigateToAdjacent(-1);
         break;

@@ -21,6 +21,11 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   const { name, enabled, label, initialValue, width, size, required, readOnly, placeholder,
     options, multiple } = props;
 
+  const { appCfg } = useAppUI();
+  const formsCfg = appCfg.forms ?? {};
+  const clearValue = formsCfg.clearSelectionValue ?? "__clear_selection__";
+  const selectionCheck = formsCfg.selectionCheck ?? false;
+
   // Controlled value state
   const raw: any = initialValue as any;
   const initNorm = (raw && typeof raw === 'object' && !Array.isArray(raw)) ? (raw.id ?? raw.value ?? null) : raw;
@@ -60,11 +65,6 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
     );
   }
 
-  const { appCfg } = useAppUI();
-  const formsCfg = appCfg.forms ?? {};
-  const clearValue = formsCfg.clearSelectionValue ?? "__clear_selection__";
-  const selectionCheck = formsCfg.selectionCheck ?? false;
-
   // Make sure values are in correct format
   const data = (options ?? [{value: 1, label: "(Empty)"}])?.flatMap((o) => {
     const v = String(o.value);
@@ -89,7 +89,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
 
     return selectionCheck ? <>
       <NfIcon
-        icon={option.value === value ? 'check' : null}
+        icon={isSelected ? 'check' : null}
         size={16}
         stroke={3}
         style={{ opacity: 0.5 }}

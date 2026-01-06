@@ -73,6 +73,6 @@
     },
     "detail": {
         "title": "Clínica {name}",
-        "toolbar": [ "close" ]
+        "toolbar": [ "edit", "close" ]
     }
 }

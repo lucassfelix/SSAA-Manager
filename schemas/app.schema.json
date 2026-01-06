@@ -997,10 +997,6 @@
           "type": "boolean",
           "description": "Whether this control is the default action (e.g. primary form button)."
         },
-        "link": {
-          "type": "string",
-          "description": "Optional navigation link for the control."
-        },
         "items": {
           "type": "array",
           "description": "Optional nested menu items for dropdown controls.",

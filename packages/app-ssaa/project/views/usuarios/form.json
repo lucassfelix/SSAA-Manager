@@ -57,6 +57,6 @@
     },
     "detail": {
         "title": "Usuário {name}",
-        "toolbar": [ "close" ]
+        "toolbar": [ "edit", "close" ]
     }
 }
