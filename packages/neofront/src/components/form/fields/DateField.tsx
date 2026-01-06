@@ -34,7 +34,7 @@ export default function NfDateField({ props }: { props: FormFieldProps }) {
           readOnly
           defaultValue={dayjs(initialValue).format(dateFmt)}
           w={width}
-          className="nf-field nf-readonly"
+          className={clsx('nf-field nf-readonly', required ? 'nf-required' : '' )}
           rightSection={<NfIcon icon="calendar" size={20} stroke={2} />}
       />
     );
@@ -53,7 +53,7 @@ export default function NfDateField({ props }: { props: FormFieldProps }) {
       placeholder={readOnly ? undefined : placeholder}
       defaultValue={initialValue}
       w={width}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '')}
+      className={clsx('nf-field', required ? 'nf-required' : '')}
       wrapperProps={{ 'data-field-props': name }}
       valueFormat={dateFmt}
       clearable={!required}

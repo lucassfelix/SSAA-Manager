@@ -43,7 +43,7 @@ export default function NfPasswordInputField({ props }: { props: FormFieldProps 
       placeholder={readOnly ? undefined : placeholder}
       defaultValue={defValue}
       w={width}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '')}
+      className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '')}
       wrapperProps={{ 'data-field-props': name }}
       visibilityToggleIcon={({ reveal }) =>
         <Tooltip label={reveal ? appCfg.strings.hidePassword : appCfg.strings.showPassword}>

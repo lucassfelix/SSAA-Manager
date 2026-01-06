@@ -10,7 +10,7 @@
 	},
 	{
 		"id": 2,
-		"nome": "Companhia AlfaDent",
+		"nome": "Companhia AlfaDent de Odontologia",
 		"nome_abreviado": "AlfaDent",
 		"cnpj": "12.345.678/0001-90",
 		"data_criacao": "2020-01-15",
@@ -54,7 +54,7 @@
 	},
 	{
 		"id": 7,
-		"nome": "Sigma Comércio e Serviços Dentários Ltda.",
+		"nome": "Sigma Comércio e Serviços Dentários",
 		"nome_abreviado": "Sigma",
 		"cnpj": "92.834.352/0001-08",
 		"data_criacao": "2021-06-10",

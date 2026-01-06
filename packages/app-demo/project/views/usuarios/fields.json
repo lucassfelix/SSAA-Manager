@@ -4,9 +4,9 @@
     "name": "usuarios",
     "language": "ptBR",
     "strings": {
-        "singular": "produto",
-        "plural": "produtos",
-        "theItem": "o produto"
+        "singular": "usuário",
+        "plural": "usuários",
+        "theItem": "o usuário"
     },
     "fields": {
         "id": {
@@ -79,7 +79,8 @@
             "footer": "{unique} empresas",
             "label": "Empresa",
             "options": { "table": "empresas", "valueAccessor": "id", "labelAccessor": "empresa.nome_abreviado" },
-            "placeholder": "Selecione uma opção"
+            "placeholder": "Selecione uma opção",
+            "required": true
         },
         "ativo": {
             "colTextAlign": "center",

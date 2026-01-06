@@ -39,7 +39,9 @@ export default function NfTextField({ props }: { props: FormFieldProps }) {
       placeholder={readOnly ? undefined : placeholder}
       defaultValue={defValue}
       w={width}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '', isPassword ? 'nf-password' : '')}
+      className={clsx('nf-field', readOnly ? "nf-readonly" : '', isPassword ? 'nf-password' : '',
+        required ? 'nf-required' : ''
+      )}
       component={isPassword ? "input" : (result.imaskConfig ? IMaskInput : undefined)}
       type={isPassword ? "password" : undefined}
       mask={result.imaskConfig}

@@ -40,7 +40,7 @@ export default function NfNumberField({ props }: { props: FormFieldProps }) {
       decimalScale={isDecimal ? 2 : undefined}
       fixedDecimalScale={isDecimal}
       hideControls={isDecimal}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '')}
+      className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '')}
       wrapperProps={{ 'data-field-props': name }}
       allowNegative={false}
       styles={{

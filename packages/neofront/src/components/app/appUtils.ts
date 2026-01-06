@@ -42,7 +42,7 @@ export function setDocumentTitle(appCfg: AppProps, currentView: string,
       }
       break;
     case 'add':
-      if (viewResult?.form.add?.title) {
+      if (viewResult?.form?.add?.title) {
         pageName = viewResult?.form.add.title;
       }
       break;

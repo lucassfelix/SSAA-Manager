@@ -73,7 +73,8 @@
             "dataType": "boolean",
             "fieldWidth": 80,
             "label": "Ativa",
-            "render": { "layout": "booleanIcon" }
+            "render": { "layout": "booleanIcon" },
+            "defaultValue": true
         },
         "actions": {
             "colTextAlign": "center",

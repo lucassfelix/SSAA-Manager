@@ -4,6 +4,7 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
+import { clsx } from 'clsx';
 import { useState } from 'react';
 import { ComboboxItem, Group, InputBase, Select, MultiSelect, Pill } from '@mantine/core';
 import { type ComboboxData } from '@mantine/core';
@@ -128,7 +129,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
         renderOption={({ option }) => renderOption(option)}
         data={data ?? []}
         onChange={(vals) => setValue(vals)}
-        className="nf-field"
+        className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
         wrapperProps={{ 'data-field-props': name }}
       />
     ) : (
@@ -147,7 +148,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
         renderOption={({ option }) => renderOption(option)}
         data={data ?? []}
         onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
-        className="nf-field"
+        className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
         wrapperProps={{ 'data-field-props': name }}
       />
     )
