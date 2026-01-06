@@ -165,6 +165,32 @@ export default function Shell(): JSX.Element {
     );
   }
 
+  function NavCollapseToggle() {
+    return collapsible ? (
+      <Tooltip label={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}>
+        <ActionIcon
+          size={appCfg.forms.toolbar?.iconButtons?.size}
+          radius={appCfg.forms.toolbar?.iconButtons?.radius}
+          title={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}
+          variant="subtle"
+          color="var(--mantine-primary-color-light-color)"
+          onClick={() => { handleToggleDesktop(); toggleMobile(); }}
+        >
+          <NfIcon
+            icon="menu"
+            size={iconBtnConfig?.iconSize}
+            stroke={iconBtnConfig?.iconStroke}
+            filled={iconBtnConfig?.filled}
+            style={toggleCfg?.rotateIcon ? {
+              transform: desktopOpened ? 'rotate(-180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.4s ease',
+            } : undefined}
+          />
+        </ActionIcon>
+      </Tooltip>
+    ) : <></>;
+  }
+
   // Render items using the order defined in configuration
   function itemRenderer(items: ItemRendererTypes[], collapsed: boolean): JSX.Element[] {
     if (!items || items?.length === 0) {
@@ -175,7 +201,7 @@ export default function Shell(): JSX.Element {
       const key = `header-item-${idx}-${it}`;
       switch (it) {
         case 'collapseToggle':
-          return <span key={key}>{navCollapseToggle}</span>;
+          return <NavCollapseToggle key={key} />;
         case 'logo':
           return <Logo key={key} collapsed={collapsed} />;
         case 'spacer':
@@ -198,33 +224,7 @@ export default function Shell(): JSX.Element {
     });
   }
 
-  // Navbar collapse/expand toggle
-  const navCollapseToggle = collapsible ? (
-    <Tooltip label={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}>
-      <ActionIcon
-        size={appCfg.forms.toolbar?.iconButtons?.size}
-        radius={appCfg.forms.toolbar?.iconButtons?.radius}
-        title={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}
-        variant="subtle"
-        color="var(--mantine-primary-color-light-color)"
-        onClick={() => { handleToggleDesktop(); toggleMobile(); }}
-      >
-        <NfIcon
-          icon="menu"
-          size={iconBtnConfig?.iconSize}
-          stroke={iconBtnConfig?.iconStroke}
-          filled={iconBtnConfig?.filled}
-          style={toggleCfg?.rotateIcon ? {
-            transform: desktopOpened ? 'rotate(-180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.4s ease',
-          } : undefined}
-        />
-      </ActionIcon>
-    </Tooltip>
-  ) : <></>;
-
   // Main contents rendered inside the shell
-
   const mainContents = (
     <Box p={16} h="100%" miw={800}>
       {viewResult?.listView ? (
@@ -253,6 +253,7 @@ export default function Shell(): JSX.Element {
     </Box>
   );
 
+  // Parameters for the shell layout
   const params = {
     mobileOpened: collapsible ? mobileOpened : true,
     desktopOpened: collapsible ? desktopOpened : true,
