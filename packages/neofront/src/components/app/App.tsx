@@ -85,6 +85,7 @@ export default function App(props: MainAppProps) {
     view: string;
     op: string;
     recordId: string;
+    search: string;
     result: ViewResultProps | undefined;
   }>(() => {
     // Initialize from sessionStorage if available (survives full page reloads)
@@ -96,7 +97,7 @@ export default function App(props: MainAppProps) {
     } catch (_e) {
       /* ignore */
     }
-    return { view: '', op: '', recordId: '', result: undefined };
+    return { view: '', op: '', recordId: '', search: '', result: undefined };
   });
 
   // Cache loaded state to sessionStorage for reload survival
@@ -115,6 +116,7 @@ export default function App(props: MainAppProps) {
   const currentOp = loaded.view ? loaded.op : urlOp;
   const currentRecordId = loaded.recordId;
   const viewResult = loaded.result;
+  const currentSearchParams = loaded.view ? new URLSearchParams((loaded.search || '').replace(/^\?/, '')) : searchParams;
 
   // Load view schema and data when URL view changes
   useEffect(() => {
@@ -130,10 +132,10 @@ export default function App(props: MainAppProps) {
       loader.then((result) => {
         const idAccessor = result?.listView?.config?.idAccessor ?? 'id';
         const recordId = searchParams.get(idAccessor) ?? '';
-        setLoaded({ view: urlView, op: urlOp, recordId, result });
+        setLoaded({ view: urlView, op: urlOp, recordId, search: `?${searchParams.toString()}`, result });
       });
     } else {
-      setLoaded({ view: urlView, op: urlOp, recordId: '', result: {} as ViewResultProps });
+      setLoaded({ view: urlView, op: urlOp, recordId: '', search: `?${searchParams.toString()}`, result: {} as ViewResultProps });
     }
   }, [isLogin, urlView, urlOp, setSearchParams, searchParams]);
 
@@ -184,6 +186,7 @@ export default function App(props: MainAppProps) {
           currentOp,
           viewResult: viewResult || {} as ViewResultProps,
           currentRecordId,
+          currentSearchParams,
           isReady: Boolean(loaded.view),
         }}>
           {isLogin ? <Login /> : <Shell />}

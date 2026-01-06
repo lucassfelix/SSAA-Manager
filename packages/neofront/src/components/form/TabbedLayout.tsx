@@ -6,7 +6,7 @@
 
 import { JSX } from "react";
 import type { Property } from "csstype";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MantineRadius, Tabs } from "@mantine/core";
 
 import { ListViewProps, RecordConfig, useAppUI } from "context";
@@ -54,16 +54,15 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
   // #region Hooks and variables
 
   const { op, recordCfg, record } = props;
-  const { viewResult, appCfg } = useAppUI();
+  const { viewResult, appCfg, currentSearchParams } = useAppUI();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
 
   const layout = viewResult.form.layout;
   const tabs: TabSchema[] = layout?.tabs ?? [];
   const tabsTheme = appCfg.forms.tabs ?? {};
 
   // Get active tab from URL or default to first tab's name
-  const tabParam = searchParams.get("tab");
+  const tabParam = currentSearchParams.get("tab");
   const activeTab = tabs.find(t => t.name === tabParam)?.name ?? tabs[0]?.name ?? "";
 
   // #endregion
@@ -75,7 +74,7 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
       color={tabsTheme.color || undefined}
       radius={tabsTheme.radius || "md"}
       onChange={(value) => {
-        const newParams = new URLSearchParams(searchParams);
+        const newParams = new URLSearchParams(currentSearchParams);
         newParams.set("tab", value!);
         navigate(`?${newParams.toString()}`, { replace: true });
       }}

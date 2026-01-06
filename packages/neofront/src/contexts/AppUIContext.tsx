@@ -30,6 +30,7 @@ interface AppUIContextValue {
   currentView: string;
   currentOp: string;
   currentRecordId: string | number;
+  currentSearchParams: URLSearchParams;
   viewResult: ViewResultProps;
   isReady: boolean;
 }
@@ -47,6 +48,7 @@ const AppUIContext = createContext<AppUIContextValue>({
   currentView: '',
   currentOp: '',
   currentRecordId: '',
+  currentSearchParams: new URLSearchParams(),
   viewResult: {} as AppUIContextValue["viewResult"],
   isReady: false,
 });
