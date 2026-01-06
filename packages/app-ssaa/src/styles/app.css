@@ -63,22 +63,27 @@
 .mantine-TextInput-label,
 .mantine-InputBase-label,
 .mantine-Select-label,
+.mantine-MultiSelect-label,
 .mantine-NumberInput-label,
 .mantine-DatePickerInput-label {
   padding-bottom: 0.3rem;
 }
 
 /* Select option styles */
-.mantine-Select-option .nf-clear {
+.mantine-Select-option .nf-clear,
+.mantine-MultiSelect-option .nf-clear {
   opacity: 0.5;
 }
-.mantine-Select-option .nf-selected {
+.mantine-Select-option .nf-selected,
+.mantine-MultiSelect-option .nf-selected {
   font-weight: bold;
 }
-.nf-light .mantine-Select-option .nf-selected {
+.nf-light .mantine-Select-option .nf-selected,
+.nf-light .mantine-MultiSelect-option .nf-selected {
   color: var(--mantine-color-black)
 }
-.nf-dark .mantine-Select-option .nf-selected {
+.nf-dark .mantine-Select-option .nf-selected,
+.nf-dark .mantine-MultiSelect-option .nf-selected {
   color: var(--mantine-color-white)
 }
 

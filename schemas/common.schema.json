@@ -519,6 +519,10 @@
           "type": "string",
           "description": "Dot-notation path to the label field. Defaults to 'label'.",
           "default": "label"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Optional field name used to filter options. Only options whose row[filter] matches record[filter] will be shown."
         }
       },
       "required": [ "table" ]

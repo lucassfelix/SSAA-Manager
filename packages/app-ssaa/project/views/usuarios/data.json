@@ -12,6 +12,18 @@
 		"data_expiracao": "9999-12-31"
 	},
 	{
+		"id": 2,
+		"nome_completo": "Letícia Polydoro de Albuquerque",
+		"nome_abreviado": "Letícia Polydoro",
+		"username": "leticiapoly",
+		"email": "leticia@hypervisual.com.br",
+		"clinica_id": 1,
+		"status": 1,
+		"senha": "1234567890",
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "9999-12-31"
+	},
+	{
 		"id": 107,
 		"nome_completo": "João Carlos Ayres Guimarães",
 		"nome_abreviado": "João Carlos Guimarães",

@@ -41,6 +41,7 @@ export interface FieldOptionsRef {
   table: string;
   valueAccessor?: string;
   labelAccessor?: string;
+  filter?: string;
 }
 
 /**

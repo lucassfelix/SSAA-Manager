@@ -35,7 +35,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   });
 
   if(!options) {
-    console.warn(`SelectField: No options provided for field '${name}'. You must make sure the relevant tables are imported in loader.js.`);
+    console.warn(`SelectField: No options provided for field '${name}'. Make sure the relevant tables are imported in loader.js.`);
   }
 
   // If select field is read-only, render as text field showing the option label
@@ -75,6 +75,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
     return { value: v, label: o.label ?? v };
   }) as ComboboxData | undefined;
 
+  // Renders an option item with optional selection check icon
   function renderOption(option: ComboboxItem) {
     const isSelected = multiple ? (Array.isArray(value) && value.includes(option.value)) : option.value === value;
 
@@ -110,8 +111,6 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
         placeholder={placeholder}
         value={value as string[]}
         w={width}
-        searchable
-        clearable={!required}
         renderOption={({ option }) => renderOption(option)}
         data={data ?? []}
         onChange={(vals) => setValue(vals)}
@@ -130,7 +129,7 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
         value={value as string | null}
         w={width}
         autoSelectOnBlur
-        allowDeselect={!required}
+        allowDeselect={false}
         renderOption={({ option }) => renderOption(option)}
         data={data ?? []}
         onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}

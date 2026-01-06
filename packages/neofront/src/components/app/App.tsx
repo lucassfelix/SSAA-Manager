@@ -158,6 +158,7 @@ export default function App(props: MainAppProps) {
   const theme = createTheme({
     components: {
       Select: { defaultProps: { comboboxProps: { offset: 2 } } },
+      MultiSelect: { defaultProps: { comboboxProps: { offset: 2 } } },
       DatePickerInput: { defaultProps: { popoverProps: { offset: 2 } } }
     },
     fontFamily: `${appCfg.theme.mainFontFamily || null}, ${DEFAULT_THEME.fontFamily}`,

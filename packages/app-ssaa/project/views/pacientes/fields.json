@@ -50,14 +50,15 @@
             "readOnly": true
         },
         "usuario_id": {
-            "header": "Usuário",
+            "header": "Responsável",
             "colWidth": 180,
             "dataType": "select",
             "fieldWidth": 200,
             "label": "Usuário responsável",
             "options": { "table": "usuarios", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
-            "placeholder": "Selecione uma opção"
+                "labelAccessor": "nome_abreviado", "filter": "clinica_id" },
+            "placeholder": "Selecione uma opção",
+            "required": true
         },
         "usuarios": {
             "dataType": "select",
@@ -65,7 +66,7 @@
             "fieldWidth": "100%",
             "label": "Usuários",
             "options": { "table": "usuarios", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
+                "labelAccessor": "nome_abreviado", "filter": "clinica_id" },
             "placeholder": "Selecione"
         },
         "status": {
