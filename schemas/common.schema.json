@@ -337,6 +337,10 @@
           "description": "Reference to an options table for select fields.",
           "$ref": "#/definitions/optionsRef"
         },
+        "multiple": {
+          "type": "boolean",
+          "description": "Whether a select field accepts multiple values (array)."
+        },
         "mask": {
           "$ref": "#/definitions/mask"
         },

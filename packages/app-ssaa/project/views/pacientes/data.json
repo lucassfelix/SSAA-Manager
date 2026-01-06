@@ -4,7 +4,8 @@
 		"nome_completo": "Carlos Alberto Silva",
 		"data_criacao": "2025-01-10",
 		"status": 2,
-		"usuario_id": 1
+		"usuario_id": 1,
+		"usuarios": [ 1, 107 ]
 	},
 	{
 		"id": 2,
@@ -12,7 +13,8 @@
 		"username": "maricosta",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"usuario_id": 2209
+		"usuario_id": 2209,
+		"usuarios": [ 2209, 1 ]
 	},
 	{
 		"id": 3,
@@ -20,7 +22,8 @@
 		"username": "pedroh98",
 		"status": 2,
 		"data_criacao": "2025-01-10",
-		"usuario_id": 340
+		"usuario_id": 340,
+		"usuarios": [ 340 ]
 	},
 	{
 		"id": 4,
@@ -28,7 +31,8 @@
 		"username": "maria_fig",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"usuario_id": 340
+		"usuario_id": 1,
+		"usuarios": [ 1, 40 ]
 	},
 	{
 		"id": 5,
@@ -36,7 +40,8 @@
 		"username": "mar33",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"usuario_id": 195
+		"usuario_id": 195,
+		"usuarios": [ 195 ]
 	},
 	{
 		"id": 6,
@@ -44,6 +49,7 @@
 		"username": "anafer21",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"usuario_id": 340
+		"usuario_id": 340,
+		"usuarios": [ 340, 980 ]
 	}
 ]

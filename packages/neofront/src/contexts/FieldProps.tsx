@@ -53,6 +53,7 @@ export interface UnifiedFieldProps {
   dataType: FieldDataType;
   accessor?: string;
   options?: FieldOptionsRef;
+  multiple?: boolean;
   mask?: MaskSpec;
 
   // Column-specific
@@ -94,6 +95,7 @@ export interface FormFieldProps {
   label?: string;
   mask?: MaskSpec;
   options?: SelectFieldOption[];
+  multiple?: boolean;
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;

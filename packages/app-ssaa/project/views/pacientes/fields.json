@@ -57,8 +57,16 @@
             "label": "Usuário responsável",
             "options": { "table": "usuarios", "valueAccessor": "id",
                 "labelAccessor": "nome_abreviado" },
-            "placeholder": "Selecione uma opção",
-            "readOnly": true
+            "placeholder": "Selecione uma opção"
+        },
+        "usuarios": {
+            "dataType": "select",
+            "multiple": true,
+            "fieldWidth": "100%",
+            "label": "Usuários",
+            "options": { "table": "usuarios", "valueAccessor": "id",
+                "labelAccessor": "nome_abreviado" },
+            "placeholder": "Selecione"
         },
         "status": {
             "colTextAlign": "center",

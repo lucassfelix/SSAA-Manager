@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"nome_completo": "Ruy Teichert Filho",
-		"nome_abreviado": "Ruy Teichert Fº",
+		"nome_abreviado": "Ruy Teichert Filho",
 		"username": "ruy_teichert",
 		"email": "ruyteichert@gmail.com",
 		"clinica_id": 1,
@@ -37,7 +37,7 @@
 	},
 	{
 		"id": 980,
-		"nome_completo": "Pedro Henrique Bernardes Machado",
+		"nome_completo": "Pedro Henrique de Castro Bernardes Machado Neto",
 		"nome_abreviado": "Pedro Machado",
 		"username": "pedroh98",
 		"email": "pedro98@google.com",

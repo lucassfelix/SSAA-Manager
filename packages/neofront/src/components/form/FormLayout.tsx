@@ -113,7 +113,8 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       placeholder: isFilter ? fieldDef.filterPlaceholder || fieldDef.placeholder : fieldDef.placeholder,
       enabled: fieldDef.enabled !== undefined ? fieldDef.enabled : true,
       mask: fieldDef.mask,
-      options: loadedData ?? undefined
+      options: loadedData ?? undefined,
+      multiple: fieldDef.multiple
     };
 
     switch (fieldDef.dataType) {

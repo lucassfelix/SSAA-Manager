@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { useState } from 'react';
-import { ComboboxItem, InputBase, Select, type ComboboxData } from '@mantine/core';
+import { ComboboxItem, InputBase, Select, MultiSelect, type ComboboxData } from '@mantine/core';
 
 import { FormFieldProps, useAppUI } from 'context';
 import NfIcon from '@/icon/NfIcon';
@@ -19,12 +19,20 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   // #region Hooks and variables
 
   const { name, enabled, label, initialValue, width, size, required, readOnly, placeholder,
-    options } = props;
+    options, multiple } = props;
 
   // Controlled value state
   const raw: any = initialValue as any;
-  const initNorm = (raw && typeof raw === 'object') ? (raw.id ?? raw.value ?? null) : raw;
-  const [value, setValue] = useState<string | null>(initNorm != null ? String(initNorm) : null);
+  const initNorm = (raw && typeof raw === 'object' && !Array.isArray(raw)) ? (raw.id ?? raw.value ?? null) : raw;
+  const [value, setValue] = useState<any>(() => {
+    if (multiple) {
+      if (Array.isArray(initNorm)) {
+        return initNorm.map(v => String(v));
+      }
+      return initNorm != null ? [String(initNorm)] : [];
+    }
+    return initNorm != null ? String(initNorm) : null;
+  });
 
   if(!options) {
     console.warn(`SelectField: No options provided for field '${name}'. You must make sure the relevant tables are imported in loader.js.`);
@@ -32,8 +40,13 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
 
   // If select field is read-only, render as text field showing the option label
   if (readOnly) {
-    const initValue = options?.find(o => String(o.value) ===
-      String(initNorm))?.label ?? (initNorm != null ? String(initNorm) : undefined);
+    const initValue = multiple ? (
+      (Array.isArray(initNorm) ? initNorm : (initNorm != null ? [initNorm] : []))
+        .map(v => options?.find(o => String(o.value) === String(v))?.label ?? String(v))
+        .join(', ')
+    ) : (
+      options?.find(o => String(o.value) === String(initNorm))?.label ?? (initNorm != null ? String(initNorm) : undefined)
+    );
     return (
       <InputBase
           name= {name}
@@ -63,10 +76,11 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   }) as ComboboxData | undefined;
 
   function renderOption(option: ComboboxItem) {
+    const isSelected = multiple ? (Array.isArray(value) && value.includes(option.value)) : option.value === value;
 
     const renderedOption = (
       <span className={option.value === clearValue ? 'nf-clear' : (
-        option.value === value ? 'nf-selected' : undefined
+        isSelected ? 'nf-selected' : undefined
       )}>
         {option.label}
       </span>
@@ -86,24 +100,44 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   // #endregion
 
   return (
-    <Select
-      name={name}
-      label={label}
-      size={size}
-      required={required}
-      readOnly={readOnly}
-      disabled={enabled === false}
-      placeholder={placeholder}
-      value={value}
-      w={width}
-      autoSelectOnBlur
-      allowDeselect={!required}
-      renderOption={({ option }) => renderOption(option)}
-      data={data ?? []}
-      onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
-      className="nf-field"
-      wrapperProps={{ 'data-field-props': name }}
-    />
+    multiple ? (
+      <MultiSelect
+        name={name}
+        label={label}
+        size={size}
+        required={required}
+        disabled={enabled === false}
+        placeholder={placeholder}
+        value={value as string[]}
+        w={width}
+        searchable
+        clearable={!required}
+        renderOption={({ option }) => renderOption(option)}
+        data={data ?? []}
+        onChange={(vals) => setValue(vals)}
+        className="nf-field"
+        wrapperProps={{ 'data-field-props': name }}
+      />
+    ) : (
+      <Select
+        name={name}
+        label={label}
+        size={size}
+        required={required}
+        readOnly={readOnly}
+        disabled={enabled === false}
+        placeholder={placeholder}
+        value={value as string | null}
+        w={width}
+        autoSelectOnBlur
+        allowDeselect={!required}
+        renderOption={({ option }) => renderOption(option)}
+        data={data ?? []}
+        onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
+        className="nf-field"
+        wrapperProps={{ 'data-field-props': name }}
+      />
+    )
   );
 }
 
