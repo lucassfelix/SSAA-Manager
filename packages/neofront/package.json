@@ -10,11 +10,11 @@
     "./contexts": "./src/contexts/index.ts"
   },
   "peerDependencies": {
-    "@mantine/core": "^8.3.9",
-    "@mantine/dates": "^8.3.9",
-    "@mantine/hooks": "^8.3.9",
-    "@tabler/icons-react": "^3.35.0",
-    "mantine-datatable": "^8.3.8",
+    "@mantine/core": "^8.3.11",
+    "@mantine/dates": "^8.3.11",
+    "@mantine/hooks": "^8.3.11",
+    "@tabler/icons-react": "^3.36.1",
+    "mantine-datatable": "^8.3.11",
     "react": "^19.1.1",
     "react-dom": "^19.2.1",
     "react-router-dom": "^7.10.0"
@@ -27,6 +27,6 @@
   "devDependencies": {
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1"
+    "@vitejs/plugin-react": "^5.1.2"
   }
 }
