@@ -1,0 +1,22 @@
+[
+    {
+        "value": 1,
+        "name": "usuario",
+        "label": "Usuário padrão"
+    },
+    {
+        "value": 2,
+        "name": "responsavel",
+        "label": "Responsável"
+    },
+    {
+        "value": 3,
+        "name": "administrador",
+        "label": "Administrador"
+    },
+    {
+        "value": 4,
+        "name": "superusuario",
+        "label": "Super usuário"
+    }
+]

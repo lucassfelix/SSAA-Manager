@@ -9,7 +9,8 @@
 		"status": 1,
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "9999-12-31"
+		"data_expiracao": "9999-12-31",
+		"permissoes": 2
 	},
 	{
 		"id": 2,
@@ -21,7 +22,20 @@
 		"status": 1,
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "9999-12-31"
+		"data_expiracao": "9999-12-31",
+		"permissoes": 1
+	},
+	{
+		"id": 3,
+		"nome_completo": "Rubem Pechansky",
+		"nome_abreviado": "Rubem Pechansky",
+		"username": "rpechansky",
+		"email": "pechansky@hypervisual.com.br",
+		"clinica_id": null,
+		"status": 1,
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "9999-12-31",
+		"permissoes": 4
 	},
 	{
 		"id": 107,
@@ -33,7 +47,8 @@
 		"status": 2,
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 1
 	},
 	{
 		"id": 2209,
@@ -45,7 +60,8 @@
 		"senha": "1234567890",
 		"status": 1,
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 2
 	},
 	{
 		"id": 980,
@@ -56,7 +72,8 @@
 		"clinica_id": 3,
 		"status": 3,
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 1
 	},
 	{
 		"id": 40,
@@ -68,7 +85,8 @@
 		"status": 1,
 		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 1
 	},
 	{
 		"id": 195,
@@ -79,7 +97,8 @@
 		"status": 1,
 		"clinica_id": 7,
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 2
 	},
 	{
 		"id": 340,
@@ -91,6 +110,7 @@
 		"status": 1,
 		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31"
+		"data_expiracao": "2025-12-31",
+		"permissoes": 2
 	}
 ]

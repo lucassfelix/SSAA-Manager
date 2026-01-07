@@ -109,6 +109,18 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
+        "permissoes": {
+            "colTextAlign": "center",
+            "header": "Permissões",
+            "colWidth": 150,
+            "dataType": "select",
+            "fieldWidth": 200,
+            "label": "Nível de permissão",
+            "options": { "table": "permissoes_usuario", "valueAccessor": "value",
+                "labelAccessor": "label" },
+            "placeholder": "Selecione uma opção",
+            "readOnly": true
+        },
         "actions": {
             "colTextAlign": "center",
             "colWidth": 100,
