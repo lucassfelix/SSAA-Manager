@@ -109,7 +109,7 @@
             "render": { "layout": "date", "format": "relative" },
             "required": true
         },
-        "permissoes": {
+        "tipo_permissao": {
             "colTextAlign": "center",
             "header": "Permissões",
             "colWidth": 150,

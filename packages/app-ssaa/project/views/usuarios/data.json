@@ -10,7 +10,7 @@
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "9999-12-31",
-		"permissoes": 2
+		"tipo_permissao": 2
 	},
 	{
 		"id": 2,
@@ -23,7 +23,7 @@
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "9999-12-31",
-		"permissoes": 1
+		"tipo_permissao": 1
 	},
 	{
 		"id": 3,
@@ -35,7 +35,7 @@
 		"status": 1,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "9999-12-31",
-		"permissoes": 4
+		"tipo_permissao": 4
 	},
 	{
 		"id": 107,
@@ -48,7 +48,7 @@
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 1
+		"tipo_permissao": 1
 	},
 	{
 		"id": 2209,
@@ -61,7 +61,7 @@
 		"status": 1,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 2
+		"tipo_permissao": 2
 	},
 	{
 		"id": 980,
@@ -73,7 +73,7 @@
 		"status": 3,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 1
+		"tipo_permissao": 1
 	},
 	{
 		"id": 40,
@@ -86,7 +86,7 @@
 		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 1
+		"tipo_permissao": 1
 	},
 	{
 		"id": 195,
@@ -98,7 +98,7 @@
 		"clinica_id": 7,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 2
+		"tipo_permissao": 2
 	},
 	{
 		"id": 340,
@@ -111,6 +111,6 @@
 		"clinica_id": 5,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
-		"permissoes": 2
+		"tipo_permissao": 2
 	}
 ]
