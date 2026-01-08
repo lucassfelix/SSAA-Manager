@@ -4,7 +4,7 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { ViewResultProps } from "context";
+import { FieldsConfig, ViewResultProps } from "context";
 
 // #endregion
 
@@ -132,8 +132,12 @@ function compare(op: string, a: unknown, b: unknown): boolean {
  * @param viewName The name of the view for which permissions are enforced.
  * @returns The data filtered according to the permissions.
  */
-export function enforcePermissions(permissions: PermissionsConfig, data: ViewResultProps["data"], 
-  viewName: string) {
+export function enforcePermissions(data: ViewResultProps["data"], 
+  viewName: string, permissions?: PermissionsConfig, fieldsCfg?: FieldsConfig) {
+
+  if(!permissions) {
+    return data;
+  }
 
   const op = new URLSearchParams(window.location.search).get('op');
   const isBrowse = !op;
@@ -141,7 +145,7 @@ export function enforcePermissions(permissions: PermissionsConfig, data: ViewRes
 
   const viewData = ((): ViewResultProps["data"] => {
 
-    if (!isPermissionsConfig(permissions) || (!isBrowse && !isDetail)) {
+    if (!isPermissionsConfig(permissions)) {
       return data;
     }
 
@@ -158,12 +162,11 @@ export function enforcePermissions(permissions: PermissionsConfig, data: ViewRes
     const viewPerm = role?.views?.[viewName];
     const records = data[viewName];
 
-    if (!role || !viewPerm || !Array.isArray(records)) {
+    if (!role || !viewPerm) {
       return data;
     }
-    if ((isBrowse && viewPerm?.rules?.browse === false) || (isDetail && viewPerm?.rules?.detail === false)) {
-      return { ...data, [viewName]: [] };
-    }
+
+    const blocked = (isBrowse && viewPerm?.rules?.browse === false) || (isDetail && viewPerm?.rules?.detail === false);
 
     // Evaluate predicates
     const evalPredicate = (pred: Predicate, rec: unknown) => {
@@ -184,8 +187,9 @@ export function enforcePermissions(permissions: PermissionsConfig, data: ViewRes
       if (!isPredicateObject(pred)) {
         return true;
       }
-      const a = getByPath(rec, pred.field);
+
       const raw = pred.value;
+      const a = getByPath(rec, pred.field);
       const b = typeof raw === 'string' && raw.startsWith('$user.') ? getByPath(user, raw.slice(6)) : raw;
       return compare(pred.op, a, b);
     };
@@ -209,11 +213,44 @@ export function enforcePermissions(permissions: PermissionsConfig, data: ViewRes
       }
     }
 
-    if (!preds.length) {
-      return data;
+    let nextData: ViewResultProps["data"] = data;
+
+    // Row filtering only for browse/detail
+    const canRowFilter = (isBrowse || isDetail) && Array.isArray(records);
+    if (blocked && canRowFilter) {
+      nextData = { ...nextData, [viewName]: [] };
+    } else if (preds.length && canRowFilter) {
+      nextData = { ...nextData, [viewName]: records.filter(r => preds.every(pr => evalPredicate(pr, r))) };
     }
 
-    return { ...data, [viewName]: records.filter(r => preds.every(pr => evalPredicate(pr, r))) };
+    // Select options filtering for fields with { filter }
+    const viewFields = fieldsCfg?.fields;
+    if (!viewFields || !isRecord(viewFields)) {
+      return nextData;
+    }
+
+    for (const [fieldName, fieldDef] of Object.entries(viewFields)) {
+      if (!isRecord(fieldDef) || fieldDef.dataType !== 'select' || !isRecord(fieldDef.options)) {
+        continue;
+      }
+      const rule = viewPerm?.fields?.[fieldName];
+      if (!isRecord(rule) || !isRecord(rule.filter) || typeof rule.filter.op !== 'string') {
+        continue;
+      }
+      const tableName = typeof fieldDef.options.table === 'string' ? fieldDef.options.table : null;
+      if (!tableName) {
+        continue;
+      }
+      const optRecords = nextData[tableName];
+      if (!Array.isArray(optRecords)) {
+        continue;
+      }
+      const valueAccessor = typeof fieldDef.options.valueAccessor === 'string' ? fieldDef.options.valueAccessor : 'value';
+      const pred: PredicateObject = { field: valueAccessor, op: rule.filter.op, value: rule.filter.value as PredicateValue };
+      nextData = { ...nextData, [tableName]: optRecords.filter(r => evalPredicate(pred, r)) };
+    }
+
+    return nextData;
 
   })();
 

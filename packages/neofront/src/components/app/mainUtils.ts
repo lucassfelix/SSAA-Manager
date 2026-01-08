@@ -58,7 +58,7 @@ export function createViewLoader(activeViews: string[], viewName: string, metada
     listView: metadata.listView[viewName],
     form: metadata.form[viewName],
     fieldConfig: metadata.fieldConfig,
-    data: permissions ? enforcePermissions(permissions, data, viewName) : data,
+    data: enforcePermissions(data, viewName, permissions, metadata.fieldConfig[viewName]),
   });
 }
 
