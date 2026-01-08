@@ -41,7 +41,7 @@
 			"items": [ "mainMenu" ],
 			"footerItems": [ "logo" ]
 		},
-		"userToolbar": [ { "type": "text", "text": "Usuário" }, "userMenu" ]
+		"userToolbar": [ { "type": "text", "text": "[User: {userid}]" }, "userMenu" ]
 	},
 	"menu": {
 		"items": {

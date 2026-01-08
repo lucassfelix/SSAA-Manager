@@ -13,6 +13,7 @@ import appCfg from "project/app.json";
 import menuCfg from "project/menu.json";
 import loginCfg from "project/login.json";
 import viewsCfg from "project/views/views.json";
+import permissionsCfg from "project/permissions.json";
 
 import metadata from "project/views/metadataloader.js";
 import data from "project/views/dataloader.js";
@@ -30,7 +31,8 @@ import "./styles/app.css";
       appCfg={appCfg as AppProps}
       menuCfg={menuCfg as MenuConfig}
       loginCfg={loginCfg as FormDataConfig}
-      loadView={(viewName: string) => createViewLoader(viewsCfg.active, viewName, metadata, data)}
+      loadView={(viewName: string) =>
+        createViewLoader(viewsCfg.active, viewName, metadata, data, permissionsCfg)}
     />
   </BrowserRouter>
 );

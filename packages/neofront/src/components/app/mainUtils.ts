@@ -7,6 +7,7 @@
 import ReactDOM from "react-dom/client";
 
 import { FieldsConfig, FormDataConfig, ListViewProps, ViewResultProps } from "context";
+import { enforcePermissions, PermissionsConfig } from "./enforcePermissions";
 
 // #endregion
 
@@ -14,13 +15,13 @@ import { FieldsConfig, FormDataConfig, ListViewProps, ViewResultProps } from "co
 
 interface ViewResultParams {
   listView: {
-    [key: string]: ListViewProps | any;
+    [key: string]: ListViewProps;
   };
   form: {
-    [key: string]: FormDataConfig | any;
+    [key: string]: FormDataConfig;
   };
   fieldConfig: {
-    [key: string]: FieldsConfig | any;
+    [key: string]: FieldsConfig;
   };
 }
 
@@ -38,15 +39,16 @@ export function getRoot() {
 }
 
 /**
- *  Creates a view loader function that loads view configurations based on active views.
+ * Creates a view loader function that loads view configurations based on active views.
  * @param activeViews Array of active view names.
  * @param viewName The name of the view to load.
  * @param metadata Metadata containing view configurations.
  * @param data Data associated with the views.
+ * @param permissions Optional permissions configuration for filtering data.
  * @returns A promise resolving to the view result properties or undefined if the view is not active.
  */
 export function createViewLoader(activeViews: string[], viewName: string, metadata: ViewResultParams,
-  data: Record<string, any>): Promise<ViewResultProps> | undefined {
+  data: ViewResultProps["data"], permissions?: PermissionsConfig): Promise<ViewResultProps> | undefined {
 
   if (!activeViews.includes(viewName)) {
     return undefined;
@@ -56,7 +58,7 @@ export function createViewLoader(activeViews: string[], viewName: string, metada
     listView: metadata.listView[viewName],
     form: metadata.form[viewName],
     fieldConfig: metadata.fieldConfig,
-    data,
+    data: permissions ? enforcePermissions(permissions, data, viewName) : data,
   });
 }
 

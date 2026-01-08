@@ -10,7 +10,7 @@
 		"senha": "1234567890",
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "9999-12-31",
-		"tipo_permissao": 2
+		"tipo_permissao": 3
 	},
 	{
 		"id": 2,

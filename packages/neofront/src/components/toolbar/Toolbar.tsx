@@ -167,6 +167,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       return fieldsCfg?.strings ? str
         .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
         .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
+        .replace('{userid}', sessionStorage.getItem('__nf_user_id')!)
         : str;
     }
 
@@ -186,7 +187,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
           styles={{ root: { fontSize: cfg.texts?.size } }}
           style={cfg.texts?.width ? { minWidth: cfg.texts.width } : undefined}
         >
-          {it.text}
+          {replaceVars(it.text!)}
         </Text>
       );
     }
@@ -199,7 +200,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
           styles={{ root: { fontSize: cfg.titles?.size } }}
           style={cfg.titles?.width ? { minWidth: cfg.titles.width } : undefined}
         >
-          {it.text}
+          {replaceVars(it.text!)}
         </Text>
       );
     }

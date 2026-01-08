@@ -118,8 +118,7 @@
             "label": "Nível de permissão",
             "options": { "table": "permissoes_usuario", "valueAccessor": "value",
                 "labelAccessor": "label" },
-            "placeholder": "Selecione uma opção",
-            "readOnly": true
+            "placeholder": "Selecione uma opção"
         },
         "actions": {
             "colTextAlign": "center",
