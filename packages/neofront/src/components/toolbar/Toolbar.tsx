@@ -4,7 +4,7 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { ActionIcon, Anchor, Box, Button, Divider, Group, Menu, Text, Tooltip } from "@mantine/core";
 
@@ -139,6 +139,21 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   const fieldsCfg = viewResult.fieldConfig ? viewResult.fieldConfig[currentView] :
     {} as FieldsConfig;
   const tbCfg = { ...appCfg.toolbars, ...appCfg.forms.toolbar } as ToolbarThemeProps;
+  const defaultAction = toolbarItems.find(it => it?.default && it.action)?.action;
+
+  useEffect(() => {
+    if (!defaultAction) {
+      return;
+    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        onAction?.(defaultAction);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [defaultAction, onAction]);
 
   // #endregion
 

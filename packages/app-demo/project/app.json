@@ -10,7 +10,7 @@
 		"deleteItemConfirm": "Tem certeza que você deseja excluir {theItem} {name}?"
 	},
 	"errorStrings": {
-		"noRecordsText": "Não há itens a serem exibidos"
+		"noRecordsText": "Não há itens a serem exibidos nesta tela."
 	},
 	"errorImages": {
 		"noViewType": "fruit_basket",

@@ -12,7 +12,7 @@
 		"hidePassword": "Ocultar senha"
 	},
 	"errorStrings": {
-		"noRecordsText": "Sem itens a exibir"
+		"noRecordsText": "Não há itens a exibir nesta tela."
 	},
 	"errorImages": {
 		"noViewType": "fruit_basket",
@@ -206,7 +206,8 @@
 			"type": "textButton",
 			"label": "Entrar",
 			"action": "login",
-			"width": "100%"
+			"width": "100%",
+			"default": true
 		}
 	},
 	"login": {
