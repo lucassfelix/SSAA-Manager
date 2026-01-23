@@ -75,6 +75,7 @@ header h4 {
 /* Wrapper (badge) styles */
 .mantine-Badge-root.nf-default {
   background-color: transparent;
+  color: var(--text-color);
 }
 .mantine-Badge-root.nf-success {
   background-color: var(--mantine-color-teal-8);

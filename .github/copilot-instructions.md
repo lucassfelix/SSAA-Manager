@@ -55,7 +55,5 @@ This version uses React 19.2.2 with the Mantine UI library (plus the community-c
 - Mantine DataTable (community component) reference: https://icflorescu.github.io/mantine-datatable/  # This is the DataTable component used in NeoFront
 - React 19.2.2 documentation: https://react.dev/reference/react  # Use as canonical guide for preferred React patterns
 
-## References
-
 ---
 **For AI agents:** In the current phase we are actively building the reusable React components and a metadata-driven architecture.
