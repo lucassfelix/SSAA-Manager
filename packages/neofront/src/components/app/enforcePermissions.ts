@@ -37,6 +37,7 @@ interface ViewRules {
 
 interface ViewPermissions {
   rules?: ViewRules;
+  scope?: Predicate;
   fields?: Record<string, FieldRule>;
 }
 
@@ -226,22 +227,13 @@ export function enforcePermissions(data: ViewResultProps["data"],
     if (role.scope === 'none') {
       return { ...data, [viewName]: [] };
     }
-    if (role.scope && role.scope !== 'all') {
-      preds.push(role.scope);
+    if (viewPerm.scope === 'none') {
+      return { ...data, [viewName]: [] };
     }
-
-    // Field-level filters
-    const fields = viewPerm?.fields ?? {};
-    for (const [fieldName, cfg] of Object.entries(fields)) {
-      if (typeof cfg === 'string') {
-        preds.push(cfg);
-      } else if (isRecord(cfg) && isRecord(cfg.filter) && typeof cfg.filter.op === 'string') {
-        preds.push({
-          field: fieldName,
-          op: cfg.filter.op as CompareOp,
-          value: cfg.filter.value as PredicateValue,
-        });
-      }
+    if (viewPerm.scope && viewPerm.scope !== 'all') {
+      preds.push(viewPerm.scope);
+    } else if (role.scope && role.scope !== 'all') {
+      preds.push(role.scope);
     }
 
     let nextData: ViewResultProps["data"] = data;
