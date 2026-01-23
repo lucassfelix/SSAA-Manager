@@ -25,6 +25,8 @@ interface AppUIContextValue {
   appCfg: AppProps;
   menuCfg: MenuConfig;
   loginCfg?: FormDataConfig;
+  /** Additional key/value pairs that can be passed to the context. */
+  extras?: Record<string, unknown>;
   userSettings: UserSettings;
   setUserSettings: (val: UserSettings) => void;
   currentView: string;
@@ -43,6 +45,7 @@ const AppUIContext = createContext<AppUIContextValue>({
   appCfg: {} as AppProps,
   menuCfg: { items: [] },
   loginCfg: {} as FormDataConfig,
+  extras: {},
   userSettings: {} as UserSettings,
   setUserSettings: () => {},
   currentView: '',

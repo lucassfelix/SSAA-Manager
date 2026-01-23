@@ -48,7 +48,7 @@ function getRelativeTime(date: any, language: string): string {
   const targetDate = dayjs(date);
 
   if (Math.abs((dayjs()).diff(targetDate, 'year')) >= 500) {
-    switch(language) {
+    switch (language) {
       case 'pt-br':
       case 'es-419':
         return 'nunca';
@@ -69,6 +69,7 @@ function getColumns(
   data: Record<string, unknown[]>,
   fieldConfig: Record<string, FieldsConfig>,
   fields: Record<string, UnifiedFieldProps>,
+  rules: Record<string, unknown> | undefined,
   onRequestDelete: (record: Record<string, any>) => void,
 ): DataTableColumn[] {
 
@@ -257,6 +258,9 @@ function getColumns(
       if (!op || !tableProps.idAccessor || !idVal) {
         return indicator;
       }
+      if (rules?.detail === false) {
+        return indicator;
+      }
 
       // Prepare link to record with specified operation
 
@@ -282,7 +286,7 @@ function getColumns(
     }
 
     function renderBooleanWrapper(value?: boolean): ReactNode {
-      if(value === undefined || value === null) {
+      if (value === undefined || value === null) {
         return '';
       }
       return (
@@ -297,7 +301,7 @@ function getColumns(
     }
 
     function renderBooleanIcon(value?: boolean): ReactNode {
-      if(value === undefined || value === null) {
+      if (value === undefined || value === null) {
         return '';
       }
       return (
@@ -312,7 +316,7 @@ function getColumns(
     }
 
     function renderBooleanValue(value?: boolean): ReactNode {
-      if(value === undefined || value === null) {
+      if (value === undefined || value === null) {
         return '';
       }
       return String(value ? appCfg.strings.yes : appCfg.strings.no);
@@ -334,6 +338,11 @@ function getColumns(
           `"${currentView}" (column "${colName}").`);
         return renderSingleCell(value, styles, mask);
       }
+
+      if (rules?.detail === false) {
+        return renderSingleCell(value, styles, mask);
+      }
+
       let output = value;
       const idAccessor = tblCfg.config.idAccessor ?? tableProps.idAccessor ?? 'id';
       const idVal = String(getValueByPath(record, idAccessor) ?? '');
@@ -398,12 +407,16 @@ function getColumns(
         }
       }
 
-      return <NfToolbar
-        className="nf-actions-toolbar"
-        items={tblCfg.actions}
-        cfg={{ ...appCfg.toolbars, ...appCfg.listViews.actionToolbar }}
-        onAction={handleAction}
-      />;
+      return (
+        <NfToolbar
+          className="nf-actions-toolbar"
+          // items={(tblCfg.actions)}
+          items={(tblCfg.actions ?? []).filter((ctrl: string) =>
+            rules?.[appCfg.controls[ctrl].action ?? ''] !== false)}
+          cfg={{ ...appCfg.toolbars, ...appCfg.listViews.actionToolbar }}
+          onAction={handleAction}
+        />
+      );
     }
 
     // #endregion
@@ -481,7 +494,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
     return <></>;
   }
 
-  const { userSettings, appCfg, viewResult, currentView } = useAppUI();
+  const { userSettings, appCfg, viewResult, currentView, extras } = useAppUI();
   const [deleteRequest, setDeleteRequest] = useState<Record<string, any> | null>(null);
 
   const tblAppCfg = appCfg.listViews.table;
@@ -540,7 +553,9 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
 
         noHeader={tableCfg.header === false}
         columns={getColumns(appCfg, viewSchema, isDark, records,
-          viewSchema.name, viewResult.data, fieldConfig, fields, (rec) => setDeleteRequest(rec))}
+          viewSchema.name, viewResult.data, fieldConfig, fields,
+          (extras as { rulesByView?: Record<string, Record<string, unknown>> } | undefined)?.rulesByView?.[currentView],
+          (rec) => setDeleteRequest(rec))}
         records={records}
       />
 

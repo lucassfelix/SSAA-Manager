@@ -56,6 +56,12 @@ export interface PermissionsConfig {
   roles: Record<string, RolePermissions>;
 }
 
+const rulesByView: Record<string, ViewRules> = {};
+
+export function getRulesByView() {
+  return rulesByView;
+}
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------- Functions
@@ -189,6 +195,8 @@ export function enforcePermissions(data: ViewResultProps["data"],
     if (!role || !viewPerm) {
       return { ...data, [viewName]: [] };
     }
+
+    rulesByView[viewName] = viewPerm.rules || {};
 
     const blocked = (isBrowse && viewPerm?.rules?.browse === false) ||
       (isDetail && viewPerm?.rules?.detail === false);

@@ -13,7 +13,7 @@
                 "clinicas": {
                     "rules": {
                         "browse": true,
-                        "detail": true,
+                        "detail": false,
                         "edit": false,
                         "add": false,
                         "delete": false

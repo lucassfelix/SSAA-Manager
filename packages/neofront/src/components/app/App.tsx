@@ -17,6 +17,7 @@ import { useLocalStorage } from "@mantine/hooks";
 
 import { AppUIContext, AppProps, MenuConfig, UserSettings, ViewResultProps } from "context";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
+import { getRulesByView } from "./enforcePermissions";
 import Shell from "@/shell/Shell";
 import Login from "@/login/Login";
 
@@ -181,6 +182,7 @@ export default function App(props: MainAppProps) {
           appCfg,
           menuCfg,
           loginCfg,
+          extras: { rulesByView: getRulesByView() },
           userSettings,
           setUserSettings,
           currentView,
