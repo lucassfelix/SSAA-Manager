@@ -76,7 +76,7 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
     return null;
   }
 
-  const { appCfg, menuCfg, currentView } = useAppUI();
+  const { appCfg, menuCfg, currentView, extras } = useAppUI();
   const [_searchParams, setSearchParams] = useSearchParams();
   const opacityTransition = { opacity: collapsed ? 0 : 1, transition: 'opacity 200ms ease' };
   const submenuCfg = {...cfg.items, ...cfg.submenuItems };
@@ -178,7 +178,17 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   }
 
   function renderItems(items: MenuItem[], prefix = '', depth = 0): JSX.Element[] {
-    return items.map((it, idx) => {
+    const rulesByView = (extras as { rulesByView?: Record<string, Record<string, unknown>> } | undefined)?.rulesByView;
+    const visibleItems = items.filter((it) => {
+      if (it.items) {
+        return true;
+      }
+      if (it.name) {
+        return rulesByView?.[it.name]?.browse !== false;
+      }
+      return true;
+    });
+    return visibleItems.map((it, idx) => {
       const key = it.name ? `${prefix}${it.name}` : `${prefix}anon-${idx}`;
 
       if (it.type === 'separator') {

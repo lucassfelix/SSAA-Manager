@@ -29,13 +29,26 @@
 		"id": 3,
 		"nome_completo": "Rubem Pechansky",
 		"nome_abreviado": "Rubem Pechansky",
-		"username": "rpechansky",
+		"username": "rubempech",
 		"email": "pechansky@hypervisual.com.br",
 		"clinica_id": null,
 		"status": 1,
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "9999-12-31",
 		"tipo_permissao": 4
+	},
+	{
+		"id": 2209,
+		"nome_completo": "Mariana Duarte da Costa",
+		"nome_abreviado": "Mariana Duarte",
+		"username": "maricosta",
+		"email": "mari_costa@ig.com.br",
+		"clinica_id": 5,
+		"senha": "1234567890",
+		"status": 1,
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "2025-12-31",
+		"tipo_permissao": 2
 	},
 	{
 		"id": 107,
@@ -49,19 +62,6 @@
 		"data_criacao": "2025-01-10",
 		"data_expiracao": "2025-12-31",
 		"tipo_permissao": 1
-	},
-	{
-		"id": 2209,
-		"nome_completo": "Mariana Duarte da Costa",
-		"nome_abreviado": "Mariana Duarte",
-		"username": "maricosta",
-		"email": "mari_costa@ig.com.br",
-		"clinica_id": 2,
-		"senha": "1234567890",
-		"status": 1,
-		"data_criacao": "2025-01-10",
-		"data_expiracao": "2025-12-31",
-		"tipo_permissao": 2
 	},
 	{
 		"id": 980,

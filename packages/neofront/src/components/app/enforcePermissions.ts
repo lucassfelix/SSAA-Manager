@@ -192,11 +192,15 @@ export function enforcePermissions(data: ViewResultProps["data"],
     const viewPerm = role?.views?.[viewName];
     const records = data[viewName];
 
+    if (role?.views) {
+      Object.entries(role.views).forEach(([name, cfg]) => {
+        rulesByView[name] = cfg.rules || {};
+      });
+    }
+
     if (!role || !viewPerm) {
       return { ...data, [viewName]: [] };
     }
-
-    rulesByView[viewName] = viewPerm.rules || {};
 
     const blocked = (isBrowse && viewPerm?.rules?.browse === false) ||
       (isDetail && viewPerm?.rules?.detail === false);

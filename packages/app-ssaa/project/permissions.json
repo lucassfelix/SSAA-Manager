@@ -22,8 +22,8 @@
                 },
                 "usuarios": {
                     "rules": {
-                        "browse": true,
-                        "detail": true,
+                        "browse": false,
+                        "detail": false,
                         "edit": "id == $user.id",
                         "add": false,
                         "delete": false
