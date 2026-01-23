@@ -15,10 +15,11 @@ This version uses React 19.2.2 with the Mantine UI library (plus the community-c
 - The AI should try at all cost to make **MINIMAL** changes to existing code, avoiding adding new functions, excessive checking, abstractions or refactoring (unless absolutely necessary).
 - In fact, the AI should make efforts to **REDUCE** code size whenever possible, removing unused code, simplifying logic, and avoiding duplication. Your task is to make the codebase as small and efficient as possible.
 - I'm not in a hurry. I prefer to wait for high-quality, elegant code instead of quick fixes that I have to Undo and Redo many times.
+- Backward compatibility is explicitly NOT a concern; prioritize clean, minimal changes even if they break existing behavior.
 
 ## More Notes
 
-- NeoFront components are under active development and are NOT production-ready. Breaking changes and incomplete features are accepted. Backward compatbility is not a concern at this stage.
+- NeoFront components are under active development and are NOT production-ready. Breaking changes and incomplete features are accepted. Remember, backward compatibility is not a concern at this stage.
 - The current phase focuses primarily on building robust, reusable React components and a metadata-driven architecture.
 - All visual components should be designed with reusability in mind, leveraging metadata for configuration.
 - Data is mocked via JSON files; no backend integration exists yet. The goal is to finalize the core framework before adding real data sources and business logic in future phases.

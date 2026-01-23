@@ -48,6 +48,9 @@ interface RolePermissions {
 
 export interface PermissionsConfig {
   userTable: string;
+  idAccessor?: string;
+  usernameAccessor?: string;
+  nameAccessor?: string;
   roleAccessor: string;
   roles: Record<string, RolePermissions>;
 }
@@ -132,10 +135,10 @@ function compare(op: string, a: unknown, b: unknown): boolean {
  * @param viewName The name of the view for which permissions are enforced.
  * @returns The data filtered according to the permissions.
  */
-export function enforcePermissions(data: ViewResultProps["data"], 
+export function enforcePermissions(data: ViewResultProps["data"],
   viewName: string, permissions?: PermissionsConfig, fieldsCfg?: FieldsConfig) {
 
-  if(!permissions) {
+  if (!permissions) {
     return data;
   }
 
@@ -150,11 +153,23 @@ export function enforcePermissions(data: ViewResultProps["data"],
     }
 
     const users = data[permissions.userTable] ?? [];
-    const userId = sessionStorage.getItem('__nf_user_id');
-    const user = userId ? users.find(u => isRecord(u) && String(u?.id) === String(userId)) : users[0];
+    const idAccessor = permissions.idAccessor || 'id';
+    const usernameAccessor = permissions.usernameAccessor || 'username';
+    const storedName = localStorage.getItem('__nf_username');
+    const user = storedName
+      ? users.find(u => isRecord(u) && String(getByPath(u, usernameAccessor) ?? '').toLowerCase() === String(storedName).toLowerCase())
+      : undefined;
+
+    if (isRecord(user)) {
+      try {
+        localStorage.setItem('__nf_username', String(getByPath(user, usernameAccessor) ?? getByPath(user, idAccessor) ?? ''));
+      } catch (_e) {
+        /* ignore */
+      }
+    }
 
     if (!isRecord(user)) {
-      return data;
+      return { ...data, [viewName]: [] };
     }
 
     const roleVal = user[permissions.roleAccessor];
@@ -163,7 +178,7 @@ export function enforcePermissions(data: ViewResultProps["data"],
     const records = data[viewName];
 
     if (!role || !viewPerm) {
-      return data;
+      return { ...data, [viewName]: [] };
     }
 
     const blocked = (isBrowse && viewPerm?.rules?.browse === false) || (isDetail && viewPerm?.rules?.detail === false);
@@ -179,7 +194,9 @@ export function enforcePermissions(data: ViewResultProps["data"],
           return true;
         }
         const a = getByPath(rec, left);
-        const b = right.startsWith('$user.') ? getByPath(user, right.slice(6)) :
+        const b = right.startsWith('$user.')
+          ? getByPath(user, right.slice(6) === 'id' ? idAccessor : right.slice(6))
+          :
           (/^-?\d+(?:\.\d+)?$/.test(right) ? Number(right) : right);
         return compare(op, a, b);
       }
@@ -190,11 +207,16 @@ export function enforcePermissions(data: ViewResultProps["data"],
 
       const raw = pred.value;
       const a = getByPath(rec, pred.field);
-      const b = typeof raw === 'string' && raw.startsWith('$user.') ? getByPath(user, raw.slice(6)) : raw;
+      const b = typeof raw === 'string' && raw.startsWith('$user.')
+        ? getByPath(user, raw.slice(6) === 'id' ? idAccessor : raw.slice(6))
+        : raw;
       return compare(pred.op, a, b);
     };
 
     const preds: Predicate[] = [];
+    if (role.scope === 'none') {
+      return { ...data, [viewName]: [] };
+    }
     if (role.scope && role.scope !== 'all') {
       preds.push(role.scope);
     }

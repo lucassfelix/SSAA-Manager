@@ -167,7 +167,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       return fieldsCfg?.strings ? str
         .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
         .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
-        .replace('{userid}', sessionStorage.getItem('__nf_user_id')!)
+        .replace('{userid}', localStorage.getItem('__nf_username') || '')
         : str;
     }
 

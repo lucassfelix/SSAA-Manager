@@ -1,6 +1,9 @@
 {
     "comment": "Generated manually",
     "userTable": "usuarios",
+    "idAccessor": "id",
+    "usernameAccessor": "username",
+    "nameAccessor": "nome_abreviado",
     "roleAccessor": "tipo_permissao",
     "roles": {
         "usuario": {

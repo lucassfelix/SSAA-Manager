@@ -118,11 +118,6 @@ export default function Shell(): JSX.Element {
         setUserSettings({ ...userSettings, dark: true });
         break;
       case 'logout':
-        try {
-          sessionStorage.removeItem('__nf_loaded_cache');
-        } catch (_e) {
-          /* ignore */
-        }
         navigate('/login', { replace: true });
         return;
       default:

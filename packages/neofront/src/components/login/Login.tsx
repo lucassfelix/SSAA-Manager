@@ -41,7 +41,10 @@ export default function Login(): JSX.Element {
     switch (action) {
       case 'login':
         try {
-          sessionStorage.removeItem('__nf_loaded_cache');
+          const input = document.querySelector<HTMLInputElement>('input[name="username"]');
+          if (input?.value) {
+            localStorage.setItem('__nf_username', input.value);
+          }
         } catch (_e) {
           /* ignore */
         }

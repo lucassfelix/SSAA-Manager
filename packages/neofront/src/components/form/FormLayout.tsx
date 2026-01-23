@@ -87,7 +87,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     // Load options from viewResult if applicable
     let loadedData: SelectFieldOption[] | undefined;
     if (fieldDef.dataType === 'select' && fieldDef.options && viewResult) {
-      let table = viewResult.data[fieldDef.options.table];
+      let table = viewResult.data?.[fieldDef.options.table];
       if (table && Array.isArray(table)) {
         const filterKey = fieldDef.options.filter;
         if (filterKey && record) {
