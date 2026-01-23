@@ -182,7 +182,9 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       return fieldsCfg?.strings ? str
         .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
         .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
-        .replace('{userid}', localStorage.getItem('__nf_username') || '')
+        .replace('{userid}', localStorage.getItem('__nf_username_valid') === '1'
+          ? (localStorage.getItem('__nf_username') || '')
+          : '(Unknown)')
         : str;
     }
 

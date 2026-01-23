@@ -157,18 +157,26 @@ export function enforcePermissions(data: ViewResultProps["data"],
     const usernameAccessor = permissions.usernameAccessor || 'username';
     const storedName = localStorage.getItem('__nf_username');
     const user = storedName
-      ? users.find(u => isRecord(u) && String(getByPath(u, usernameAccessor) ?? '').toLowerCase() === String(storedName).toLowerCase())
+      ? users.find(u => isRecord(u) && String(getByPath(u, usernameAccessor) ??
+        '').toLowerCase() === String(storedName).toLowerCase())
       : undefined;
 
     if (isRecord(user)) {
       try {
-        localStorage.setItem('__nf_username', String(getByPath(user, usernameAccessor) ?? getByPath(user, idAccessor) ?? ''));
+        localStorage.setItem('__nf_username', String(getByPath(user, usernameAccessor) ??
+          getByPath(user, idAccessor) ?? ''));
+        localStorage.setItem('__nf_username_valid', '1');
       } catch (_e) {
         /* ignore */
       }
     }
 
     if (!isRecord(user)) {
+      try {
+        localStorage.setItem('__nf_username_valid', '0');
+      } catch (_e) {
+        /* ignore */
+      }
       return { ...data, [viewName]: [] };
     }
 
@@ -181,7 +189,8 @@ export function enforcePermissions(data: ViewResultProps["data"],
       return { ...data, [viewName]: [] };
     }
 
-    const blocked = (isBrowse && viewPerm?.rules?.browse === false) || (isDetail && viewPerm?.rules?.detail === false);
+    const blocked = (isBrowse && viewPerm?.rules?.browse === false) ||
+      (isDetail && viewPerm?.rules?.detail === false);
 
     // Evaluate predicates
     const evalPredicate = (pred: Predicate, rec: unknown) => {
@@ -242,7 +251,8 @@ export function enforcePermissions(data: ViewResultProps["data"],
     if (blocked && canRowFilter) {
       nextData = { ...nextData, [viewName]: [] };
     } else if (preds.length && canRowFilter) {
-      nextData = { ...nextData, [viewName]: records.filter(r => preds.every(pr => evalPredicate(pr, r))) };
+      nextData = { ...nextData, [viewName]: 
+        records.filter(r => preds.every(pr => evalPredicate(pr, r))) };
     }
 
     // Select options filtering for fields with { filter }
@@ -267,8 +277,12 @@ export function enforcePermissions(data: ViewResultProps["data"],
       if (!Array.isArray(optRecords)) {
         continue;
       }
-      const valueAccessor = typeof fieldDef.options.valueAccessor === 'string' ? fieldDef.options.valueAccessor : 'value';
-      const pred: PredicateObject = { field: valueAccessor, op: rule.filter.op, value: rule.filter.value as PredicateValue };
+      const valueAccessor = typeof fieldDef.options.valueAccessor === 'string' ?
+        fieldDef.options.valueAccessor : 'value';
+      const pred: PredicateObject = {
+        field: valueAccessor, op: rule.filter.op,
+        value: rule.filter.value as PredicateValue
+      };
       nextData = { ...nextData, [tableName]: optRecords.filter(r => evalPredicate(pred, r)) };
     }
 
