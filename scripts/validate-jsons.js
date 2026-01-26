@@ -96,6 +96,10 @@ function printUsage() {
   console.log('');
 }
 
+function stripAnsi(text) {
+  return String(text).replace(/\u001b\[[0-9;]*m/g, '');
+}
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -211,7 +215,7 @@ if (output.length) {
   console.log(output.join(EOL));
 }
 if (logFile) {
-  const logContent = output.length ? output.join(EOL) : 'No schema validation problems found.';
+  const logContent = output.length ? stripAnsi(output.join(EOL)) : 'No schema validation problems found.';
   fs.writeFileSync(logFile, logContent + EOL, 'utf8');
   console.log(colors.cyan(`Log written to ${path.basename(logFile)}.`));
 }

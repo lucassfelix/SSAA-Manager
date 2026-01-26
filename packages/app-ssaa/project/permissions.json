@@ -1,4 +1,5 @@
 {
+    "$schema": "../../../schemas/permissions.schema.json",
     "comment": "Generated manually",
     "userTable": "usuarios",
     "idAccessor": "id",

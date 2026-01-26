@@ -16,6 +16,7 @@ export default defineConfig([
       "no-undef": "off",
       "nonblock-statement-body-position": ["warn", "below"],
       "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 1 }],
+      "no-control-regex": "off",
 
       "@typescript-eslint/no-unused-vars": ["warn", {
         "argsIgnorePattern": "^_",
