@@ -1,13 +1,13 @@
 //
-// Entry point for this application.
+// Ponto de entrada desta aplicação.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
 
 import { BrowserRouter } from "react-router-dom";
-import { App, AppProps, MenuConfig, FormDataConfig, getRoot } from "@neofront/core";
+import { App, getRoot } from "@neofront/core";
 
-// App configuration imports
+// Configurações da aplicação
 
 import appCfg from "project/app.json";
 import menuCfg from "project/menu.json";
@@ -34,12 +34,12 @@ const tableNames = [
   'produtos'
 ];
 
-(getRoot()).render(
+getRoot().render(
   <BrowserRouter>
     <App
-      appCfg={appCfg as AppProps}
-      menuCfg={menuCfg as MenuConfig}
-      loginCfg={loginCfg as FormDataConfig}
+      appCfg={appCfg}
+      menuCfg={menuCfg}
+      loginCfg={loginCfg}
       activeViews={viewsCfg.active}
       metadata={metadata}
       mockData={data}
