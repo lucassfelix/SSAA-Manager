@@ -86,7 +86,7 @@ export interface AppProps {
     images: string;
   };
   data: {
-    source: "mock" | "api";
+    source: 'mock' | 'api';
     apiBaseUrl?: string;
   };
   shell: ShellProps;

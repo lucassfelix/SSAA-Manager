@@ -232,8 +232,8 @@ INSERT INTO projetos (id, sku, nome, data_criacao, ultima_edicao, status, pacien
   (3, NULL, 'Teste 3 com Lysippus (75%), mais claro', '2025-03-10', '2025-02-20', 2, 3, 340, 5),
   (4, NULL, 'Teste meio escuro', '2026-04-05', '2025-02-20', 1, 6, 340, 5),
   (5, NULL, 'Teste 2', '2025-05-18', '2025-02-20', 3, 5, 195, 7),
-  (6, NULL, 'Teste 3', '2025-11-20', '2025-02-20', 2, 5, 195, 7),
-  (7, NULL, 'Teste 3', '2025-07-10', '2025-02-20', 1, 1, 1, 1),
+  (6, NULL, 'Teste 4', '2025-11-20', '2025-02-20', 2, 5, 195, 7),
+  (7, NULL, 'Teste 5', '2025-07-10', '2025-02-20', 1, 1, 1, 1),
   (8, NULL, 'Mais um teste', '2025-07-10', '2025-02-20', 4, 4, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
