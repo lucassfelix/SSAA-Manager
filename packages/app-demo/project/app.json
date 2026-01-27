@@ -22,6 +22,10 @@
 	"paths": {
 		"images": "images/"
 	},
+	"data": {
+		"source": "api",
+		"apiBaseUrl": "http://localhost:3100"
+	},
 	"shell": {
 		"header": {
 			"fullWidth": true,

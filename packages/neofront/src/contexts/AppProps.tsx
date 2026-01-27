@@ -85,6 +85,10 @@ export interface AppProps {
   paths: {
     images: string;
   };
+  data: {
+    source: "mock" | "api";
+    apiBaseUrl?: string;
+  };
   shell: ShellProps;
   menu: MainMenuProps;
   toolbars: ToolbarThemeProps;

@@ -48,18 +48,21 @@ export function getRoot() {
  * @returns A promise resolving to the view result properties or undefined if the view is not active.
  */
 export function createViewLoader(activeViews: string[], viewName: string, metadata: ViewResultParams,
-  data: ViewResultProps["data"], permissions?: PermissionsConfig): Promise<ViewResultProps> | undefined {
+  data: ViewResultProps["data"] | ((viewName: string) => Promise<ViewResultProps["data"]>),
+  permissions?: PermissionsConfig): Promise<ViewResultProps> | undefined {
 
   if (!activeViews.includes(viewName)) {
     return undefined;
   }
 
-  return Promise.resolve({
+  const dataPromise = typeof data === "function" ? data(viewName) : Promise.resolve(data);
+
+  return dataPromise.then(resolvedData => ({
     listView: metadata.listView[viewName],
     form: metadata.form[viewName],
     fieldConfig: metadata.fieldConfig,
-    data: enforcePermissions(data, viewName, permissions, metadata.fieldConfig[viewName]),
-  });
+    data: enforcePermissions(resolvedData, viewName, permissions, metadata.fieldConfig[viewName]),
+  }));
 }
 
 // #endregion

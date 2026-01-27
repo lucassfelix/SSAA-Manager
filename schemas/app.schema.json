@@ -71,6 +71,23 @@
         "images"
       ]
     },
+    "data": {
+      "type": "object",
+      "description": "Data source configuration for the application.",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [ "mock", "api" ],
+          "description": "Selects mock data or API data."
+        },
+        "apiBaseUrl": {
+          "type": "string",
+          "description": "Base URL for the data API."
+        }
+      },
+      "required": [ "source" ]
+    },
     "shell": {
       "type": "object",
       "description": "Configuration for the application shell.",
@@ -696,6 +713,7 @@
   "required": [
     "strings",
     "paths",
+    "data",
     "shell",
     "menu",
     "toolbars",

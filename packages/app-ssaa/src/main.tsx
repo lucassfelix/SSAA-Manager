@@ -17,6 +17,7 @@ import permissionsCfg from "project/permissions.json";
 
 import metadata from "project/views/metadataloader.js";
 import data from "project/views/dataloader.js";
+import createApiDataLoader from "./data/apiDataLoader";
 
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -32,7 +33,13 @@ import "./styles/app.css";
       menuCfg={menuCfg as MenuConfig}
       loginCfg={loginCfg as FormDataConfig}
       loadView={(viewName: string) =>
-        createViewLoader(viewsCfg.active, viewName, metadata, data, permissionsCfg)}
+        createViewLoader(
+          viewsCfg.active,
+          viewName,
+          metadata,
+          appCfg.data?.source === "api" ? createApiDataLoader(appCfg.data.apiBaseUrl) : data,
+          permissionsCfg
+        )}
     />
   </BrowserRouter>
 );
