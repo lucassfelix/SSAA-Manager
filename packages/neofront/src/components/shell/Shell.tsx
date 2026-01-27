@@ -166,7 +166,6 @@ export default function Shell(): JSX.Element {
         <ActionIcon
           size={appCfg.forms.toolbar?.iconButtons?.size}
           radius={appCfg.forms.toolbar?.iconButtons?.radius}
-          title={desktopOpened ? toggleCfg?.tipCollapse : toggleCfg?.tipExpand}
           variant="subtle"
           color="var(--mantine-primary-color-light-color)"
           onClick={() => { handleToggleDesktop(); toggleMobile(); }}

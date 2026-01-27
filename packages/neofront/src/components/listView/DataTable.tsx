@@ -165,7 +165,7 @@ function getColumns(
         })(fieldDef.headerIcon);
       }
       if (fieldDef.header !== null && fieldDef.header !== undefined) {
-        return replaceMacros(fieldDef.header, accessor, records);
+        return <span title={undefined}>{replaceMacros(fieldDef.header, accessor, records)}</span>;
       }
       return '';
     }

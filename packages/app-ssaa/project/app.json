@@ -90,8 +90,8 @@
 		},
 		"collapseToggle": {
 			"rotateIcon": true,
-			"tipCollapse": "Fechar a barra lateral",
-			"tipExpand": "Abrir a barra lateral"
+			"tipCollapse": "Fechar o painel lateral",
+			"tipExpand": "Abrir o painel lateral"
 		},
 		"themeSwitch": {
 			"type": "iconButton",
