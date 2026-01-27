@@ -75,6 +75,8 @@ function getSchemaKey(json, file) {
   if (json.$schema) {
     const base = path.basename(json.$schema, '.json');
     return base.endsWith('.schema') ? base.slice(0, -7) : base;
+  } else {
+    output.push(colors.yellow(`No $schema assigned to ${path.basename(file)}.`));
   }
   // Fallback: path heuristics
   const rel = path.relative(projectFolder, file).replace(/\\/g, '/');
