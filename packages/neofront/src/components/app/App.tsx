@@ -6,18 +6,19 @@
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-import { defaultStrings, errorStrings, FormDataConfig } from "context";
+import { defaultStrings, errorStrings } from "context";
 
-// import { StrictMode } from "react";
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { DatesProvider } from '@mantine/dates';
 import { createTheme, MantineProvider, DEFAULT_THEME } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
-import { AppUIContext, AppProps, MenuConfig, UserSettings, ViewResultProps } from "context";
+import { AppUIContext, AppProps, FieldsConfig, FormDataConfig, ListViewProps, MenuConfig, UserSettings, ViewResultProps } from "context";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
 import { getRulesByView } from "./enforcePermissions";
+import { createDataLoader, createViewLoader } from "./mainUtils";
+import type { PermissionsConfig } from "./enforcePermissions";
 import Shell from "@/shell/Shell";
 import Login from "@/login/Login";
 
@@ -29,7 +30,17 @@ interface MainAppProps {
   appCfg: AppProps;
   menuCfg: MenuConfig;
   loginCfg?: FormDataConfig;
-  loadView: (viewName: string) => Promise<ViewResultProps> | undefined;
+  loadView?: (viewName: string) => Promise<ViewResultProps> | undefined;
+  activeViews?: string[];
+  metadata?: {
+    listView: { [key: string]: ListViewProps };
+    form: { [key: string]: FormDataConfig };
+    fieldConfig: { [key: string]: FieldsConfig };
+  };
+  mockData?: ViewResultProps["data"];
+  apiTableNames?: string[];
+  dataEnhancer?: (data: any) => any;
+  permissionsCfg?: PermissionsConfig;
 }
 
 // #endregion
@@ -40,7 +51,23 @@ export default function App(props: MainAppProps) {
 
   // #region Hooks and variables
 
-  const { appCfg, menuCfg, loginCfg, loadView } = props;
+  const { appCfg, menuCfg, loginCfg, activeViews, metadata, mockData, apiTableNames,
+    dataEnhancer, permissionsCfg } = props;
+
+  const loadView =
+    props.loadView ||
+    ((viewName: string) => {
+      if (!activeViews || !metadata) {
+        return undefined;
+      }
+
+      const dataSource = appCfg.data?.source === "api"
+        ? createDataLoader(appCfg.data.apiBaseUrl || "", apiTableNames || [], dataEnhancer)
+        : (dataEnhancer ? dataEnhancer(mockData) : mockData) || {};
+
+      return createViewLoader(activeViews, viewName, metadata, dataSource,
+        permissionsCfg);
+    });
 
   if (!appCfg.topControls || !appCfg.controls) {
     throw new Error("App: Missing controls / mainControls in app configuration.");

@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { BrowserRouter } from "react-router-dom";
-import { App, AppProps, createViewLoader, MenuConfig, FormDataConfig, getRoot } from "@neofront/core";
+import { App, AppProps, MenuConfig, FormDataConfig, getRoot } from "@neofront/core";
 
 // App configuration imports
 
@@ -24,13 +24,26 @@ import "./styles/app.css";
 
 // #region ----------------------------------------------------------------------------- Entry point
 
+/** Tabelas a serem carregadas */
+const tableNames = [
+  'usuarios',
+  'permissoes_usuario',
+  'empresas',
+  'status_empresa',
+  'ufs',
+  'produtos'
+];
+
 (getRoot()).render(
   <BrowserRouter>
     <App
       appCfg={appCfg as AppProps}
       menuCfg={menuCfg as MenuConfig}
       loginCfg={loginCfg as FormDataConfig}
-      loadView={(viewName: string) => createViewLoader(viewsCfg.active, viewName, metadata, data)}
+      activeViews={viewsCfg.active}
+      metadata={metadata}
+      mockData={data}
+      apiTableNames={tableNames}
     />
   </BrowserRouter>
 );
