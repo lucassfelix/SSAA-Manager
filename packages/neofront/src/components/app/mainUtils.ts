@@ -85,7 +85,7 @@ export function createDataLoader(apiBaseUrl: string, tableNames: string[],
     const url = `${baseUrl}/data?tables=${encodeURIComponent(tableNames.join(','))}`;
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Failed to load data from API');
+      throw new Error('Failed to load data from API: ' + response.statusText);
     }
     const payload = await response.json();
     return dataEnhancer ? dataEnhancer(payload) : payload;
