@@ -12,6 +12,7 @@ import { FormOperationType } from "./Form";
 import Section, { SectionSchema } from "@/form/Section";
 import ErrorPage from "@/errorpage/ErrorPage";
 import { getValueByPath } from "@/listView/datatableUtils";
+import dayjs from "dayjs";
 
 import { FormLayoutSchema } from "context";
 import NfTextField from "./fields/TextField";
@@ -126,6 +127,17 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     return value;
   }
 
+  function normalizeDateValue(value: unknown): unknown {
+    if (value === 'now') {
+      return new Date();
+    }
+    if (typeof value === 'string') {
+      const d = dayjs(value);
+      return d.isValid() ? d.toDate() : value;
+    }
+    return value;
+  }
+
   // Render a single field based on the fields section
   const renderField = (fieldName: string) => {
 
@@ -170,8 +182,10 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
     const recordValue = record ? getValueByPath(record, accessor) : undefined;
     const baseValue = isDetail ? recordValue : recordValue ?? fieldDef.defaultValue;
-    const initialValue = fieldDef.dataType === 'select' && fieldDef.multiple ?
-      normalizeMultiSelectValue(baseValue) : baseValue;
+    const initialValue =
+      fieldDef.dataType === 'select' && fieldDef.multiple ? normalizeMultiSelectValue(baseValue) :
+        fieldDef.dataType === 'date' ? normalizeDateValue(baseValue) :
+          baseValue;
 
     const props: FormFieldProps = {
       name: fieldName,

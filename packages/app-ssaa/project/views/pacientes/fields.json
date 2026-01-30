@@ -29,10 +29,11 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "header": "Entrada",
             "colWidth": 120,
             "dataType": "date",
+            "defaultValue": "now",
             "fieldWidth": 140,
+            "header": "Entrada",
             "label": "Data de entrada",
             "placeholder": "Selecione",
             "render": { "layout": "date", "format": "relative" },

@@ -47,14 +47,16 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "header": "Criada",
             "colWidth": 140,
             "dataType": "date",
+            "defaultValue": "now",
             "fieldWidth": 140,
+            "header": "Criada",
             "label": "Cadastrada em",
             "placeholder": "Selecione",
             "readOnly": true,
-            "render": { "layout": "date", "format": "relative" }
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
         },
         "data_expiracao": {
             "colStyles": "sm",

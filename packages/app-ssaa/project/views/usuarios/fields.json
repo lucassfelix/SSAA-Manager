@@ -89,14 +89,16 @@
         },
         "data_criacao": {
             "colStyles": "sm",
-            "header": "Criado",
             "colWidth": 140,
             "dataType": "date",
+            "defaultValue": "now",
             "fieldWidth": 140,
+            "header": "Criado",
             "label": "Cadastrado em",
             "placeholder": "Selecione",
             "readOnly": true,
-            "render": { "layout": "date", "format": "relative" }
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
         },
         "data_expiracao": {
             "colStyles": "sm",
