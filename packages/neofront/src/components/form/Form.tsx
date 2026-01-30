@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import type { JSX } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Divider, Group, ScrollArea, Stack, Title } from "@mantine/core";
 
@@ -16,6 +16,7 @@ import FormLayout from './FormLayout';
 import TabbedLayout from './TabbedLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
 import DeleteBox from '@/messageBox/DeleteBox';
+import { getFormValues, hasAllRequired } from './validation';
 import { RecordConfig } from 'src/contexts/FormProps';
 
 // #endregion
@@ -69,6 +70,26 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   const formRef = useRef<HTMLDivElement | null>(null);
   const [deleteRequest, setDeleteRequest] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+
+  const requiredNames = useMemo(() => {
+    if (op !== 'add' && op !== 'edit') {
+      return [];
+    }
+    const fields = viewResult.fieldConfig?.[currentView]?.fields ?? {};
+    return Object.entries(fields)
+      .filter(([, def]: any) => def?.required && def?.enabled !== false && def?.readOnly !== true)
+      .map(([name]) => name);
+  }, [currentView, op, viewResult.fieldConfig]);
+
+  function recomputeValidity() {
+    const values = getFormValues(formRef.current);
+    setIsValid(hasAllRequired(values, requiredNames));
+  }
+
+  useEffect(() => {
+    recomputeValidity();
+  }, [currentRecordId, requiredNames.length]);
 
   // Compute whether previous/next records exist and prepare toolbar items
   const recordsList = records ?? [];
@@ -90,6 +111,8 @@ export default function NfForm(props: FormProps): JSX.Element {
         copy.disabled = !hasPrev;
       } else if (it === 'next') {
         copy.disabled = !hasNext;
+      } else if (it === 'send') {
+        copy.disabled = !isValid;
       };
       return copy;
     }
@@ -99,6 +122,8 @@ export default function NfForm(props: FormProps): JSX.Element {
       copy.disabled = !hasPrev;
     } else if (copy.action === 'next') {
       copy.disabled = !hasNext;
+    } else if (copy.action === 'send') {
+      copy.disabled = !isValid;
     };
     return copy;
   });
@@ -133,37 +158,6 @@ export default function NfForm(props: FormProps): JSX.Element {
     navigate(target, { replace: true });
   }
 
-  function getFormValues(): Record<string, unknown> {
-    const root = formRef.current;
-    if (!root) {
-      return {};
-    }
-
-    const names = Array.from(root.querySelectorAll<HTMLElement>('[data-field-props]'))
-      .map(el => el.getAttribute('data-field-props'))
-      .filter((v): v is string => Boolean(v));
-
-    const result: Record<string, unknown> = {};
-    for (const name of new Set(names)) {
-      const inputs = Array.from(root.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${CSS.escape(name)}"]`));
-      if (inputs.length === 0) {
-        continue;
-      }
-      if (inputs.length > 1) {
-        result[name] = inputs.map(i => (i as HTMLInputElement).value).filter(v => v !== "");
-        continue;
-      }
-
-      const input = inputs[0] as HTMLInputElement;
-      if (input.type === 'checkbox') {
-        result[name] = input.checked;
-      } else {
-        result[name] = input.value === "" ? null : input.value;
-      }
-    }
-    return result;
-  }
-
   async function saveRecord() {
     if (appCfg.data?.source !== 'api' || !appCfg.data.apiBaseUrl) {
       console.warn('Form: API data source not configured');
@@ -171,7 +165,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     }
 
     const baseUrl = appCfg.data.apiBaseUrl.replace(/\/$/, "");
-    const payload = getFormValues();
+    const payload = getFormValues(formRef.current);
 
     if (op === 'add') {
       const response = await fetch(`${baseUrl}/record/${currentView}`, {
@@ -330,7 +324,7 @@ export default function NfForm(props: FormProps): JSX.Element {
             {hasToolbar ? toolbarComponent : null}
           </Group>
         ) : (
-          <Box ref={formRef} style={{ width: '100%' }}>
+          <Box ref={formRef} onInput={recomputeValidity} onChange={recomputeValidity} style={{ width: '100%' }}>
             {formLayoutComponent}
           </Box>
         )}

@@ -135,6 +135,10 @@ function compare(op: string, a: unknown, b: unknown): boolean {
   return true;
 }
 
+// #endregion
+
+// #region -------------------------------------------------------------------------------- Exports
+
 /**
  * Enforces permissions on the provided data based on the permissions configuration and view name.
  * @param permissions The permissions configuration object.
