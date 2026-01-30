@@ -91,6 +91,15 @@ export default function NfForm(props: FormProps): JSX.Element {
     recomputeValidity();
   }, [currentRecordId, requiredNames.length]);
 
+  useEffect(() => {
+    if (op !== 'add' && op !== 'edit') {
+      return;
+    }
+    const handler = () => setTimeout(recomputeValidity, 0);
+    document.addEventListener('click', handler, true);
+    return () => document.removeEventListener('click', handler, true);
+  }, [op, requiredNames.length]);
+
   // Compute whether previous/next records exist and prepare toolbar items
   const recordsList = records ?? [];
   const curIndex = currentRecordId ? recordsList.findIndex(r =>

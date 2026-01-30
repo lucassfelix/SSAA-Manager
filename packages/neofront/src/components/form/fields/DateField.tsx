@@ -28,17 +28,17 @@ export default function NfDateField({ props }: { props: FormFieldProps }) {
   if (readOnly) {
     return (
       <InputBase
-          name= {name}
-          label={label}
-          size={size}
-          readOnly
-          defaultValue={dayjs(initialValue).format(dateFmt)}
-          w={width}
-          className={clsx('nf-field nf-readonly', required ? 'nf-required' : '' )}
-          rightSection={<NfIcon icon="calendar" size={20} stroke={2} />}
+        name={name}
+        label={label}
+        size={size}
+        readOnly
+        defaultValue={dayjs(initialValue).format(dateFmt)}
+        w={width}
+        className={clsx('nf-field nf-readonly', required ? 'nf-required' : '')}
+        rightSection={<NfIcon icon="calendar" size={20} stroke={2} />}
       />
     );
-  }  
+  }
 
   // #endregion
 

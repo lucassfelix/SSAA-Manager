@@ -113,7 +113,7 @@ tr:hover .nf-actions-toolbar {
 
 /* Password field styles */
 .nf-password input {
-  font-size: 150%;
+  letter-spacing: 0.1em;
 }
 
 /* Accordion form element styles */

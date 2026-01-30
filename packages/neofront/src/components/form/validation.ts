@@ -26,31 +26,48 @@ export function getFormValues(root: HTMLElement | null): Record<string, unknown>
     return {};
   }
 
-  const names = Array.from(root.querySelectorAll<HTMLElement>('[data-field-props]'))
-    .map(el => el.getAttribute('data-field-props'))
-    .filter((v): v is string => Boolean(v));
-
   const result: Record<string, unknown> = {};
-  for (const name of new Set(names)) {
-    const inputs = Array.from(
-      root.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
-        `[name="${CSS.escape(name)}"]`
-      )
-    );
-    if (inputs.length === 0) {
-      continue;
-    }
-    if (inputs.length > 1) {
-      result[name] = inputs.map(i => (i as HTMLInputElement).value).filter(v => v !== "");
+  const wrappers = Array.from(root.querySelectorAll<HTMLElement>('[data-field-props]'));
+
+  for (const wrapper of wrappers) {
+    const name = wrapper.getAttribute('data-field-props');
+    if (!name) {
       continue;
     }
 
-    const input = inputs[0] as HTMLInputElement;
-    if (input.type === 'checkbox') {
-      result[name] = input.checked;
-    } else {
-      result[name] = input.value === "" ? null : input.value;
+    const dateBtn = wrapper.querySelector<HTMLButtonElement>('button[data-dates-input]');
+    if (dateBtn) {
+      const hasPlaceholder = Boolean(dateBtn.querySelector('.mantine-InputPlaceholder-placeholder'));
+      const text = (dateBtn.textContent ?? '').trim();
+      result[name] = (!text || hasPlaceholder) ? null : text;
+      continue;
     }
+
+    const controls = Array.from(wrapper.querySelectorAll<HTMLInputElement | HTMLSelectElement |
+      HTMLTextAreaElement>('input,select,textarea'));
+    if (controls.length === 0) {
+      continue;
+    }
+
+    const checkbox = controls.find((el): el is HTMLInputElement => el
+      instanceof HTMLInputElement && el.type === 'checkbox');
+    if (checkbox) {
+      result[name] = checkbox.checked;
+      continue;
+    }
+
+    const hiddenInputs = controls.filter((el): el is HTMLInputElement => el
+      instanceof HTMLInputElement && el.type === 'hidden');
+    const visible = controls.filter((el) => !(el instanceof HTMLInputElement && el.type === 'hidden'));
+
+    if (hiddenInputs.length > 1) {
+      const vals = hiddenInputs.map(i => i.value).filter(v => v !== '');
+      result[name] = vals.length === 0 ? null : vals;
+      continue;
+    }
+
+    const val = (visible[0] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | undefined)?.value ?? '';
+    result[name] = val === '' ? null : val;
   }
 
   return result;
