@@ -49,7 +49,7 @@
     },
     "edit": {
         "title": "Paciente {name}",
-        "toolbar": [ "send", "cancel" ]
+        "toolbar": [ "send", "delete", "cancel" ]
     },
     "add": {
         "title": "Novo paciente",

@@ -18,7 +18,6 @@ SET time_zone = '+00:00';
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- Drop (dependents first)
-DROP TABLE IF EXISTS paciente_usuarios;
 DROP TABLE IF EXISTS projetos;
 DROP TABLE IF EXISTS pacientes;
 DROP TABLE IF EXISTS usuarios;
@@ -68,7 +67,7 @@ CREATE TABLE status_projeto (
 
 -- Core tables
 CREATE TABLE clinicas (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
   nome_abreviado VARCHAR(120) NOT NULL,
   cnpj VARCHAR(32) NULL,
@@ -79,7 +78,7 @@ CREATE TABLE clinicas (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE usuarios (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   nome_completo VARCHAR(255) NOT NULL,
   nome_abreviado VARCHAR(255) NOT NULL,
   username VARCHAR(80) NOT NULL,
@@ -104,12 +103,13 @@ CREATE TABLE usuarios (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE pacientes (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   nome_completo VARCHAR(255) NOT NULL,
   data_criacao DATE NULL,
   status INT NULL,
   usuario_id BIGINT NULL,
   clinica_id BIGINT NULL,
+  usuarios JSON NULL,
   PRIMARY KEY (id),
   KEY ix_pacientes_usuario_id (usuario_id),
   KEY ix_pacientes_clinica_id (clinica_id),
@@ -122,20 +122,8 @@ CREATE TABLE pacientes (
     ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- pacientes.usuarios[] -> join table
-CREATE TABLE paciente_usuarios (
-  paciente_id BIGINT NOT NULL,
-  usuario_id BIGINT NOT NULL,
-  PRIMARY KEY (paciente_id, usuario_id),
-  KEY ix_paciente_usuarios_usuario_id (usuario_id),
-  CONSTRAINT fk_paciente_usuarios_paciente FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_paciente_usuarios_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-    ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE projetos (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   sku VARCHAR(80) NULL,
   nome VARCHAR(255) NOT NULL,
   data_criacao DATE NULL,
@@ -208,23 +196,13 @@ INSERT INTO usuarios (id, nome_completo, nome_abreviado, username, email, clinic
   (980, 'Pedro Henrique de Castro Bernardes Machado Neto', 'Pedro Machado', 'pedroh98', 'pedro98@google.com', 3, 3, NULL, '2025-01-10', '2025-12-31', 1),
   (2209, 'Mariana Duarte da Costa', 'Mariana Duarte', 'maricosta', 'mari_costa@ig.com.br', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 2);
 
-INSERT INTO pacientes (id, nome_completo, data_criacao, status, usuario_id, clinica_id) VALUES
-  (1, 'Carlos Alberto Silva', '2025-01-10', 2, 1, 1),
-  (2, 'Sofia de Oliveira Pereira', '2025-01-10', 1, 2209, 5),
-  (3, 'Lucas Madeira Olivetti', '2025-01-10', 2, 340, 5),
-  (4, 'Beatriz Lima Andrade', '2025-01-10', 1, 1, 1),
-  (5, 'Rafael Costa Moreira Filho', '2025-01-10', 1, 195, 7),
-  (6, 'Fernanda de Almeida Rocha', '2025-01-10', 1, 340, 5);
-
-INSERT INTO paciente_usuarios (paciente_id, usuario_id) VALUES
-  (1, 1),
-  (1, 2),
-  (2, 2209),
-  (3, 340),
-  (4, 40),
-  (5, 195),
-  (6, 340),
-  (6, 40);
+INSERT INTO pacientes (id, nome_completo, data_criacao, status, usuario_id, clinica_id, usuarios) VALUES
+  (1, 'Carlos Alberto Silva', '2025-01-10', 2, 1, 1, JSON_ARRAY(1, 2)),
+  (2, 'Sofia de Oliveira Pereira', '2025-01-10', 1, 2209, 5, JSON_ARRAY(2209)),
+  (3, 'Lucas Madeira Olivetti', '2025-01-10', 2, 340, 5, JSON_ARRAY(340)),
+  (4, 'Beatriz Lima Andrade', '2025-01-10', 1, 1, 1, JSON_ARRAY(40)),
+  (5, 'Rafael Costa Moreira Filho', '2025-01-10', 1, 195, 7, JSON_ARRAY(195)),
+  (6, 'Fernanda de Almeida Rocha', '2025-01-10', 1, 340, 5, JSON_ARRAY(340, 40));
 
 INSERT INTO projetos (id, sku, nome, data_criacao, ultima_edicao, status, paciente_id, usuario_id, clinica_id) VALUES
   (1, NULL, 'Original', '2025-01-15', '2025-02-20', 1, 2, 2209, 5),

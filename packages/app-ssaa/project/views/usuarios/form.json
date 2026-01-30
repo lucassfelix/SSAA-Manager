@@ -49,7 +49,7 @@
     },
     "edit": {
         "title": "Usuário {name}",
-        "toolbar": [ "send", "cancel" ]
+        "toolbar": [ "send", "delete", "cancel" ]
     },
     "add": {
         "title": "Novo usuário",

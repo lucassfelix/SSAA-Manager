@@ -153,7 +153,7 @@ tr:hover .nf-actions-toolbar {
 /* #region ----------------------------------------------------------- Message box element styles */
 
 /* Critical action button */
-.mantine-Modal-body .nf-Button-filled.nf-critical {
+.nf-Button-filled.nf-critical {
   background-color: var(--mantine-color-red-6);
 }
 

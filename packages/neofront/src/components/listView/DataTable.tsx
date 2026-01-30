@@ -18,7 +18,7 @@ import NfIcon from '@/icon/NfIcon';
 import { getValueByPath, replaceMacros, getStyles } from "./datatableUtils";
 import { applyMask, MaskSpec } from "@/form/fields/createMask";
 import NfToolbar from "@/toolbar/Toolbar";
-import MessageBox from "@/messageBox/MessageBox";
+import DeleteBox from "@/messageBox/DeleteBox";
 
 // #endregion
 
@@ -502,20 +502,13 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
   const tableCfg = viewSchema.config;
   const fieldConfig = viewResult.fieldConfig;
   const fields = fieldConfig?.[viewSchema.name]?.fields;
-  const fieldsCfg = viewResult.fieldConfig[currentView];
 
   if (!fields) {
     console.warn(`DataTable: No field definitions found for table "${currentView}". Is loader.js configured correctly?`);
   }
 
-  function replaceVars(str: string, record: Record<string, any>): string {
-    return str
-      .replace("{name}", record[tableCfg.nameAccessor!])
-      .replace("{id}", record[tableCfg.idAccessor!])
-      .replace("{theItem}", fieldsCfg.strings.theItem)
-      .replace("{singular}", fieldsCfg.strings.singular)
-      ;
-  }
+  const idAccessor = tableCfg.idAccessor ?? 'id';
+  const nameAccessor = tableCfg.nameAccessor ?? 'name';
 
   // #endregion
 
@@ -560,17 +553,14 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
       />
 
       {/* Delete action */}
-      {deleteRequest ? (
-        <MessageBox
-          title={appCfg.strings.deleteItemTitle}
-          message={replaceVars(appCfg.strings.deleteItemConfirm ?? "", deleteRequest)}
-          items={appCfg.listViews.messageBox.deleteControls}
-          icon={"help"}
-          iconClass="warning"
-          onClose={() => setDeleteRequest(null)}
-          onDelete={() => { console.log("delete", deleteRequest); }}
-        />
-      ) : null}
+      <DeleteBox
+        record={deleteRequest}
+        viewName={currentView}
+        idAccessor={idAccessor}
+        nameAccessor={nameAccessor}
+        onClose={() => setDeleteRequest(null)}
+        onDeleted={() => window.location.reload()}
+      />
     </>
   );
 

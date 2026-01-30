@@ -4,7 +4,7 @@
 
 // #region --------------------------------------------------------------------------------- Imports
 
-import { CSSProperties, JSX } from "react";
+import { CSSProperties, JSX, useRef } from "react";
 import { Group, Stack, SimpleGrid } from "@mantine/core";
 
 import { RecordConfig, UnifiedFieldProps, useAppUI, FormFieldProps, SelectFieldOption } from "context";
@@ -74,6 +74,57 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
   const headerFields = layout.header || [];
   const sections = layout.sections || [];
   const resolvedFields = fields ?? viewResult.fieldConfig[currentView]?.fields ?? {};
+  const warnedMissingField = useRef(new Set<string>());
+
+  function hasPath(obj: unknown, path: string): boolean {
+    if (!obj || typeof obj !== 'object') {
+      return false;
+    }
+    const parts = path.split('.').filter(Boolean);
+    let cur: any = obj;
+    for (const part of parts) {
+      if (!cur || typeof cur !== 'object' || !(part in cur)) {
+        return false;
+      }
+      cur = cur[part];
+    }
+    return true;
+  }
+
+  function normalizeMultiSelectValue(value: unknown): unknown {
+    if (!value) {
+      return value;
+    }
+    if (Array.isArray(value)) {
+      return value;
+    }
+    if (typeof value !== 'string') {
+      return value;
+    }
+
+    const s = value.trim();
+    if (!s) {
+      return value;
+    }
+
+    if (s.startsWith('[') && s.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(s);
+        return Array.isArray(parsed) ? parsed : value;
+      } catch {
+        return value;
+      }
+    }
+
+    if (s.includes(',')) {
+      const parts = s.split(',').map(p => p.trim()).filter(Boolean);
+      if (parts.length > 1 && parts.every(p => /^-?\d+$/.test(p))) {
+        return parts.map(Number);
+      }
+    }
+
+    return value;
+  }
 
   // Render a single field based on the fields section
   const renderField = (fieldName: string) => {
@@ -105,8 +156,22 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
     // Prefill initialValue from record if available
     const accessor = fieldDef.accessor ?? fieldName;
+
+    if (record && !isFilter && !hasPath(record, accessor)) {
+      const key = `${currentView}:${fieldName}:${accessor}`;
+      if (!warnedMissingField.current.has(key)) {
+        warnedMissingField.current.add(key);
+        console.warn(
+          `FormLayout: Field '${fieldName}' (accessor '${accessor}') is not present on the current record for view '${currentView}'. ` +
+          `This usually means the backend schema/data loader doesn't provide it, so edits may not be persisted.`
+        );
+      }
+    }
+
     const recordValue = record ? getValueByPath(record, accessor) : undefined;
-    const initialValue = isDetail ? recordValue : recordValue ?? fieldDef.defaultValue;
+    const baseValue = isDetail ? recordValue : recordValue ?? fieldDef.defaultValue;
+    const initialValue = fieldDef.dataType === 'select' && fieldDef.multiple ?
+      normalizeMultiSelectValue(baseValue) : baseValue;
 
     const props: FormFieldProps = {
       name: fieldName,

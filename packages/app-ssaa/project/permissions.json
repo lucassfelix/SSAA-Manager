@@ -136,6 +136,9 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "status": { "readOnly": false }
                     }
                 },
                 "projetos": {
@@ -185,6 +188,10 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "clinica_id": { "readOnly": false },
+                        "status": { "readOnly": false }
                     }
                 },
                 "projetos": {

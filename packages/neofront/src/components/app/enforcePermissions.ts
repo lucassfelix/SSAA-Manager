@@ -265,6 +265,23 @@ export function enforcePermissions(data: ViewResultProps["data"],
       return nextData;
     }
 
+    // Apply field overrides (readOnly/visible) for this view
+    if (isRecord(viewPerm?.fields)) {
+      for (const [fieldName, rule] of Object.entries(viewPerm.fields)) {
+        const fieldDef = viewFields[fieldName];
+        if (!isRecord(fieldDef) || !isRecord(rule)) {
+          continue;
+        }
+        if (typeof rule.readOnly === 'boolean') {
+          (fieldDef as any).readOnly = rule.readOnly;
+        }
+        if (typeof rule.visible === 'boolean') {
+          // UnifiedFieldProps doesn't have `visible`; `enabled` is the closest runtime equivalent.
+          (fieldDef as any).enabled = rule.visible;
+        }
+      }
+    }
+
     for (const [fieldName, fieldDef] of Object.entries(viewFields)) {
       if (!isRecord(fieldDef) || fieldDef.dataType !== 'select' || !isRecord(fieldDef.options)) {
         continue;

@@ -65,7 +65,7 @@
     },
     "edit": {
         "title": "Clínica {name}",
-        "toolbar": [ "send", "cancel" ]
+        "toolbar": [ "send", "delete", "cancel" ]
     },
     "add": {
         "title": "Nova clínica",

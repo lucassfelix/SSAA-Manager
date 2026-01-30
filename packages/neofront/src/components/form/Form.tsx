@@ -5,6 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import type { JSX } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Divider, Group, ScrollArea, Stack, Title } from "@mantine/core";
 
@@ -14,6 +15,7 @@ import NfToolbar from "@/toolbar/Toolbar";
 import FormLayout from './FormLayout';
 import TabbedLayout from './TabbedLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
+import DeleteBox from '@/messageBox/DeleteBox';
 import { RecordConfig } from 'src/contexts/FormProps';
 
 // #endregion
@@ -64,6 +66,9 @@ export default function NfForm(props: FormProps): JSX.Element {
   const toolbarCfg = isFilter ? { ...formCfg.toolbar, ...appCfg.listViews.filterToolbar } : formCfg.toolbar;
   const toolbarItems = isFilter ? viewResult.listView.filterPanel?.toolbar : recordCfg.toolbar;
   const hasToolbar = Boolean(toolbarItems?.length);
+
+  const formRef = useRef<HTMLDivElement | null>(null);
+  const [deleteRequest, setDeleteRequest] = useState(false);
 
   // Compute whether previous/next records exist and prepare toolbar items
   const recordsList = records ?? [];
@@ -128,6 +133,81 @@ export default function NfForm(props: FormProps): JSX.Element {
     navigate(target, { replace: true });
   }
 
+  function getFormValues(): Record<string, unknown> {
+    const root = formRef.current;
+    if (!root) {
+      return {};
+    }
+
+    const names = Array.from(root.querySelectorAll<HTMLElement>('[data-field-props]'))
+      .map(el => el.getAttribute('data-field-props'))
+      .filter((v): v is string => Boolean(v));
+
+    const result: Record<string, unknown> = {};
+    for (const name of new Set(names)) {
+      const inputs = Array.from(root.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${CSS.escape(name)}"]`));
+      if (inputs.length === 0) {
+        continue;
+      }
+      if (inputs.length > 1) {
+        result[name] = inputs.map(i => (i as HTMLInputElement).value).filter(v => v !== "");
+        continue;
+      }
+
+      const input = inputs[0] as HTMLInputElement;
+      if (input.type === 'checkbox') {
+        result[name] = input.checked;
+      } else {
+        result[name] = input.value === "" ? null : input.value;
+      }
+    }
+    return result;
+  }
+
+  async function saveRecord() {
+    if (appCfg.data?.source !== 'api' || !appCfg.data.apiBaseUrl) {
+      console.warn('Form: API data source not configured');
+      return;
+    }
+
+    const baseUrl = appCfg.data.apiBaseUrl.replace(/\/$/, "");
+    const payload = getFormValues();
+
+    if (op === 'add') {
+      const response = await fetch(`${baseUrl}/record/${currentView}`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save record');
+      }
+      const result = await response.json();
+      const newId = result?.insertId;
+      if (newId != null) {
+        navigate(`/?v=${currentView}&op=detail&${idAccessor}=${newId}`);
+      } else {
+        navigateToListView();
+      }
+      return;
+    }
+
+    if (op === 'edit') {
+      const response = await fetch(
+        `${baseUrl}/record/${currentView}/${encodeURIComponent(String(currentRecordId))}?idAccessor=${encodeURIComponent(idAccessor)}`,
+        {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload),
+        }
+      );
+      if (!response.ok) {
+        throw new Error('Failed to update record');
+      }
+      navigateToListView();
+    }
+  }
+
   // Handler for toolbar actions
   const handleAction = (action: string) => {
     switch (action) {
@@ -135,12 +215,13 @@ export default function NfForm(props: FormProps): JSX.Element {
         navigateToListView();
         break;
       case 'send':
-        // TODO: fetch the current field values
-        console.log(`Action: ${action}`);
-        navigateToListView();
+        saveRecord().catch(e => console.error(e));
         break;
       case 'edit':
         navigate(`/?v=${currentView}&op=edit&id=${currentRecordId}`);
+        break;
+      case 'delete':
+        setDeleteRequest(true);
         break;
       case 'previous':
         navigateToAdjacent(-1);
@@ -203,6 +284,15 @@ export default function NfForm(props: FormProps): JSX.Element {
   return (
     <Stack gap={formCfg.verticalGap} h={formCfg.fullHeight ? "100%" : "auto"}>
 
+      <DeleteBox
+        record={deleteRequest ? (record ?? null) : null}
+        viewName={currentView}
+        idAccessor={idAccessor}
+        nameAccessor={nameAccessor}
+        onClose={() => setDeleteRequest(false)}
+        onDeleted={navigateToListView}
+      />
+
       {/* Title */}
       {recordCfg.title && <Title order={4}>{recordCfg.title.replace("{name}", name)}</Title>}
 
@@ -218,12 +308,18 @@ export default function NfForm(props: FormProps): JSX.Element {
       <ScrollArea>
         {toolbarPosition === "right" ? (
           <Group align="flex-end">
-            {formLayoutComponent}
+            <Box ref={formRef} style={{ width: '100%' }}>
+              {formLayoutComponent}
+            </Box>
             {/* Inline toolbar */}
             <Box flex={1} />
             {hasToolbar ? toolbarComponent : null}
           </Group>
-        ) : formLayoutComponent}
+        ) : (
+          <Box ref={formRef} style={{ width: '100%' }}>
+            {formLayoutComponent}
+          </Box>
+        )}
       </ScrollArea>
 
       {/* Toolbar */}
