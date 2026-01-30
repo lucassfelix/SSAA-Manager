@@ -189,6 +189,7 @@ INSERT INTO usuarios (id, nome_completo, nome_abreviado, username, email, clinic
   (1, 'Ruy Teichert Filho', 'Ruy Teichert Filho', 'ruy_teichert', 'ruyteichert@gmail.com', 1, 1, '1234567890', '2025-01-10', '9999-12-31', 3),
   (2, 'Letícia Polydoro de Albuquerque', 'Letícia Polydoro', 'letipolya', 'leticia@hypervisual.com.br', 1, 1, '1234567890', '2025-01-10', '9999-12-31', 1),
   (3, 'Rubem Pechansky', 'Rubem Pechansky', 'rubempech', 'pechansky@hypervisual.com.br', NULL, 1, NULL, '2025-01-10', '9999-12-31', 4),
+  (4, 'Lucas Salaverry Félix', 'Lucas Félix', 'lucasfelix', 'lucas.felix.gamedev@gmail.com', NULL, 1, NULL, '2025-01-10', '9999-12-31', 4),
   (40, 'Maria Beatriz Figueira Gomes', 'Maria B. Gomes', 'maria_fig', 'marifigueira@google.com', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 1),
   (107, 'João Carlos Ayres Guimarães', 'João Carlos Guimarães', 'jayres', 'joao.ayres18@uol.com.br', 8, 2, '1234567890', '2025-01-10', '2025-12-31', 1),
   (195, 'Marcelo Barroso Goulart', 'Marcelo Barroso', 'mar33', 'marcelobgoulart77@yahoo.com', 7, 1, NULL, '2025-01-10', '2025-12-31', 2),
@@ -197,9 +198,9 @@ INSERT INTO usuarios (id, nome_completo, nome_abreviado, username, email, clinic
   (2209, 'Mariana Duarte da Costa', 'Mariana Duarte', 'maricosta', 'mari_costa@ig.com.br', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 2);
 
 INSERT INTO pacientes (id, nome_completo, data_criacao, status, usuario_id, clinica_id, usuarios) VALUES
-  (1, 'Carlos Alberto Silva', '2025-01-10', 2, 1, 1, JSON_ARRAY(1, 2)),
+  (1, 'Paulo Ricardo Silva de Aguiar', '2025-01-10', 2, 1, 1, JSON_ARRAY(1, 2)),
   (2, 'Sofia de Oliveira Pereira', '2025-01-10', 1, 2209, 5, JSON_ARRAY(2209)),
-  (3, 'Lucas Madeira Olivetti', '2025-01-10', 2, 340, 5, JSON_ARRAY(340)),
+  (3, 'Luís Antônio Madeira Olivetti', '2025-01-10', 2, 340, 5, JSON_ARRAY(340)),
   (4, 'Beatriz Lima Andrade', '2025-01-10', 1, 1, 1, JSON_ARRAY(40)),
   (5, 'Rafael Costa Moreira Filho', '2025-01-10', 1, 195, 7, JSON_ARRAY(195)),
   (6, 'Fernanda de Almeida Rocha', '2025-01-10', 1, 340, 5, JSON_ARRAY(340, 40));

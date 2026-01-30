@@ -2,10 +2,16 @@
 // Delete confirmation wrapper.
 //
 
+// #region --------------------------------------------------------------------------------- Imports
+
 import type { JSX } from 'react';
 
 import { useAppUI } from 'context';
 import MessageBox from './MessageBox';
+
+// #endregion
+
+// #region ----------------------------------------------------------------------------------- Types
 
 interface DeleteBoxProps {
   record: Record<string, any> | null;
@@ -15,6 +21,10 @@ interface DeleteBoxProps {
   onClose: () => void;
   onDeleted?: () => void;
 }
+
+// #endregion
+
+// #region ------------------------------------------------------------------------------- Component
 
 export default function DeleteBox(props: DeleteBoxProps): JSX.Element | null {
   const { record, viewName, idAccessor, nameAccessor, onClose, onDeleted } = props;
@@ -64,3 +74,5 @@ export default function DeleteBox(props: DeleteBoxProps): JSX.Element | null {
     />
   );
 }
+
+// #endregion

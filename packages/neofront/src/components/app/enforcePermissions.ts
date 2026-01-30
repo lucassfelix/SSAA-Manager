@@ -267,7 +267,25 @@ export function enforcePermissions(data: ViewResultProps["data"],
 
     // Apply field overrides (readOnly/visible) for this view
     if (isRecord(viewPerm?.fields)) {
+      const allRule = viewPerm.fields?.allFields;
+      if (isRecord(allRule)) {
+        for (const fieldDef of Object.values(viewFields)) {
+          if (!isRecord(fieldDef)) {
+            continue;
+          }
+          if (typeof allRule.readOnly === 'boolean') {
+            (fieldDef as any).readOnly = allRule.readOnly;
+          }
+          if (typeof allRule.visible === 'boolean') {
+            (fieldDef as any).enabled = allRule.visible;
+          }
+        }
+      }
+
       for (const [fieldName, rule] of Object.entries(viewPerm.fields)) {
+        if (fieldName === 'allFields') {
+          continue;
+        }
         const fieldDef = viewFields[fieldName];
         if (!isRecord(fieldDef) || !isRecord(rule)) {
           continue;

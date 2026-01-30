@@ -163,6 +163,9 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "allFields": { "readOnly": false }
                     }
                 },
                 "usuarios": {
@@ -174,8 +177,7 @@
                         "delete": true
                     },
                     "fields": {
-                        "tipo_permissao": { "readOnly": false },
-                        "senha": { "visible": true }
+                        "allFields": { "readOnly": false }
                     },
                     "tabs": {
                         "pacientes": false
@@ -190,8 +192,7 @@
                         "delete": true
                     },
                     "fields": {
-                        "clinica_id": { "readOnly": false },
-                        "status": { "readOnly": false }
+                        "allFields": { "readOnly": false }
                     }
                 },
                 "projetos": {
@@ -201,6 +202,9 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "allFields": { "readOnly": false }
                     }
                 }
             }

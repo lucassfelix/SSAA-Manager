@@ -93,7 +93,7 @@
             "colWidth": 140,
             "dataType": "date",
             "fieldWidth": 140,
-            "label": "Cadastrada em",
+            "label": "Cadastrado em",
             "placeholder": "Selecione",
             "readOnly": true,
             "render": { "layout": "date", "format": "relative" }

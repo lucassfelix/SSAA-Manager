@@ -38,6 +38,18 @@
 		"tipo_permissao": 4
 	},
 	{
+		"id": 4,
+		"nome_completo": "Lucas Salaverry Félix",
+		"nome_abreviado": "Lucas Félix",
+		"username": "lucasfelix",
+		"email": "lucas.felix.gamedev@gmail.com",
+		"clinica_id": null,
+		"status": 1,
+		"data_criacao": "2025-01-10",
+		"data_expiracao": "9999-12-31",
+		"tipo_permissao": 4
+	},
+	{
 		"id": 2209,
 		"nome_completo": "Mariana Duarte da Costa",
 		"nome_abreviado": "Mariana Duarte",
