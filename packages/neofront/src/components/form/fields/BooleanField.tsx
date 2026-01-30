@@ -37,7 +37,11 @@ export default function NfBooleanField({ props }: { props: FormFieldProps }) {
         paddingTop: formsCfg.checkboxTopPadding || 20,
         pointerEvents: readOnly ? 'none' : 'auto',
       }}
-      onChange={e => { if (!readOnly) { setValue(e.currentTarget.checked); } }}
+      onChange={e => {
+        if (!readOnly) {
+          setValue(e.currentTarget.checked);
+        }
+      }}
       wrapperProps={{ 'data-field-props': name }}
     />
   );

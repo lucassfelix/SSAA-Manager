@@ -106,7 +106,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     // Prefill initialValue from record if available
     const accessor = fieldDef.accessor ?? fieldName;
     const recordValue = record ? getValueByPath(record, accessor) : undefined;
-    const initialValue = recordValue ?? fieldDef.defaultValue;
+    const initialValue = isDetail ? recordValue : recordValue ?? fieldDef.defaultValue;
 
     const props: FormFieldProps = {
       name: fieldName,
