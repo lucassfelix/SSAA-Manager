@@ -287,6 +287,12 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   const toolbarPosition = getToolbarPosition();
 
+  const formBox = (
+    <Box ref={formRef} onInput={recomputeValidity} onChange={recomputeValidity} style={{ width: '100%' }}>
+      {formLayoutComponent}
+    </Box>
+  );
+
   // #endregion
 
   return (
@@ -316,17 +322,13 @@ export default function NfForm(props: FormProps): JSX.Element {
       <ScrollArea>
         {toolbarPosition === "right" ? (
           <Group align="flex-end">
-            <Box ref={formRef} style={{ width: '100%' }}>
-              {formLayoutComponent}
-            </Box>
+            {formBox}
             {/* Inline toolbar */}
             <Box flex={1} />
             {hasToolbar ? toolbarComponent : null}
           </Group>
         ) : (
-          <Box ref={formRef} onInput={recomputeValidity} onChange={recomputeValidity} style={{ width: '100%' }}>
-            {formLayoutComponent}
-          </Box>
+          formBox
         )}
       </ScrollArea>
 

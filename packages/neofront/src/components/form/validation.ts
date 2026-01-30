@@ -57,7 +57,12 @@ export function getFormValues(root: HTMLElement | null): Record<string, unknown>
 }
 
 export function hasAllRequired(values: Record<string, unknown>, requiredNames: string[]): boolean {
-  return requiredNames.every((name) => !isBlank(values[name]));
+  return requiredNames.every((name) => {
+    if (!(name in values)) {
+      return true;
+    }
+    return !isBlank(values[name]);
+  });
 }
 
 // #endregion

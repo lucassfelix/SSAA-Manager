@@ -192,7 +192,7 @@ INSERT INTO usuarios (id, nome_completo, nome_abreviado, username, email, clinic
   (4, 'Lucas Salaverry Félix', 'Lucas Félix', 'lucasfelix', 'lucas.felix.gamedev@gmail.com', NULL, 1, NULL, '2025-01-10', '9999-12-31', 4),
   (40, 'Maria Beatriz Figueira Gomes', 'Maria B. Gomes', 'maria_fig', 'marifigueira@google.com', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 1),
   (107, 'João Carlos Ayres Guimarães', 'João Carlos Guimarães', 'jayres', 'joao.ayres18@uol.com.br', 8, 2, '1234567890', '2025-01-10', '2025-12-31', 1),
-  (195, 'Marcelo Barroso Goulart', 'Marcelo Barroso', 'mar33', 'marcelobgoulart77@yahoo.com', 7, 1, NULL, '2025-01-10', '2025-12-31', 2),
+  (195, 'Marcelo Barroso Goulart', 'Marcelo Barroso', 'mar33', 'marcelobgoulart77@yahoo.com', 7, 3, NULL, '2025-01-10', '2025-12-31', 2),
   (340, 'Ana Lúcia Schneider Fernandes', 'Ana Lúcia', 'anafer21', 'anaschneider21@uol.com.br', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 2),
   (980, 'Pedro Henrique de Castro Bernardes Machado Neto', 'Pedro Machado', 'pedroh98', 'pedro98@google.com', 3, 3, NULL, '2025-01-10', '2025-12-31', 1),
   (2209, 'Mariana Duarte da Costa', 'Mariana Duarte', 'maricosta', 'mari_costa@ig.com.br', 5, 1, '1234567890', '2025-01-10', '2025-12-31', 2);
