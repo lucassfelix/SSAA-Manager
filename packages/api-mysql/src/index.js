@@ -238,7 +238,14 @@ app.post("/record/:table", async (req, res) => {
     return res.json({ ok: true, insertId: result?.insertId });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "db_error" });
+    const e = error || {};
+    return res.status(500).json({
+      error: "db_error",
+      code: e.code,
+      sqlState: e.sqlState,
+      sqlMessage: e.sqlMessage,
+      message: e.sqlMessage || "Database error",
+    });
   }
 });
 
@@ -270,7 +277,14 @@ app.put("/record/:table/:id", async (req, res) => {
     return res.json({ ok: true, affectedRows: result?.affectedRows });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "db_error" });
+    const e = error || {};
+    return res.status(500).json({
+      error: "db_error",
+      code: e.code,
+      sqlState: e.sqlState,
+      sqlMessage: e.sqlMessage,
+      message: e.sqlMessage || "Database error",
+    });
   }
 });
 
@@ -290,7 +304,14 @@ app.delete("/record/:table/:id", async (req, res) => {
     return res.json({ ok: true, affectedRows: result?.affectedRows });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "db_error" });
+    const e = error || {};
+    return res.status(500).json({
+      error: "db_error",
+      code: e.code,
+      sqlState: e.sqlState,
+      sqlMessage: e.sqlMessage,
+      message: e.sqlMessage || "Database error",
+    });
   }
 });
 

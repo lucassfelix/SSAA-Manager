@@ -180,7 +180,14 @@ export default function NfForm(props: FormProps): JSX.Element {
         body: JSON.stringify(payload),
       });
       if (!response.ok) {
-        throw new Error('Failed to save record');
+        let msg = 'Failed to save record';
+        try {
+          const err = await response.json();
+          msg = err?.sqlMessage || err?.message || msg;
+        } catch {
+          /* ignore */
+        }
+        throw new Error(msg);
       }
       const result = await response.json();
       const newId = result?.insertId;
@@ -202,7 +209,14 @@ export default function NfForm(props: FormProps): JSX.Element {
         }
       );
       if (!response.ok) {
-        throw new Error('Failed to update record');
+        let msg = 'Failed to update record';
+        try {
+          const err = await response.json();
+          msg = err?.sqlMessage || err?.message || msg;
+        } catch {
+          /* ignore */
+        }
+        throw new Error(msg);
       }
       navigateToListView();
     }
