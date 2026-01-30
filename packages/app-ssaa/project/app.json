@@ -7,7 +7,7 @@
 	"strings": {
 		"appVersion": "0.10.0",
 		"appTitle": "{pageName} | SSAA",
-		"deleteItemConfirm": "Deseja excluir {theItem} {name}?",
+		"deleteItemConfirm": "Tem certeza que deseja excluir {theItem} <b>{name}</b>? Essa ação não poderá ser desfeita.",
 		"showPassword": "Mostrar senha",
 		"hidePassword": "Ocultar senha"
 	},
@@ -167,8 +167,14 @@
 			"type": "textButton",
 			"label": "Excluir",
 			"action": "delete",
-			"class": "critical",
-			"default": true
+			"class": "critical"
+		},
+		"confirm_delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"default": true,
+			"class": "critical"
 		},
 		"close": {
 			"type": "textButton",
@@ -301,7 +307,7 @@
 					"size": "sm"
 				}
 			},
-			"deleteControls": [ "delete", "cancel" ]
+			"deleteControls": [ "confirm_delete", "cancel" ]
 		},
 		"pagination": {
 			"defaultPageSize": 10,

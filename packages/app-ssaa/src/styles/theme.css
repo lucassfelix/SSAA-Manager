@@ -43,6 +43,10 @@ header h4 {
   font-weight: 500 !important;
 }
 
+.nf-dark p b {
+  color: white;
+}
+
 /* #endregion */
 
 /* #region ----------------------------------------------------------- Table and datatable styles */
@@ -155,6 +159,10 @@ tr:hover .nf-actions-toolbar {
 /* Critical action button */
 .nf-Button-filled.nf-critical {
   background-color: var(--mantine-color-red-6);
+}
+.nf-Button-outline.nf-critical {
+  border-color: var(--mantine-color-red-6);
+  color: var(--mantine-color-red-6);
 }
 
 /* #endregion */

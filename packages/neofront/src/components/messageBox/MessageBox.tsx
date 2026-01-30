@@ -72,7 +72,8 @@ export default function MessageBox(props: NfModalProps): JSX.Element {
           <Text
             size={cfg.texts?.size as MantineFontSize || 'sm'}
             fw={cfg.texts?.fontWeight || 500}
-          >{message}</Text>
+            {...({ dangerouslySetInnerHTML: { __html: message } })}
+          >{null}</Text>
         </Group>
         <Stack>
           {cfg.upperBorder && <Divider />}
