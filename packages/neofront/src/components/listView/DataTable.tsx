@@ -367,7 +367,13 @@ function getColumns(
 
     function renderDateCell(value: string | number): ReactNode {
       if (render?.format === 'relative') {
-        return renderSingleCell(getRelativeTime(value, appCfg.language), styles, undefined);
+        const abs = dayjs(value).isValid() ? dayjs(value).format(String(appCfg.strings.defaultDateFormat ?? 'YYYY-MM-DD')) : String(value);
+        const tip = [fieldDef.label, abs].filter(Boolean).join(' ');
+        return (
+          <Tooltip label={tip} transitionProps={{ enterDelay: 500 }}>
+            {renderSingleCell(getRelativeTime(value, appCfg.language), styles, undefined)}
+          </Tooltip>
+        );
       }
       return renderSingleCell((dayjs(value)).format(String(render?.format ??
         appCfg.strings.defaultDateFormat ?? 'YYYY-MM-DD')), styles, undefined);
