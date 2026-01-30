@@ -245,11 +245,13 @@ function getColumns(
             label={values.length}
             size={16}
             className="nf-numeric-icon-wrapper"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', lineHeight: 0 }}
           >
             <NfIcon
               icon={fieldDef.icon || 'circle'}
               color={fieldDef.iconColor}
               size={20}
+              style={{ display: 'block' }}
             />
           </Indicator>
         </Tooltip>
