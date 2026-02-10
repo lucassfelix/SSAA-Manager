@@ -70,6 +70,7 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   const formRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const recomputeRef = useRef<() => void>(() => {});
   const [deleteRequest, setDeleteRequest] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
@@ -106,9 +107,7 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   function recomputeValidity() {
     if (requiredNames.length === 0 && filterKeys.length === 0) {
-      if (!isValid) {
-        setIsValid(true);
-      }
+      setIsValid(true);
       return;
     }
 
@@ -119,18 +118,16 @@ export default function NfForm(props: FormProps): JSX.Element {
       for (const k of filterKeys) {
         next[k] = values[k];
       }
-      const prev = filterValues;
-      const changed = Object.keys(next).some(k => prev[k] !== next[k]) || Object.keys(prev).some(k => !(k in next));
-      if (changed) {
-        setFilterValues(next);
-      }
+      setFilterValues(prev => {
+        const changed = Object.keys(next).some(k => prev[k] !== next[k]) || Object.keys(prev).some(k => !(k in next));
+        return changed ? next : prev;
+      });
     }
 
-    const nextIsValid = requiredNames.length === 0 ? true : hasAllRequired(values, requiredNames);
-    if (nextIsValid !== isValid) {
-      setIsValid(nextIsValid);
-    }
+    setIsValid(requiredNames.length === 0 ? true : hasAllRequired(values, requiredNames));
   }
+
+  recomputeRef.current = recomputeValidity;
 
   useEffect(() => {
     recomputeValidity();
@@ -140,7 +137,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     if (op !== 'add' && op !== 'edit') {
       return;
     }
-    const handler = () => setTimeout(recomputeValidity, 0);
+    const handler = () => setTimeout(() => recomputeRef.current(), 0);
     document.addEventListener('click', handler, true);
     return () => document.removeEventListener('click', handler, true);
   }, [op, requiredNames.length]);
