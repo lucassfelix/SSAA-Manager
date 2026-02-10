@@ -250,25 +250,26 @@ const separator = '-'.repeat(100);
 
 let knownControls = new Set();
 const fieldsCache = new Map();
+const fieldsJsonCache = new Map();
 
 function warn(file, line, msg) {
   warnings++;
   output.push(colors.darkgray(separator));
-  output.push(colors.yellow(`Warning: ${msg}`));
+  output.push(`Warning: ${colors.yellow(msg)}`);
   output.push(colors.white(`    • ${rel(file)}:${line}`));
 }
 
 function err(file, line, msg) {
   errors++;
   output.push(colors.darkgray(separator));
-  output.push(colors.red(`Error: ${msg}`));
+  output.push(`Error: ${colors.red(msg)}`);
   output.push(colors.white(`    • ${rel(file)}:${line}`));
 }
 
 function reportAccessorMismatch(formFile, formLine, lvName, key, embeddedVal, targetFile, targetLine, targetVal) {
   errors++;
   output.push(colors.darkgray(separator));
-  output.push(colors.red('Error: different accessors'));
+  output.push(`Error: ${colors.red('different accessors')}`);
   output.push(colors.white(`    • ${rel(formFile)}:${formLine}, embedded listView '${lvName}': ${key}="${embeddedVal}"`));
   output.push(colors.white(`    • ${rel(targetFile)}:${targetLine}: ${key}="${targetVal}"`));
 }
@@ -313,6 +314,84 @@ function getFieldsSet(viewName) {
     const set = new Set();
     fieldsCache.set(name, set);
     return set;
+  }
+}
+
+function getFieldsJson(viewName) {
+  const name = String(viewName || '');
+  if (!name) {
+    return null;
+  }
+  if (fieldsJsonCache.has(name)) {
+    return fieldsJsonCache.get(name);
+  }
+
+  const file = path.join(viewsFolder, name, 'fields.json');
+  try {
+    const { json } = readJsonFile(file);
+    fieldsJsonCache.set(name, json);
+    return json;
+  } catch (_e) {
+    fieldsJsonCache.set(name, null);
+    return null;
+  }
+}
+
+function collectFormFields(layout, collected = new Set()) {
+  if (Array.isArray(layout)) {
+    for (const item of layout) {
+      if (typeof item === 'string') {
+        collected.add(item);
+      } else if (item && typeof item === 'object') {
+        collectFormFields(item, collected);
+      }
+    }
+  } else if (layout && typeof layout === 'object') {
+    for (const key of Object.keys(layout)) {
+      collectFormFields(layout[key], collected);
+    }
+  }
+  return collected;
+}
+
+function checkRequiredFields(formFile) {
+  let raw;
+  let form;
+  try {
+    ({ raw, json: form } = readJsonFile(formFile));
+  } catch (_e) {
+    return;
+  }
+
+  const viewName = form?.name;
+  if (!viewName) {
+    return;
+  }
+
+  const fieldsJson = getFieldsJson(viewName);
+  if (!fieldsJson?.fields) {
+    return;
+  }
+
+  const requiredFields = [];
+  for (const [fieldName, fieldDef] of Object.entries(fieldsJson.fields)) {
+    if (fieldDef && fieldDef.required === true) {
+      requiredFields.push(fieldName);
+    }
+  }
+
+  if (requiredFields.length === 0) {
+    return;
+  }
+
+  const formFields = collectFormFields(form?.layout);
+
+  for (const requiredField of requiredFields) {
+    if (!formFields.has(requiredField)) {
+      const line = findKeyLine(raw, 'layout');
+      const fieldsFile = path.join(viewsFolder, viewName, 'fields.json');
+      err(formFile, line, `Required field "${requiredField}" from ${rel(fieldsFile)} is not in the form layout.`);
+    }
   }
 }
 
@@ -458,6 +537,7 @@ if (formFiles.length === 0) {
 
 for (const f of formFiles) {
   analyzeEmbeddedListViews(f);
+  checkRequiredFields(f);
 }
 
 if (output.length) {

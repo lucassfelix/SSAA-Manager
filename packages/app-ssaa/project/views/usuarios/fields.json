@@ -31,6 +31,7 @@
         "nome_abreviado": {
             "header": "Abreviado",
             "colWidth": 200,
+            "fieldWidth": 300,
             "dataType": "string",
             "label": "Nome abreviado",
             "placeholder": "Nome abreviado",
