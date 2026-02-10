@@ -18,6 +18,6 @@
     },
     "edit": {
         "title": "Boas-vindas ao",
-        "toolbar": [ "login" ]
+        "toolbar": [ "login_text" ]
     }
 }

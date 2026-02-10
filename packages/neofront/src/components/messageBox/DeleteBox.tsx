@@ -8,6 +8,7 @@ import type { JSX } from 'react';
 
 import { useAppUI } from 'context';
 import MessageBox from './MessageBox';
+import { replaceVars } from '@/app/mainUtils';
 
 // #endregion
 
@@ -34,13 +35,14 @@ export default function DeleteBox(props: DeleteBoxProps): JSX.Element | null {
     return null;
   }
 
+  console.log('DeleteBox record:', record);
   const fieldsCfg = viewResult?.fieldConfig?.[viewName];
-  const message = (appCfg.strings.deleteItemConfirm ?? '')
-    .replace('{name}', String(record?.[nameAccessor] ?? ''))
-    .replace('{id}', String(record?.[idAccessor] ?? ''))
-    .replace('{theItem}', String(fieldsCfg?.strings?.theItem ?? ''))
-    .replace('{singular}', String(fieldsCfg?.strings?.singular ?? ''))
-    ;
+  const message = replaceVars(appCfg.strings.deleteItemConfirm ?? '', {
+    fieldsCfg,
+    record,
+    idAccessor,
+    nameAccessor,
+  });
 
   async function doDelete() {
     if (appCfg.data?.source !== 'api' || !appCfg.data.apiBaseUrl) {

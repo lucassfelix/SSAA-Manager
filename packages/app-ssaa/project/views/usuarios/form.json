@@ -35,14 +35,17 @@
                     "name": "pacientes",
                     "config": {
                         "idAccessor": "id",
-                        "nameAccessor": "nome",
+                        "nameAccessor": "nome_completo",
                         "rowClassAccessor": "none"
                     },
                     "columns": [
                         "nome_completo",
                         "data_criacao",
-                        "status"
-                    ]
+                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
                 }
             }
         ]

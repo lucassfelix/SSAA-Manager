@@ -106,6 +106,9 @@
 		}
 	},
 	"controls": {
+		"separator": {
+			"type": "separator"
+		},
 		"userMenu": {
 			"type": "iconButton",
 			"name": "userSettings",
@@ -118,14 +121,17 @@
 				{ "label": "Sair", "action": "logout" }
 			]
 		},
-		"separator": {
-			"type": "separator"
-		},
 		"add": {
 			"type": "iconButton",
 			"tip": "Adicionar {singular}",
 			"icon": "add",
 			"action": "add"
+		},
+		"add_text": {
+			"type": "textButton",
+			"label": "Adicionar {singular}",
+			"action": "add",
+			"default": true
 		},
 		"search": {
 			"type": "iconButton",
@@ -212,7 +218,7 @@
 				}
 			]
 		},
-		"login": {
+		"login_text": {
 			"type": "textButton",
 			"label": "Entrar",
 			"action": "login",

@@ -92,4 +92,31 @@ export function createDataLoader(apiBaseUrl: string, tableNames: string[],
   };
 }
 
+export function replaceVars(text: string, ctx?: {
+  fieldsCfg?: FieldsConfig;
+  record?: Record<string, any> | null;
+  idAccessor?: string;
+  nameAccessor?: string;
+}): string {
+  if (!text) {
+    return text;
+  }
+
+  const fieldsCfg = ctx?.fieldsCfg;
+  const record = ctx?.record;
+  const name = ctx?.nameAccessor ? record?.[ctx.nameAccessor] : undefined;
+  const id = ctx?.idAccessor ? record?.[ctx.idAccessor] : undefined;
+  const userid = localStorage.getItem('__nf_username_valid') === '1'
+    ? (localStorage.getItem('__nf_username') || '')
+    : '(Unknown)';
+
+  return text
+    .replace('{name}', String(name ?? ''))
+    .replace('{id}', String(id ?? ''))
+    .replace('{theItem}', String(fieldsCfg?.strings?.theItem ?? ''))
+    .replace('{singular}', String(fieldsCfg?.strings?.singular ?? fieldsCfg?.name ?? ''))
+    .replace('{plural}', String(fieldsCfg?.strings?.plural ?? fieldsCfg?.name ?? ''))
+    .replace('{userid}', userid);
+}
+
 // #endregion

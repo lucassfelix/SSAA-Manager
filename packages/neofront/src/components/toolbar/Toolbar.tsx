@@ -10,6 +10,7 @@ import { ActionIcon, Anchor, Box, Button, Divider, Group, Menu, Text, Tooltip } 
 
 import { FieldsConfig, useAppUI } from "context";
 import NfIcon from "@/icon/NfIcon";
+import { replaceVars } from "@/app/mainUtils";
 
 // #endregion
 
@@ -178,15 +179,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
       }
     };
 
-    function replaceVars(str: string): string {
-      return fieldsCfg?.strings ? str
-        .replace('{singular}', fieldsCfg?.strings?.singular || fieldsCfg?.name)
-        .replace('{plural}', fieldsCfg?.strings?.plural || fieldsCfg?.name)
-        .replace('{userid}', localStorage.getItem('__nf_username_valid') === '1'
-          ? (localStorage.getItem('__nf_username') || '')
-          : '(Unknown)')
-        : str;
-    }
+    const replaceCtx = { fieldsCfg };
 
     function renderSeparator(key: string): JSX.Element {
       return <Divider key={key} orientation="vertical" />;
@@ -204,7 +197,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
           styles={{ root: { fontSize: cfg.texts?.size } }}
           style={cfg.texts?.width ? { minWidth: cfg.texts.width } : undefined}
         >
-          {replaceVars(it.text!)}
+          {replaceVars(it.text!, replaceCtx)}
         </Text>
       );
     }
@@ -217,7 +210,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
           styles={{ root: { fontSize: cfg.titles?.size } }}
           style={cfg.titles?.width ? { minWidth: cfg.titles.width } : undefined}
         >
-          {replaceVars(it.text!)}
+          {replaceVars(it.text!, replaceCtx)}
         </Text>
       );
     }
@@ -240,7 +233,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
         <Tooltip
           key={key}
           label={<span dangerouslySetInnerHTML={{
-            __html: it.selected ? replaceVars(it.selectedTip ?? "") : replaceVars(it.tip ?? "")
+            __html: it.selected ? replaceVars(it.selectedTip ?? "", replaceCtx)
+              : replaceVars(it.tip ?? "", replaceCtx)
           }} />}
           position="top"
         >{node}</Tooltip>
@@ -249,11 +243,12 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
     function renderSimpleButton(it: ToolbarItem, key: string): JSX.Element {
 
-      const name = it.name ? replaceVars(it.name) : undefined;
+      const name = it.name ? replaceVars(it.name, replaceCtx) : undefined;
 
       if (it.type === 'textButton') {
         const textBtnVariant = it.default ? tbCfg.textButtons?.defaultVariant || 'filled' :
           tbCfg.textButtons?.regularVariant || 'outline';
+        const label = replaceVars(it.label ?? `[${name}]`, replaceCtx);
         return renderTooltip(it, key,
           <Button
             key={key}
@@ -270,7 +265,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
               width: it.width ? it.width : undefined,
               textTransform: cfg.textButtons?.uppercase ? "uppercase" : undefined
             }}
-          >{it.label ?? `[${name}]`}</Button>);
+          >{label}</Button>);
       } else {
         const iconBtnVariant = it.selected ? tbCfg.iconButtons?.selectedVariant || 'filled' :
           tbCfg.iconButtons?.regularVariant || 'subtle';
@@ -330,13 +325,14 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     }
 
     function renderLink(it: ToolbarItem, key: string): JSX.Element {
+      const label = replaceVars(it.label ?? `[${it.name}]`, replaceCtx);
       return <Anchor  
         key={key}
         href={it.action ?? '#'}
         rel="noopener noreferrer"
         className={it.class ? `nf-${it.class}` : undefined}
       >
-        {it.label ?? `[${it.name}]`}
+        {label}
       </Anchor>;
     }
 
