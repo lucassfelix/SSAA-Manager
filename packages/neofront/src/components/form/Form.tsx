@@ -6,7 +6,7 @@
 
 import type { JSX } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Divider, Group, ScrollArea, Stack, Title } from "@mantine/core";
 
 import { useAppUI } from "context";
@@ -42,7 +42,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   // #region Hooks and context
 
   const { op, onAction } = props;
-  const { appCfg, viewResult, currentView, currentRecordId } = useAppUI();
+  const { appCfg, viewResult, currentView, currentRecordId, currentSearchParams } = useAppUI();
 
   if (!viewResult) {
     return (
@@ -56,11 +56,25 @@ export default function NfForm(props: FormProps): JSX.Element {
   const nameAccessor = viewResult.listView.config?.nameAccessor ?? 'name';
   const idAccessor = viewResult.listView.config?.idAccessor ?? 'id';
   const records = viewResult.data[currentView];
+  const navigate = useNavigate();
   const record = currentRecordId ? records?.find(r => String(getValueByPath(r, idAccessor)) ===
     String(currentRecordId)) : undefined;
-  const name = record ? getValueByPath(record, nameAccessor) : undefined;
-  const navigate = useNavigate();
-  const location = useLocation();
+  
+  const prefillRecord = useMemo(() => {
+    if (op !== 'add') {
+      return undefined;
+    }
+    const prefill: Record<string, any> = {};
+    for (const [key, value] of currentSearchParams.entries()) {
+      if (key !== 'v' && key !== 'op' && key !== 'id' && key !== 'tab') {
+        prefill[key] = value;
+      }
+    }
+    return Object.keys(prefill).length > 0 ? prefill : undefined;
+  }, [op, currentSearchParams]);
+  
+  const effectiveRecord = record ?? prefillRecord;
+  const name = effectiveRecord ? getValueByPath(effectiveRecord, nameAccessor) : undefined;
   const isFilter = op === 'filter';
   const formCfg = isFilter ? { ...appCfg.forms, ...appCfg.listViews.filterPanel } : appCfg.forms;
   const recordCfg = (allowedOps.includes(op as AllowedOp) ? viewResult.form[op as AllowedOp] : {}) as RecordConfig;
@@ -202,11 +216,10 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   // Navigate back to list view by removing op and id parameters
   function navigateToListView() {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(currentSearchParams);
     params.delete('op');
     params.delete('id');
-    const target = location.pathname + (params.toString() ? `?${params.toString()}` : '');
-    navigate(target, { replace: true });
+    navigate(`/?${params.toString()}`, { replace: true });
   }
 
   async function saveRecord() {
@@ -311,7 +324,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       key={currentRecordId || 'new'}
       op={op}
       recordCfg={recordCfg}
-      record={record}
+      record={effectiveRecord}
       values={filterValues}
     />
   ) : (
@@ -319,7 +332,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       key={currentRecordId || 'new'}
       op={op}
       recordCfg={recordCfg}
-      record={record}
+      record={effectiveRecord}
       formLayout={viewResult.form.layout}
       values={filterValues}
     />
@@ -352,7 +365,7 @@ export default function NfForm(props: FormProps): JSX.Element {
     <Stack gap={formCfg.verticalGap} h={formCfg.fullHeight ? "100%" : "auto"}>
 
       <DeleteBox
-        record={deleteRequest ? (record ?? null) : null}
+        record={deleteRequest ? (effectiveRecord ?? null) : null}
         viewName={currentView}
         idAccessor={idAccessor}
         nameAccessor={nameAccessor}

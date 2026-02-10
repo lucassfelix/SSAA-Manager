@@ -18,6 +18,8 @@ import FilterPanel from "@/listView/FilterPanel";
 interface NfListViewProps {
   viewSchema: ListViewProps;
   records: Record<string, any>[];
+  parentView?: string;
+  parentRecordId?: string | number;
 };
 
 // #region ------------------------------------------------------------------------------- Component
@@ -27,7 +29,7 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
   // #region Hooks and variables
 
   const { appCfg, userSettings, setUserSettings, currentView, viewResult } = useAppUI();
-  const { viewSchema, records } = props;
+  const { viewSchema, records, parentView, parentRecordId } = props;
   const withPanel = viewSchema?.filterPanel;
   const navigate = useNavigate();
   const filterOpen = userSettings.views?.[currentView!]?.filterPanelOpen ?? false;
@@ -61,15 +63,21 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
 
   // Preset handlers for toolbar actions
   const handleAction = (action: string, _payload: any) => {
+    const targetView = viewSchema.name || currentView;
+    const params = new URLSearchParams({ v: targetView, op: 'add' });
+    console.log(params);
     switch (action) {
       case 'add':
-        navigate(`?v=${currentView}&op=add`);
+        if (parentView && parentRecordId != null) {
+          params.set(`${parentView.replace(/s$/, '')}_id`, String(parentRecordId));
+        }
+        navigate(`?${params.toString()}`);
         return;
       case 'toggleFilterPanel':
         toggleFilterPanelState();
         return;
       case 'edit':
-        navigate(`?v=${currentView}&op=edit&id=${_payload}`);
+        navigate(`?v=${targetView}&op=edit&id=${_payload}`);
         return;
       case 'closeFilterPanel':
         if (filterOpen) {

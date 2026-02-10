@@ -55,7 +55,7 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
   // #region Hooks and variables
 
   const { op, recordCfg, record, values } = props;
-  const { viewResult, appCfg, currentSearchParams } = useAppUI();
+  const { viewResult, appCfg, currentSearchParams, currentView, currentRecordId } = useAppUI();
   const navigate = useNavigate();
 
   const layout = viewResult.form.layout;
@@ -103,6 +103,8 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
             <NfListView
               viewSchema={tab.listView}
               records={record?.[tab.listView.name]}
+              parentView={currentView}
+              parentRecordId={currentRecordId}
             />
           ) : (
             <FormLayout

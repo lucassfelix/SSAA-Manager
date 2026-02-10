@@ -173,7 +173,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     // Prefill initialValue from record if available
     const accessor = fieldDef.accessor ?? fieldName;
 
-    if (record && !isFilter && !hasPath(record, accessor)) {
+    if (record && !isFilter && op !== 'add' && !hasPath(record, accessor)) {
       const key = `${currentView}:${fieldName}:${accessor}`;
       if (!warnedMissingField.current.has(key)) {
         warnedMissingField.current.add(key);
