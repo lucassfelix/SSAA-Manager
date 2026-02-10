@@ -116,42 +116,50 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   // #endregion
 
   return (
-    multiple ? (
-      <MultiSelect
-        name={name}
-        label={label}
-        size={size}
-        required={required}
-        disabled={enabled === false}
-        placeholder={placeholder}
-        value={value as string[]}
-        w={width}
-        renderOption={({ option }) => renderOption(option)}
-        data={data ?? []}
-        onChange={(vals) => setValue(vals)}
-        className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
-        wrapperProps={{ 'data-field-props': name }}
-      />
-    ) : (
-      <Select
-        name={name}
-        label={label}
-        size={size}
-        required={required}
-        readOnly={readOnly}
-        disabled={enabled === false}
-        placeholder={placeholder}
-        value={value as string | null}
-        w={width}
-        autoSelectOnBlur
-        allowDeselect={false}
-        renderOption={({ option }) => renderOption(option)}
-        data={data ?? []}
-        onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
-        className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
-        wrapperProps={{ 'data-field-props': name }}
-      />
-    )
+    <div data-field-props={name}>
+      {multiple ? (
+        <>
+          {(value as string[]).map((v, i) => (
+            <input key={`${name}-${i}`} type="hidden" name={name} value={v} />
+          ))}
+          <MultiSelect
+            name={name}
+            label={label}
+            size={size}
+            required={required}
+            disabled={enabled === false}
+            placeholder={placeholder}
+            value={value as string[]}
+            w={width}
+            renderOption={({ option }) => renderOption(option)}
+            data={data ?? []}
+            onChange={(vals) => setValue(vals)}
+            className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
+          />
+        </>
+      ) : (
+        <>
+          <input type="hidden" name={name} value={(value as string | null) ?? ''} />
+          <Select
+            name={name}
+            label={label}
+            size={size}
+            required={required}
+            readOnly={readOnly}
+            disabled={enabled === false}
+            placeholder={placeholder}
+            value={value as string | null}
+            w={width}
+            autoSelectOnBlur
+            allowDeselect={false}
+            renderOption={({ option }) => renderOption(option)}
+            data={data ?? []}
+            onChange={(v, option) => setValue(option?.value === clearValue ? null : v)}
+            className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '' )}
+          />
+        </>
+      )}
+    </div>
   );
 }
 

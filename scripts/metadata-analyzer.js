@@ -199,11 +199,6 @@ function rel(p) {
   return path.relative(projectFolder, p).replace(/\\/g, '/');
 }
 
-function relView(p) {
-  const r = rel(p);
-  return r.startsWith('views/') ? r.slice(6) : r;
-}
-
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -260,22 +255,22 @@ function warn(file, line, msg) {
   warnings++;
   output.push(colors.darkgray(separator));
   output.push(colors.yellow(`Warning: ${msg}`));
-  output.push(colors.white(`    • ${relView(file)}:${line}`));
+  output.push(colors.white(`    • ${rel(file)}:${line}`));
 }
 
 function err(file, line, msg) {
   errors++;
   output.push(colors.darkgray(separator));
   output.push(colors.red(`Error: ${msg}`));
-  output.push(colors.white(`    • ${relView(file)}:${line}`));
+  output.push(colors.white(`    • ${rel(file)}:${line}`));
 }
 
 function reportAccessorMismatch(formFile, formLine, lvName, key, embeddedVal, targetFile, targetLine, targetVal) {
   errors++;
   output.push(colors.darkgray(separator));
   output.push(colors.red('Error: different accessors'));
-  output.push(colors.white(`    • ${relView(formFile)}:${formLine}, embedded listView '${lvName}': ${key}="${embeddedVal}"`));
-  output.push(colors.white(`    • ${relView(targetFile)}:${targetLine}: ${key}="${targetVal}"`));
+  output.push(colors.white(`    • ${rel(formFile)}:${formLine}, embedded listView '${lvName}': ${key}="${embeddedVal}"`));
+  output.push(colors.white(`    • ${rel(targetFile)}:${targetLine}: ${key}="${targetVal}"`));
 }
 
 function checkToolbar(file, raw, toolbar, toolbarPath) {
@@ -338,7 +333,7 @@ function checkColumnsExist(file, raw, lvName, columns, columnsPath, isEmbedded) 
       const line = isEmbedded
         ? (findListViewValueLine(raw, lvName, col) || findKeyLineFromPath(raw, columnsPath))
         : (findRawValueLine(raw, col) || findKeyLineFromPath(raw, columnsPath));
-      err(file, line, `${isEmbedded ? 'Embedded ' : ''}listView "${lvName}" column "${col}" does not exist in ${relView(path.join(viewsFolder, lvName, 'fields.json'))}.`);
+      err(file, line, `${isEmbedded ? 'Embedded ' : ''}listView "${lvName}" column "${col}" does not exist in ${rel(path.join(viewsFolder, lvName, 'fields.json'))}.`);
     }
   }
 }
@@ -383,7 +378,7 @@ function analyzeEmbeddedListViews(formFile) {
     const targetListViewFile = path.join(viewsFolder, lvName, 'listview.json');
     if (!fs.existsSync(targetListViewFile)) {
       const line = findKeyLineFromPath(raw, [...p, 'listView', 'name']);
-      err(formFile, line, `Embedded listView references "${lvName}", but ${relView(targetListViewFile)} is missing.`);
+      err(formFile, line, `Embedded listView references "${lvName}", but ${rel(targetListViewFile)} is missing.`);
       return;
     }
 

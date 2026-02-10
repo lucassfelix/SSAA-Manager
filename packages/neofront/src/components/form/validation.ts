@@ -60,9 +60,14 @@ export function getFormValues(root: HTMLElement | null): Record<string, unknown>
       instanceof HTMLInputElement && el.type === 'hidden');
     const visible = controls.filter((el) => !(el instanceof HTMLInputElement && el.type === 'hidden'));
 
-    if (hiddenInputs.length > 1) {
+    if (hiddenInputs.length > 0) {
       const vals = hiddenInputs.map(i => i.value).filter(v => v !== '');
-      result[name] = vals.length === 0 ? null : vals;
+      const uniq = Array.from(new Set(vals));
+      if (uniq.length <= 1) {
+        result[name] = uniq[0] ?? null;
+      } else {
+        result[name] = uniq;
+      }
       continue;
     }
 
