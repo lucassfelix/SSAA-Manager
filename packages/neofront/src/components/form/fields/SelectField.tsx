@@ -5,7 +5,7 @@
 // #region --------------------------------------------------------------------------------- Imports
 
 import { clsx } from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ComboboxItem, Group, InputBase, Select, MultiSelect, Pill } from '@mantine/core';
 import { type ComboboxData } from '@mantine/core';
 
@@ -44,6 +44,41 @@ export default function NfSelectField({ props }: { props: FormFieldProps }) {
   if (!options) {
     console.warn(`SelectField: No options provided for field '${name}'. Make sure the relevant tables are imported in loader.js.`);
   }
+
+  // Keep value in valid options only
+  useEffect(() => {
+    if (readOnly || options == null) {
+      return;
+    }
+
+    if (options.length === 0) {
+      if (multiple) {
+        const cur = Array.isArray(value) ? (value as string[]) : [];
+        if (cur.length !== 0) {
+          setValue([]);
+        }
+      } else {
+        if (value != null && value !== '') {
+          setValue(null);
+        }
+      }
+      return;
+    }
+
+    const allowed = new Set(options.map(o => String(o.value)));
+    if (multiple) {
+      const cur = Array.isArray(value) ? (value as string[]) : [];
+      const next = cur.filter(v => allowed.has(String(v)));
+      if (next.length !== cur.length) {
+        setValue(next);
+      }
+      return;
+    }
+
+    if (value != null && !allowed.has(String(value))) {
+      setValue(null);
+    }
+  }, [multiple, options, readOnly, value]);
 
   // If select field is read-only, render as text field showing the option label
   if (readOnly) {

@@ -48,7 +48,7 @@
             "options": { "table": "clinicas", "valueAccessor": "id",
                 "labelAccessor": "nome_abreviado" },
             "placeholder": "Selecione uma opção",
-            "readOnly": true
+            "required": true
         },
         "usuario_id": {
             "header": "Responsável",

@@ -71,6 +71,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   const formRef = useRef<HTMLDivElement | null>(null);
   const [deleteRequest, setDeleteRequest] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const [formValues, setFormValues] = useState<Record<string, unknown>>({});
 
   const requiredNames = useMemo(() => {
     if (op !== 'add' && op !== 'edit') {
@@ -84,6 +85,7 @@ export default function NfForm(props: FormProps): JSX.Element {
 
   function recomputeValidity() {
     const values = getFormValues(formRef.current);
+    setFormValues(values);
     setIsValid(hasAllRequired(values, requiredNames));
   }
 
@@ -270,6 +272,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       op={op}
       recordCfg={recordCfg}
       record={record}
+      values={formValues}
     />
   ) : (
     <FormLayout
@@ -278,6 +281,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       recordCfg={recordCfg}
       record={record}
       formLayout={viewResult.form.layout}
+      values={formValues}
     />
   );
 

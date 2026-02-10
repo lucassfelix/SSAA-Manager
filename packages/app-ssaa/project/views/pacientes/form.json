@@ -17,7 +17,7 @@
                                 "status"
                             ],
                             [
-                                [ "data_criacao", "usuario_id", "clinica_id" ],
+                                [ "data_criacao", "clinica_id", "usuario_id" ],
                                 "usuarios"
                             ]
                         ]

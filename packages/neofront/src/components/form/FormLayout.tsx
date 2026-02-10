@@ -6,13 +6,13 @@
 
 import { CSSProperties, JSX, useRef } from "react";
 import { Group, Stack, SimpleGrid } from "@mantine/core";
+import dayjs from "dayjs";
 
 import { RecordConfig, UnifiedFieldProps, useAppUI, FormFieldProps, SelectFieldOption } from "context";
 import { FormOperationType } from "./Form";
 import Section, { SectionSchema } from "@/form/Section";
 import ErrorPage from "@/errorpage/ErrorPage";
 import { getValueByPath } from "@/listView/datatableUtils";
-import dayjs from "dayjs";
 
 import { FormLayoutSchema } from "context";
 import NfTextField from "./fields/TextField";
@@ -31,6 +31,7 @@ interface FormLayoutProps {
   op: FormOperationType;
   recordCfg: RecordConfig;
   record?: Record<string, any>;
+  values?: Record<string, unknown>;
   formLayout: FormLayoutSchema;
   fields?: Record<string, UnifiedFieldProps>;
   style?: CSSProperties;
@@ -44,7 +45,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { op, recordCfg, record, formLayout, fields, style } = props;
+  const { op, recordCfg, record, values, formLayout, fields, style } = props;
   const { appCfg, currentView, viewResult } = useAppUI();
 
   if (!recordCfg) {
@@ -153,9 +154,12 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       let table = viewResult.data?.[fieldDef.options.table];
       if (table && Array.isArray(table)) {
         const filterKey = fieldDef.options.filter;
-        if (filterKey && record) {
-          const filterValue = getValueByPath(record, filterKey);
-          if (filterValue != null && filterValue !== '') {
+        if (filterKey) {
+          const rawFilterValue = (values && (filterKey in values)) ? (values as any)[filterKey] : undefined;
+          const filterValue = rawFilterValue ?? (record ? getValueByPath(record, filterKey) : undefined);
+          if (filterValue == null || filterValue === '') {
+            table = [];
+          } else {
             table = table.filter((item: any) => String(getValueByPath(item, filterKey, true) ?? '') === String(filterValue));
           }
         }

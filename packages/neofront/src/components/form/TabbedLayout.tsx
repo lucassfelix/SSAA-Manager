@@ -43,6 +43,7 @@ interface TabbedLayoutProps {
   op: FormOperationType;
   recordCfg: RecordConfig;
   record?: Record<string, any>;
+  values?: Record<string, unknown>;
 }
 
 // #endregion
@@ -53,7 +54,7 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { op, recordCfg, record } = props;
+  const { op, recordCfg, record, values } = props;
   const { viewResult, appCfg, currentSearchParams } = useAppUI();
   const navigate = useNavigate();
 
@@ -109,6 +110,7 @@ export default function TabbedLayout(props: TabbedLayoutProps): JSX.Element {
               recordCfg={recordCfg}
               record={record}
               formLayout={{ header: tab.header, sections: tab.sections! }}
+              values={values}
             />
           )}
         </Tabs.Panel>
