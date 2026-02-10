@@ -13,7 +13,7 @@ Keep scripts small, single-purpose, and consistent with existing `scripts/*.js`.
 - Use simple ANSI color helpers like existing scripts; allow `--no-color`.
 - Exit codes:
   - `0` when no problems.
-  - `3` when problems found (matches `validate-jsons.js`).
+  - `3` when problems found (matches `json-validator.js`).
 
 ## Output format
 
@@ -26,7 +26,7 @@ Keep scripts small, single-purpose, and consistent with existing `scripts/*.js`.
 ## Metadata analysis (when applicable)
 
 - Treat schema validation as separate; metadata analysis scripts should:
-  - read JSON/JSONC (`stripJsonc` like `validate-jsons.js`)
+  - read JSON/JSONC (`stripJsonc` like `json-validator.js`)
   - load relevant view files under `<project>/views/**/{listview,form}.json`
   - cross-check references (e.g. embedded listView configs in `form.json` vs the target view’s `listview.json`).
 

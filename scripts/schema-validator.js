@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-// Simple CLI to check that all object schemas have a description, and that additionalProperties 
-// is not allowed unless explicitly set to false or an object schema.
+// Simple CLI to check that all object schemas have a description, and that additionalProperties
+// is not allowed unless explicitly set to false/true or an object schema.
 
 // #region --------------------------------------------------------------------------------- Imports
 
@@ -184,7 +184,7 @@ function collectJsonFiles(dir) {
 
 function printUsage(colors) {
   console.log('');
-  console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/check-schemas.js')} ${colors.yellow('[--out <file>] [--no-color]')} ${colors.cyan('<schemas-folder>')}`);
+  console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/schema-validator.js')} ${colors.yellow('[--out <file>] [--no-color]')} ${colors.cyan('<schemas-folder>')}`);
   console.log('');
   console.log('Options:');
   console.log(`  ${colors.yellow('--out <file>')}    Save plain TXT report to <file>`);

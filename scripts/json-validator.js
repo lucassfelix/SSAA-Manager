@@ -87,7 +87,7 @@ function getSchemaKey(json, file) {
 // Print script usage info
 function printUsage() {
   console.log('');
-  console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/validate-jsons.js')} ${colors.yellow('--schemas <folder> --project <folder> [--log <file>]')} ${colors.yellow('[--no-color]')}`);
+  console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/json-validator.js')} ${colors.yellow('--schemas <folder> --project <folder> [--log <file>]')} ${colors.yellow('[--no-color]')}`);
   console.log('');
   console.log('Options:');
   console.log(`  ${colors.yellow('--schemas <folder>')}  Folder with JSON schemas (required)`);

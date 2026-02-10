@@ -15,7 +15,7 @@ When given a table name and its fields, create a new table by performing the fol
 5. Generate mock data records for the table and save them in a `data.json` file inside the same folder. Be careful to create realistic-looking mock data. For example, Brazilian names "Maria Silva" and "João Souza" are obviously fake: Brazilians typically have two (or even three) surnames, and "Maria", "João", "José" and others are almost always the base of compound first names. Some Italian and German surnames are relatively common as well. (See `.github\agents\br-names.json5` for ideas.) Also, ids, SKUS etc. are typically not sequential, nor uniform in shape. Diversity is key to realism.
 6. If there are auxiliary tables needed (like categories, status, etc.), generate the mock data for  them in the same way.
 7. Create a loader script `loader.js` that will load the metadata from `listview.json`, `form.json` and the data from `data.json` (and perhaps the auxiliary tables) into the system. If the new table uses values from existing tables, be sure to load their respective data in the loader script as well. (In the 'usuarios' example, the `empresas` table is an example.)
-8. After creating these files, run the schema validation script `scripts/validate-jsons.js` automatically to ensure everything is correct.
+8. After creating these files, run the schema validation script `scripts/json-validator.js` automatically to ensure everything is correct.
 9. Add the new view name to `project/views/views.json` in the active array.
 10. Add the table name to `project/menu.json`, if not there already.
 
