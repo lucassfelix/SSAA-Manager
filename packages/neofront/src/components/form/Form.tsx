@@ -69,9 +69,10 @@ export default function NfForm(props: FormProps): JSX.Element {
   const hasToolbar = Boolean(toolbarItems?.length);
 
   const formRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
   const [deleteRequest, setDeleteRequest] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const [formValues, setFormValues] = useState<Record<string, unknown>>({});
+  const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
 
   const requiredNames = useMemo(() => {
     if (op !== 'add' && op !== 'edit') {
@@ -83,10 +84,52 @@ export default function NfForm(props: FormProps): JSX.Element {
       .map(([name]) => name);
   }, [currentView, op, viewResult.fieldConfig]);
 
+  const filterKeys = useMemo(() => {
+    if (op !== 'add' && op !== 'edit') {
+      return [] as string[];
+    }
+    const fields = viewResult.fieldConfig?.[currentView]?.fields ?? {};
+    return Object.values(fields)
+      .map((def: any) => def?.dataType === 'select' ? def?.options?.filter : null)
+      .filter((v: any): v is string => typeof v === 'string' && v.length > 0);
+  }, [currentView, op, viewResult.fieldConfig]);
+
+  function scheduleRecompute() {
+    if (rafRef.current != null) {
+      return;
+    }
+    rafRef.current = window.requestAnimationFrame(() => {
+      rafRef.current = null;
+      recomputeValidity();
+    });
+  }
+
   function recomputeValidity() {
+    if (requiredNames.length === 0 && filterKeys.length === 0) {
+      if (!isValid) {
+        setIsValid(true);
+      }
+      return;
+    }
+
     const values = getFormValues(formRef.current);
-    setFormValues(values);
-    setIsValid(hasAllRequired(values, requiredNames));
+
+    if (filterKeys.length > 0) {
+      const next: Record<string, unknown> = {};
+      for (const k of filterKeys) {
+        next[k] = values[k];
+      }
+      const prev = filterValues;
+      const changed = Object.keys(next).some(k => prev[k] !== next[k]) || Object.keys(prev).some(k => !(k in next));
+      if (changed) {
+        setFilterValues(next);
+      }
+    }
+
+    const nextIsValid = requiredNames.length === 0 ? true : hasAllRequired(values, requiredNames);
+    if (nextIsValid !== isValid) {
+      setIsValid(nextIsValid);
+    }
   }
 
   useEffect(() => {
@@ -272,7 +315,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       op={op}
       recordCfg={recordCfg}
       record={record}
-      values={formValues}
+      values={filterValues}
     />
   ) : (
     <FormLayout
@@ -281,7 +324,7 @@ export default function NfForm(props: FormProps): JSX.Element {
       recordCfg={recordCfg}
       record={record}
       formLayout={viewResult.form.layout}
-      values={formValues}
+      values={filterValues}
     />
   );
 
@@ -301,7 +344,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   const toolbarPosition = getToolbarPosition();
 
   const formBox = (
-    <Box ref={formRef} onInput={recomputeValidity} onChange={recomputeValidity} style={{ width: '100%' }}>
+    <Box ref={formRef} onChange={scheduleRecompute} style={{ width: '100%' }}>
       {formLayoutComponent}
     </Box>
   );
