@@ -35,7 +35,6 @@ export default function DeleteBox(props: DeleteBoxProps): JSX.Element | null {
     return null;
   }
 
-  console.log('DeleteBox record:', record);
   const fieldsCfg = viewResult?.fieldConfig?.[viewName];
   const message = replaceVars(appCfg.strings.deleteItemConfirm ?? '', {
     fieldsCfg,

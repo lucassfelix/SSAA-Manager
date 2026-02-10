@@ -78,6 +78,11 @@ function readJsonFile(filePath) {
   return { raw, json: JSON.parse(stripJsonc(raw)) };
 }
 
+function findRawValueLine(raw, value) {
+  const idx = String(raw).indexOf(`"${value}"`);
+  return idx === -1 ? 1 : getLineNumberFromIndex(raw, idx);
+}
+
 function printUsage(colors) {
   console.log('');
   console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/metadata-analyzer.js')} ${colors.yellow('--project <folder> [--log <file>]')} ${colors.yellow('[--no-color]')}`);
@@ -147,6 +152,58 @@ function findListViewKeyLine(raw, lvName, key) {
   return 1;
 }
 
+function findListViewValueLine(raw, lvName, value) {
+  const nameRe = new RegExp(`"name"\\s*:\\s*"${escapeRegExp(lvName)}"`);
+  const valueRe = new RegExp(`"${escapeRegExp(value)}"`);
+
+  let idx = 0;
+  while (idx >= 0) {
+    idx = raw.indexOf('"listView"', idx);
+    if (idx === -1) {
+      break;
+    }
+
+    const start = raw.indexOf('{', idx);
+    if (start === -1) {
+      idx += 9;
+      continue;
+    }
+
+    let depth = 0;
+    let end = -1;
+    for (let i = start; i < raw.length; i++) {
+      const ch = raw[i];
+      if (ch === '{') {
+        depth++;
+      } else if (ch === '}') {
+        depth--;
+        if (depth === 0) {
+          end = i + 1;
+          break;
+        }
+      }
+    }
+
+    const segment = raw.slice(idx, end === -1 ? raw.length : end);
+    if (nameRe.test(segment)) {
+      const valueIdx = segment.search(valueRe);
+      return getLineNumberFromIndex(raw, idx + (valueIdx === -1 ? 0 : valueIdx));
+    }
+
+    idx = start + 1;
+  }
+  return 1;
+}
+
+function rel(p) {
+  return path.relative(projectFolder, p).replace(/\\/g, '/');
+}
+
+function relView(p) {
+  const r = rel(p);
+  return r.startsWith('views/') ? r.slice(6) : r;
+}
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -155,6 +212,7 @@ const argv = process.argv.slice(2);
 let projectFolder = null;
 let logFile = null;
 let useColor = true;
+
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--project' && argv[i + 1]) {
     projectFolder = path.resolve(argv[++i]);
@@ -175,6 +233,7 @@ const colors = {
   lightRed: (s) => (useColor ? `\u001b[91m${s}\u001b[39m` : s),
   orange: (s) => (useColor ? `\u001b[38;5;214m${s}\u001b[39m` : s),
   white: (s) => (useColor ? `\u001b[37m${s}\u001b[39m` : s),
+  darkgray: (s) => (useColor ? `\u001b[90m${s}\u001b[39m` : s),
   bold: (s) => (useColor ? `\u001b[1m${s}\u001b[22m` : s),
 };
 
@@ -194,31 +253,104 @@ let warnings = 0;
 let errors = 0;
 const separator = '-'.repeat(100);
 
-function rel(p) {
-  return path.relative(projectFolder, p).replace(/\\/g, '/');
-}
-
-function relView(p) {
-  const r = rel(p);
-  return r.startsWith('views/') ? r.slice(6) : r;
-}
+let knownControls = new Set();
+const fieldsCache = new Map();
 
 function warn(file, line, msg) {
   warnings++;
-  output.push(colors.yellow(`Warning: ${rel(file)}:${line} ${msg}`));
+  output.push(colors.darkgray(separator));
+  output.push(colors.yellow(`Warning: ${msg}`));
+  output.push(colors.white(`    • ${relView(file)}:${line}`));
 }
 
 function err(file, line, msg) {
   errors++;
-  output.push(colors.red(`Error: ${rel(file)}:${line} ${msg}`));
+  output.push(colors.darkgray(separator));
+  output.push(colors.red(`Error: ${msg}`));
+  output.push(colors.white(`    • ${relView(file)}:${line}`));
 }
 
 function reportAccessorMismatch(formFile, formLine, lvName, key, embeddedVal, targetFile, targetLine, targetVal) {
   errors++;
-  output.push(colors.yellow(separator));
+  output.push(colors.darkgray(separator));
   output.push(colors.red('Error: different accessors'));
   output.push(colors.white(`    • ${relView(formFile)}:${formLine}, embedded listView '${lvName}': ${key}="${embeddedVal}"`));
   output.push(colors.white(`    • ${relView(targetFile)}:${targetLine}: ${key}="${targetVal}"`));
+}
+
+function checkToolbar(file, raw, toolbar, toolbarPath) {
+  if (!Array.isArray(toolbar)) {
+    return;
+  }
+
+  for (const item of toolbar) {
+    if (typeof item === 'string') {
+      if (!knownControls.has(item)) {
+        const line = findKeyLineFromPath(raw, toolbarPath);
+        err(file, line, `Toolbar references unknown control "${item}".`);
+      }
+    } else if (item && typeof item === 'object' && typeof item.name === 'string') {
+      if (!knownControls.has(item.name)) {
+        const line = findKeyLineFromPath(raw, toolbarPath);
+        err(file, line, `Toolbar references unknown control "${item.name}".`);
+      }
+    }
+  }
+}
+
+function getFieldsSet(viewName) {
+  const name = String(viewName || '');
+  if (!name) {
+    return new Set();
+  }
+  if (fieldsCache.has(name)) {
+    return fieldsCache.get(name);
+  }
+
+  const file = path.join(viewsFolder, name, 'fields.json');
+  try {
+    const { json } = readJsonFile(file);
+    const fields = json?.fields && typeof json.fields === 'object' ? json.fields : {};
+    const set = new Set(Object.keys(fields));
+    fieldsCache.set(name, set);
+    return set;
+  } catch (_e) {
+    const set = new Set();
+    fieldsCache.set(name, set);
+    return set;
+  }
+}
+
+function checkColumnsExist(file, raw, lvName, columns, columnsPath, isEmbedded) {
+  if (!Array.isArray(columns)) {
+    return;
+  }
+
+  const fieldsSet = getFieldsSet(lvName);
+  for (const col of columns) {
+    if (typeof col !== 'string') {
+      continue;
+    }
+    if (col === 'actions' || col === 'spacer') {
+      continue;
+    }
+    if (!fieldsSet.has(col)) {
+      const line = isEmbedded
+        ? (findListViewValueLine(raw, lvName, col) || findKeyLineFromPath(raw, columnsPath))
+        : (findRawValueLine(raw, col) || findKeyLineFromPath(raw, columnsPath));
+      err(file, line, `${isEmbedded ? 'Embedded ' : ''}listView "${lvName}" column "${col}" does not exist in ${relView(path.join(viewsFolder, lvName, 'fields.json'))}.`);
+    }
+  }
+}
+
+// Load control registry from app.json (used to validate toolbar references)
+try {
+  const appFile = path.join(projectFolder, 'app.json');
+  const { json: appJson } = readJsonFile(appFile);
+  const controls = appJson?.controls && typeof appJson.controls === 'object' ? appJson.controls : {};
+  knownControls = new Set(Object.keys(controls));
+} catch (e) {
+  err(path.join(projectFolder, 'app.json'), 1, `Failed to read app.json controls: ${e && e.message ? e.message : String(e)}`);
 }
 
 function analyzeEmbeddedListViews(formFile) {
@@ -232,6 +364,10 @@ function analyzeEmbeddedListViews(formFile) {
   }
 
   walk(form, [], (obj, p) => {
+    if (Array.isArray(obj?.toolbar)) {
+      checkToolbar(formFile, raw, obj.toolbar, [...p, 'toolbar']);
+    }
+
     const lv = obj?.listView;
     if (!lv || typeof lv !== 'object') {
       return;
@@ -247,7 +383,7 @@ function analyzeEmbeddedListViews(formFile) {
     const targetListViewFile = path.join(viewsFolder, lvName, 'listview.json');
     if (!fs.existsSync(targetListViewFile)) {
       const line = findKeyLineFromPath(raw, [...p, 'listView', 'name']);
-      err(formFile, line, `Embedded listView references "${lvName}", but ${rel(targetListViewFile)} is missing.`);
+      err(formFile, line, `Embedded listView references "${lvName}", but ${relView(targetListViewFile)} is missing.`);
       return;
     }
 
@@ -262,6 +398,26 @@ function analyzeEmbeddedListViews(formFile) {
 
     const embeddedCfg = lv.config || {};
     const targetCfg = target?.config || {};
+
+    const embeddedCols = Array.isArray(lv.columns) ? lv.columns : [];
+    const targetCols = Array.isArray(target?.columns) ? target.columns : [];
+    const embeddedHasActionsCol = embeddedCols.some((c) => String(c) === 'actions');
+    const targetHasActionsCol = targetCols.some((c) => String(c) === 'actions');
+    const embeddedHasActions = Array.isArray(lv.actions) && lv.actions.length > 0;
+    const targetHasActions = Array.isArray(target?.actions) && target.actions.length > 0;
+
+    if (embeddedHasActionsCol && !embeddedHasActions) {
+      const line = findListViewValueLine(raw, lvName, 'actions') || findListViewKeyLine(raw, lvName, 'columns');
+      err(formFile, line, `Embedded listView "${lvName}" has an "actions" column but no actions are defined.`);
+    }
+
+    if (targetHasActionsCol && !targetHasActions) {
+      const line = findKeyLineFromPath(targetRaw, ['columns']);
+      err(targetListViewFile, line, `listview.json has an "actions" column but no actions are defined.`);
+    }
+
+    checkColumnsExist(formFile, raw, lvName, embeddedCols, [...p, 'listView', 'columns'], true);
+    checkColumnsExist(targetListViewFile, targetRaw, lvName, targetCols, ['columns'], false);
 
     const checks = [
       ['idAccessor', embeddedCfg.idAccessor, targetCfg.idAccessor],
@@ -285,7 +441,7 @@ function analyzeEmbeddedListViews(formFile) {
       for (const k of ['idAccessor', 'nameAccessor', 'rowClassAccessor']) {
         if (embeddedCfg[k] != null && targetCfg[k] == null) {
           const line = findListViewKeyLine(raw, lvName, k);
-          warn(formFile, line, `Embedded listView("${lvName}") sets config.${k}, but target listview.json has no config.${k}.`);
+          warn(formFile, line, `Embedded listView "${lvName}" sets config.${k}, but target listview.json has no config.${k}.`);
         }
       }
     }
@@ -299,6 +455,7 @@ function analyzeEmbeddedListViews(formFile) {
 }
 
 const formFiles = collectJsonFiles(viewsFolder).filter(f => /(^|[\\/])form\.json$/i.test(f));
+
 if (formFiles.length === 0) {
   console.log('No form.json files found under', viewsFolder);
   process.exit(0);
@@ -319,7 +476,7 @@ if (logFile) {
 }
 
 console.log(`Metadata analysis complete: ${colors.cyan(formFiles.length)} files, ` +
-  `${warnings > 0 ? colors.yellow(warnings) : colors.green(warnings)} warnings, ` +
+  `${warnings > 0 ? colors.yellow(warnings) : colors.yellow(warnings)} warnings, ` +
   `${errors > 0 ? colors.red(errors) : colors.green(errors)} errors.` + EOL);
 
 process.exit(errors > 0 ? 3 : 0);

@@ -26,7 +26,7 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
 
   // #region Hooks and variables
 
-  const { appCfg, userSettings, setUserSettings, currentView } = useAppUI();
+  const { appCfg, userSettings, setUserSettings, currentView, viewResult } = useAppUI();
   const { viewSchema, records } = props;
   const withPanel = viewSchema?.filterPanel;
   const navigate = useNavigate();
@@ -94,6 +94,7 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
             { ...it, selected: filterOpen } : it)}
           cfg={appCfg.toolbars}
           onAction={handleAction}
+          fieldsCfg={viewResult?.fieldConfig?.[viewSchema.name]}
         />
       )}
 

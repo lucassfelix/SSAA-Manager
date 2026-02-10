@@ -107,15 +107,15 @@ export function replaceVars(text: string, ctx?: {
   const name = ctx?.nameAccessor ? record?.[ctx.nameAccessor] : undefined;
   const id = ctx?.idAccessor ? record?.[ctx.idAccessor] : undefined;
   const userid = localStorage.getItem('__nf_username_valid') === '1'
-    ? (localStorage.getItem('__nf_username') || '')
-    : '(Unknown)';
+    ? (localStorage.getItem('__nf_username') || '[unknown]')
+    : '[unknown]';
 
   return text
-    .replace('{name}', String(name ?? ''))
-    .replace('{id}', String(id ?? ''))
-    .replace('{theItem}', String(fieldsCfg?.strings?.theItem ?? ''))
-    .replace('{singular}', String(fieldsCfg?.strings?.singular ?? fieldsCfg?.name ?? ''))
-    .replace('{plural}', String(fieldsCfg?.strings?.plural ?? fieldsCfg?.name ?? ''))
+    .replace('{name}', String(name ?? '[unknown]'))
+    .replace('{id}', String(id ?? '[unknown]'))
+    .replace('{theItem}', String(fieldsCfg?.strings?.theItem ?? '[unknown]'))
+    .replace('{singular}', String(fieldsCfg?.strings?.singular ?? fieldsCfg?.name ?? '[unknown]'))
+    .replace('{plural}', String(fieldsCfg?.strings?.plural ?? fieldsCfg?.name ?? '[unknown]'))
     .replace('{userid}', userid);
 }
 

@@ -92,6 +92,7 @@ interface NfToolbarProps {
   cfg: ToolbarThemeProps;
   onAction?: (action: string, payload?: any) => void;
   isItemSelected?: (itemName: string) => boolean;
+  fieldsCfg?: FieldsConfig;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -137,8 +138,8 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
   };
 
   const iconBtnConfig = cfg.iconButtons;
-  const fieldsCfg = viewResult.fieldConfig ? viewResult.fieldConfig[currentView] :
-    {} as FieldsConfig;
+  const fieldsCfg = props.fieldsCfg ?? (viewResult.fieldConfig ?
+    viewResult.fieldConfig[currentView] : {} as FieldsConfig);
   const tbCfg = { ...appCfg.toolbars, ...appCfg.forms.toolbar } as ToolbarThemeProps;
   const defaultAction = toolbarItems.find(it => it?.default && it.action)?.action;
 
@@ -326,7 +327,7 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
 
     function renderLink(it: ToolbarItem, key: string): JSX.Element {
       const label = replaceVars(it.label ?? `[${it.name}]`, replaceCtx);
-      return <Anchor  
+      return <Anchor
         key={key}
         href={it.action ?? '#'}
         rel="noopener noreferrer"

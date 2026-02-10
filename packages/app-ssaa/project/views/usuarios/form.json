@@ -35,7 +35,7 @@
                     "name": "pacientes",
                     "config": {
                         "idAccessor": "id",
-                        "nameAccessor": "nome",
+                        "nameAccessor": "nome_completo",
                         "rowClassAccessor": "none"
                     },
                     "columns": [
