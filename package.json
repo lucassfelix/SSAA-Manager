@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "npm run dev -w @neofront/app-ssaa",
     "build": "npm run build -w @neofront/app-ssaa",
+    "metadata-analyzer": "node scripts/metadata-analyzer.js --project ./packages/app-ssaa/project --log ./metadata-analyzer-ssaa.log",
     "check-schemas": "node scripts/check-schemas ./schemas --out ./check-schemas.log",
     "validate-jsons": "node scripts/validate-jsons.js --schemas ./schemas --project ./packages/app-ssaa/project --log ./validate-jsons-ssaa.log"
   },
