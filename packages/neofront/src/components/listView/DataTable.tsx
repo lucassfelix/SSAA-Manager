@@ -474,11 +474,21 @@ function getColumns(
       };
     }
 
+    // Disable ellipsis for non-text render layouts
+    let ellipsis = true;
+    const noEllipsisRenderers = [
+      'booleanWrapper', 'booleanIcon', 'colorWrapper', 'iconWithBadge', 'image', 'actions', 
+      'stacked', 'date', 'decimal'
+    ];
+    if (render && noEllipsisRenderers.includes(render.layout)) {
+      ellipsis = false;
+    }
+
     return {
       accessor,
       width: fieldDef.colWidth ?? undefined,
       textAlign: fieldDef.colTextAlign ?? 'left',
-      ellipsis: true,
+      ellipsis,
       titleClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
       footerClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
       cellsClassName: fieldDef.emphasizeColumn ? 'nf-emphasis' : '',
