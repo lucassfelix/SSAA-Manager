@@ -1,72 +1,259 @@
-
 # Copilot Instructions for NeoFront Web Management System
 
-VERY_SHORT: true
+## 1. Purpose
 
-## Overview
+NeoFront is a **parametric, metadata-driven SPA framework** for web management systems implemented in a monorepo.
 
-This workspace is a monorepo implementing a pre-beta version of **NeoFront**, a parametric, metadata-driven single-page application framework for web management systems. The UI, navigation, forms, tables, and actions are generated dynamically from configuration files, not hardcoded components. Logic and structure are defined in JSON schemas and metadata, enabling rapid changes and consistent UX.
+All UI structure, navigation, forms, tables, and actions originate from **JSON schemas and configuration**, not hardcoded React logic.
 
-This version uses React with the Mantine UI library (plus the community-contributed Mantine DataTable) to build reusable components with a flexible theming system and battle-tested hooks. See the references at the bottom for more details on Mantine usage.
-
-Repo layout summary:
-- `packages/neofront/`: the NeoFront engine (reusable framework/components)
-- `packages/app-*/`: each `app-*` folder is a standalone NeoFront project
-- `packages/api-mysql/`: a small MySQL test API
-
-## ATTENTION: **Very important notes**
-
-- The AI should always provide **VERY SHORT ANSWERS** and avoid long explanations at all costs. **TWO VERY SHORT PARAGRAPHS** is the limit, each one with just one sentence.
-- The AI should try at all cost to make **MINIMAL** changes to existing code, avoiding adding new functions, excessive checking, abstractions or refactoring (unless absolutely necessary).
-- In fact, the AI should make efforts to **REDUCE** code size whenever possible, removing unused code, simplifying logic, and avoiding duplication. Your task is to make the codebase as small and efficient as possible.
-- I'm not in a hurry. I prefer to wait for high-quality, elegant code instead of quick fixes that I have to Undo and Redo many times.
-- Backward compatibility is explicitly NOT a concern; prioritize clean, minimal changes even if they break existing behavior.
-
-## More Notes
-
-- NeoFront components are under active development and are NOT production-ready. Breaking changes and incomplete features are accepted. Remember, backward compatibility is not a concern at this stage.
-- The current phase focuses primarily on building robust, reusable React components and a metadata-driven architecture.
-- All visual components should be designed with reusability in mind, leveraging metadata for configuration.
-- Data is mocked via JSON files; no backend integration exists yet. The goal is to finalize the core framework before adding real data sources and business logic in future phases.
-
-## Architecture & Key Directories
-
-- Repo root
-	- `schemas/`: JSON schema definitions (authoritative language is `en-US`)
-	- `scripts/`: Utility scripts for schema validation and metadata tooling
-
-- NeoFront engine package (`packages/neofront/`)
-	- `src/`: engine entrypoints and exports
-	- `src/components/`: reusable UI components (metadata-driven)
-	- `src/contexts/`: context providers for UI state, theming, and app-wide settings
-
-- NeoFront projects (`packages/app-*/`)
-	- `project/`: per-project configuration (`app.json`, `menu.json`, `login.json`, etc)
-	- `project/views/`: per-module metadata and mock data (typically `fields.json`, `form.json`, `listview.json`, `data.json` and maybe extra mock data files)
-	- `public/`: runtime assets (images, icons, etc)
-	- `src/`: thin project bootstrap (typically `main.tsx` and CSS style files)
-
-- MySQL test API (`packages/api-mysql/`)
-	- `src/index.js`: simple API entrypoint (not part of the NeoFront engine)
-
-## Patterns & Conventions
-
-- **Metadata-first:** UI and behavior are defined in JSON, not in React code. Example: Adding a new module typically means adding a new folder under `packages/app-*/project/views/` and updating `packages/app-*/project/menu.json`.
-- **No direct API calls in engine components:** Data is loaded by each `app-*` project (via its project loaders / view loaders); engine components receive metadata and data via props.
-- **Theming:** Use Mantine's theming system. Avoid hardcoded colors; use semantic colors and CSS variables.
-- **Hooks:** Use Mantine hooks for state management, theming, and responsiveness.
-- **Data sources:** During the pre-beta, all data is loaded from JSON files under each project (commonly `packages/app-*/project/views/**/data.json`) or from the test MySQL API. In the future they will be replaced with API calls by updating project data loader utilities.
-- **Schema evolution:** Update or add schemas in `schemas/` to change app structure or validation rules. Schemas are actively being changed during this pre-beta phase.
-- **useAppUI first:** Always check whether the `useAppUI` hook already provides the necessary data or functions before adding new context providers or hooks. For example, URLSearchParams() is generally not needed in components because `useAppUI` already has a `currentSearchParams` property.
-
-## References
-
-- See `README.md` for big-picture philosophy and demo details.
-- See `packages/app-*/project/` for configuration-driven architecture.
-- See `packages/neofront/src/components/` for UI components.
-- React documentation: https://react.dev/reference/react  # Use as canonical guide for preferred React patterns
-- Mantine LLMs.txt reference: https://mantine.dev/llms.txt
-- Mantine DataTable (community component) reference: https://icflorescu.github.io/mantine-datatable/  # This is the DataTable component used in NeoFront
+The current phase focuses on **stabilizing reusable engine components** and the **metadata architecture**, before real backend integration.
 
 ---
-**For AI agents:** In the current phase we are actively building the reusable React components and a metadata-driven architecture.
+
+## 2. Architecture Contract (MUST NEVER BREAK)
+
+These rules override any other instruction.
+
+### 2.1 Metadata authority
+
+- UI structure and behavior must originate from **metadata, schemas, or project configuration**.
+- React components in `packages/neofront` must **not encode business/domain structure**.
+- Adding features should primarily require **metadata or project-level changes**, not engine rewrites.
+
+Engine components may be modified only when:
+
+- The change enables a reusable metadata capability, AND
+- The solution is generic across multiple projects, AND
+- No project-level workaround exists.
+
+Metadata must define:
+
+- Navigation structure
+- Forms and fields
+- Table columns and behaviors
+- View-level actions
+- Validation rules
+
+---
+
+### 2.2 Engine component purity
+
+Components inside `packages/neofront/src/components/` are **pure view layers**:
+
+- No direct data fetching
+- No schema mutation
+- No business logic branching
+- Side effects limited to **local UI state only**
+
+Data loading belongs exclusively to:
+
+- `packages/app-*/` project loaders
+- Metadata/configuration layers
+
+Engine components must never:
+
+- Import from any `packages/app-*` path
+- Depend on project-specific metadata shape
+- Contain conditional logic for a specific application
+
+All project-specific behavior must live in `packages/app-*`.
+
+---
+
+### 2.3 Data flow boundaries
+
+Valid runtime data sources during pre-beta:
+
+- Project JSON files under `packages/app-*/project/` for metadata
+- Mock data under `packages/app-*/project/views/**`
+- Test API in `packages/api-mysql/`
+
+Any solution bypassing these layers is **architecturally invalid**, even if functionally correct.
+
+---
+
+### 2.4 Conflict resolution
+
+If a user request conflicts with the Architecture Contract:
+
+1. Do NOT implement the requested change directly.
+2. Explain briefly why it violates the contract, citing the exact rule section.
+3. Propose the smallest metadata-driven alternative.
+4. Only modify engine code if required to enable a reusable metadata capability.
+
+---
+
+## 3. Invalid Patterns (DO NOT GENERATE)
+
+The following are always incorrect:
+
+- Fetching or async I/O inside **engine UI components**
+- Hardcoded table columns, form fields, navigation, or layout structure in React
+- Business rules implemented directly in JSX
+- Inline styles or hardcoded colors instead of Mantine theme tokens
+- Creating new global context when `useAppUI` already provides the data
+- Refactoring that increases abstraction without **clear multi-use reuse**
+
+If a solution requires any item above, it must be **rejected and redesigned**.
+
+---
+
+## 4. Preferred Change Strategy (MINIMIZE CODE IMPACT)
+
+When modifying code, follow this strict order:
+
+1. Adjust **metadata or schemas**
+2. Adjust **project configuration**
+3. Modify **component props or parameters**
+4. Perform **small local refactor in the same file**
+5. Introduce **new helper function** only if necessary
+6. Introduce **new abstraction/component** only with proven reuse
+
+Primary optimization goals:
+
+- Reduce total code size
+- Remove unnecessary duplication
+- Prefer small local duplication over premature abstraction
+- Keep logic local and simple
+- Backward compatibility is **not required**: breaking changes acceptable if necessary
+
+---
+
+## 5. Reasoning Workflow for Code Generation
+
+Before writing code, the AI must internally:
+
+1. Identify constraints from the **Architecture Contract**
+2. Ensure the request does not violate **Invalid Patterns**
+3. Choose the **smallest valid modification**
+4. Prefer **metadata/project changes over engine changes**
+
+Final output must contain only:
+
+- Minimal code
+- Minimal diff
+- No long explanations
+
+Before finishing an implementation, verify with:
+
+- `npm run ai:check`
+
+Diff constraints:
+
+- Never rewrite entire files unless explicitly requested.
+- Prefer line-level edits.
+- Preserve existing naming and structure whenever possible.
+
+If required information is missing:
+
+- Do not invent APIs, props, or schemas.
+- Ask for the missing file or definition instead.
+
+Code must:
+
+- Follow existing project patterns exactly
+- Avoid introducing new libraries
+- Avoid speculative abstractions
+
+Monorepo safety:
+
+- Do not move files across packages unless explicitly requested.
+- Do not introduce cross-package dependencies outside intended public APIs.
+
+---
+
+## 6. Monorepo Structure Semantics
+
+### Root
+
+- `schemas/` → authoritative JSON schemas (`en-US` canonical)
+- `scripts/` → validation and metadata tooling
+
+---
+
+### Engine (`packages/neofront/`)
+
+- `src/` → public engine entrypoints/exports
+- `src/components/` → reusable metadata-driven UI components
+- `src/contexts/` → global UI state, theming, and app settings
+
+Engine code must remain:
+
+- Generic
+- Metadata-driven
+- Project-agnostic
+
+---
+
+### Projects (`packages/app-*/`)
+
+Each `app-*` folder is a **standalone NeoFront application**.
+
+- `project/` → app configuration (`app.json`, `menu.json`, `login.json`, etc.)
+- `project/views/` → module metadata and mock data
+- `public/` → runtime assets
+- `src/` → thin bootstrap only
+
+Projects are responsible for:
+
+- Data loading
+- Backend integration
+- Runtime wiring
+
+Engine must **not depend on project specifics**.
+
+---
+
+### Test API (`packages/api-mysql/`)
+
+- Simple MySQL test backend
+- Not part of engine architecture
+
+---
+
+## 7. UI & Theming Rules
+
+- Always use **Mantine theming, tokens, and hooks**
+- Never hardcode colors, spacing, or typography
+- Ensure components remain **fully reusable and metadata-configurable**
+
+---
+
+## 8. Current Phase Constraints
+
+- Components are **not production-ready**
+- Breaking changes are acceptable
+- Backend abstraction is incomplete
+- Priority is **architecture correctness and reuse**, not feature completeness
+
+---
+
+## 9. References
+
+- `README.md` → philosophy and overview
+- `packages/app-*/project/` → configuration-driven structure
+- `packages/neofront/src/components/` → engine UI patterns
+
+External:
+
+- React reference → https://react.dev/reference/react
+- Mantine LLM guide → https://mantine.dev/llms.txt
+- Mantine DataTable → https://icflorescu.github.io/mantine-datatable/
+
+---
+
+## 10. Guidance for AI Agents
+
+During this phase, always prioritize:
+
+- Strengthening the **metadata-driven architecture**
+- Keeping implementations **minimal, pure, and reusable**
+- Enforcing the **Architecture Contract** above all else
+
+If uncertain, choose the option that:
+
+- Reduces hardcoded logic
+- Moves responsibility toward metadata or project config
+- Simplifies the overall system
+
+Tip: For new Copilot Chat threads, use the prompt template in `.github/prompts/neofront-change.prompt.md`.
