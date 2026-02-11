@@ -5,9 +5,14 @@ VERY_SHORT: true
 
 ## Overview
 
-This project implements a pre-beta version of **NeoFront**, a parametric, metadata-driven single-page application framework for web management systems. The UI, navigation, forms, tables, and actions are generated dynamically from configuration files, not hardcoded components. Logic and structure are defined in JSON schemas and metadata, enabling rapid changes and consistent UX.
+This workspace is a monorepo implementing a pre-beta version of **NeoFront**, a parametric, metadata-driven single-page application framework for web management systems. The UI, navigation, forms, tables, and actions are generated dynamically from configuration files, not hardcoded components. Logic and structure are defined in JSON schemas and metadata, enabling rapid changes and consistent UX.
 
-This version uses React 19.2.2 with the Mantine UI library (plus the community-contributed Mantine DataTable) to build reusable components with a flexible theming system and battle-tested hooks. See the references at the bottom for more details on Mantine usage.
+This version uses React with the Mantine UI library (plus the community-contributed Mantine DataTable) to build reusable components with a flexible theming system and battle-tested hooks. See the references at the bottom for more details on Mantine usage.
+
+Repo layout summary:
+- `packages/neofront/`: the NeoFront engine (reusable framework/components)
+- `packages/app-*/`: each `app-*` folder is a standalone NeoFront project
+- `packages/api-mysql/`: a small MySQL test API
 
 ## ATTENTION: **Very important notes**
 
@@ -26,35 +31,42 @@ This version uses React 19.2.2 with the Mantine UI library (plus the community-c
 
 ## Architecture & Key Directories
 
-- `project/`: Core app configuration. Contains `app.json`, `menus.json`, and data/tables for modules. In the future, this folder will be replaced by remote access or moved to a separate repository.
-- `project/views/`: Metadata (schema) definitions and mock data.
-- `schemas/`: JSON schema definitions organized by locale. The only up-to-date language is en-US.
-- `scripts/`: Utility scripts for schema validation and other tasks.
-- `src/`: The NeoFront engine.
-- `src/components/`: Reusable UI components. All are generic and driven by metadata.
-- `src/contexts/`: Context providers for UI state, theming, and app-wide settings.
-- `src/utils/`: General-purpose utility functions.
-- `src/views/`: Page-level hooks used to load metadata and data for each view.
-- `__sobras/`: Experimental or legacy code. Must be ignored.
+- Repo root
+	- `schemas/`: JSON schema definitions (authoritative language is `en-US`)
+	- `scripts/`: Utility scripts for schema validation and metadata tooling
+
+- NeoFront engine package (`packages/neofront/`)
+	- `src/`: engine entrypoints and exports
+	- `src/components/`: reusable UI components (metadata-driven)
+	- `src/contexts/`: context providers for UI state, theming, and app-wide settings
+
+- NeoFront projects (`packages/app-*/`)
+	- `project/`: per-project configuration (`app.json`, `menu.json`, `login.json`, etc)
+	- `project/views/`: per-module metadata and mock data (typically `fields.json`, `form.json`, `listview.json`, `data.json` and maybe extra mock data files)
+	- `public/`: runtime assets (images, icons, etc)
+	- `src/`: thin project bootstrap (typically `main.tsx` and CSS style files)
+
+- MySQL test API (`packages/api-mysql/`)
+	- `src/index.js`: simple API entrypoint (not part of the NeoFront engine)
 
 ## Patterns & Conventions
 
-- **Metadata-first:** UI and behavior are defined in JSON, not in React code. Example: Adding a new table requires only adding new folders to `project/views/` and updating `menus.json`.
-- **No direct API calls in components:** Data is loaded via the page-level hooks at `src/views/`. Components receive data and metadata as props.
+- **Metadata-first:** UI and behavior are defined in JSON, not in React code. Example: Adding a new module typically means adding a new folder under `packages/app-*/project/views/` and updating `packages/app-*/project/menu.json`.
+- **No direct API calls in engine components:** Data is loaded by each `app-*` project (via its project loaders / view loaders); engine components receive metadata and data via props.
 - **Theming:** Use Mantine's theming system. Avoid hardcoded colors; use semantic colors and CSS variables.
 - **Hooks:** Use Mantine hooks for state management, theming, and responsiveness.
-- **Data sources:** During the pre-beta, all data is loaded from JSON files in `project/data/`. In the future they will be replaced with API calls by updating data loader utilities.
+- **Data sources:** During the pre-beta, all data is loaded from JSON files under each project (commonly `packages/app-*/project/views/**/data.json`) or from the test MySQL API. In the future they will be replaced with API calls by updating project data loader utilities.
 - **Schema evolution:** Update or add schemas in `schemas/` to change app structure or validation rules. Schemas are actively being changed during this pre-beta phase.
+- **useAppUI first:** Always check whether the `useAppUI` hook already provides the necessary data or functions before adding new context providers or hooks. For example, URLSearchParams() is generally not needed in components because `useAppUI` already has a `currentSearchParams` property.
 
 ## References
 
 - See `README.md` for big-picture philosophy and demo details.
-- See `project/` for configuration-driven architecture.
-- See `src/components/` for generic UI patterns.
+- See `packages/app-*/project/` for configuration-driven architecture.
+- See `packages/neofront/src/components/` for UI components.
 - React documentation: https://react.dev/reference/react  # Use as canonical guide for preferred React patterns
 - Mantine LLMs.txt reference: https://mantine.dev/llms.txt
 - Mantine DataTable (community component) reference: https://icflorescu.github.io/mantine-datatable/  # This is the DataTable component used in NeoFront
-- React 19.2.2 documentation: https://react.dev/reference/react  # Use as canonical guide for preferred React patterns
 
 ---
 **For AI agents:** In the current phase we are actively building the reusable React components and a metadata-driven architecture.

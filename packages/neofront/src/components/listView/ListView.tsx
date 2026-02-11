@@ -15,12 +15,16 @@ import FilterPanel from "@/listView/FilterPanel";
 
 // #endregion
 
+// #region ----------------------------------------------------------------------------------- Types
+
 interface NfListViewProps {
   viewSchema: ListViewProps;
   records: Record<string, any>[];
   parentView?: string;
   parentRecordId?: string | number;
 };
+
+// #endregion
 
 // #region ------------------------------------------------------------------------------- Component
 
@@ -65,7 +69,7 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
   const handleAction = (action: string, _payload: any) => {
     const targetView = viewSchema.name || currentView;
     const params = new URLSearchParams({ v: targetView, op: 'add' });
-    console.log(params);
+    console.log(`Action: ${action}, Payload: ${_payload}`);
     switch (action) {
       case 'add':
         if (parentView && parentRecordId != null) {
