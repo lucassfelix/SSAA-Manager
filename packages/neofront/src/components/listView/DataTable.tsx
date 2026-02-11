@@ -223,7 +223,7 @@ function getColumns(
       );
     }
 
-    function renderNumericIcon(values: (Record<string, unknown>)[], record: Record<string, any>): ReactNode {
+    function renderIconWithBadge(values: (Record<string, unknown>)[], record: Record<string, any>): ReactNode {
 
       if (!values || !values.length) {
         return "";
@@ -244,7 +244,7 @@ function getColumns(
             inline
             label={values.length}
             size={16}
-            className="nf-numeric-icon-wrapper"
+            className="nf-icon-with-badge-wrapper"
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', lineHeight: 0 }}
           >
             <NfIcon
@@ -457,8 +457,8 @@ function getColumns(
               return renderDateCell(value);
             case 'decimal':
               return renderDecimalCell(value);
-            case 'numericIcon':
-              return renderNumericIcon(value, record);
+            case 'iconWithBadge':
+              return renderIconWithBadge(value, record);
             case 'blank':
               return "";
             default:

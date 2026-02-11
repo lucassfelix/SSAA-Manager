@@ -13,7 +13,7 @@ type FieldDataType = "string" | "integer" | "decimal" | "boolean" | "select" | "
 type HorizAlignmentType = "left" | "center" | "right";
 
 type RenderLayout = 'colorWrapper' | 'booleanValue' | 'booleanWrapper' | 'booleanIcon'
-  | 'stacked' | 'link' | 'date' | 'decimal' | 'image' | 'actions' | 'numericIcon' | 'blank';
+  | 'stacked' | 'link' | 'date' | 'decimal' | 'image' | 'actions' | 'iconWithBadge' | 'blank';
 
 type colStyles = 'light' | 'normal' | 'semibold' | 'bold' | 'italic' | 'xs' | 'sm' | 'md' | 'lg' |
   'xl' | 'smallest' | 'largest' | 'smaller' | 'small' | 'large' | 'larger';

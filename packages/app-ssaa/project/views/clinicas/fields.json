@@ -92,14 +92,14 @@
             "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",
-            "render": { "layout": "numericIcon", "op": "detail", "tab": "usuarios" }
+            "render": { "layout": "iconWithBadge", "op": "detail", "tab": "usuarios" }
         },
         "pacientes": {
             "icon": "dental",
             "iconColor": "var(--nf-secondary-color)",
             "colWidth": 40,
             "colTextAlign": "center",
-            "render": { "layout": "numericIcon", "op": "detail", "tab": "pacientes" }
+            "render": { "layout": "iconWithBadge", "op": "detail", "tab": "pacientes" }
         }
     }
 }

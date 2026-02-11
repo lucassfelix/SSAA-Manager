@@ -96,9 +96,9 @@ header h4 {
   padding-top: 0.1rem;
 }
 
-/* Shows actions toolbar and numeric wrapper indicators only on row hover */
+/* Shows actions toolbar and icon-with-badge indicators only on row hover */
 tr .nf-actions-toolbar,
-tr:not(:hover) .nf-numeric-icon-wrapper .mantine-Indicator-indicator {
+tr:not(:hover) .nf-icon-with-badge-wrapper .mantine-Indicator-indicator {
   opacity: 0;
   transition: opacity 80ms ease;
 }

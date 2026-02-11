@@ -453,13 +453,13 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": [ "blank", "link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions", "numericIcon" ],
+          "enum": [ "blank", "link", "stacked", "colorWrapper", "booleanIcon", "booleanWrapper", "booleanValue", "date", "decimal", "image", "actions", "iconWithBadge" ],
           "description": "Rendering layout type."
         },
         "op": {
           "type": "string",
           "enum": [ "edit", "detail", "email" ],
-          "description": "Operation for 'link' and 'numericIcon' layouts."
+          "description": "Operation for 'link' and 'iconWithBadge' layouts."
         },
         "format": {
           "type": "string",
@@ -474,7 +474,7 @@
         },
         "tab": {
           "type": "string",
-          "description": "Tab name to append when using the 'numericIcon' layout."
+          "description": "Tab name to append when using the 'iconWithBadge' layout."
         }
       },
       "required": [ "layout" ]
