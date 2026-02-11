@@ -8,9 +8,9 @@
   "scripts": {
     "dev": "npm run dev -w @neofront/app-ssaa",
     "build": "npm run build -w @neofront/app-ssaa",
-    "metadata-analyzer": "node scripts/metadata-analyzer.js --project ./packages/app-ssaa/project --log ./metadata-analyzer-ssaa.log",
-    "schema-validator": "node scripts/schema-validator.js ./schemas --out ./schema-validator.log",
-    "json-validator": "node scripts/json-validator.js --schemas ./schemas --project ./packages/app-ssaa/project --log ./json-validator-ssaa.log",
+    "metadata-analyzer": "node scripts/metadata-analyzer.js --project ./packages/app-ssaa/project --log metadata-analyzer-ssaa.log",
+    "schema-validator": "node scripts/schema-validator.js ./schemas --out schema-validator.log",
+    "json-validator": "node scripts/json-validator.js --schemas ./schemas --project ./packages/app-ssaa/project --log json-validator-ssaa.log",
     "ai:check": "node scripts/ai-check.js"
   },
   "devDependencies": {

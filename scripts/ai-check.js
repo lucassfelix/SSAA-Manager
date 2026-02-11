@@ -14,7 +14,7 @@ function printUsage() {
   console.log('Options:');
   console.log('  --project <folder>   Project folder (default: ./packages/app-ssaa/project)');
   console.log('  --schemas <folder>   Schemas folder (default: ./schemas)');
-  console.log('  --logDir <folder>    Write logs into this folder (default: repo root)');
+  console.log('  --logDir <folder>    Write logs into this folder (default: ./scripts/logs)');
   console.log('  --no-color           Disable ANSI colors in child scripts');
   console.log('  --help, -h           Show this help');
   console.log('');
@@ -50,7 +50,7 @@ if (argv.includes('--help') || argv.includes('-h')) {
 
 let projectFolder = path.resolve('./packages/app-ssaa/project');
 let schemasFolder = path.resolve('./schemas');
-let logDir = null;
+let logDir = path.resolve('./scripts/logs');
 let noColor = false;
 
 for (let i = 0; i < argv.length; i++) {
@@ -73,9 +73,9 @@ const schemaValidator = path.join(root, 'scripts', 'schema-validator.js');
 const jsonValidator = path.join(root, 'scripts', 'json-validator.js');
 const metadataAnalyzer = path.join(root, 'scripts', 'metadata-analyzer.js');
 
-const schemaOut = path.join(logDir || root, 'schema-validator.log');
-const jsonOut = path.join(logDir || root, 'json-validator.log');
-const metadataOut = path.join(logDir || root, 'metadata-analyzer.log');
+const schemaOut = path.join(logDir, 'schema-validator.log');
+const jsonOut = path.join(logDir, 'json-validator.log');
+const metadataOut = path.join(logDir, 'metadata-analyzer.log');
 
 const commonFlags = noColor ? ['--no-color'] : [];
 

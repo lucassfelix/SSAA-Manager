@@ -201,6 +201,21 @@ function printError(useColor, color, label, ...details) {
   }
 };
 
+function resolveOutFilePath(fileArg) {
+  if (!fileArg) {
+    return null;
+  }
+  if (path.isAbsolute(fileArg)) {
+    return fileArg;
+  }
+  // If caller already provided a path (e.g. ./out/report.txt or logs/report.txt), honor it.
+  if (/[\\/]/.test(fileArg)) {
+    return path.resolve(fileArg);
+  }
+  // Bare filename -> default logs folder
+  return path.resolve('scripts', 'logs', fileArg);
+}
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -215,7 +230,7 @@ async function main() {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--out' && argv[i + 1]) {
-      outFile = argv[i + 1];
+      outFile = resolveOutFilePath(argv[i + 1]);
       i++;
       continue;
     }
@@ -318,6 +333,7 @@ async function main() {
     if (outFile) {
       try {
         const summary = `No schema issues found.\n\nTotal ${files.length} files checked, 0 files with issues\n`;
+        fs.mkdirSync(path.dirname(outFile), { recursive: true });
         fs.writeFileSync(outFile, summary, 'utf8');
         console.log(`Saved report to ${outFile}.\n`);
       } catch (e) {
@@ -371,6 +387,7 @@ async function main() {
       const filesWithMissing = byFile.size;
       const validFiles = totalFiles - filesWithMissing;
       const summary = `Total ${totalFiles} files checked, ${validFiles} valid files, ${filesWithMissing} with issues`;
+      fs.mkdirSync(path.dirname(outFile), { recursive: true });
       fs.writeFileSync(outFile, `Schema issues found:\n\n${plain}\n${summary}\n`, 'utf8');
       console.log(`Saved report to ${outFile}.\n`);
     } catch (e) {

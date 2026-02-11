@@ -199,6 +199,21 @@ function rel(p) {
   return path.relative(projectFolder, p).replace(/\\/g, '/');
 }
 
+function resolveLogFilePath(fileArg) {
+  if (!fileArg) {
+    return null;
+  }
+  if (path.isAbsolute(fileArg)) {
+    return fileArg;
+  }
+  // If caller already provided a path (e.g. ./out/log.txt or logs/out.txt), honor it.
+  if (/[\\/]/.test(fileArg)) {
+    return path.resolve(fileArg);
+  }
+  // Bare filename -> default logs folder
+  return path.resolve('scripts', 'logs', fileArg);
+}
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -212,7 +227,7 @@ for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--project' && argv[i + 1]) {
     projectFolder = path.resolve(argv[++i]);
   } else if (argv[i] === '--log' && argv[i + 1]) {
-    logFile = path.resolve(argv[++i]);
+    logFile = resolveLogFilePath(argv[++i]);
   } else if (argv[i] === '--no-color') {
     useColor = false;
   }
@@ -546,6 +561,7 @@ if (output.length) {
 
 if (logFile) {
   const logContent = output.length ? stripAnsi(output.join(EOL)) : 'No metadata problems found.';
+  fs.mkdirSync(path.dirname(logFile), { recursive: true });
   fs.writeFileSync(logFile, logContent + EOL, 'utf8');
   console.log(colors.cyan(`Log written to ${path.basename(logFile)}.`));
 }
