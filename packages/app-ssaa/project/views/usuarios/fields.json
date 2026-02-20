@@ -21,7 +21,7 @@
         },
         "nome_completo": {
             "header": "Nome completo",
-            "colWidth": "100%",
+            "colWidth": 400,
             "dataType": "string",
             "label": "Nome",
             "placeholder": "Nome completo",

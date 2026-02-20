@@ -69,7 +69,7 @@ export default function NfListView(props: NfListViewProps): JSX.Element {
   const handleAction = (action: string, _payload: any) => {
     const targetView = viewSchema.name || currentView;
     const params = new URLSearchParams({ v: targetView, op: 'add' });
-    console.log(`Action: ${action}, Payload: ${_payload}`);
+
     switch (action) {
       case 'add':
         if (parentView && parentRecordId != null) {

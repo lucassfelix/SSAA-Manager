@@ -24,7 +24,7 @@
         "toolbar": [ "send", "delete", "cancel" ]
     },
     "add": {
-        "title": "Novo produto",
+        "title": "Novo projeto",
         "toolbar": [ "send", "cancel" ]
     },
     "detail": {
