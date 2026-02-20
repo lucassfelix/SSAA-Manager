@@ -30,7 +30,7 @@
                         "delete": false
                     },
                     "fields": {
-                        "clinica_id": { "readOnly": true },
+                        "clinica_id": { "readOnly": true, "filter": { "op": "==", "value": "$user.clinica_id" } },
                         "tipo_permissao": {
                             "readOnly": true,
                             "filter": { "op": "==", "value": 1 }
@@ -44,6 +44,10 @@
                         "edit": { "field": "usuario_id", "op": "==", "value": "$user.id" },
                         "add": { "field": "usuario_id", "op": "==", "value": "$user.id" },
                         "delete": false
+                    },
+                    "fields": {
+                        "clinica_id": { "readOnly": true, "filter": { "op": "==", "value": "$user.clinica_id" } },
+                        "usuario_id": { "readOnly": true, "filter": { "op": "==", "value": "$user.id" } }
                     }
                 },
                 "projetos": {
@@ -53,6 +57,9 @@
                         "edit": "usuario_id == $user.id",
                         "add": "usuario_id == $user.id",
                         "delete": false
+                    },
+                    "fields": {
+                        "paciente_id": { "readOnly": true }
                     }
                 }
             }
@@ -80,7 +87,8 @@
                         "delete": true
                     },
                     "fields": {
-                        "tipo_permissao": "tipo_permissao <= 2"
+                        "tipo_permissao": "tipo_permissao <= 2",
+                        "clinica_id": { "filter": { "op": "==", "value": "$user.clinica_id" } }
                     }
                 },
                 "pacientes": {
@@ -90,6 +98,9 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "clinica_id": { "readOnly": true, "filter": { "op": "==", "value": "$user.clinica_id" } }
                     }
                 },
                 "projetos": {
@@ -99,6 +110,9 @@
                         "edit": true,
                         "add": true,
                         "delete": true
+                    },
+                    "fields": {
+                        "paciente_id": { "readOnly": true }
                     }
                 }
             }

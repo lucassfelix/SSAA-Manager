@@ -58,8 +58,19 @@ export interface PermissionsConfig {
 
 const rulesByView: Record<string, ViewRules> = {};
 
+type CurrentUserContext = {
+  user: Record<string, unknown>;
+  idAccessor: string;
+};
+
+let currentUserContext: CurrentUserContext | null = null;
+
 export function getRulesByView() {
   return rulesByView;
+}
+
+export function getCurrentUserContext() {
+  return currentUserContext;
 }
 
 // #endregion
@@ -183,6 +194,7 @@ export function enforcePermissions(data: ViewResultProps["data"],
     }
 
     if (!isRecord(user)) {
+      currentUserContext = null;
       try {
         localStorage.setItem('__nf_username_valid', '0');
       } catch (_e) {
@@ -190,6 +202,8 @@ export function enforcePermissions(data: ViewResultProps["data"],
       }
       return { ...data, [viewName]: [] };
     }
+
+    currentUserContext = { user, idAccessor };
 
     const roleVal = user[permissions.roleAccessor];
     const role = Object.values(permissions.roles ?? {}).find((r) => r?.value === roleVal);

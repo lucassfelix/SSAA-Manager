@@ -22,6 +22,7 @@ import NfDateField from "./fields/DateField";
 import NfNumberField from "./fields/NumberField";
 import NfImageField from "./fields/ImageField";
 import NfPasswordInputField from "./fields/PasswordInputField";
+import { getCurrentUserContext } from "@/app/enforcePermissions";
 
 // #endregion
 
@@ -139,6 +140,33 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     return value;
   }
 
+  function resolveDynamicValue(value: unknown): unknown {
+    if (typeof value !== 'string') {
+      return value;
+    }
+
+    if (value.startsWith('$params.')) {
+      const key = value.slice(8);
+      if (!key) {
+        return value;
+      }
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key) ?? undefined;
+    }
+
+    if (value.startsWith('$user.')) {
+      const path = value.slice(6);
+      const ctx = getCurrentUserContext();
+      if (!ctx?.user || !path) {
+        return value;
+      }
+      const userPath = path === 'id' ? ctx.idAccessor : path;
+      return getValueByPath(ctx.user as any, userPath) ?? undefined;
+    }
+
+    return value;
+  }
+
   // Render a single field based on the fields section
   const renderField = (fieldName: string) => {
 
@@ -186,10 +214,11 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
     const recordValue = record ? getValueByPath(record, accessor) : undefined;
     const baseValue = isDetail ? recordValue : recordValue ?? fieldDef.defaultValue;
+    const resolvedBaseValue = resolveDynamicValue(baseValue);
     const initialValue =
-      fieldDef.dataType === 'select' && fieldDef.multiple ? normalizeMultiSelectValue(baseValue) :
-        fieldDef.dataType === 'date' ? normalizeDateValue(baseValue) :
-          baseValue;
+      fieldDef.dataType === 'select' && fieldDef.multiple ? normalizeMultiSelectValue(resolvedBaseValue) :
+        fieldDef.dataType === 'date' ? normalizeDateValue(resolvedBaseValue) :
+          resolvedBaseValue;
 
     const props: FormFieldProps = {
       name: fieldName,

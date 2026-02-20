@@ -56,12 +56,13 @@
             "header": "Paciente",
             "colWidth": 240,
             "dataType": "select",
+            "defaultValue": "$params.paciente_id",
             "fieldWidth": 240,
             "label": "Paciente",
             "options": { "table": "pacientes", "valueAccessor": "id",
                 "labelAccessor": "nome_completo" },
             "placeholder": "Selecione uma opção",
-            "readOnly": true
+            "required": true
         },
         "data_criacao": {
             "colStyles": "sm",
