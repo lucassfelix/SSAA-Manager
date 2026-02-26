@@ -2,10 +2,10 @@
 // Política de acesso do SSAA: resolver para permissões na camada da aplicação.
 //
 
-import { createAccessResolver, allRules, noRules, filterRows } from "@neofront/core";
-import type { RoleResolver, FieldCapability } from "@neofront/core";
+import { createViewBasedAccessResolver, allRules, noRules, filterRows } from "@neofront/core";
+import type { ViewResolver, FieldCapability } from "@neofront/core";
 
-// #region ------------------------------------------------------------------------------- Constants
+// #region ------------------------------------------------------------------------------- Constantes
 
 /** Valores dos papéis conforme armazenados em `tipo_permissao`. */
 const ROLE = {
@@ -15,31 +15,54 @@ const ROLE = {
   superusuario: 4,
 } as const;
 
+type RoleVal = typeof ROLE[keyof typeof ROLE];
+
+/** Campos desbloqueados para superusuário. */
+const allFieldsUnlocked: Record<string, FieldCapability> = { allFields: { readOnly: false } };
+
 // #endregion
 
-// #region ---------------------------------------------------------------------- Resolvers per role
+// #region ---------------------------------------------------------------------- Resolvers por view
 
-const resolveUsuario: RoleResolver = (user, viewName, data): ReturnType<RoleResolver> => {
-  const userId = user.id;
+/** Permissões e filtros para a view "clinicas", por papel. */
+const resolveClinicas: ViewResolver = (user, role, data): ReturnType<ViewResolver> => {
   const clinicaId = user.clinica_id;
 
-  switch (viewName) {
-    case 'clinicas':
+  switch (role as RoleVal) {
+    case ROLE.usuario:
       return {
-        viewCaps: {
-          rules: { browse: true, detail: false, edit: false, add: false, delete: false },
-        },
+        viewCaps: { rules: { browse: true, detail: false, edit: false, add: false, delete: false } },
         data: { ...data, clinicas: filterRows(data.clinicas, r => r.id === clinicaId) },
       };
 
-    case 'usuarios':
+    case ROLE.responsavel:
+      return {
+        viewCaps: { rules: { browse: true, detail: true, edit: true, add: false, delete: false } },
+        data: { ...data, clinicas: filterRows(data.clinicas, r => r.id === clinicaId) },
+      };
+
+    case ROLE.administrador:
+      return { viewCaps: { rules: allRules() }, data };
+
+    case ROLE.superusuario:
+      return { viewCaps: { rules: allRules(), fields: allFieldsUnlocked }, data };
+
+    default:
+      return { viewCaps: { rules: noRules() }, data };
+  }
+};
+
+/** Permissões e filtros para a view "usuarios", por papel. */
+const resolveUsuarios: ViewResolver = (user, role, data): ReturnType<ViewResolver> => {
+  const userId = user.id;
+  const clinicaId = user.clinica_id;
+
+  switch (role as RoleVal) {
+    case ROLE.usuario:
       return {
         viewCaps: {
           rules: { browse: false, detail: false, edit: true, add: false, delete: false },
-          fields: {
-            clinica_id: { readOnly: true },
-            tipo_permissao: { readOnly: true },
-          },
+          fields: { clinica_id: { readOnly: true }, tipo_permissao: { readOnly: true } },
         },
         data: {
           ...data,
@@ -48,43 +71,7 @@ const resolveUsuario: RoleResolver = (user, viewName, data): ReturnType<RoleReso
         },
       };
 
-    case 'pacientes':
-      return {
-        viewCaps: {
-          rules: { browse: true, detail: true, edit: true, add: true, delete: false },
-          fields: {
-            clinica_id: { readOnly: true },
-            usuario_id: { readOnly: true },
-          },
-        },
-        data: { ...data, pacientes: filterRows(data.pacientes, r => r.clinica_id === clinicaId) },
-      };
-
-    case 'projetos':
-      return {
-        viewCaps: {
-          rules: { browse: true, detail: true, edit: true, add: true, delete: false },
-          fields: { paciente_id: { readOnly: true } },
-        },
-        data: { ...data, projetos: filterRows(data.projetos, r => r.clinica_id === clinicaId) },
-      };
-
-    default:
-      return { viewCaps: { rules: noRules() }, data };
-  }
-};
-
-const resolveResponsavel: RoleResolver = (user, viewName, data): ReturnType<RoleResolver> => {
-  const clinicaId = user.clinica_id;
-
-  switch (viewName) {
-    case 'clinicas':
-      return {
-        viewCaps: { rules: { browse: true, detail: true, edit: true, add: false, delete: false } },
-        data: { ...data, clinicas: filterRows(data.clinicas, r => r.id === clinicaId) },
-      };
-
-    case 'usuarios':
+    case ROLE.responsavel:
       return {
         viewCaps: {
           rules: allRules(),
@@ -97,35 +84,7 @@ const resolveResponsavel: RoleResolver = (user, viewName, data): ReturnType<Role
         },
       };
 
-    case 'pacientes':
-      return {
-        viewCaps: {
-          rules: allRules(),
-          fields: { clinica_id: { readOnly: true } },
-        },
-        data: { ...data, pacientes: filterRows(data.pacientes, r => r.clinica_id === clinicaId) },
-      };
-
-    case 'projetos':
-      return {
-        viewCaps: {
-          rules: allRules(),
-          fields: { paciente_id: { readOnly: true } },
-        },
-        data: { ...data, projetos: filterRows(data.projetos, r => r.clinica_id === clinicaId) },
-      };
-
-    default:
-      return { viewCaps: { rules: noRules() }, data };
-  }
-};
-
-const resolveAdministrador: RoleResolver = (_user, viewName, data): ReturnType<RoleResolver> => {
-  switch (viewName) {
-    case 'clinicas':
-      return { viewCaps: { rules: allRules() }, data };
-
-    case 'usuarios':
+    case ROLE.administrador:
       return {
         viewCaps: {
           rules: allRules(),
@@ -137,7 +96,38 @@ const resolveAdministrador: RoleResolver = (_user, viewName, data): ReturnType<R
         },
       };
 
-    case 'pacientes':
+    case ROLE.superusuario:
+      return { viewCaps: { rules: allRules(), fields: allFieldsUnlocked }, data };
+
+    default:
+      return { viewCaps: { rules: noRules() }, data };
+  }
+};
+
+/** Permissões e filtros para a view "pacientes", por papel. */
+const resolvePacientes: ViewResolver = (user, role, data): ReturnType<ViewResolver> => {
+  const clinicaId = user.clinica_id;
+
+  switch (role as RoleVal) {
+    case ROLE.usuario:
+      return {
+        viewCaps: {
+          rules: { browse: true, detail: true, edit: true, add: true, delete: false },
+          fields: { clinica_id: { readOnly: true }, usuario_id: { readOnly: true } },
+        },
+        data: { ...data, pacientes: filterRows(data.pacientes, r => r.clinica_id === clinicaId) },
+      };
+
+    case ROLE.responsavel:
+      return {
+        viewCaps: {
+          rules: allRules(),
+          fields: { clinica_id: { readOnly: true } },
+        },
+        data: { ...data, pacientes: filterRows(data.pacientes, r => r.clinica_id === clinicaId) },
+      };
+
+    case ROLE.administrador:
       return {
         viewCaps: {
           rules: allRules(),
@@ -146,22 +136,41 @@ const resolveAdministrador: RoleResolver = (_user, viewName, data): ReturnType<R
         data,
       };
 
-    case 'projetos':
-      return { viewCaps: { rules: allRules() }, data };
+    case ROLE.superusuario:
+      return { viewCaps: { rules: allRules(), fields: allFieldsUnlocked }, data };
 
     default:
       return { viewCaps: { rules: noRules() }, data };
   }
 };
 
-const resolveSuperusuario: RoleResolver = (_user, viewName, data): ReturnType<RoleResolver> => {
-  const allFieldsUnlocked: Record<string, FieldCapability> = { allFields: { readOnly: false } };
+/** Permissões e filtros para a view "projetos", por papel. */
+const resolveProjetos: ViewResolver = (user, role, data): ReturnType<ViewResolver> => {
+  const clinicaId = user.clinica_id;
 
-  switch (viewName) {
-    case 'clinicas':
-    case 'pacientes':
-    case 'projetos':
-    case 'usuarios':
+  switch (role as RoleVal) {
+    case ROLE.usuario:
+      return {
+        viewCaps: {
+          rules: { browse: true, detail: true, edit: true, add: true, delete: false },
+          fields: { paciente_id: { readOnly: true } },
+        },
+        data: { ...data, projetos: filterRows(data.projetos, r => r.clinica_id === clinicaId) },
+      };
+
+    case ROLE.responsavel:
+      return {
+        viewCaps: {
+          rules: allRules(),
+          fields: { paciente_id: { readOnly: true } },
+        },
+        data: { ...data, projetos: filterRows(data.projetos, r => r.clinica_id === clinicaId) },
+      };
+
+    case ROLE.administrador:
+      return { viewCaps: { rules: allRules() }, data };
+
+    case ROLE.superusuario:
       return { viewCaps: { rules: allRules(), fields: allFieldsUnlocked }, data };
 
     default:
@@ -173,17 +182,16 @@ const resolveSuperusuario: RoleResolver = (_user, viewName, data): ReturnType<Ro
 
 // #region -------------------------------------------------------------------------------- Resolver
 
-/** Resolver de acesso do SSAA, construído a partir das funções de política por papel. */
-export const ssaaAccessResolver = createAccessResolver({
+/** Resolver de acesso do SSAA, construído a partir das funções de política por view. */
+export const ssaaAccessResolver = createViewBasedAccessResolver({
   userTable: 'usuarios',
   usernameAccessor: 'username',
-  allViewNames: ['clinicas', 'usuarios', 'pacientes', 'projetos'],
   roleAccessor: 'tipo_permissao',
-  roleResolvers: {
-    [ROLE.usuario]: resolveUsuario,
-    [ROLE.responsavel]: resolveResponsavel,
-    [ROLE.administrador]: resolveAdministrador,
-    [ROLE.superusuario]: resolveSuperusuario,
+  viewResolvers: {
+    clinicas: resolveClinicas,
+    usuarios: resolveUsuarios,
+    pacientes: resolvePacientes,
+    projetos: resolveProjetos,
   },
   buildPrincipal: (user) => ({
     id: user.id,

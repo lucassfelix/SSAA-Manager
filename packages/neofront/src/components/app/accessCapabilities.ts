@@ -87,7 +87,18 @@ export type RoleResolver = (
 ) => { viewCaps: ViewCapabilities; data: DataPayload };
 
 /**
- * Configuration for the `createAccessResolver` factory.
+ * Per-view resolver function signature.
+ * Receives the authenticated user, the user's role value, and the full data payload.
+ * Returns view capabilities and (optionally filtered) data.
+ */
+export type ViewResolver = (
+  user: Row,
+  role: number,
+  data: DataPayload,
+) => { viewCaps: ViewCapabilities; data: DataPayload };
+
+/**
+ * Configuration for the `createAccessResolver` factory (role-based dispatch).
  */
 export interface AccessResolverConfig {
   /** Table that contains user records (e.g. "usuarios"). */
@@ -100,6 +111,22 @@ export interface AccessResolverConfig {
   roleAccessor: string;
   /** Map from numeric role value → resolver function. */
   roleResolvers: Record<number, RoleResolver>;
+  /** Builds the PrincipalContext from the authenticated user row. */
+  buildPrincipal: (user: Row) => PrincipalContext;
+}
+
+/**
+ * Configuration for the `createViewBasedAccessResolver` factory (view-based dispatch).
+ */
+export interface ViewBasedAccessResolverConfig {
+  /** Table that contains user records (e.g. "usuarios"). */
+  userTable: string;
+  /** Field used to match localStorage username (default: "username"). */
+  usernameAccessor?: string;
+  /** Field on the user record that holds the role value (e.g. "tipo_permissao"). */
+  roleAccessor: string;
+  /** Map from view name → resolver function. Unlisted views get noRules(). */
+  viewResolvers: Record<string, ViewResolver>;
   /** Builds the PrincipalContext from the authenticated user row. */
   buildPrincipal: (user: Row) => PrincipalContext;
 }
@@ -128,10 +155,52 @@ export function filterRows(rows: Row[] | undefined, predicate: (r: Row) => boole
 
 // #endregion
 
+// #region -------------------------------------------------------------------------- Internal helpers
+
+/** Shared user lookup + localStorage flag logic for both factory variants. */
+function lookupUser(
+  data: DataPayload,
+  userTable: string,
+  usernameAccessor: string,
+): Row | undefined {
+  const users = data[userTable];
+  const storedName = localStorage.getItem('__nf_username');
+  const user = storedName && Array.isArray(users)
+    ? users.find(u => String(u[usernameAccessor] ?? '').toLowerCase() === storedName.toLowerCase())
+    : undefined;
+
+  if (!user) {
+    try {
+      localStorage.setItem('__nf_username_valid', '0');
+    } catch {
+      /* */
+    }
+  } else {
+    try {
+      localStorage.setItem('__nf_username', String(user[usernameAccessor] ?? user.id ?? ''));
+      localStorage.setItem('__nf_username_valid', '1');
+    } catch {
+      /* */
+    }
+  }
+
+  return user;
+}
+
+/** Returns a deny-all result for a given view name. */
+function denyResult(viewName: string, data: DataPayload): AccessResolverResult {
+  return {
+    capabilities: { views: { [viewName]: { rules: noRules() } } },
+    data: { ...data, [viewName]: [] as Row[] },
+  };
+}
+
+// #endregion
+
 // #region ----------------------------------------------------------------------- Factory: createAccessResolver
 
 /**
- * Creates a standard AccessResolver from a role-based configuration.
+ * Creates a standard AccessResolver from a **role-based** configuration.
  *
  * Handles: user lookup via localStorage username, localStorage validation flags,
  * role dispatch, principal construction, and all-views capability resolution
@@ -149,56 +218,79 @@ export function createAccessResolver(config: AccessResolverConfig): AccessResolv
   } = config;
 
   return (viewName, data, _fieldsCfg) => {
-    // Locate authenticated user
-    const users = data[userTable];
-    const storedName = localStorage.getItem('__nf_username');
-    const user = storedName && Array.isArray(users)
-      ? users.find(u => String(u[usernameAccessor] ?? '').toLowerCase() === storedName.toLowerCase())
-      : undefined;
-
-    // No authenticated user → empty view, no caps
+    const user = lookupUser(data, userTable, usernameAccessor);
     if (!user) {
-      try {
-        localStorage.setItem('__nf_username_valid', '0');
-      } catch {
-        /* */
-      }
-      return {
-        capabilities: { views: { [viewName]: { rules: noRules() } } },
-        data: { ...data, [viewName]: [] as Row[] },
-      };
+      return denyResult(viewName, data);
     }
 
-    // Persist validated user info for other engine utilities
-    try {
-      localStorage.setItem('__nf_username', String(user[usernameAccessor] ?? user.id ?? ''));
-      localStorage.setItem('__nf_username_valid', '1');
-    } catch {
-      /* */
+    const resolver = roleResolvers[user[roleAccessor] as number];
+    if (!resolver) {
+      return denyResult(viewName, data);
+    }
+
+    const resolved = resolver(user, viewName, data);
+
+    const allViews: Record<string, ViewCapabilities> = {};
+    for (const vn of allViewNames) {
+      allViews[vn] = vn === viewName
+        ? resolved.viewCaps
+        : resolver(user, vn, data).viewCaps;
+    }
+
+    return {
+      capabilities: { principal: buildPrincipal(user), views: allViews },
+      data: resolved.data,
+    };
+  };
+}
+
+// #endregion
+
+// #region -------------------------------------------------------------- Factory: createViewBasedAccessResolver
+
+/**
+ * Creates a standard AccessResolver from a **view-based** configuration.
+ *
+ * Same user-lookup and menu-gating plumbing as `createAccessResolver`, but the
+ * dispatch axis is flipped: the app provides one resolver per **view** (each
+ * of which switches on the role internally).
+ *
+ * View names are derived from the keys of `viewResolvers`. Views not listed
+ * receive `noRules()`.
+ */
+export function createViewBasedAccessResolver(config: ViewBasedAccessResolverConfig): AccessResolver {
+  const {
+    userTable,
+    usernameAccessor = 'username',
+    roleAccessor,
+    viewResolvers,
+    buildPrincipal,
+  } = config;
+
+  const allViewNames = Object.keys(viewResolvers);
+
+  return (viewName, data, _fieldsCfg) => {
+    const user = lookupUser(data, userTable, usernameAccessor);
+    if (!user) {
+      return denyResult(viewName, data);
     }
 
     const roleVal = user[roleAccessor] as number;
-    const resolver = roleResolvers[roleVal];
 
-    // Unknown role → deny
-    if (!resolver) {
-      return {
-        capabilities: { views: { [viewName]: { rules: noRules() } } },
-        data: { ...data, [viewName]: [] as Row[] },
-      };
+    function resolveOne(vn: string): { viewCaps: ViewCapabilities; data: DataPayload } {
+      const resolver = viewResolvers[vn];
+      return resolver
+        ? resolver(user!, roleVal, data)
+        : { viewCaps: { rules: noRules() }, data };
     }
 
-    // Resolve the requested view (full: caps + filtered data)
-    const resolved = resolver(user, viewName, data);
+    const resolved = resolveOne(viewName);
 
-    // Resolve all other views for menu gating (only caps needed, data discarded)
     const allViews: Record<string, ViewCapabilities> = {};
     for (const vn of allViewNames) {
-      if (vn === viewName) {
-        allViews[vn] = resolved.viewCaps;
-      } else {
-        allViews[vn] = resolver(user, vn, data).viewCaps;
-      }
+      allViews[vn] = vn === viewName
+        ? resolved.viewCaps
+        : resolveOne(vn).viewCaps;
     }
 
     return {
