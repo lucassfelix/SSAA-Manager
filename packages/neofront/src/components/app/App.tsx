@@ -16,9 +16,8 @@ import { useLocalStorage } from "@mantine/hooks";
 
 import { AppUIContext, AppProps, FieldsConfig, FormDataConfig, ListViewProps, MenuConfig, UserSettings, ViewResultProps } from "context";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
-import { getRulesByView } from "./enforcePermissions";
 import { createDataLoader, createViewLoader } from "./mainUtils";
-import type { PermissionsConfig } from "./enforcePermissions";
+import type { AccessResolver } from "./accessCapabilities";
 import Shell from "@/shell/Shell";
 import Login from "@/login/Login";
 
@@ -40,7 +39,8 @@ interface MainAppProps {
   mockData?: ViewResultProps["data"];
   apiTableNames?: string[];
   dataEnhancer?: (data: any) => any;
-  permissionsCfg?: PermissionsConfig;
+  /** Access resolver callback — called per view load to resolve capabilities and filter data. */
+  accessResolver?: AccessResolver;
 }
 
 // #endregion
@@ -52,7 +52,7 @@ export default function App(props: MainAppProps) {
   // #region Hooks and variables
 
   const { appCfg, menuCfg, loginCfg, activeViews, metadata, mockData, apiTableNames,
-    dataEnhancer, permissionsCfg } = props;
+    dataEnhancer, accessResolver } = props;
 
   const loadView =
     props.loadView ||
@@ -66,7 +66,7 @@ export default function App(props: MainAppProps) {
         : (dataEnhancer ? dataEnhancer(mockData) : mockData) || {};
 
       return createViewLoader(activeViews, viewName, metadata, dataSource,
-        permissionsCfg);
+        accessResolver);
     });
 
   if (!appCfg.topControls || !appCfg.controls) {
@@ -209,7 +209,7 @@ export default function App(props: MainAppProps) {
           appCfg,
           menuCfg,
           loginCfg,
-          extras: { rulesByView: getRulesByView() },
+          extras: { capabilities: viewResult?.capabilities },
           userSettings,
           setUserSettings,
           currentView,

@@ -8,6 +8,7 @@ import { ListViewProps } from "context";
 import { SectionSchema } from "@/form/Section";
 import { FieldsConfig } from "./FieldProps";
 import { TabSchema } from "@/form/TabbedLayout";
+import type { AccessCapabilities } from "@/app/accessCapabilities";
 
 // #endregion
 
@@ -51,6 +52,8 @@ export interface ViewResultProps {
   data: {
     [key: string]: Record<string, any>[];
   };
+  /** Pre-resolved access capabilities for UI gating, provided by the app layer. */
+  capabilities?: AccessCapabilities;
 }
 
 // #endregion

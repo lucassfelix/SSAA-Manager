@@ -178,13 +178,13 @@ export default function MainMenu({ cfg, collapsed = false }: NfMenuProps) {
   }
 
   function renderItems(items: MenuItem[], prefix = '', depth = 0): JSX.Element[] {
-    const rulesByView = (extras as { rulesByView?: Record<string, Record<string, unknown>> } | undefined)?.rulesByView;
+    const caps = (extras as { capabilities?: { views?: Record<string, { rules?: Record<string, unknown> }> } } | undefined)?.capabilities;
     const visibleItems = items.filter((it) => {
       if (it.items) {
         return true;
       }
       if (it.name) {
-        return rulesByView?.[it.name]?.browse !== false;
+        return caps?.views?.[it.name]?.rules?.browse !== false;
       }
       return true;
     });

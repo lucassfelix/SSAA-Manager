@@ -565,7 +565,7 @@ export default function NfDataTable(props: NfDataTableProps): JSX.Element {
         noHeader={tableCfg.header === false}
         columns={getColumns(appCfg, viewSchema, isDark, records,
           viewSchema.name, viewResult.data, fieldConfig, fields,
-          (extras as { rulesByView?: Record<string, Record<string, unknown>> } | undefined)?.rulesByView?.[currentView],
+          (extras as { capabilities?: { views?: Record<string, { rules?: Record<string, unknown> }> } } | undefined)?.capabilities?.views?.[currentView]?.rules,
           (rec) => setDeleteRequest(rec))}
         records={records}
       />

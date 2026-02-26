@@ -22,7 +22,7 @@ import NfDateField from "./fields/DateField";
 import NfNumberField from "./fields/NumberField";
 import NfImageField from "./fields/ImageField";
 import NfPasswordInputField from "./fields/PasswordInputField";
-import { getCurrentUserContext } from "@/app/enforcePermissions";
+import type { PrincipalContext } from "@/app/accessCapabilities";
 
 // #endregion
 
@@ -47,7 +47,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
   // #region Hooks and variables
 
   const { op, recordCfg, record, values, formLayout, fields, style } = props;
-  const { appCfg, currentView, viewResult } = useAppUI();
+  const { appCfg, currentView, viewResult, extras } = useAppUI();
 
   if (!recordCfg) {
     return (
@@ -156,12 +156,14 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
 
     if (value.startsWith('$user.')) {
       const path = value.slice(6);
-      const ctx = getCurrentUserContext();
-      if (!ctx?.user || !path) {
+      const principal = (extras as { capabilities?: { principal?: PrincipalContext } } | undefined)?.capabilities?.principal;
+      if (!principal || !path) {
         return value;
       }
-      const userPath = path === 'id' ? ctx.idAccessor : path;
-      return getValueByPath(ctx.user as any, userPath) ?? undefined;
+      if (path === 'id') {
+        return principal.id;
+      }
+      return principal.attrs?.[path] ?? (principal as any)[path] ?? undefined;
     }
 
     return value;

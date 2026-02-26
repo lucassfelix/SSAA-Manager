@@ -13,10 +13,10 @@ import appCfg from "project/app.json";
 import menuCfg from "project/menu.json";
 import loginCfg from "project/login.json";
 import viewsCfg from "project/views/views.json";
-import permissionsCfg from "project/permissions.json";
 
 import metadata from "project/views/metadataloader.js";
 import data from "project/views/dataloader.js";
+import { ssaaAccessResolver } from "./policy";
 
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -140,7 +140,7 @@ getRoot().render(
       mockData={data}
       apiTableNames={tableNames}
       dataEnhancer={enhanceData}
-      permissionsCfg={permissionsCfg}
+      accessResolver={ssaaAccessResolver}
     />
   </BrowserRouter>
 );
