@@ -6,7 +6,11 @@
 // solely as UI gating hints (show/hide, enable/disable).
 //
 
+// #region --------------------------------------------------------------------------------- Imports
+
 import type { FieldsConfig } from "context";
+
+// #endregion
 
 // #region ----------------------------------------------------------------------------------- Types
 
@@ -75,48 +79,31 @@ export interface AccessResolverResult {
   data: DataPayload;
 }
 
-/**
- * Per-role resolver function signature.
- * Receives the authenticated user, the view being loaded, and the full data payload.
- * Returns view capabilities and (optionally filtered) data.
- */
-export type RoleResolver = (
-  user: Row,
-  viewName: string,
-  data: DataPayload,
-) => { viewCaps: ViewCapabilities; data: DataPayload };
+/** Payload passed to each ViewResolver function. */
+export interface ViewResolverPayload {
+  /** The authenticated user row. */
+  user: Row;
+  /** Numeric role value from the user record. */
+  role: number;
+  /** Full data payload (all tables). */
+  data: DataPayload;
+}
+
+/** Result returned by a ViewResolver. */
+export type ViewResolverResult = { viewCaps: ViewCapabilities; data: DataPayload };
 
 /**
  * Per-view resolver function signature.
- * Receives the authenticated user, the user's role value, and the full data payload.
- * Returns view capabilities and (optionally filtered) data.
+ * Receives a payload with the authenticated user, role value, and full data.
+ * Returns view capabilities and (optionally filtered) data, or `undefined`
+ * to fall back to `roleOverrides` / default deny.
  */
 export type ViewResolver = (
-  user: Row,
-  role: number,
-  data: DataPayload,
-) => { viewCaps: ViewCapabilities; data: DataPayload };
+  payload: ViewResolverPayload,
+) => ViewResolverResult | undefined;
 
 /**
- * Configuration for the `createAccessResolver` factory (role-based dispatch).
- */
-export interface AccessResolverConfig {
-  /** Table that contains user records (e.g. "usuarios"). */
-  userTable: string;
-  /** Field used to match localStorage username (default: "username"). */
-  usernameAccessor?: string;
-  /** All view names in the project (needed to resolve menu-level caps). */
-  allViewNames: string[];
-  /** Field on the user record that holds the role value (e.g. "tipo_permissao"). */
-  roleAccessor: string;
-  /** Map from numeric role value → resolver function. */
-  roleResolvers: Record<number, RoleResolver>;
-  /** Builds the PrincipalContext from the authenticated user row. */
-  buildPrincipal: (user: Row) => PrincipalContext;
-}
-
-/**
- * Configuration for the `createViewBasedAccessResolver` factory (view-based dispatch).
+ * Configuration for the `createViewBasedAccessResolver` factory.
  */
 export interface ViewBasedAccessResolverConfig {
   /** Table that contains user records (e.g. "usuarios"). */
@@ -127,6 +114,13 @@ export interface ViewBasedAccessResolverConfig {
   roleAccessor: string;
   /** Map from view name → resolver function. Unlisted views get noRules(). */
   viewResolvers: Record<string, ViewResolver>;
+  /**
+   * Capabilities applied for specific roles across ALL views, before falling
+   * back to noRules(). When a ViewResolver returns `undefined` for a given
+   * role, the factory checks here. This avoids repeating the same role
+   * (e.g. superusuario) in every view resolver.
+   */
+  roleOverrides?: Record<number, ViewCapabilities>;
   /** Builds the PrincipalContext from the authenticated user row. */
   buildPrincipal: (user: Row) => PrincipalContext;
 }
@@ -197,63 +191,14 @@ function denyResult(viewName: string, data: DataPayload): AccessResolverResult {
 
 // #endregion
 
-// #region ----------------------------------------------------------------------- Factory: createAccessResolver
+// #region ----------------------------------------------------------------------- Factory: createViewBasedAccessResolver
 
 /**
- * Creates a standard AccessResolver from a **role-based** configuration.
+ * Creates a standard AccessResolver from a view-based configuration.
  *
  * Handles: user lookup via localStorage username, localStorage validation flags,
- * role dispatch, principal construction, and all-views capability resolution
- * (for menu gating). Projects only need to supply per-role resolver functions
- * and a principal builder.
- */
-export function createAccessResolver(config: AccessResolverConfig): AccessResolver {
-  const {
-    userTable,
-    usernameAccessor = 'username',
-    allViewNames,
-    roleAccessor,
-    roleResolvers,
-    buildPrincipal,
-  } = config;
-
-  return (viewName, data, _fieldsCfg) => {
-    const user = lookupUser(data, userTable, usernameAccessor);
-    if (!user) {
-      return denyResult(viewName, data);
-    }
-
-    const resolver = roleResolvers[user[roleAccessor] as number];
-    if (!resolver) {
-      return denyResult(viewName, data);
-    }
-
-    const resolved = resolver(user, viewName, data);
-
-    const allViews: Record<string, ViewCapabilities> = {};
-    for (const vn of allViewNames) {
-      allViews[vn] = vn === viewName
-        ? resolved.viewCaps
-        : resolver(user, vn, data).viewCaps;
-    }
-
-    return {
-      capabilities: { principal: buildPrincipal(user), views: allViews },
-      data: resolved.data,
-    };
-  };
-}
-
-// #endregion
-
-// #region -------------------------------------------------------------- Factory: createViewBasedAccessResolver
-
-/**
- * Creates a standard AccessResolver from a **view-based** configuration.
- *
- * Same user-lookup and menu-gating plumbing as `createAccessResolver`, but the
- * dispatch axis is flipped: the app provides one resolver per **view** (each
- * of which switches on the role internally).
+ * principal construction, and all-views capability resolution (for menu gating).
+ * The app provides one resolver per **view** (each switches on the role internally).
  *
  * View names are derived from the keys of `viewResolvers`. Views not listed
  * receive `noRules()`.
@@ -264,10 +209,12 @@ export function createViewBasedAccessResolver(config: ViewBasedAccessResolverCon
     usernameAccessor = 'username',
     roleAccessor,
     viewResolvers,
+    roleOverrides,
     buildPrincipal,
   } = config;
 
   const allViewNames = Object.keys(viewResolvers);
+  const defaultResult = (d: DataPayload): ViewResolverResult => ({ viewCaps: { rules: noRules() }, data: d });
 
   return (viewName, data, _fieldsCfg) => {
     const user = lookupUser(data, userTable, usernameAccessor);
@@ -276,12 +223,21 @@ export function createViewBasedAccessResolver(config: ViewBasedAccessResolverCon
     }
 
     const roleVal = user[roleAccessor] as number;
+    const override = roleOverrides?.[roleVal];
 
-    function resolveOne(vn: string): { viewCaps: ViewCapabilities; data: DataPayload } {
+    function resolveOne(vn: string): ViewResolverResult {
       const resolver = viewResolvers[vn];
-      return resolver
-        ? resolver(user!, roleVal, data)
-        : { viewCaps: { rules: noRules() }, data };
+      // 1) Try the view-specific resolver
+      const result = resolver?.({ user: user!, role: roleVal, data });
+      if (result) {
+        return result;
+      }
+      // 2) Fall back to role override (e.g. superusuario gets allRules everywhere)
+      if (override) {
+        return { viewCaps: override, data };
+      }
+      // 3) Default: deny
+      return defaultResult(data);
     }
 
     const resolved = resolveOne(viewName);
