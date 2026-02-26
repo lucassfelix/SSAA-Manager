@@ -1,13 +1,7 @@
 # Prompt Templates
 
-## Change request template
+Use the workspace prompt file `.github/prompts/neofront-change.prompt.md`.
 
-1) Summarize the goal in 2 bullets.
-2) List architecture constraints you must not violate.
-3) Propose the smallest metadata-first change.
-4) Output only a minimal diff.
-5) Tell me what to run: `npm run ai:check`.
+In Copilot Chat:
 
-## If you need clarification
-
-Ask at most 3 questions, and suggest a default.
+- Run `/neofront-change`

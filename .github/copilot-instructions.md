@@ -256,4 +256,4 @@ If uncertain, choose the option that:
 - Moves responsibility toward metadata or project config
 - Simplifies the overall system
 
-Tip: For new Copilot Chat threads, use the prompt template in `.github/prompts/neofront-change.prompt.md`.
+Tip: For new Copilot Chat threads, run `/neofront-change` from the Chat prompt list (stored at `.github/prompts/neofront-change.prompt.md`).

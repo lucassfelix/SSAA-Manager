@@ -20,3 +20,7 @@ This folder is **static context** for LLM-assisted engineering in this repo.
 ## Examples
 
 See `ai/examples/` for copyable, repo-aligned patterns.
+
+## Copilot Chat
+
+- Prefer starting a new thread with the `/neofront-change` prompt.
