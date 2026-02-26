@@ -92,6 +92,12 @@ export function createDataLoader(apiBaseUrl: string, tableNames: string[],
   };
 }
 
+/**
+ * Replaces variables in a text string with values from the provided context.
+ * @param text The text containing variables to be replaced.
+ * @param ctx An optional context object containing fields configuration, record data, and accessors for id and name. 
+ * @returns The text with variables replaced by their corresponding values from the context.
+ */
 export function replaceVars(text: string, ctx?: {
   fieldsCfg?: FieldsConfig;
   record?: Record<string, any> | null;
