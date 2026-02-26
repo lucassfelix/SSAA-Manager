@@ -1,4 +1,4 @@
-# SSAA API
+# MySQL API
 
 Minimal API to expose MySQL tables for the SSAA app.
 

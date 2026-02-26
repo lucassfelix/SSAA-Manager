@@ -66,7 +66,7 @@ Valid runtime data sources during pre-beta:
 
 - Project JSON files under `packages/app-*/project/` for metadata
 - Mock data under `packages/app-*/project/views/**`
-- Test API in `packages/api-mysql/`
+- Test API in `packages/mysql-api/`
 
 Any solution bypassing these layers is **architecturally invalid**, even if functionally correct.
 
@@ -204,7 +204,7 @@ Engine must **not depend on project specifics**.
 
 ---
 
-### Test API (`packages/api-mysql/`)
+### Test API (`packages/mysql-api/`)
 
 - Simple MySQL test backend
 - Not part of engine architecture

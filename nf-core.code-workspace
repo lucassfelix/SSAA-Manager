@@ -12,7 +12,6 @@
 			"**/node_modules": true
 		},
 		"search.exclude": {
-			"package*.*": true,
 			"node_modules": true,
 			".git": true,
 			"**/*.svg": true,
