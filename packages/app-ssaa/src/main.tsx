@@ -16,7 +16,7 @@ import viewsCfg from "project/views/views.json";
 
 import metadata from "project/views/metadataloader.js";
 import data from "project/views/dataloader.js";
-import { ssaaAccessResolver } from "./policy";
+import { accessResolver } from "./policy";
 
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -140,7 +140,7 @@ getRoot().render(
       mockData={data}
       apiTableNames={tableNames}
       dataEnhancer={enhanceData}
-      accessResolver={ssaaAccessResolver}
+      accessResolver={accessResolver}
     />
   </BrowserRouter>
 );

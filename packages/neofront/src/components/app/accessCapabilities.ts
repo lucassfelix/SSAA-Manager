@@ -1,9 +1,9 @@
 //
 // Generic capabilities contract for NeoFront access control.
 //
-// The engine never evaluates policy rules. It receives pre-resolved capabilities
-// from the application layer (project loaders, backend APIs, etc.) and uses them
-// solely as UI gating hints (show/hide, enable/disable).
+// The engine never evaluates policy rules: it receives pre-resolved capabilities from the
+// application layer (project loaders, backend APIs, etc.) and uses them solely as UI gating hints
+// (show/hide, enable/disable).
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -31,13 +31,17 @@ export interface ViewRules {
 
 /** Per-field UI overrides resolved for the current principal. */
 export interface FieldCapability {
+  /** Whether the field is read-only. */
   readOnly?: boolean;
+  /** Whether the field is visible. */
   visible?: boolean;
 }
 
 /** Capabilities for a single view. */
 export interface ViewCapabilities {
+  /** Operation capabilities for the view. */
   rules: ViewRules;
+  /** Per-field UI overrides for the view. */
   fields?: Record<string, FieldCapability>;
 }
 
@@ -90,7 +94,15 @@ export interface ViewResolverPayload {
 }
 
 /** Result returned by a ViewResolver. */
-export type ViewResolverResult = { viewCaps: ViewCapabilities; data: DataPayload };
+export type ViewResolverResult = {
+  /** Capabilities for the current view. The factory aggregates these per view. */
+  viewCaps: ViewCapabilities;
+  /** Data after app-layer filtering (row-level, option-level). */
+  data: DataPayload;
+};
+
+/** Result returned by a ViewResolver, or `undefined` to fall back to roleOverrides. */
+export type ViewResolverResultType = ViewResolverResult | undefined;
 
 /**
  * Per-view resolver function signature.
@@ -127,7 +139,7 @@ export interface ViewBasedAccessResolverConfig {
 
 // #endregion
 
-// #region --------------------------------------------------------------------------- Helper exports
+// #region -------------------------------------------------------------------------- Helper exports
 
 /** Returns a ViewRules object with all operations allowed. */
 export function allRules(): ViewRules {
@@ -149,7 +161,7 @@ export function filterRows(rows: Row[] | undefined, predicate: (r: Row) => boole
 
 // #endregion
 
-// #region -------------------------------------------------------------------------- Internal helpers
+// #region ------------------------------------------------------------------------ Internal helpers
 
 /** Shared user lookup + localStorage flag logic for both factory variants. */
 function lookupUser(
@@ -191,17 +203,16 @@ function denyResult(viewName: string, data: DataPayload): AccessResolverResult {
 
 // #endregion
 
-// #region ----------------------------------------------------------------------- Factory: createViewBasedAccessResolver
+// #region --------------------------------------------------------------------------------- Factory
 
 /**
  * Creates a standard AccessResolver from a view-based configuration.
  *
- * Handles: user lookup via localStorage username, localStorage validation flags,
- * principal construction, and all-views capability resolution (for menu gating).
- * The app provides one resolver per **view** (each switches on the role internally).
+ * Handles: user lookup via localStorage username, localStorage validation flags, principal
+ * construction, and all-views capability resolution (for menu gating). The app provides one
+ * resolver per **view** (each switches on the role internally).
  *
- * View names are derived from the keys of `viewResolvers`. Views not listed
- * receive `noRules()`.
+ * View names are derived from the keys of `viewResolvers`. Views not listed receive `noRules()`.
  */
 export function createViewBasedAccessResolver(config: ViewBasedAccessResolverConfig): AccessResolver {
   const {

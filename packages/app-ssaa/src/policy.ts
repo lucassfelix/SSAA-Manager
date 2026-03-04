@@ -1,18 +1,12 @@
 //
-// Política de acesso do SSAA: resolver para permissões na camada da aplicação.
-// IMPORTANTE: casos reais exigirão uma abordagem mais robusta, com validação no backend.
+// Políticas de acesso deste projeto, com resolver para permissões na camada da aplicação.
+// Nota: a implementação real exigirá uma abordagem mais robusta com validação no backend.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
 
 import { createViewBasedAccessResolver, allRules, filterRows } from "@neofront/core";
-import type { ViewResolverPayload, ViewResolverResult, FieldCapability } from "@neofront/core";
-
-// #endregion
-
-// #region ----------------------------------------------------------------------------------- Types
-
-type VRR = ViewResolverResult | undefined;
+import type { ViewResolverPayload, ViewResolverResultType, FieldCapability } from "@neofront/core";
 
 // #endregion
 
@@ -33,8 +27,8 @@ const allFieldsUnlocked: Record<string, FieldCapability> = { allFields: { readOn
 
 // #region ---------------------------------------------------------------------- Resolvers per view
 
-/** Permissões e filtros para a view "clinicas", por papel. */
-const resolveClinicas = ({ user, role, data }: ViewResolverPayload): VRR => {
+/** Permissões e filtros para a view "clinicas". */
+const resolveClinicas = ({ user, role, data }: ViewResolverPayload): ViewResolverResultType => {
   const clinicaId = user.clinica_id;
 
   switch (role) {
@@ -53,8 +47,8 @@ const resolveClinicas = ({ user, role, data }: ViewResolverPayload): VRR => {
   }
 };
 
-/** Permissões e filtros para a view "usuarios", por papel. */
-const resolveUsuarios = ({ user, role, data }: ViewResolverPayload): VRR => {
+/** Permissões e filtros para a view "usuarios". */
+const resolveUsuarios = ({ user, role, data }: ViewResolverPayload): ViewResolverResultType => {
   const userId = user.id;
   const clinicaId = user.clinica_id;
   const readOnlyPolicyFields = {
@@ -101,8 +95,8 @@ const resolveUsuarios = ({ user, role, data }: ViewResolverPayload): VRR => {
   }
 };
 
-/** Permissões e filtros para a view "pacientes", por papel. */
-const resolvePacientes = ({ user, role, data }: ViewResolverPayload): VRR => {
+/** Permissões e filtros para a view "pacientes". */
+const resolvePacientes = ({ user, role, data }: ViewResolverPayload): ViewResolverResultType => {
   const clinicaId = user.clinica_id;
 
   switch (role) {
@@ -133,8 +127,8 @@ const resolvePacientes = ({ user, role, data }: ViewResolverPayload): VRR => {
   }
 };
 
-/** Permissões e filtros para a view "projetos", por papel. */
-const resolveProjetos = ({ user, role, data }: ViewResolverPayload): VRR => {
+/** Permissões e filtros para a view "projetos". */
+const resolveProjetos = ({ user, role, data }: ViewResolverPayload): ViewResolverResultType => {
   const clinicaId = user.clinica_id;
 
   switch (role) {
@@ -163,13 +157,13 @@ const resolveProjetos = ({ user, role, data }: ViewResolverPayload): VRR => {
 
 // #region -------------------------------------------------------------------------------- Resolver
 
-/** Resolver de acesso do SSAA, construído a partir das funções de política por view. */
-export const ssaaAccessResolver = createViewBasedAccessResolver({
+/** Resolver de acesso construído a partir das funções de política por view. */
+export const accessResolver = createViewBasedAccessResolver({
   userTable: 'usuarios',
   usernameAccessor: 'username',
   roleAccessor: 'tipo_permissao',
   roleOverrides: {
-    [ROLE.superusuario]: { rules: allRules(), fields: allFieldsUnlocked },
+    [ROLE.superusuario]: { rules: allRules(), fields: allFieldsUnlocked }
   },
   viewResolvers: {
     clinicas: resolveClinicas,
