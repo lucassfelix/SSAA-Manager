@@ -1,0 +1,23 @@
+{
+    "$schema": "../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "login",
+    "language": "ptBR",
+    "layout": {
+        "sections": [
+            {
+                "initialState": "noheader",
+                "columns": [
+                    [
+                        "username",
+                        "passwordInput"
+                    ]
+                ]
+            }
+        ]
+    },
+    "edit": {
+        "title": "Boas-vindas ao",
+        "toolbar": [ "login_text" ]
+    }
+}

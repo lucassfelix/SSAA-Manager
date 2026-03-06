@@ -1,0 +1,26 @@
+{
+    "$schema": "../../../../../schemas/listview.schema.json",
+    "name": "projetos",
+    "type": "listView",
+    "language": "ptBR",
+    "config": {
+        "header": true,
+        "footer": false,
+        "idAccessor": "id",
+        "nameAccessor": "nome",
+        "rowClassAccessor": "none"
+    },
+    "columns": [
+        "nome",
+        "paciente_id",
+        "data_criacao",
+        "ultima_edicao",
+        "status",
+		"actions"
+    ],
+    "actions": [ "record_edit", "record_delete" ],
+	"toolbar": [
+        { "type": "title", "text": "Projetos" },
+        "add"
+    ]
+}

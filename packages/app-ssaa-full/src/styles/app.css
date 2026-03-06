@@ -1,0 +1,101 @@
+/*
+ * Style overrides for most applications.
+ */
+
+/* #region ------------------------------------------------------------- Global element overrides */
+
+/* Tooltip size overrides */
+.mantine-Tooltip-tooltip {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+}
+
+/* ScrollArea thumb opacity */
+.mantine-ScrollArea-thumb {
+  opacity: 0.4;
+}
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Main menu overrides */
+
+/* Avoids extra height added by indicator */
+#main-menu-stack .mantine-Indicator-root {
+  display: flex;
+}
+
+/* Ensure main menu never creates horizontal scroll */
+#main-menu-stack {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Prevent tiny horizontal overflow from borders/padding */
+#main-menu-stack .mantine-NavLink-root {
+  max-width: 100%;
+  overflow: hidden
+}
+
+/* Ensure labels don't render ellipsis while container shrinks — we fade them instead */
+#main-menu-stack .mantine-NavLink-body {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  max-width: 100% !important;
+}
+
+/* Default styles for active submenu items */
+.nf-submenu .mantine-Menu-item.nf-active {
+  background-color: var(--mantine-primary-color-light);
+  color: var(--mantine-primary-color-light-color);
+}
+.nf-submenu .mantine-Menu-item.nf-active:hover {
+  background-color: var(--mantine-primary-color-light-hover);
+}
+
+/* #endregion */
+
+/* #region ---------------------------------------------------------------------- Field overrides */
+
+/* Input/Select label padding */
+.mantine-TextInput-label,
+.mantine-InputBase-label,
+.mantine-Select-label,
+.mantine-MultiSelect-label,
+.mantine-NumberInput-label,
+.mantine-DatePickerInput-label {
+  padding-bottom: 0.3rem;
+}
+
+/* Select option styles */
+.mantine-Select-option .nf-clear,
+.mantine-MultiSelect-option .nf-clear {
+  opacity: 0.5;
+}
+.mantine-Select-option .nf-selected,
+.mantine-MultiSelect-option .nf-selected {
+  font-weight: bold;
+}
+.nf-light .mantine-Select-option .nf-selected,
+.nf-light .mantine-MultiSelect-option .nf-selected {
+  color: var(--mantine-color-black)
+}
+.nf-dark .mantine-Select-option .nf-selected,
+.nf-dark .mantine-MultiSelect-option .nf-selected {
+  color: var(--mantine-color-white)
+}
+
+/* Read-only field styles */
+.nf-readonly .mantine-Input-input {
+  border-color: transparent;
+}
+.nf-light .nf-readonly .mantine-Input-input {
+  background-color: var(--mantine-color-gray-light-hover);
+}
+.nf-dark .nf-readonly .mantine-Input-input {
+  background-color: var(--mantine-color-gray-outline-hover);
+}
+
+/* #endregion */

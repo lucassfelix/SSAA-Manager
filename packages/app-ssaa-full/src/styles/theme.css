@@ -1,0 +1,168 @@
+/*
+ * Theme-specific style overrides for this application.
+ */
+
+/* #region ---------------------------------------------------------------- Global element styles */
+
+/* Custom theme colors */
+body.nf-light {
+  --nf-background-color: #f9faff;
+  --nf-primary-color: #1f82da;
+  --nf-secondary-color: #eba016;
+
+  --mantine-color-body: var(--nf-background-color);
+  --mantine-primary-color-light-color: var(--nf-primary-color);
+  --mantine-color-anchor: var(--nf-primary-color);
+}
+body.nf-dark {
+  --nf-background-color: #242930;
+  --nf-primary-color: #3fa6ff;
+  --nf-secondary-color: #ffbc3f;
+  --mantine-color-dark-6: #191d22;
+  
+  --mantine-color-body: var(--nf-background-color);
+  --mantine-primary-color-light-color: var(--nf-primary-color);
+  --mantine-color-anchor: var(--nf-primary-color);
+  --mantine-color-default: var(--mantine-color-gray-8);
+}
+
+/* Tooltip custom styles */
+.nf-light {
+  --tooltip-bg: var(--mantine-color-gray-7);
+}
+.nf-light .mantine-Tooltip-tooltip b {
+  font-weight: 600;
+  color: var(--mantine-color-teal-3);
+}
+.nf-dark .mantine-Tooltip-tooltip b {
+  font-weight: 700;
+  color: var(--mantine-color-teal-9);
+}
+
+header h4 {
+  font-weight: 500 !important;
+}
+
+.nf-dark p b {
+  color: white;
+}
+
+/* #endregion */
+
+/* #region ----------------------------------------------------------- Table and datatable styles */
+
+/* Table cell styles */
+.mantine-Table-td p,
+.mantine-Table-td a {
+  font-size: 0.95rem;
+}
+
+/* Default header and footer styles */
+.mantine-Table-th {
+  font-weight: 600;
+}
+
+/* Boolean icon styles */
+.nf-light .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-teal-6);
+}
+.nf-light .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-6);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-true {
+  color: var(--mantine-color-green-4);
+}
+.nf-dark .nf-boolean-icon.nf-boolean-false {
+  color: var(--mantine-color-red-4);
+}
+
+/* Wrapper (badge) styles */
+.mantine-Badge-root.nf-default {
+  background-color: transparent;
+  color: var(--text-color);
+}
+.mantine-Badge-root.nf-success {
+  background-color: var(--mantine-color-teal-8);
+}
+.mantine-Badge-root.nf-error {
+  background-color: var(--mantine-color-red-6);
+}
+.mantine-Badge-root.nf-warning {
+  background-color: var(--mantine-color-orange-7);
+}
+
+/* Badge text style adjustments (for Roboto font) */
+.mantine-Badge-root span {
+  padding-top: 0.1rem;
+}
+
+/* Shows actions toolbar and icon-with-badge indicators only on row hover */
+tr .nf-actions-toolbar,
+tr:not(:hover) .nf-icon-with-badge-wrapper .mantine-Indicator-indicator {
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+tr:hover .nf-actions-toolbar {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Form element styles */
+
+/* Password field styles */
+.nf-password input {
+  letter-spacing: 0.1em;
+}
+
+/* Accordion form element styles */
+.mantine-Accordion-control {
+  margin-bottom: 0;
+  transition: margin-bottom 200ms ease;
+}
+[data-active=true] .mantine-Accordion-control {
+  margin-bottom: 1em;
+}
+.mantine-Accordion-label {
+  font-weight: 600;
+}
+.nf-open .mantine-Accordion-label {
+  padding-left: 0;
+  transition: padding-left 200ms ease;
+}
+.nf-open .mantine-Accordion-control:hover .mantine-Accordion-label {
+  padding-left: 16px;
+}
+.nf-light .mantine-Accordion-control {
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+}
+.nf-dark .mantine-Accordion-control {
+  border-bottom: 1px solid var(--mantine-color-gray-8);
+}
+
+/* Button text style adjustments (for Roboto font) */
+.mantine-Button-inner span {
+  padding-top: 0.1rem;
+  letter-spacing: 0.02rem;
+}
+
+/* Link text styles for login form */
+.nf-login .mantine-Stack-root .mantine-Anchor-root {
+  font-size: 82%;
+}
+
+/* #endregion */
+
+/* #region ----------------------------------------------------------- Message box element styles */
+
+/* Critical action button */
+.nf-Button-filled.nf-critical {
+  background-color: var(--mantine-color-red-6);
+}
+.nf-Button-outline.nf-critical {
+  border-color: var(--mantine-color-red-6);
+  color: var(--mantine-color-red-6);
+}
+
+/* #endregion */

@@ -1,0 +1,84 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "clinicas",
+    "language": "ptBR",
+    "layout": {
+        "tabs": [
+            {
+                "label": "Cadastro",
+                "name": "cadastro",
+                "sections": [
+                    {
+                        "initialState": "noheader",
+                        "columns": [
+                            [ "nome", "nome_abreviado", "ativa" ],
+                            [
+                                [ "data_criacao", "data_expiracao" ],
+                                "cnpj"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Usuários",
+                "name": "usuarios",
+                "icon": "users",
+                "iconColor": "var(--nf-secondary-color)",
+                "listView": {
+                    "name": "usuarios",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome_abreviado",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome_completo",
+                        "nome_abreviado",
+                        "data_criacao",
+                        "data_expiracao",
+                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
+                }
+            },
+            {
+                "label": "Pacientes",
+                "name": "pacientes",
+                "icon": "dental",
+                "iconColor": "var(--nf-secondary-color)",
+                "listView": {
+                    "name": "pacientes",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome_completo",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome_completo",
+                        "data_criacao",
+                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
+                }
+            }
+        ]
+    },
+    "edit": {
+        "title": "Clínica {name}",
+        "toolbar": [ "send", "delete", "cancel" ]
+    },
+    "add": {
+        "title": "Nova clínica",
+        "toolbar": [ "send", "cancel" ]
+    },
+    "detail": {
+        "title": "Clínica {name}",
+        "toolbar": [ "edit", "close" ]
+    }
+}

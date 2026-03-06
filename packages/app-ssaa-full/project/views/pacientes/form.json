@@ -1,0 +1,65 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "pacientes",
+    "language": "ptBR",
+    "layout": {
+        "tabs": [
+            {
+                "label": "Cadastro",
+                "name": "cadastro",
+                "sections": [
+                    {
+                        "initialState": "noheader",
+                        "columns": [
+                            [
+                                "nome_completo",
+                                "status"
+                            ],
+                            [
+                                [ "data_criacao", "clinica_id", "usuario_id" ],
+                                "usuarios"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Projetos",
+                "name": "projetos",
+                "icon": "clipboardText",
+                "iconColor": "var(--nf-secondary-color)",
+                "listView": {
+                    "name": "projetos",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome",
+                        "clinica_id",
+                        "data_criacao",
+                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
+                }
+            }
+        ]
+
+    },
+    "edit": {
+        "title": "Paciente {name}",
+        "toolbar": [ "send", "delete", "cancel" ]
+    },
+    "add": {
+        "title": "Novo paciente",
+        "toolbar": [ "send", "cancel" ]
+    },
+    "detail": {
+        "title": "Paciente {name}",
+        "toolbar": [ "edit", "close" ]
+    }
+}

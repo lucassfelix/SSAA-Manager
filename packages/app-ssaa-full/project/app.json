@@ -1,0 +1,368 @@
+{
+	"$schema": "../../../schemas/app.schema.json",
+	"version": "0.3.0",
+	"language": "pt-br",
+	"comments": "SSAA: configuração de projeto",
+	"projectId": "ssaa-smile-manager",
+	"strings": {
+		"appVersion": "0.10.0",
+		"appTitle": "{pageName} | SSAA",
+		"deleteItemConfirm": "Tem certeza que deseja excluir {theItem} <b>{name}</b>? Essa ação não poderá ser desfeita.",
+		"showPassword": "Mostrar senha",
+		"hidePassword": "Ocultar senha"
+	},
+	"errorStrings": {
+		"noRecordsText": "Não há itens a exibir nesta tela."
+	},
+	"errorImages": {
+		"noViewType": "fruit_basket",
+		"viewMissing": "beach_house",
+		"formLayoutMissing": "shipwreck_survivor",
+		"formConfigMissing": "octopus",
+		"formMissing": "forest"
+	},
+	"paths": {
+		"images": "images/"
+	},
+	"data": {
+		"source": "api",
+		"apiBaseUrl": "http://localhost:3100"
+	},
+	"shell": {
+		"header": {
+			"fullWidth": true,
+			"height": 80,
+			"bordered": true,
+			"items": [ "collapseToggle", "mainTitle", "spacer", "userToolbar" ]
+		},
+		"navbar": {
+			"width": 200,
+			"collapsible": true,
+			"collapsedWidth": 72,
+			"bordered": true,
+			"icons": true,
+			"footer": true,
+			"items": [ "mainMenu" ],
+			"footerItems": [ "logo" ]
+		},
+		"userToolbar": [ { "type": "text", "text": "{userid}" }, "userMenu" ]
+	},
+	"menu": {
+		"items": {
+			"gap": 16,
+			"radius": 8,
+			"labelSize": "1rem",
+			"labelWeight": 400,
+			"iconFilled": false,
+			"iconSize": 26,
+			"iconStroke": 2
+		}
+	},
+	"toolbars": {
+		"horizontalPadding": 10,
+		"verticalPadding": 6,
+		"gap": 16,
+		"align": "left",
+		"iconButtons": {
+			"rotateSelected": true,
+			"size": 36,
+			"radius": 8,
+			"filled": false,
+			"iconSize": 24,
+			"iconStroke": 2
+		},
+		"textButtons": {
+			"size": "sm",
+			"radius": 6,
+			"fontSize": "0.82rem",
+			"fontWeight": 700,
+			"uppercase": true
+		},
+		"titles": {
+			"size": 20,
+			"fontWeight": 500,
+			"width": 120
+		}
+	},
+	"topControls": {
+		"mainTitle": {
+			"label": "Sistema gerencial SSAA"
+		},
+		"collapseToggle": {
+			"rotateIcon": true,
+			"tipCollapse": "Fechar o painel lateral",
+			"tipExpand": "Abrir o painel lateral"
+		},
+		"themeSwitch": {
+			"type": "iconButton",
+			"tipLight": "Mudar para o tema claro",
+			"tipDark": "Mudar para o tema escuro"
+		},
+		"logo": {
+			"collapsedHeight": 52,
+			"expandedHeight": 52,
+			"altText": "Logotipo SSAA",
+			"link": "/"
+		}
+	},
+	"controls": {
+		"separator": {
+			"type": "separator"
+		},
+		"userMenu": {
+			"type": "iconButton",
+			"name": "userSettings",
+			"icon": "userSettings",
+			"tip": "Opções do usuário",
+			"items": [
+				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
+				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
+				{ "type": "separator" },
+				{ "label": "Sair", "action": "logout" }
+			]
+		},
+		"add": {
+			"type": "iconButton",
+			"tip": "Adicionar {singular}",
+			"icon": "add",
+			"action": "add"
+		},
+		"add_text": {
+			"type": "textButton",
+			"label": "Adicionar {singular}",
+			"action": "add",
+			"default": true
+		},
+		"search": {
+			"type": "iconButton",
+			"tip": "Pesquisar {plural}",
+			"icon": "search",
+			"action": "search"
+		},
+		"record_detail": {
+			"type": "iconButton",
+			"tip": "Ver detalhes do {singular}",
+			"icon": "view",
+			"action": "detail"
+		},
+		"record_edit": {
+			"type": "iconButton",
+			"tip": "Editar {singular}",
+			"icon": "edit",
+			"action": "edit"
+		},
+		"record_delete": {
+			"type": "iconButton",
+			"tip": "Excluir {singular}",
+			"icon": "trash",
+			"action": "delete",
+			"class": "warning"
+		},
+		"send": {
+			"type": "textButton",
+			"label": "Enviar",
+			"action": "send",
+			"default": true
+		},
+		"cancel": {
+			"type": "textButton",
+			"label": "Cancelar",
+			"action": "cancel"
+		},
+		"delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"class": "critical"
+		},
+		"confirm_delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"default": true,
+			"class": "critical"
+		},
+		"close": {
+			"type": "textButton",
+			"label": "Fechar",
+			"action": "cancel",
+			"default": true
+		},
+		"edit": {
+			"type": "textButton",
+			"label": "Editar",
+			"action": "edit"
+		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{
+					"name": "exportCSV",
+					"label": "Exportar para planilha",
+					"action": "exportCSV"
+				},
+				{
+					"name": "exportPDF",
+					"label": "Exportar PDF",
+					"action": "exportPDF"
+				},
+				{
+					"type": "separator"
+				},
+				{
+					"name": "print",
+					"label": "Imprimir listagem",
+					"action": "printRecords"
+				}
+			]
+		},
+		"login_text": {
+			"type": "textButton",
+			"label": "Entrar",
+			"action": "login",
+			"width": "100%",
+			"default": true
+		}
+	},
+	"login": {
+		"fullHeight": true,
+		"width": 480,
+		"alignItems": "center",
+		"themeSwitch": true,
+		"logo": {
+			"height": 240,
+			"width": 400,
+			"altText": "Logotipo SSAA",
+			"lightMode": {
+				"image": "logo-ssaa-light.svg"
+			},
+			"darkMode": {
+				"image": "logo-ssaa-dark.svg"
+			}
+		},
+		"toolbar": {
+			"upperBorder": true
+		},
+		"fields": {
+			"username": {
+				"dataType": "string",
+				"label": "Nome de usuário",
+				"placeholder": "Digite seu nome de usuário",
+				"required": true
+			},
+			"passwordInput": {
+				"dataType": "passwordInput",
+				"label": "Senha",
+				"placeholder": "Digite sua senha",
+				"required": true
+			}
+		}
+	},
+	"listViews": {
+		"defaultList": "clinicas",
+		"table": {
+			"striped": false,
+			"bordered": false,
+			"rowBorders": true,
+			"colBorders": false,
+			"borderRadius": "sm",
+			"horizontalSpacing": 10,
+			"verticalSpacing": 12,
+			"headerHeight": 20,
+			"shadow": "xs",
+			"wrapperSize": "md",
+			"wrapperBooleanWidth": 50,
+			"booleanIconsSize": 26,
+			"booleanIconsStroke": 2
+		},
+		"filterPanel": {
+			"labelPosition": "top",
+			"verticalPadding": 12,
+			"transitionDuration": 200
+		},
+		"filterToolbar": {
+			"horizontalPadding": 0,
+			"verticalPadding": 0,
+			"align": "right",
+			"position": "right"
+		},
+		"actionToolbar": {
+			"horizontalPadding": 12,
+			"verticalPadding": 0,
+			"gap": 4,
+			"align": "center",
+			"iconButtons": {
+				"iconSize": 22
+			}
+		},
+		"messageBox": {
+			"icon": {
+				"size": 32,
+				"stroke": 1.5,
+				"filled": false
+			},
+			"toolbar": {
+				"align": "right",
+				"horizontalPadding": 0,
+				"verticalPadding": "xs",
+				"gap": 16,
+				"upperBorder": false,
+				"texts": {
+					"size": "sm"
+				}
+			},
+			"deleteControls": [ "confirm_delete", "cancel" ]
+		},
+		"pagination": {
+			"defaultPageSize": 10,
+			"pageSizes": [ 5, 10, 20, 50, 100 ],
+			"showFirstLast": false,
+			"showPageSizeSelector": true,
+			"showTotalItems": false
+		},
+		"infiniteScroll": {
+			"enabled": false,
+			"threshold": 300
+		}
+	},
+	"forms": {
+		"fieldSize": "sm",
+		"verticalGap": "xl",
+		"fullHeight": true,
+		"clearSelectionValue": "__clear_selection__",
+		"selectionCheck": false,
+		"checkboxTopPadding": 36,
+		"outlinedSections": false,
+		"tabs": {
+			"justify": "start",
+			"variant": "outline",
+			"radius": "md",
+			"iconSize": 16
+		},
+		"toolbar": {
+			"align": "right",
+			"upperBorder": true,
+			"position": "bottom",
+			"horizontalPadding": 0
+		}
+	},
+	"theme": {
+		"defaultUIScale": 100,
+		"iconFamily": "tabler",
+		"mainFontFamily": "Roboto",
+		"headingsFontFamily": "Roboto",
+		"lightMode": {
+			"expandedLogo": "logo-ssaa-light.svg",
+			"collapsedLogo": "logo-ssaa-light.svg"
+		},
+		"darkMode": {
+			"expandedLogo": "logo-ssaa-dark.svg",
+			"collapsedLogo": "logo-ssaa-dark.svg"
+		},
+		"iconMapMaterial": {
+			"dental": "dentistry"
+		}
+	}
+}

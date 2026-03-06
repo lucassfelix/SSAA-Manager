@@ -1,0 +1,50 @@
+[
+	{
+		"id": 1,
+		"nome_completo": "Carlos Alberto Silva",
+		"data_criacao": "2025-01-10",
+		"status": 2,
+		"usuario_id": 1,
+		"usuarios": [ 1, 2 ]
+	},
+	{
+		"id": 2,
+		"nome_completo": "Sofia de Oliveira Pereira",
+		"data_criacao": "2025-01-10",
+		"status": 1,
+		"usuario_id": 2209,
+		"usuarios": [ 2209 ]
+	},
+	{
+		"id": 3,
+		"nome_completo": "Lucas Madeira Olivetti",
+		"data_criacao": "2025-01-10",
+		"status": 2,
+		"usuario_id": 340,
+		"usuarios": [ 340 ]
+	},
+	{
+		"id": 4,
+		"nome_completo": "Beatriz Lima Andrade",
+		"data_criacao": "2025-01-10",
+		"status": 1,
+		"usuario_id": 1,
+		"usuarios": [ 40 ]
+	},
+	{
+		"id": 5,
+		"nome_completo": "Rafael Costa Moreira Filho",
+		"data_criacao": "2025-01-10",
+		"status": 1,
+		"usuario_id": 195,
+		"usuarios": [ 195 ]
+	},
+	{
+		"id": 6,
+		"nome_completo": "Fernanda de Almeida Rocha",
+		"data_criacao": "2025-01-10",
+		"status": 1,
+		"usuario_id": 340,
+		"usuarios": [ 340, 40 ]
+	}
+]

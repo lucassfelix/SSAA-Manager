@@ -1,0 +1,25 @@
+{
+    "$schema": "../../../schemas/menu.schema.json",
+    "items": [
+        {
+            "name": "clinicas",
+            "label": "Clínicas",
+            "icon": "buildings"
+        },
+        {
+            "name": "usuarios",
+            "label": "Usuários",
+            "icon": "users"
+        },
+        {
+            "name": "pacientes",
+            "label": "Pacientes",
+            "icon": "dental"
+        },
+        {
+            "name": "projetos",
+            "label": "Projetos",
+            "icon": "clipboard"
+        }
+    ]
+}

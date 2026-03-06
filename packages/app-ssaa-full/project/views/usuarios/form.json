@@ -1,0 +1,65 @@
+{
+    "$schema": "../../../../../schemas/form.schema.json",
+    "comment": "Generated manually",
+    "name": "usuarios",
+    "language": "ptBR",
+    "layout": {
+        "tabs": [
+            {
+                "label": "Cadastro",
+                "name": "cadastro",
+                "sections": [
+                    {
+                        "initialState": "noheader",
+                        "columns": [
+                            [
+                                [ "username" ],
+                                "nome_completo",
+                                [ "nome_abreviado", "email" ]
+                            ],
+                            [
+                                [ "clinica_id", "tipo_permissao" ],
+                                [ "data_criacao", "data_expiracao" ],
+                                [ "status", "senha" ]
+                            ]
+                        ]
+                    }
+                ]
+            },
+            {
+                "label": "Pacientes",
+                "name": "pacientes",
+                "icon": "dental",
+                "iconColor": "var(--nf-secondary-color)",
+                "listView": {
+                    "name": "pacientes",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome_completo",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome_completo",
+                        "data_criacao",
+                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
+                }
+            }
+        ]
+    },
+    "edit": {
+        "title": "Usuário {name}",
+        "toolbar": [ "send", "delete", "cancel" ]
+    },
+    "add": {
+        "title": "Novo usuário",
+        "toolbar": [ "send", "cancel" ]
+    },
+    "detail": {
+        "title": "Usuário {name}",
+        "toolbar": [ "edit", "close" ]
+    }
+}

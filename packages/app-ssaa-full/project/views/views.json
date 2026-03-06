@@ -1,0 +1,9 @@
+{
+    "$schema": "../../../../schemas/views.schema.json",
+    "active": [
+        "clinicas",
+        "usuarios",
+        "pacientes",
+        "projetos"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+	"$schema": "../../../../../schemas/listview.schema.json",
+	"comment": "Generated manually",
+	"name": "clinicas",
+	"type": "listView",
+	"language": "ptBR",
+	"config": {
+		"header": true,
+		"footer": false,
+		"idAccessor": "id",
+		"nameAccessor": "nome_abreviado",
+		"rowClassAccessor": "status"
+	},
+	"columns": [
+		"nome",
+		"nome_abreviado",
+		"usuarios",
+		"pacientes",
+		"spacer",
+		"data_criacao",
+		"data_expiracao",
+		"ativa",
+		"actions"
+	],
+	"actions": [ "record_edit", "record_delete" ],
+	"toolbar": [
+		{ "type": "title", "text": "Clínicas" },
+		"add"
+	]
+}

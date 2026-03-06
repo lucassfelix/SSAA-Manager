@@ -1,0 +1,143 @@
+{
+    "$schema": "../../../../../schemas/fields.schema.json",
+    "comment": "Generated manually",
+    "name": "usuarios",
+    "language": "ptBR",
+    "strings": {
+        "singular": "usuário",
+        "plural": "usuários",
+        "theItem": "o usuário"
+    },
+    "fields": {
+        "id": {
+            "colStyles": "tabular",
+            "header": "Nº",
+            "colWidth": "60",
+            "dataType": "string",
+            "fieldWidth": 60,
+            "label": "Nº",
+            "mask": { "pattern": "0000", "digits": 4 },
+            "readOnly": true
+        },
+        "nome_completo": {
+            "header": "Nome completo",
+            "colWidth": 400,
+            "dataType": "string",
+            "label": "Nome",
+            "placeholder": "Nome completo",
+            "render": { "layout": "link", "op": "detail" },
+            "required": true
+        },
+        "nome_abreviado": {
+            "header": "Abreviado",
+            "colWidth": 200,
+            "fieldWidth": 300,
+            "dataType": "string",
+            "label": "Nome abreviado",
+            "placeholder": "Nome abreviado",
+            "required": true
+        },
+        "username": {
+            "header": "Usuário",
+            "colWidth": 140,
+            "dataType": "string",
+            "fieldWidth": 200,
+            "label": "Nome de usuário",
+            "placeholder": "Username",
+            "required": true
+        },
+        "senha": {
+            "header": "Senha",
+            "colWidth": 140,
+            "dataType": "password",
+            "fieldWidth": 240,
+            "label": "Senha",
+            "readOnly": true
+        },
+        "email": {
+            "header": "E-mail",
+            "colWidth": 220,
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "E-mail",
+            "placeholder": "Preencha o e-mail",
+            "render": { "layout": "link", "op": "email" }
+        },
+        "clinica_id": {
+            "header": "Clínica",
+            "colWidth": 150,
+            "dataType": "select",
+            "fieldWidth": 200,
+            "label": "Clínica",
+            "options": { "table": "clinicas", "valueAccessor": "id",
+                "labelAccessor": "nome_abreviado" },
+            "placeholder": "Selecione uma opção"
+        },
+        "status": {
+            "colTextAlign": "center",
+            "header": "Status",
+            "colWidth": 100,
+            "dataType": "select",
+            "defaultValue": 1,
+            "fieldWidth": 240,
+            "label": "Status",
+            "options": { "table": "status_usuario", "valueAccessor": "value",
+                "labelAccessor": "label" },
+            "placeholder": "Selecione uma opção",
+            "render": { "layout": "colorWrapper" },
+            "required": true,
+            "wrapperWidth": 90
+        },
+        "data_criacao": {
+            "colStyles": "sm",
+            "colWidth": 140,
+            "dataType": "date",
+            "defaultValue": "now",
+            "fieldWidth": 140,
+            "header": "Criado",
+            "label": "Cadastrado em",
+            "placeholder": "Selecione",
+            "readOnly": true,
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
+        },
+        "data_expiracao": {
+            "colStyles": "sm",
+            "header": "Expira",
+            "colWidth": 140,
+            "dataType": "date",
+            "fieldWidth": 140,
+            "label": "Expira em",
+            "placeholder": "Selecione",
+            "render": { "layout": "date", "format": "relative" },
+            "required": true
+        },
+        "tipo_permissao": {
+            "colTextAlign": "center",
+            "header": "Permissões",
+            "colWidth": 150,
+            "dataType": "select",
+            "fieldWidth": 200,
+            "label": "Nível de permissão",
+            "options": { "table": "permissoes_usuario", "valueAccessor": "value",
+                "labelAccessor": "label" },
+            "placeholder": "Selecione uma opção"
+        },
+        "actions": {
+            "colTextAlign": "center",
+            "colWidth": 100,
+            "render": { "layout": "actions" }
+        },
+        "spacer": {
+            "colWidth": 40,
+            "render": { "layout": "blank" }
+        },
+        "pacientes": {
+            "icon": "dental",
+            "iconColor": "var(--nf-secondary-color)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "iconWithBadge", "op": "detail", "tab": "pacientes" }
+        }
+    }
+}
