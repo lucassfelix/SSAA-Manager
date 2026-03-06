@@ -56,6 +56,8 @@ CREATE TABLE pacientes (
   id BIGINT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
   clinica_id BIGINT NULL,
+  imagem_sem_afastador VARCHAR(1024) NULL,
+  imagem_com_afastador VARCHAR(1024) NULL,
   PRIMARY KEY (id),
   KEY ix_pacientes_clinica_id (clinica_id),
   CONSTRAINT fk_pacientes_clinica FOREIGN KEY (clinica_id) REFERENCES clinicas(id)
@@ -64,8 +66,8 @@ CREATE TABLE pacientes (
 
 CREATE TABLE projetos (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  sku VARCHAR(80) NULL,
   nome VARCHAR(255) NOT NULL,
+  settings LONGTEXT NULL,
   paciente_id BIGINT NULL,
   clinica_id BIGINT NULL,
   PRIMARY KEY (id),
@@ -105,22 +107,22 @@ INSERT INTO usuarios (id, nome, username, clinica_id, status, senha) VALUES
   (980, 'Pedro Henrique de Castro Bernardes Machado Neto', 'pedroh98', 3, 2, NULL),
   (2209, 'Mariana Duarte da Costa', 'maricosta', 5, 1, '1234567890');
 
-INSERT INTO pacientes (id, nome, clinica_id) VALUES
-  (1, 'Carlos Alberto Silva', 1),
-  (2, 'Sofia de Oliveira Pereira', 5),
-  (3, 'Lucas Madeira Olivetti', 5),
-  (4, 'Beatriz Lima Andrade', 1),
-  (5, 'Rafael Costa Moreira Filho', 7),
-  (6, 'Fernanda de Almeida Rocha', 5);
+INSERT INTO pacientes (id, nome, clinica_id, imagem_sem_afastador, imagem_com_afastador) VALUES
+  (1, 'Carlos Alberto Silva', 1, 'img/carlos_sem.jpg', 'img/carlos_com.jpg'),
+  (2, 'Sofia de Oliveira Pereira', 5, 'img/sofia_sem.jpg', 'img/sofia_com.jpg'),
+  (3, 'Lucas Madeira Olivetti', 5, 'img/lucas_sem.jpg', 'img/lucas_com.jpg'),
+  (4, 'Beatriz Lima Andrade', 1, 'img/beatriz_sem.jpg', 'img/beatriz_com.jpg'),
+  (5, 'Rafael Costa Moreira Filho', 7, 'img/rafael_sem.jpg', 'img/rafael_com.jpg'),
+  (6, 'Fernanda de Almeida Rocha', 5, 'img/fernanda_sem.jpg', 'img/fernanda_com.jpg');
 
-INSERT INTO projetos (id, sku, nome, paciente_id, clinica_id) VALUES
-  (1, NULL, 'Original', 2, 5),
-  (2, 'LG-MX3', 'Teste com proporção áurea', 2, 5),
-  (3, NULL, 'Teste 3 com Lysippus (75%), mais claro', 3, 5),
-  (4, NULL, 'Teste meio escuro', 6, 5),
-  (5, NULL, 'Teste 2', 5, 7),
-  (6, NULL, 'Teste 4', 5, 7),
-  (7, NULL, 'Teste 5', 1, 1),
-  (8, NULL, 'Mais um teste', 4, 1);
+INSERT INTO projetos (id, nome, settings, paciente_id, clinica_id) VALUES
+  (1, 'Original', '{"rotate":"-2.96","pupilsLineY":"208.6","shade":"A2"}', 2, 5),
+  (2, 'Teste com proporção áurea', '{"scale":1.618}', 2, 5),
+  (3, 'Teste 3 com Lysippus (75%), mais claro', '{"brightness":"1.095"}', 3, 5),
+  (4, 'Teste meio escuro', '{"brightness":"0.87"}', 6, 5),
+  (5, 'Teste 2', '{"rotate":"3.02","pupilsLineY":"192.3","shade":"A3"}', 5, 7),
+  (6, 'Teste 4', '{"brightness":"1.19"}', 5, 7),
+  (7, 'Teste 5', '{"scale":1.089,"brightness":"0.92"}', 1, 1),
+  (8, 'Mais um teste', '{"rotate":"-1.5","pupilsLineY":"200","shade":"B1"}', 4, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

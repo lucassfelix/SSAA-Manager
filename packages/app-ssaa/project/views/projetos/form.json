@@ -9,6 +9,7 @@
                 "columns": [
                     [
                         "nome",
+                        "settings",
                         [ "paciente_id" ]
                     ],
                     [

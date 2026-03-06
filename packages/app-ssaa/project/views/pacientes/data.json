@@ -2,31 +2,43 @@
 	{
 		"id": 1,
 		"nome": "Carlos Alberto Silva",
-		"clinica_id": 1
+		"clinica_id": 1,
+		"imagem_sem_afastador": "img/carlos_sem.jpg",
+		"imagem_com_afastador": "img/carlos_com.jpg"
 	},
 	{
 		"id": 2,
 		"nome": "Sofia de Oliveira Pereira",
-		"clinica_id": 5
+		"clinica_id": 5,
+		"imagem_sem_afastador": "img/sofia_sem.jpg",
+		"imagem_com_afastador": "img/sofia_com.jpg"
 	},
 	{
 		"id": 3,
 		"nome": "Lucas Madeira Olivetti",
-		"clinica_id": 5
+		"clinica_id": 5,
+		"imagem_sem_afastador": "img/lucas_sem.jpg",
+		"imagem_com_afastador": "img/lucas_com.jpg"
 	},
 	{
 		"id": 4,
 		"nome": "Beatriz Lima Andrade",
-		"clinica_id": 1
+		"clinica_id": 1,
+		"imagem_sem_afastador": "img/beatriz_sem.jpg",
+		"imagem_com_afastador": "img/beatriz_com.jpg"
 	},
 	{
 		"id": 5,
 		"nome": "Rafael Costa Moreira Filho",
-		"clinica_id": 7
+		"clinica_id": 7,
+		"imagem_sem_afastador": "img/rafael_sem.jpg",
+		"imagem_com_afastador": "img/rafael_com.jpg"
 	},
 	{
 		"id": 6,
 		"nome": "Fernanda de Almeida Rocha",
-		"clinica_id": 5
+		"clinica_id": 5,
+		"imagem_sem_afastador": "img/fernanda_sem.jpg",
+		"imagem_com_afastador": "img/fernanda_com.jpg"
 	}
 ]

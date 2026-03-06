@@ -3,49 +3,56 @@
 		"id": 1,
 		"nome": "Original",
 		"paciente_id": 2,
-		"clinica_id": 5
+		"clinica_id": 5,
+		"settings": "{\"rotate\":\"-2.96\",\"pupilsLineY\":\"208.6\",\"shade\":\"A2\"}"
 	},
 	{
 		"id": 2,
-		"sku": "LG-MX3",
 		"nome": "Teste com proporção áurea",
 		"paciente_id": 2,
-		"clinica_id": 5
+		"clinica_id": 5,
+		"settings": "{\"scale\":1.618}"
 	},
 	{
 		"id": 3,
 		"nome": "Teste 3 com Lysippus (75%), mais claro",
 		"paciente_id": 3,
-		"clinica_id": 5
+		"clinica_id": 5,
+		"settings": "{\"brightness\":\"1.095\"}"
 	},
 	{
 		"id": 4,
 		"nome": "Teste meio escuro",
 		"paciente_id": 6,
-		"clinica_id": 5
+		"clinica_id": 5,
+		"settings": "{\"brightness\":\"0.87\"}"
 	},
 	{
 		"id": 5,
 		"nome": "Teste 2",
 		"paciente_id": 5,
-		"clinica_id": 7
+		"clinica_id": 7,
+		"settings": "{\"rotate\":\"3.02\",\"pupilsLineY\":\"192.3\",\"shade\":\"A3\"}"
 	},
 	{
 		"id": 6,
 		"nome": "Teste 4",
 		"paciente_id": 5,
-		"clinica_id": 7
+		"clinica_id": 7,
+		"settings": "{\"brightness\":\"1.19\"}"
 	},
 	{
 		"id": 7,
 		"nome": "Teste 5",
 		"paciente_id": 1,
-		"clinica_id": 1
+		"clinica_id": 1,
+		"settings": "{\"scale\":1.089,\"brightness\":\"0.92\"}"
 	},
 	{
 		"id": 8,
 		"nome": "Mais um teste",
 		"paciente_id": 4,
-		"clinica_id": 1
+		"clinica_id": 1,
+		"settings": "{\"rotate\":\"-1.5\",\"pupilsLineY\":\"200\",\"shade\":\"B1\"}"
 	}
 ]

@@ -13,6 +13,7 @@
     "columns": [
         "nome",
         "paciente_id",
+        "clinica_id",
 		"actions"
     ],
     "actions": [ "record_edit", "record_delete" ],

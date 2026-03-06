@@ -50,18 +50,15 @@ type DataPayload = {
 
 /**
  * Acrescenta dinamicamente registros-filhos e campos adicionais às tabelas.
- * Este método poderá ser substituído por queries de backend na implementação.
+ * Este método deverá ser substituído por queries de backend na implementação.
  * @param data Os dados brutos carregados.
  * @returns Os dados enriquecidos com campos auxiliares.
  */
 function enhanceData(data: DataPayload): DataPayload {
   const clinicas = data.clinicas;
-
   const usuarios = data.usuarios;
   const status_usuario = data.status_usuario;
-
   const pacientes = data.pacientes;
-
   const projetos = data.projetos;
 
   pacientes.forEach(p => {
@@ -80,12 +77,9 @@ function enhanceData(data: DataPayload): DataPayload {
 
   return {
     clinicas,
-
     usuarios,
     status_usuario,
-
     pacientes,
-
     projetos,
   };
 }

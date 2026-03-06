@@ -13,7 +13,9 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                "nome"
+                                "nome",
+                                "imagem_sem_afastador",
+                                "imagem_com_afastador"
                             ],
                             [
                                 [ "clinica_id" ]

@@ -20,11 +20,11 @@
             "readOnly": true
         },
         "nome": {
-            "header": "Nome completo",
+            "header": "Nome",
             "colWidth": 400,
             "dataType": "string",
-            "label": "Nome",
-            "placeholder": "Nome completo",
+            "label": "Nome da pessoa",
+            "placeholder": "Nome",
             "render": { "layout": "link", "op": "detail" },
             "required": true
         },

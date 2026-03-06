@@ -32,7 +32,7 @@
         },
         "clinica_id": {
             "header": "Clínica",
-            "colWidth": 180,
+            "colWidth": 240,
             "dataType": "select",
             "fieldWidth": 200,
             "label": "Clínica",
@@ -52,6 +52,13 @@
                 "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção",
             "required": true
+        },
+        "settings": {
+            "header": "Settings",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "Settings",
+            "placeholder": "JSON (string)"
         },
         "actions": {
             "colTextAlign": "center",

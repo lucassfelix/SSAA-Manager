@@ -20,10 +20,10 @@
             "readOnly": true
         },
         "nome": {
-            "header": "Nome completo",
+            "header": "Nome",
             "dataType": "string",
             "label": "Nome",
-            "placeholder": "Nome completo",
+            "placeholder": "Nome",
             "render": { "layout": "link", "op": "detail" },
             "required": true
         },
@@ -38,6 +38,20 @@
                 "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção",
             "required": true
+        },
+        "imagem_sem_afastador": {
+            "header": "S / afastador",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "Imagem sem afastador",
+            "placeholder": "URL ou caminho da imagem"
+        },
+        "imagem_com_afastador": {
+            "header": "C / afastador",
+            "dataType": "string",
+            "fieldWidth": "100%",
+            "label": "Imagem com afastador",
+            "placeholder": "URL ou caminho da imagem"
         },
         "actions": {
             "colTextAlign": "center",

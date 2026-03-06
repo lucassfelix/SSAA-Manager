@@ -20,12 +20,12 @@
             "readOnly": true
         },
         "nome": {
-            "header": "Nome completo",
+            "header": "Nome",
             "colWidth": "100%",
             "dataType": "string",
             "fieldWidth": "70%",
             "label": "Nome da clínica",
-            "placeholder": "Nome completo da clínica",
+            "placeholder": "Nome da clínica",
             "required": true,
             "render": { "layout": "link", "op": "detail" }
         },
