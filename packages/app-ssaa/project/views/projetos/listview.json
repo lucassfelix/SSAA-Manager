@@ -13,9 +13,6 @@
     "columns": [
         "nome",
         "paciente_id",
-        "data_criacao",
-        "ultima_edicao",
-        "status",
 		"actions"
     ],
     "actions": [ "record_edit", "record_delete" ],

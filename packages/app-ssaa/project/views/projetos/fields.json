@@ -37,18 +37,7 @@
             "fieldWidth": 200,
             "label": "Clínica",
             "options": { "table": "clinicas", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
-            "placeholder": "Selecione uma opção",
-            "readOnly": true
-        },
-        "usuario_id": {
-            "header": "Responsável",
-            "colWidth": 200,
-            "dataType": "select",
-            "fieldWidth": 240,
-            "label": "Usuário responsável",
-            "options": { "table": "usuarios", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
+                "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção",
             "readOnly": true
         },
@@ -63,45 +52,6 @@
                 "labelAccessor": "nome_completo" },
             "placeholder": "Selecione uma opção",
             "required": true
-        },
-        "data_criacao": {
-            "colStyles": "sm",
-            "colWidth": 140,
-            "dataType": "date",
-            "defaultValue": "now",
-            "fieldWidth": 140,
-            "header": "Criado",
-            "label": "Data de entrada",
-            "placeholder": "Selecione",
-            "readOnly": true,
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
-        "ultima_edicao": {
-            "colStyles": "sm",
-            "header": "Editado",
-            "colWidth": 140,
-            "dataType": "date",
-            "fieldWidth": 140,
-            "label": "Última edição",
-            "placeholder": "Selecione",
-            "render": { "layout": "date", "format": "relative" },
-            "readOnly": true
-        },
-        "status": {
-            "colTextAlign": "center",
-            "header": "Status",
-            "colWidth": 100,
-            "dataType": "select",
-            "defaultValue": 1,
-            "fieldWidth": 240,
-            "label": "Status",
-            "options": { "table": "status_projeto", "valueAccessor": "value",
-                "labelAccessor": "label" },
-            "placeholder": "Selecione uma opção",
-            "render": { "layout": "colorWrapper" },
-            "required": true,
-            "wrapperWidth": 90
         },
         "actions": {
             "colTextAlign": "center",

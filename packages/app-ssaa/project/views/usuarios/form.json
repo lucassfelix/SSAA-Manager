@@ -14,12 +14,10 @@
                         "columns": [
                             [
                                 [ "username" ],
-                                "nome_completo",
-                                [ "nome_abreviado", "email" ]
+                                "nome_completo"
                             ],
                             [
-                                [ "clinica_id", "tipo_permissao" ],
-                                [ "data_criacao", "data_expiracao" ],
+                                [ "clinica_id" ],
                                 [ "status", "senha" ]
                             ]
                         ]
@@ -40,8 +38,27 @@
                     },
                     "columns": [
                         "nome_completo",
-                        "data_criacao",
-                        "status",
+                        "actions"
+                    ],
+                    "actions": [ "record_edit", "record_delete" ],
+                    "toolbar": [ "add_text" ]
+                }
+            },
+            {
+                "label": "Projetos",
+                "name": "projetos",
+                "icon": "clipboardText",
+                "iconColor": "var(--nf-secondary-color)",
+                "listView": {
+                    "name": "projetos",
+                    "config": {
+                        "idAccessor": "id",
+                        "nameAccessor": "nome",
+                        "rowClassAccessor": "none"
+                    },
+                    "columns": [
+                        "nome",
+                        "paciente_id",
                         "actions"
                     ],
                     "actions": [ "record_edit", "record_delete" ],

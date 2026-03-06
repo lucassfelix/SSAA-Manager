@@ -13,12 +13,10 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                "nome_completo",
-                                "status"
+                                "nome_completo"
                             ],
                             [
-                                [ "data_criacao", "clinica_id", "usuario_id" ],
-                                "usuarios"
+                                [ "clinica_id" ]
                             ]
                         ]
                     }
@@ -39,8 +37,6 @@
                     "columns": [
                         "nome",
                         "clinica_id",
-                        "data_criacao",
-                        "status",
                         "actions"
                     ],
                     "actions": [ "record_edit", "record_delete" ],

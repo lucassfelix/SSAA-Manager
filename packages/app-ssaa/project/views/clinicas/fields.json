@@ -29,55 +29,6 @@
             "required": true,
             "render": { "layout": "link", "op": "detail" }
         },
-        "nome_abreviado": {
-            "header": "Abreviado",
-            "colWidth": 150,
-            "dataType": "string",
-            "fieldWidth": 240,
-            "label": "Nome abreviado",
-            "placeholder": "Nome curto da clínica",
-            "required": true
-        },
-        "cnpj": {
-            "dataType": "string",
-            "fieldWidth": 180,
-            "label": "CNPJ",
-            "mask": { "pattern": "00.000.000/0000-00", "digits": 14 },
-            "placeholder": "CNPJ da clínica"
-        },
-        "data_criacao": {
-            "colStyles": "sm",
-            "colWidth": 140,
-            "dataType": "date",
-            "defaultValue": "now",
-            "fieldWidth": 140,
-            "header": "Criada",
-            "label": "Cadastrada em",
-            "placeholder": "Selecione",
-            "readOnly": true,
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
-        "data_expiracao": {
-            "colStyles": "sm",
-            "header": "Expira",
-            "colWidth": 140,
-            "dataType": "date",
-            "fieldWidth": 140,
-            "label": "Expira em",
-            "placeholder": "Selecione",
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
-        "ativa": {
-            "header": "Ativa",
-            "colWidth": 60,
-            "dataType": "boolean",
-            "fieldWidth": 80,
-            "label": "Ativa",
-            "render": { "layout": "booleanIcon" },
-            "defaultValue": true
-        },
         "actions": {
             "colTextAlign": "center",
             "colWidth": 100,

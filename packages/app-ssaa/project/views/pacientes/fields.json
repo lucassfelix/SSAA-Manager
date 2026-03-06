@@ -27,64 +27,17 @@
             "render": { "layout": "link", "op": "detail" },
             "required": true
         },
-        "data_criacao": {
-            "colStyles": "sm",
-            "colWidth": 120,
-            "dataType": "date",
-            "defaultValue": "now",
-            "fieldWidth": 140,
-            "header": "Entrada",
-            "label": "Data de entrada",
-            "placeholder": "Selecione",
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
         "clinica_id": {
             "header": "Clínica",
-            "colWidth": 150,
+            "colWidth": 220,
             "dataType": "select",
             "defaultValue": "$user.clinica_id",
             "fieldWidth": 200,
             "label": "Clínica",
             "options": { "table": "clinicas", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
+                "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção",
             "required": true
-        },
-        "usuario_id": {
-            "header": "Responsável",
-            "colWidth": 180,
-            "dataType": "select",
-            "defaultValue": "$user.id",
-            "fieldWidth": 200,
-            "label": "Usuário responsável",
-            "options": { "table": "usuarios", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado", "filter": "clinica_id" },
-            "placeholder": "Selecione uma opção",
-            "required": true
-        },
-        "usuarios": {
-            "dataType": "select",
-            "multiple": true,
-            "fieldWidth": "100%",
-            "label": "Usuários",
-            "options": { "table": "usuarios", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado", "filter": "clinica_id" },
-            "placeholder": "Selecione"
-        },
-        "status": {
-            "colTextAlign": "center",
-            "header": "Status",
-            "colWidth": 90,
-            "dataType": "select",
-            "defaultValue": 1,
-            "fieldWidth": 240,
-            "label": "Status",
-            "options": { "table": "status_paciente", "valueAccessor": "value",
-                "labelAccessor": "label" },
-            "placeholder": "Selecione uma opção",
-            "render": { "layout": "colorWrapper" },
-            "readOnly": true
         },
         "actions": {
             "colTextAlign": "center",

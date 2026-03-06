@@ -28,15 +28,6 @@
             "render": { "layout": "link", "op": "detail" },
             "required": true
         },
-        "nome_abreviado": {
-            "header": "Abreviado",
-            "colWidth": 200,
-            "fieldWidth": 300,
-            "dataType": "string",
-            "label": "Nome abreviado",
-            "placeholder": "Nome abreviado",
-            "required": true
-        },
         "username": {
             "header": "Usuário",
             "colWidth": 140,
@@ -54,29 +45,20 @@
             "label": "Senha",
             "readOnly": true
         },
-        "email": {
-            "header": "E-mail",
-            "colWidth": 220,
-            "dataType": "string",
-            "fieldWidth": "100%",
-            "label": "E-mail",
-            "placeholder": "Preencha o e-mail",
-            "render": { "layout": "link", "op": "email" }
-        },
         "clinica_id": {
             "header": "Clínica",
-            "colWidth": 150,
+            "colWidth": 220,
             "dataType": "select",
             "fieldWidth": 200,
             "label": "Clínica",
             "options": { "table": "clinicas", "valueAccessor": "id",
-                "labelAccessor": "nome_abreviado" },
+                "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção"
         },
         "status": {
             "colTextAlign": "center",
             "header": "Status",
-            "colWidth": 100,
+            "colWidth": 90,
             "dataType": "select",
             "defaultValue": 1,
             "fieldWidth": 240,
@@ -86,42 +68,7 @@
             "placeholder": "Selecione uma opção",
             "render": { "layout": "colorWrapper" },
             "required": true,
-            "wrapperWidth": 90
-        },
-        "data_criacao": {
-            "colStyles": "sm",
-            "colWidth": 140,
-            "dataType": "date",
-            "defaultValue": "now",
-            "fieldWidth": 140,
-            "header": "Criado",
-            "label": "Cadastrado em",
-            "placeholder": "Selecione",
-            "readOnly": true,
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
-        "data_expiracao": {
-            "colStyles": "sm",
-            "header": "Expira",
-            "colWidth": 140,
-            "dataType": "date",
-            "fieldWidth": 140,
-            "label": "Expira em",
-            "placeholder": "Selecione",
-            "render": { "layout": "date", "format": "relative" },
-            "required": true
-        },
-        "tipo_permissao": {
-            "colTextAlign": "center",
-            "header": "Permissões",
-            "colWidth": 150,
-            "dataType": "select",
-            "fieldWidth": 200,
-            "label": "Nível de permissão",
-            "options": { "table": "permissoes_usuario", "valueAccessor": "value",
-                "labelAccessor": "label" },
-            "placeholder": "Selecione uma opção"
+            "wrapperWidth": 70
         },
         "actions": {
             "colTextAlign": "center",
@@ -138,6 +85,13 @@
             "colWidth": 40,
             "colTextAlign": "center",
             "render": { "layout": "iconWithBadge", "op": "detail", "tab": "pacientes" }
+        },
+        "projetos": {
+            "icon": "clipboardText",
+            "iconColor": "var(--nf-secondary-color)",
+            "colWidth": 40,
+            "colTextAlign": "center",
+            "render": { "layout": "iconWithBadge", "op": "detail", "tab": "projetos" }
         }
     }
 }

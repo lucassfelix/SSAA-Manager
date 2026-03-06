@@ -8,17 +8,15 @@
 		"header": true,
 		"footer": false,
 		"idAccessor": "id",
-		"nameAccessor": "nome_abreviado",
+		"nameAccessor": "nome_completo",
 		"rowClassAccessor": "none"
 	},
 	"columns": [
 		"nome_completo",
-		"nome_abreviado",
 		"clinica_id",
 		"pacientes",
+		"projetos",
 		"spacer",
-		"data_criacao",
-		"data_expiracao",
 		"status",
 		"actions"
 	],

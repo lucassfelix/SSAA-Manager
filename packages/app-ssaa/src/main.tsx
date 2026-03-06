@@ -30,7 +30,6 @@ type Id = string | number;
 type TableRow = Record<string, unknown> & {
   id?: Id;
   paciente_id?: Id;
-  usuario_id?: Id;
   clinica_id?: Id;
   projetos?: TableRow[];
   usuarios?: TableRow[];
@@ -39,14 +38,10 @@ type TableRow = Record<string, unknown> & {
 
 type DataPayload = {
   clinicas: TableRow[];
-  status_clinicas: TableRow[];
   usuarios: TableRow[];
   status_usuario: TableRow[];
-  permissoes_usuario: TableRow[];
   pacientes: TableRow[];
-  status_paciente: TableRow[];
   projetos: TableRow[];
-  status_projeto: TableRow[];
 } & Record<string, TableRow[]>;
 
 // #endregion
@@ -61,54 +56,37 @@ type DataPayload = {
  */
 function enhanceData(data: DataPayload): DataPayload {
   const clinicas = data.clinicas;
-  const status_clinicas = data.status_clinicas;
 
   const usuarios = data.usuarios;
   const status_usuario = data.status_usuario;
-  const permissoes_usuario = data.permissoes_usuario;
 
   const pacientes = data.pacientes;
-  const status_paciente = data.status_paciente;
 
   const projetos = data.projetos;
-  const status_projeto = data.status_projeto;
-
-  projetos.forEach(pr => {
-    pr.usuario_id = pacientes.find(p => p.id === pr.paciente_id)?.usuario_id;
-    pr.clinica_id = usuarios.find(u => u.id === pr.usuario_id)?.clinica_id;
-  });
 
   pacientes.forEach(p => {
     p.projetos = projetos.filter(pr => pr.paciente_id === p.id);
-    p.clinica_id = usuarios.find(u => u.id === p.usuario_id)?.clinica_id;
   });
 
   usuarios.forEach(u => {
-    u.pacientes = pacientes.filter(p => p.usuario_id === u.id);
-    u.projetos = projetos.filter(i => i.usuario_id === u.id);
+    u.pacientes = pacientes.filter(p => p.clinica_id != null && p.clinica_id === u.clinica_id);
+    u.projetos = projetos.filter(pr => pr.clinica_id != null && pr.clinica_id === u.clinica_id);
   });
 
   clinicas.forEach(i => {
     i.usuarios = usuarios.filter(u => u.clinica_id === i.id);
-    i.pacientes = [];
-    i.usuarios.forEach(u => {
-      i.pacientes = (i.pacientes || []).concat(pacientes.filter(p => p.usuario_id === u.id));
-    });
+    i.pacientes = pacientes.filter(p => p.clinica_id === i.id);
   });
 
   return {
     clinicas,
-    status_clinicas,
 
     usuarios,
     status_usuario,
-    permissoes_usuario,
 
     pacientes,
-    status_paciente,
 
     projetos,
-    status_projeto,
   };
 }
 
@@ -119,14 +97,10 @@ function enhanceData(data: DataPayload): DataPayload {
 /** Tabelas a serem carregadas */
 const tableNames = [
   'clinicas',
-  'status_clinicas',
   'usuarios',
   'status_usuario',
-  'permissoes_usuario',
   'pacientes',
-  'status_paciente',
   'projetos',
-  'status_projeto'
 ];
 
 getRoot().render(

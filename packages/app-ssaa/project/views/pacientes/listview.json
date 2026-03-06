@@ -16,9 +16,6 @@
 		"clinica_id",
 		"projetos",
 		"spacer",
-		"usuario_id",
-		"data_criacao",
-		"status",
 		"actions"
 	],
 	"actions": [ "record_edit", "record_delete" ],

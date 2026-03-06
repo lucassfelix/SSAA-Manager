@@ -8,10 +8,5 @@
         "value": 2,
         "label": "Inativo",
         "className": "default"
-    },
-    {
-        "value": 3,
-        "label": "Cancelado",
-        "className": "error"
     }
 ]

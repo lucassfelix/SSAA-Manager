@@ -9,11 +9,10 @@
                 "columns": [
                     [
                         "nome",
-                        [ "paciente_id", "usuario_id" ]
+                        [ "paciente_id" ]
                     ],
                     [
-                        [ "data_criacao", "ultima_edicao" ],
-                        [ "clinica_id", "status" ]
+                        [ "clinica_id" ]
                     ]
                 ]
             }

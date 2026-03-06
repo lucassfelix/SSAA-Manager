@@ -12,11 +12,7 @@
                     {
                         "initialState": "noheader",
                         "columns": [
-                            [ "nome", "nome_abreviado", "ativa" ],
-                            [
-                                [ "data_criacao", "data_expiracao" ],
-                                "cnpj"
-                            ]
+                            [ "nome" ]
                         ]
                     }
                 ]
@@ -30,15 +26,11 @@
                     "name": "usuarios",
                     "config": {
                         "idAccessor": "id",
-                        "nameAccessor": "nome_abreviado",
+                        "nameAccessor": "nome_completo",
                         "rowClassAccessor": "none"
                     },
                     "columns": [
                         "nome_completo",
-                        "nome_abreviado",
-                        "data_criacao",
-                        "data_expiracao",
-                        "status",
                         "actions"
                     ],
                     "actions": [ "record_edit", "record_delete" ],
@@ -59,8 +51,6 @@
                     },
                     "columns": [
                         "nome_completo",
-                        "data_criacao",
-                        "status",
                         "actions"
                     ],
                     "actions": [ "record_edit", "record_delete" ],

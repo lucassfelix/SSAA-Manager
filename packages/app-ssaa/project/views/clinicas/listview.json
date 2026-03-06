@@ -8,18 +8,14 @@
 		"header": true,
 		"footer": false,
 		"idAccessor": "id",
-		"nameAccessor": "nome_abreviado",
+		"nameAccessor": "nome",
 		"rowClassAccessor": "status"
 	},
 	"columns": [
 		"nome",
-		"nome_abreviado",
 		"usuarios",
 		"pacientes",
 		"spacer",
-		"data_criacao",
-		"data_expiracao",
-		"ativa",
 		"actions"
 	],
 	"actions": [ "record_edit", "record_delete" ],
