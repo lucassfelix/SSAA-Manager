@@ -16,6 +16,7 @@ import { getValueByPath } from "@/listView/datatableUtils";
 
 import { FormLayoutSchema } from "context";
 import NfTextField from "./fields/TextField";
+import NfTextArea from "./fields/TextAreaField";
 import NfBooleanField from "./fields/BooleanField";
 import NfSelectField from "./fields/SelectField";
 import NfDateField from "./fields/DateField";
@@ -140,6 +141,35 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     return value;
   }
 
+  function normalizeJsonValue(value: unknown): unknown {
+    if (value == null) {
+      return value;
+    }
+
+    if (typeof value === 'string') {
+      const s = value.trim();
+      if (!s) {
+        return value;
+      }
+      try {
+        const parsed = JSON.parse(s);
+        return JSON.stringify(parsed, null, 2);
+      } catch {
+        return value;
+      }
+    }
+
+    if (typeof value === 'object') {
+      try {
+        return JSON.stringify(value, null, 2);
+      } catch {
+        return String(value);
+      }
+    }
+
+    return String(value);
+  }
+
   function resolveDynamicValue(value: unknown): unknown {
     if (typeof value !== 'string') {
       return value;
@@ -220,6 +250,7 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
     const initialValue =
       fieldDef.dataType === 'select' && fieldDef.multiple ? normalizeMultiSelectValue(resolvedBaseValue) :
         fieldDef.dataType === 'date' ? normalizeDateValue(resolvedBaseValue) :
+          fieldDef.dataType === 'json' ? normalizeJsonValue(resolvedBaseValue) :
           resolvedBaseValue;
 
     const props: FormFieldProps = {
@@ -235,7 +266,8 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
       enabled: fieldDef.enabled !== undefined ? fieldDef.enabled : true,
       mask: fieldDef.mask,
       options: loadedData ?? undefined,
-      multiple: fieldDef.multiple
+      multiple: fieldDef.multiple,
+      className: fieldDef.dataType === 'json' ? 'nf-monospaced' : undefined
     };
 
     switch (fieldDef.dataType) {
@@ -255,6 +287,8 @@ export default function FormLayout(props: FormLayoutProps): JSX.Element {
         return <NfDateField key={fieldName} props={props} />;
       case 'image':
         return <NfImageField key={fieldName} props={props} />;
+      case 'json':
+        return <NfTextArea key={fieldName} props={props} />;
       default:
         console.warn(`FormLayout: No renderer for dataType '${fieldDef.dataType}' in field '${fieldName}'.`);
         return <div key={fieldName}>(No renderer for dataType '{fieldDef.dataType}')</div>;

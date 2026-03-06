@@ -55,10 +55,10 @@
         },
         "settings": {
             "header": "Settings",
-            "dataType": "string",
+            "dataType": "json",
             "fieldWidth": "100%",
             "label": "Settings",
-            "placeholder": "JSON (string)"
+            "placeholder": "JSON"
         },
         "actions": {
             "colTextAlign": "center",

@@ -98,4 +98,9 @@
   background-color: var(--mantine-color-gray-outline-hover);
 }
 
+/* Monospaced textarea */
+.mantine-Textarea-root.nf-monospaced .mantine-Textarea-input {
+  font-family: monospace;
+}
+
 /* #endregion */
