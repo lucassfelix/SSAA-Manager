@@ -169,7 +169,7 @@ INSERT INTO status_paciente (value, label, className) VALUES
   (2, 'Inativo', 'default');
 
 INSERT INTO status_projeto (value, label, className) VALUES
-  (1, 'Aberto', 'default'),
+  (1, 'Ativo', 'default'),
   (2, 'Concluído', 'success'),
   (3, 'Pausado', 'warning'),
   (4, 'Cancelado', 'error');
@@ -186,7 +186,7 @@ INSERT INTO clinicas (id, nome, nome_abreviado, cnpj, data_criacao, data_expirac
   (8, 'Ômega Serviços Odontológicos Integrados', 'Ômega', '9.213.671/0001-09', '2021-06-10', '2026-06-10', 1);
 
 INSERT INTO usuarios (id, nome_completo, nome_abreviado, username, email, clinica_id, status, senha, data_criacao, data_expiracao, tipo_permissao) VALUES
-  (1, 'Ruy Teichert Filho', 'Ruy Teichert Filho', 'ruy_teichert', 'ruyteichert@gmail.com', 1, 1, '1234567890', '2025-01-10', '9999-12-31', 3),
+  (1, 'Ruy Teichert Filho', 'Ruy Teichert Filho', 'ruyteichert', 'ruyteichert@gmail.com', 1, 1, '1234567890', '2025-01-10', '9999-12-31', 3),
   (2, 'Letícia Polydoro de Albuquerque', 'Letícia Polydoro', 'letipolya', 'leticia@hypervisual.com.br', 1, 1, '1234567890', '2025-01-10', '9999-12-31', 1),
   (3, 'Rubem Pechansky', 'Rubem Pechansky', 'rubempech', 'pechansky@hypervisual.com.br', NULL, 1, NULL, '2025-01-10', '9999-12-31', 4),
   (4, 'Lucas Salaverry Félix', 'Lucas Félix', 'lucasfelix', 'lucas.felix.gamedev@gmail.com', NULL, 1, NULL, '2025-01-10', '9999-12-31', 4),
