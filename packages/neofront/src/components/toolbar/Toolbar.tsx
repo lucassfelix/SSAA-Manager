@@ -149,6 +149,10 @@ export default function NfToolbar(props: NfToolbarProps): JSX.Element | null {
     }
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
+        const target = e.target as HTMLElement | null;
+        if (target instanceof HTMLTextAreaElement) {
+          return;
+        }
         e.preventDefault();
         onAction?.(defaultAction);
       }
