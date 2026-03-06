@@ -27,7 +27,7 @@
             "footer": "{count} projetos",
             "label": "Nome",
             "placeholder": "Nome do projeto",
-            "render": { "layout": "link", "op": "detail" },
+            "render": { "layout": "link", "op": "edit" },
             "required": true
         },
         "clinica_id": {

@@ -25,7 +25,7 @@
             "dataType": "string",
             "label": "Nome da pessoa",
             "placeholder": "Nome",
-            "render": { "layout": "link", "op": "detail" },
+            "render": { "layout": "link", "op": "edit" },
             "required": true
         },
         "username": {

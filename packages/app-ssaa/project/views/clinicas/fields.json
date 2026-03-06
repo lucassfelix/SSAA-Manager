@@ -27,7 +27,7 @@
             "label": "Nome da clínica",
             "placeholder": "Nome da clínica",
             "required": true,
-            "render": { "layout": "link", "op": "detail" }
+            "render": { "layout": "link", "op": "edit" }
         },
         "actions": {
             "colTextAlign": "center",

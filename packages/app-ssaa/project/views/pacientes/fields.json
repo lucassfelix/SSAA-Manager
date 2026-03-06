@@ -24,7 +24,7 @@
             "dataType": "string",
             "label": "Nome",
             "placeholder": "Nome",
-            "render": { "layout": "link", "op": "detail" },
+            "render": { "layout": "link", "op": "edit" },
             "required": true
         },
         "clinica_id": {
