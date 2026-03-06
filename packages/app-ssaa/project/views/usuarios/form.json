@@ -14,7 +14,7 @@
                         "columns": [
                             [
                                 [ "username" ],
-                                "nome_completo"
+                                "nome"
                             ],
                             [
                                 [ "clinica_id" ],
@@ -33,11 +33,11 @@
                     "name": "pacientes",
                     "config": {
                         "idAccessor": "id",
-                        "nameAccessor": "nome_completo",
+                        "nameAccessor": "nome",
                         "rowClassAccessor": "none"
                     },
                     "columns": [
-                        "nome_completo",
+                        "nome",
                         "actions"
                     ],
                     "actions": [ "record_edit", "record_delete" ],

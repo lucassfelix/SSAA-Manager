@@ -8,11 +8,11 @@
 		"header": true,
 		"footer": false,
 		"idAccessor": "id",
-		"nameAccessor": "nome_completo",
+		"nameAccessor": "nome",
 		"rowClassAccessor": "none"
 	},
 	"columns": [
-		"nome_completo",
+		"nome",
 		"clinica_id",
 		"projetos",
 		"spacer",

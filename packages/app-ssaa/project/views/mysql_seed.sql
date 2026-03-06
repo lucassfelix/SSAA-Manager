@@ -37,7 +37,7 @@ CREATE TABLE clinicas (
 
 CREATE TABLE usuarios (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  nome_completo VARCHAR(255) NOT NULL,
+  nome VARCHAR(255) NOT NULL,
   username VARCHAR(80) NOT NULL,
   clinica_id BIGINT NULL,
   status INT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE usuarios (
 
 CREATE TABLE pacientes (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  nome_completo VARCHAR(255) NOT NULL,
+  nome VARCHAR(255) NOT NULL,
   clinica_id BIGINT NULL,
   PRIMARY KEY (id),
   KEY ix_pacientes_clinica_id (clinica_id),
@@ -93,7 +93,7 @@ INSERT INTO clinicas (id, nome) VALUES
   (7, 'Sigma Comércio e Serviços Dentários'),
   (8, 'Ômega Serviços Odontológicos Integrados');
 
-INSERT INTO usuarios (id, nome_completo, username, clinica_id, status, senha) VALUES
+INSERT INTO usuarios (id, nome, username, clinica_id, status, senha) VALUES
   (1, 'Ruy Teichert Filho', 'ruyteichert', 1, 1, '1234567890'),
   (2, 'Letícia Polydoro de Albuquerque', 'letipolya', NULL, 1, NULL),
   (3, 'Rubem Pechansky', 'rubempech', NULL, 1, NULL),
@@ -105,7 +105,7 @@ INSERT INTO usuarios (id, nome_completo, username, clinica_id, status, senha) VA
   (980, 'Pedro Henrique de Castro Bernardes Machado Neto', 'pedroh98', 3, 2, NULL),
   (2209, 'Mariana Duarte da Costa', 'maricosta', 5, 1, '1234567890');
 
-INSERT INTO pacientes (id, nome_completo, clinica_id) VALUES
+INSERT INTO pacientes (id, nome, clinica_id) VALUES
   (1, 'Carlos Alberto Silva', 1),
   (2, 'Sofia de Oliveira Pereira', 5),
   (3, 'Lucas Madeira Olivetti', 5),

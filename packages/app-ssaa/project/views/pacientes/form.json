@@ -13,7 +13,7 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                "nome_completo"
+                                "nome"
                             ],
                             [
                                 [ "clinica_id" ]

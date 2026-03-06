@@ -19,7 +19,7 @@
             "mask": { "pattern": "0000", "digits": 4 },
             "readOnly": true
         },
-        "nome_completo": {
+        "nome": {
             "header": "Nome completo",
             "dataType": "string",
             "label": "Nome",

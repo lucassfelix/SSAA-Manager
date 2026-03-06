@@ -49,7 +49,7 @@
             "fieldWidth": 240,
             "label": "Paciente",
             "options": { "table": "pacientes", "valueAccessor": "id",
-                "labelAccessor": "nome_completo" },
+                "labelAccessor": "nome" },
             "placeholder": "Selecione uma opção",
             "required": true
         },

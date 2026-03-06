@@ -1,32 +1,32 @@
 [
 	{
 		"id": 1,
-		"nome_completo": "Carlos Alberto Silva",
+		"nome": "Carlos Alberto Silva",
 		"clinica_id": 1
 	},
 	{
 		"id": 2,
-		"nome_completo": "Sofia de Oliveira Pereira",
+		"nome": "Sofia de Oliveira Pereira",
 		"clinica_id": 5
 	},
 	{
 		"id": 3,
-		"nome_completo": "Lucas Madeira Olivetti",
+		"nome": "Lucas Madeira Olivetti",
 		"clinica_id": 5
 	},
 	{
 		"id": 4,
-		"nome_completo": "Beatriz Lima Andrade",
+		"nome": "Beatriz Lima Andrade",
 		"clinica_id": 1
 	},
 	{
 		"id": 5,
-		"nome_completo": "Rafael Costa Moreira Filho",
+		"nome": "Rafael Costa Moreira Filho",
 		"clinica_id": 7
 	},
 	{
 		"id": 6,
-		"nome_completo": "Fernanda de Almeida Rocha",
+		"nome": "Fernanda de Almeida Rocha",
 		"clinica_id": 5
 	}
 ]

@@ -1,7 +1,7 @@
 [
 	{
 		"id": 1,
-		"nome_completo": "Ruy Teichert Filho",
+		"nome": "Ruy Teichert Filho",
 		"username": "ruyteichert",
 		"clinica_id": 1,
 		"status": 1,
@@ -9,7 +9,7 @@
 	},
 	{
 		"id": 2,
-		"nome_completo": "Letícia Polydoro de Albuquerque",
+		"nome": "Letícia Polydoro de Albuquerque",
 		"username": "letipolya",
 		"clinica_id": null,
 		"status": 1,
@@ -17,21 +17,21 @@
 	},
 	{
 		"id": 3,
-		"nome_completo": "Rubem Pechansky",
+		"nome": "Rubem Pechansky",
 		"username": "rubempech",
 		"clinica_id": null,
 		"status": 1
 	},
 	{
 		"id": 4,
-		"nome_completo": "Lucas Salaverry Félix",
+		"nome": "Lucas Salaverry Félix",
 		"username": "lucasfelix",
 		"clinica_id": null,
 		"status": 1
 	},
 	{
 		"id": 2209,
-		"nome_completo": "Mariana Duarte da Costa",
+		"nome": "Mariana Duarte da Costa",
 		"username": "maricosta",
 		"clinica_id": 5,
 		"senha": "1234567890",
@@ -39,7 +39,7 @@
 	},
 	{
 		"id": 107,
-		"nome_completo": "João Carlos Ayres Guimarães",
+		"nome": "João Carlos Ayres Guimarães",
 		"username": "jayres",
 		"clinica_id": 8,
 		"status": 2,
@@ -47,14 +47,14 @@
 	},
 	{
 		"id": 980,
-		"nome_completo": "Pedro Henrique de Castro Bernardes Machado Neto",
+		"nome": "Pedro Henrique de Castro Bernardes Machado Neto",
 		"username": "pedroh98",
 		"clinica_id": 3,
 		"status": 2
 	},
 	{
 		"id": 40,
-		"nome_completo": "Maria Beatriz Figueira Gomes",
+		"nome": "Maria Beatriz Figueira Gomes",
 		"username": "maria_fig",
 		"senha": "1234567890",
 		"status": 1,
@@ -62,14 +62,14 @@
 	},
 	{
 		"id": 195,
-		"nome_completo": "Marcelo Barroso Goulart",
+		"nome": "Marcelo Barroso Goulart",
 		"username": "mar33",
 		"status": 1,
 		"clinica_id": 7
 	},
 	{
 		"id": 340,
-		"nome_completo": "Ana Lúcia Schneider Fernandes",
+		"nome": "Ana Lúcia Schneider Fernandes",
 		"username": "anafer21",
 		"senha": "1234567890",
 		"status": 1,
