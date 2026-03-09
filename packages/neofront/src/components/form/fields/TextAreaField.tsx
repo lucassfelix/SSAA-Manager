@@ -33,12 +33,8 @@ export default function NfTextArea({ props }: { props: FormFieldProps }) {
       w={width}
       autosize
       maxRows={8}
-      className={clsx(
-        'nf-field',
-        readOnly ? 'nf-readonly' : '',
-        required ? 'nf-required' : '',
-        className
-      )}
+      className={clsx( 'nf-field', readOnly ? 'nf-readonly' : '', required ? 'nf-required' : '', 
+        className )}
       wrapperProps={{ 'data-field-props': name }}
     />
   );

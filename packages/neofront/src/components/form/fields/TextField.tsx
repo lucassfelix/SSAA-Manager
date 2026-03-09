@@ -19,7 +19,7 @@ export default function NfTextField({ props }: { props: FormFieldProps }) {
   // #region Hooks and variables
 
   const { name, enabled, label, initialValue, width, size, required, readOnly,
-    placeholder, mask, dataType } = props;
+    placeholder, mask, dataType, className } = props;
 
   let defValue = initialValue;
   const result = useMask(initialValue, mask);
@@ -39,8 +39,8 @@ export default function NfTextField({ props }: { props: FormFieldProps }) {
       placeholder={readOnly ? undefined : placeholder}
       defaultValue={defValue}
       w={width}
-      className={clsx('nf-field', readOnly ? "nf-readonly" : '', isPassword ? 'nf-password' : '',
-        required ? 'nf-required' : ''
+      className={clsx('nf-field', readOnly ? "nf-readonly" : '', required ? 'nf-required' : '',
+        isPassword ? 'nf-password' : '', className
       )}
       component={isPassword ? "input" : (result.imaskConfig ? IMaskInput : undefined)}
       type={isPassword ? "password" : undefined}
