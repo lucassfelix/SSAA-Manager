@@ -9,11 +9,11 @@
                 "columns": [
                     [
                         "nome",
-                        "settings",
-                        [ "paciente_id" ]
+                        "paciente_id",
+                        "settings"
                     ],
                     [
-                        [ "clinica_id" ]
+                        "clinica_id"
                     ]
                 ]
             }

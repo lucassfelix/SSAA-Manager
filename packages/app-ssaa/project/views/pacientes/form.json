@@ -18,7 +18,7 @@
                                 "imagem_com_afastador"
                             ],
                             [
-                                [ "clinica_id" ]
+                                "clinica_id"
                             ]
                         ]
                     }

@@ -13,11 +13,11 @@
                         "initialState": "noheader",
                         "columns": [
                             [
-                                [ "username" ],
+                                "username",
                                 "nome"
                             ],
                             [
-                                [ "clinica_id" ],
+                                "clinica_id",
                                 [ "status", "senha" ]
                             ]
                         ]

@@ -12,7 +12,9 @@
                     {
                         "initialState": "noheader",
                         "columns": [
-                            [ "nome" ]
+                            [
+                                "nome"
+                            ]
                         ]
                     }
                 ]
