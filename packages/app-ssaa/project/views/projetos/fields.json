@@ -55,9 +55,9 @@
         },
         "settings": {
             "header": "Settings",
-            "dataType": "json",
+            "dataType": "string",
             "fieldWidth": "100%",
-            "label": "Settings",
+            "label": "Configurações (JSON)",
             "placeholder": "JSON"
         },
         "actions": {

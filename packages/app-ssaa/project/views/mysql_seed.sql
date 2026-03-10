@@ -116,13 +116,13 @@ INSERT INTO pacientes (id, nome, clinica_id, imagem_sem_afastador, imagem_com_af
   (6, 'Fernanda de Almeida Rocha', 5, 'img/fernanda_sem.jpg', 'img/fernanda_com.jpg');
 
 INSERT INTO projetos (id, nome, settings, paciente_id, clinica_id) VALUES
-  (1, 'Original', '{"rotate":"-2.96","pupilsLineY":"208.6","shade":"A2"}', 2, 5),
-  (2, 'Teste com proporção áurea', '{"scale":1.618}', 2, 5),
-  (3, 'Teste 3 com Lysippus (75%), mais claro', '{"brightness":"1.095"}', 3, 5),
-  (4, 'Teste meio escuro', '{"brightness":"0.87"}', 6, 5),
-  (5, 'Teste 2', '{"rotate":"3.02","pupilsLineY":"192.3","shade":"A3"}', 5, 7),
-  (6, 'Teste 4', '{"brightness":"1.19"}', 5, 7),
-  (7, 'Teste 5', '{"scale":1.089,"brightness":"0.92"}', 1, 1),
-  (8, 'Mais um teste', '{"rotate":"-1.5","pupilsLineY":"200","shade":"B1"}', 4, 1);
+  (1, 'Original', 'settings/sofia/original.json', 2, 5),
+  (2, 'Teste com proporção áurea', 'settings/sofia/proporcao_aurea.json', 2, 5),
+  (3, 'Teste 3 com Lysippus (75%), mais claro', 'settings/lucas/lysippus_75_mais_claro.json', 3, 5),
+  (4, 'Teste meio escuro', 'settings/fernanda/meio_escuro.json', 6, 5),
+  (5, 'Teste 2', 'settings/rafael/teste_2.json', 5, 7),
+  (6, 'Teste 4', 'settings/rafael/teste_4.json', 5, 7),
+  (7, 'Teste 5', 'settings/carlos/teste_5.json', 1, 1),
+  (8, 'Mais um teste', 'settings/beatriz/mais_um_teste.json', 4, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
