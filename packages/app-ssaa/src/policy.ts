@@ -1,9 +1,10 @@
 //
-// Políticas de acesso deste projeto, com resolver para permissões na camada da aplicação.
-// Nota: a implementação real exigirá uma abordagem mais robusta com validação no backend.
-// Esta versão implementa uma política simplificada: sem níveis de permissão ou datas.
-// O acesso é determinado por `clinica_id`: NULL ou 1 pode acessar tudo, enquanto outros valores
-// veem apenas os dados da própria clínica.
+// Políticas de acesso com resolvedor para permissões na camada da aplicação.
+//
+// Nota: a implementação real exigirá uma abordagem mais robusta com validação no backend. Esta
+// versão implementa uma política simplificada, sem níveis de permissão. O acesso é determinado por
+// `clinica_id`: NULL ou 1 pode acessar tudo, enquanto outros valores veem apenas os dados da
+// própria clínica.
 //
 
 // #region --------------------------------------------------------------------------------- Imports
@@ -63,7 +64,7 @@ const resolveProjetos = ({ user, data }: ViewResolverPayload): ViewResolverResul
 
 // #region -------------------------------------------------------------------------------- Resolver
 
-/** Resolver de acesso construído a partir das funções de política por view. */
+/** Resolvedor de acesso construído a partir das funções de política por view. */
 export const accessResolver = createViewBasedAccessResolver({
   userTable: 'usuarios',
   usernameAccessor: 'username',
