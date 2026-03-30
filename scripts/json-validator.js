@@ -8,40 +8,13 @@ import fs from 'fs';
 import { EOL } from 'os';
 import path from 'path';
 import Ajv from 'ajv';
+import { createColors, collectJsonFiles, readJsonFile, resolveLogFilePath, stripAnsi } from './lib/master.lib.js';
 
 // #endregion
 
 // #region --------------------------------------------------------------------------------- Helpers
 
-// Strip JSONC comments (/* ... */ and // ...)
-function stripJsonc(text) {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/(^|[^:])\/\/.*$/gm, '$1')
-    .replace(/,\s*(?=[}\]])/g, '');
-}
-
-// Collect JSON files recursively
-function collectJsonFiles(dir) {
-  const res = [];
-  if (!fs.existsSync(dir)) {
-    return res;
-  }
-  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.name.startsWith('__')) {
-      continue;
-    }
-    const full = path.join(dir, e.name);
-    if (e.isDirectory()) {
-      res.push(...collectJsonFiles(full));
-    } else if (e.isFile() && e.name.endsWith('.json')) {
-      res.push(full);
-    }
-  }
-  return res;
-}
-
-// Load schemas from folder
+/** Load schemas from folder. */
 function loadSchemas(folder) {
   const schemas = {};
   if (!fs.existsSync(folder)) {
@@ -52,22 +25,21 @@ function loadSchemas(folder) {
       continue;
     }
     try {
-      const raw = fs.readFileSync(path.join(folder, f), 'utf8');
-      const json = JSON.parse(stripJsonc(raw));
+      const { json } = readJsonFile(path.join(folder, f));
       // Strip .schema suffix if present (e.g. listview.schema.json -> listview)
       let key = path.basename(f, '.json');
       if (key.endsWith('.schema')) {
         key = key.slice(0, -7);
       }
       schemas[key] = json;
-    } catch (_e) {
-      console.error(`Failed to read schema ${f}: ${_e.message}`);
+    } catch (e) {
+      console.error(`Failed to read schema ${f}: ${e && e.message ? e.message : String(e)}`);
     }
   }
   return schemas;
 }
 
-// Determine schema key for a JSON file
+/** Determine schema key for a JSON file. */
 function getSchemaKey(json, file) {
   if (Array.isArray(json)) {
     return 'records';
@@ -84,8 +56,8 @@ function getSchemaKey(json, file) {
   return m ? m[2] : path.basename(file, '.json');
 }
 
-// Print script usage info
-function printUsage() {
+/** Print script usage info. */
+function printUsage(colors) {
   console.log('');
   console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/json-validator.js')} ${colors.yellow('--schemas <folder> --project <folder> [--log <file>]')} ${colors.yellow('[--no-color]')}`);
   console.log('');
@@ -96,25 +68,6 @@ function printUsage() {
   console.log(`  ${colors.yellow('--no-color')}          Disable ANSI colors in output`);
   console.log(`  ${colors.yellow('--help, -h')}          Show this help`);
   console.log('');
-}
-
-function stripAnsi(text) {
-  return String(text).replace(/\u001b\[[0-9;]*m/g, '');
-}
-
-function resolveLogFilePath(fileArg) {
-  if (!fileArg) {
-    return null;
-  }
-  if (path.isAbsolute(fileArg)) {
-    return fileArg;
-  }
-  // If caller already provided a path (e.g. ./out/log.txt or logs/out.txt), honor it.
-  if (/[\\/]/.test(fileArg)) {
-    return path.resolve(fileArg);
-  }
-  // Bare filename -> default logs folder
-  return path.resolve('scripts', 'logs', fileArg);
 }
 
 // #endregion
@@ -139,26 +92,15 @@ for (let i = 0; i < argv.length; i++) {
   }
 }
 
-// Color helpers (ANSI)
-const colors = {
-  red: (s) => (useColor ? `\u001b[31m${s}\u001b[39m` : s),
-  yellow: (s) => (useColor ? `\u001b[33m${s}\u001b[39m` : s),
-  cyan: (s) => (useColor ? `\u001b[36m${s}\u001b[39m` : s),
-  green: (s) => (useColor ? `\u001b[32m${s}\u001b[39m` : s),
-  magenta: (s) => (useColor ? `\u001b[35m${s}\u001b[39m` : s),
-  lightMagenta: (s) => (useColor ? `\u001b[95m${s}\u001b[39m` : s),
-  lightRed: (s) => (useColor ? `\u001b[91m${s}\u001b[39m` : s),
-  orange: (s) => (useColor ? `\u001b[38;5;214m${s}\u001b[39m` : s),
-  bold: (s) => (useColor ? `\u001b[1m${s}\u001b[22m` : s),
-};
+const colors = createColors(useColor);
 
 if (argv.includes('--help') || argv.includes('-h')) {
-  printUsage();
+  printUsage(colors);
   process.exit(0);
 }
 
 if (!schemasFolder || !projectFolder) {
-  printUsage();
+  printUsage(colors);
   process.exit(1);
 }
 
@@ -193,9 +135,9 @@ let failures = 0;
 for (const f of files) {
   let json;
   try {
-    json = JSON.parse(stripJsonc(fs.readFileSync(f, 'utf8')));
-  } catch (_e) {
-    output.push(`Invalid JSON: ${f}: ${_e.message}`);
+    ({ json } = readJsonFile(f));
+  } catch (e) {
+    output.push(`Invalid JSON: ${f}: ${e && e.message ? e.message : String(e)}`);
     failures++;
     continue;
   }

@@ -9,18 +9,18 @@ import fs from 'fs';
 import { EOL } from 'os';
 import path from 'path';
 
+import {
+  collectJsonFiles,
+  createColors,
+  escapeRegExp,
+  getLineNumberFromIndex,
+  resolveLogFilePath,
+  stripJsonc,
+} from './lib/master.lib.js';
+
 // #endregion
 
 // #region --------------------------------------------------------------------------------- Helpers
-
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function getLineNumberFromIndex(text, idx) {
-  const slice = text.slice(0, idx);
-  return slice.split('\n').length;
-}
 
 function findKeyLine(text, key) {
   try {
@@ -62,16 +62,6 @@ function findKeyLineFromPath(text, pathArr) {
   }
   // If we found a match for the full path, return its line number
   return getLineNumberFromIndex(text, idx || 0);
-}
-
-function stripJsonc(text) {
-  // Remove /* ... */ block comments
-  text = text.replace(/\/\*[\s\S]*?\*\//g, '');
-  // Remove // line comments
-  text = text.replace(/(^|[^:]|^)\/\/.*$/gm, '');
-  // Remove trailing commas before } or ]
-  text = text.replace(/,\s*(?=[}\]])/g, '');
-  return text;
 }
 
 function isObjectSchemaCandidate(obj, pathArr) {
@@ -168,20 +158,6 @@ function walk(obj, pathArr, fileText, filePath, out) {
   }
 }
 
-function collectJsonFiles(dir) {
-  const res = [];
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const e of entries) {
-    const full = path.join(dir, e.name);
-    if (e.isDirectory()) {
-      res.push(...collectJsonFiles(full));
-    } else if (e.isFile() && e.name.endsWith('.json')) {
-      res.push(full);
-    }
-  }
-  return res;
-}
-
 function printUsage(colors) {
   console.log('');
   console.log(`${colors.bold('Usage:')} ${colors.cyan('node scripts/schema-validator.js')} ${colors.yellow('[--out <file>] [--no-color]')} ${colors.cyan('<schemas-folder>')}`);
@@ -202,18 +178,7 @@ function printError(useColor, color, label, ...details) {
 };
 
 function resolveOutFilePath(fileArg) {
-  if (!fileArg) {
-    return null;
-  }
-  if (path.isAbsolute(fileArg)) {
-    return fileArg;
-  }
-  // If caller already provided a path (e.g. ./out/report.txt or logs/report.txt), honor it.
-  if (/[\\/]/.test(fileArg)) {
-    return path.resolve(fileArg);
-  }
-  // Bare filename -> default logs folder
-  return path.resolve('scripts', 'logs', fileArg);
+  return resolveLogFilePath(fileArg);
 }
 
 // #endregion
@@ -247,17 +212,7 @@ async function main() {
   folder = folderArg;
 
   // Color helpers (ANSI). Keep plain text if useColor === false
-  const colors = {
-    red: (s) => (useColor ? `\u001b[31m${s}\u001b[39m` : s),
-    yellow: (s) => (useColor ? `\u001b[33m${s}\u001b[39m` : s),
-    cyan: (s) => (useColor ? `\u001b[36m${s}\u001b[39m` : s),
-    green: (s) => (useColor ? `\u001b[32m${s}\u001b[39m` : s),
-    magenta: (s) => (useColor ? `\u001b[35m${s}\u001b[39m` : s),
-    lightMagenta: (s) => (useColor ? `\u001b[95m${s}\u001b[39m` : s),
-    lightRed: (s) => (useColor ? `\u001b[91m${s}\u001b[39m` : s),
-    orange: (s) => (useColor ? `\u001b[38;5;214m${s}\u001b[39m` : s),
-    bold: (s) => (useColor ? `\u001b[1m${s}\u001b[22m` : s),
-  };
+  const colors = createColors(useColor);
 
   if (argv.includes('--help') || argv.includes('-h')) {
     printUsage(colors);
@@ -276,7 +231,7 @@ async function main() {
     const stat = fs.statSync(abs);
     if (stat.isDirectory()) {
       console.log(`Checking JSON schema files in ${abs}...` + EOL);
-      files = collectJsonFiles(abs);
+      files = collectJsonFiles(abs, { skipDoubleUnderscore: false });
     } else if (stat.isFile()) {
       console.log(`Checking JSON schema file ${abs}...` + EOL);
       files = [abs];

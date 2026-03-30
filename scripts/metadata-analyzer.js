@@ -8,80 +8,22 @@ import fs from 'fs';
 import { EOL } from 'os';
 import path from 'path';
 
+import {
+  collectJsonFiles,
+  createColors,
+  escapeRegExp,
+  findKeyLine,
+  findKeyLineFromPath,
+  findRawValueLine,
+  getLineNumberFromIndex,
+  readJsonFile,
+  resolveLogFilePath,
+  stripAnsi,
+} from './lib/master.lib.js';
+
 // #endregion
 
 // #region --------------------------------------------------------------------------------- Helpers
-
-function stripJsonc(text) {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/(^|[^:])\/\/.*$/gm, '$1')
-    .replace(/,\s*(?=[}\]])/g, '');
-}
-
-function stripAnsi(text) {
-  return String(text).replace(/\u001b\[[0-9;]*m/g, '');
-}
-
-function escapeRegExp(string) {
-  return String(string).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function getLineNumberFromIndex(text, idx) {
-  return text.slice(0, Math.max(0, idx)).split('\n').length;
-}
-
-function findKeyLine(text, key) {
-  const idx = text.indexOf(`"${key}"`);
-  return idx === -1 ? 1 : getLineNumberFromIndex(text, idx);
-}
-
-function findKeyLineFromPath(text, pathArr) {
-  let idx = 0;
-  for (const rawKey of pathArr) {
-    if (/^\d+$/.test(String(rawKey))) {
-      continue;
-    }
-    const key = String(rawKey);
-    const re = new RegExp(`"${escapeRegExp(key)}"\\s*:`, 'g');
-    re.lastIndex = idx;
-    const m = re.exec(text);
-    if (!m || typeof m.index !== 'number') {
-      return findKeyLine(text, key);
-    }
-    idx = m.index + m[0].length;
-  }
-  return getLineNumberFromIndex(text, idx || 0);
-}
-
-function collectJsonFiles(dir) {
-  const res = [];
-  if (!fs.existsSync(dir)) {
-    return res;
-  }
-  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.name.startsWith('__')) {
-      continue;
-    }
-    const full = path.join(dir, e.name);
-    if (e.isDirectory()) {
-      res.push(...collectJsonFiles(full));
-    } else if (e.isFile() && e.name.endsWith('.json')) {
-      res.push(full);
-    }
-  }
-  return res;
-}
-
-function readJsonFile(filePath) {
-  const raw = fs.readFileSync(filePath, 'utf8');
-  return { raw, json: JSON.parse(stripJsonc(raw)) };
-}
-
-function findRawValueLine(raw, value) {
-  const idx = String(raw).indexOf(`"${value}"`);
-  return idx === -1 ? 1 : getLineNumberFromIndex(raw, idx);
-}
 
 function printUsage(colors) {
   console.log('');
@@ -199,21 +141,6 @@ function rel(p) {
   return path.relative(projectFolder, p).replace(/\\/g, '/');
 }
 
-function resolveLogFilePath(fileArg) {
-  if (!fileArg) {
-    return null;
-  }
-  if (path.isAbsolute(fileArg)) {
-    return fileArg;
-  }
-  // If caller already provided a path (e.g. ./out/log.txt or logs/out.txt), honor it.
-  if (/[\\/]/.test(fileArg)) {
-    return path.resolve(fileArg);
-  }
-  // Bare filename -> default logs folder
-  return path.resolve('scripts', 'logs', fileArg);
-}
-
 // #endregion
 
 // #region ------------------------------------------------------------------------------------ Main
@@ -233,19 +160,7 @@ for (let i = 0; i < argv.length; i++) {
   }
 }
 
-const colors = {
-  red: (s) => (useColor ? `\u001b[31m${s}\u001b[39m` : s),
-  yellow: (s) => (useColor ? `\u001b[33m${s}\u001b[39m` : s),
-  cyan: (s) => (useColor ? `\u001b[36m${s}\u001b[39m` : s),
-  green: (s) => (useColor ? `\u001b[32m${s}\u001b[39m` : s),
-  magenta: (s) => (useColor ? `\u001b[35m${s}\u001b[39m` : s),
-  lightMagenta: (s) => (useColor ? `\u001b[95m${s}\u001b[39m` : s),
-  lightRed: (s) => (useColor ? `\u001b[91m${s}\u001b[39m` : s),
-  orange: (s) => (useColor ? `\u001b[38;5;214m${s}\u001b[39m` : s),
-  white: (s) => (useColor ? `\u001b[37m${s}\u001b[39m` : s),
-  darkgray: (s) => (useColor ? `\u001b[90m${s}\u001b[39m` : s),
-  bold: (s) => (useColor ? `\u001b[1m${s}\u001b[22m` : s),
-};
+const colors = createColors(useColor);
 
 if (argv.includes('--help') || argv.includes('-h')) {
   printUsage(colors);

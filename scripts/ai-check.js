@@ -3,9 +3,16 @@
 
 // Run the standard NeoFront verification loop (schemas + project JSON + metadata consistency).
 
-import fs from 'fs';
+// #region --------------------------------------------------------------------------------- Imports
+
 import path from 'path';
 import { spawnSync } from 'child_process';
+
+import { ensureDirExists } from './lib/master.lib.js';
+
+// #endregion
+
+//#region ---------------------------------------------------------------------------------- Helpers
 
 function printUsage() {
   console.log('');
@@ -33,14 +40,9 @@ function runNodeScript(scriptPath, args) {
   return { code };
 }
 
-function ensureDir(dirPath) {
-  if (!dirPath) {
-    return;
-  }
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-}
+// #endregion
+
+// #region ------------------------------------------------------------------------------------ Main
 
 const argv = process.argv.slice(2);
 if (argv.includes('--help') || argv.includes('-h')) {
@@ -66,7 +68,7 @@ for (let i = 0; i < argv.length; i++) {
   }
 }
 
-ensureDir(logDir);
+ensureDirExists(logDir);
 
 const root = process.cwd();
 const schemaValidator = path.join(root, 'scripts', 'schema-validator.js');
@@ -117,3 +119,5 @@ console.log('');
 
 console.log(`AI check complete. Logs: ${path.basename(schemaOut)}, ${path.basename(jsonOut)}, ${path.basename(metadataOut)}`);
 process.exit(finalExit);
+
+// #endregion
