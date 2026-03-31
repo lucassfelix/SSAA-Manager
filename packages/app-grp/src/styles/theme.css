@@ -29,7 +29,11 @@ body.nf-light {
   --nf-border: #E9E9ED;
 
   --mantine-color-body: var(--nf-background);
-  --mantine-primary-color-light-color: var(--nf-primary);
+  --mantine-primary-color-filled: #E5004C;
+  --mantine-primary-color-filled-hover: #c0003e;
+  --mantine-primary-color-light: rgba(229, 0, 76, 0.08);
+  --mantine-primary-color-light-hover: rgba(229, 0, 76, 0.12);
+  --mantine-primary-color-light-color: #E5004C;
   --mantine-color-anchor: #0073E5;
 }
 body.nf-dark {
@@ -41,7 +45,11 @@ body.nf-dark {
   --nf-border: #2e2e4a;
 
   --mantine-color-body: var(--nf-background);
-  --mantine-primary-color-light-color: var(--nf-primary);
+  --mantine-primary-color-filled: #ff4d80;
+  --mantine-primary-color-filled-hover: #e0004d;
+  --mantine-primary-color-light: rgba(255, 77, 128, 0.1);
+  --mantine-primary-color-light-hover: rgba(255, 77, 128, 0.15);
+  --mantine-primary-color-light-color: #ff4d80;
   --mantine-color-anchor: #4da6ff;
   --mantine-color-dark-6: var(--nf-background);
 }
@@ -69,6 +77,10 @@ body.nf-dark {
   border-right-color: rgba(255, 255, 255, 0.08);
 }
 
+#main-menu-stack .mantine-Divider-root {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
 /* Search box inside sidebar */
 .mantine-AppShell-navbar .mantine-Input-input {
   background: transparent;
@@ -83,35 +95,51 @@ body.nf-dark {
 /* Menu items */
 #main-menu-stack .mantine-NavLink-root {
   position: relative;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.82);
   border-radius: 8px;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 40px;
+  padding: 10px 12px;
 }
 #main-menu-stack .mantine-NavLink-root:hover {
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
 }
 #main-menu-stack .mantine-NavLink-root[data-active] {
-  background-color: rgba(229, 0, 76, 0.14);
-  color: white;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  color: var(--nf-text);
+}
+#main-menu-stack .mantine-NavLink-root[data-active]:hover {
+  background-color: #ffffff;
+  color: var(--nf-text);
 }
 #main-menu-stack .mantine-NavLink-root[data-active]::after {
   content: '';
   position: absolute;
   left: 0;
-  top: 5px;
-  bottom: 5px;
+  top: 8px;
+  bottom: 8px;
   width: 3px;
   background-color: var(--nf-primary);
   border-radius: 0 2px 2px 0;
 }
 #main-menu-stack .mantine-NavLink-label {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2;
 }
 #main-menu-stack .mantine-NavLink-icon {
   color: rgba(255, 255, 255, 0.55);
 }
+#main-menu-stack .mantine-NavLink-root[data-active] .mantine-NavLink-label {
+  font-weight: 600;
+}
 #main-menu-stack .mantine-NavLink-root[data-active] .mantine-NavLink-icon {
+  color: var(--nf-primary);
+}
+#main-menu-stack .mantine-NavLink-root[data-active] .mantine-NavLink-section,
+#main-menu-stack .mantine-NavLink-root[data-active] .mantine-NavLink-chevron {
   color: var(--nf-primary);
 }
 
@@ -161,6 +189,51 @@ body.nf-dark {
   background-color: #1e1e38;
 }
 
+/* White table surface, with gray row cards inside like the mockup */
+.nf-light .mantine-DataTable-root {
+  --mantine-color-body: #ffffff;
+  background-color: #ffffff;
+}
+.nf-light .mantine-DataTable-table {
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+.nf-light .mantine-DataTable-table tbody td {
+  background-color: #f6f6f8;
+  border-bottom: 0;
+  color: rgba(36, 36, 66, 0.8);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.nf-light .mantine-DataTable-table tbody tr:hover td {
+  background-color: #e9e9ed;
+}
+.nf-light .mantine-DataTable-table tbody td:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.nf-light .mantine-DataTable-table tbody td:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.nf-light .mantine-DataTable-table thead th {
+  color: #242442;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.nf-light .mantine-DataTable-table tbody td a {
+  color: #242442;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-decoration: none;
+}
+.nf-light .mantine-DataTable-table tbody td a:hover {
+  color: #0073e5;
+}
+.nf-light .mantine-DataTable-table tbody td p {
+  color: rgba(36, 36, 66, 0.8);
+}
+
 /* Boolean icons */
 .nf-light .nf-boolean-icon.nf-boolean-true  { color: var(--mantine-color-teal-6); }
 .nf-light .nf-boolean-icon.nf-boolean-false { color: var(--mantine-color-red-6); }
@@ -178,9 +251,40 @@ body.nf-dark {
 }
 
 /* Status badge styles (Figma Status tokens) */
+/* All GRP status badges: 29px high, 14px regular, no uppercase */
+.mantine-Badge-root.nf-success,
+.mantine-Badge-root.nf-cancelled,
+.mantine-Badge-root.nf-warning,
+.mantine-Badge-root.nf-default,
+.mantine-Badge-root.nf-error {
+  --badge-tt: none;
+  align-items: center;
+  border-radius: 20px;
+  height: 29px;
+  min-height: 29px;
+  justify-content: center;
+  padding-inline: 16px;
+  text-transform: none;
+}
+.mantine-Badge-root.nf-success span,
+.mantine-Badge-root.nf-cancelled span,
+.mantine-Badge-root.nf-warning span,
+.mantine-Badge-root.nf-default span,
+.mantine-Badge-root.nf-error span {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  padding-top: 0;
+  text-transform: none;
+}
 .mantine-Badge-root.nf-success {
   background-color: #ADEBD6;
   color: #1a5c48;
+}
+.mantine-Badge-root.nf-cancelled {
+  background-color: #FFD2A5;
+  color: #7a3900;
 }
 .mantine-Badge-root.nf-warning {
   background-color: #FFDD99;

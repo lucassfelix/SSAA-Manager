@@ -28,6 +28,20 @@
 /* Ensure main menu never creates horizontal scroll */
 #main-menu-stack {
   width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* Prevent tiny horizontal overflow from borders/padding */
+#main-menu-stack .mantine-NavLink-root {
+  max-width: 100%;
+}
+
+/* Ensure labels don't render ellipsis while container shrinks — we fade them instead */
+#main-menu-stack .mantine-NavLink-body {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  min-width: 0;
 }
 
 /* #endregion */

@@ -18,9 +18,9 @@
 			"readOnly": true
 		},
 		"numero": {
-			"colStyles": [ "semibold", "tabular" ],
+			"colStyles": [ "bold", "tabular" ],
 			"header": "Contrato",
-			"colWidth": 90,
+			"colWidth": 96,
 			"dataType": "string",
 			"fieldWidth": 120,
 			"label": "Nº / Exercício",
@@ -38,36 +38,40 @@
 		"assinatura": {
 			"colStyles": "tabular",
 			"header": "Assinatura",
-			"colWidth": 90,
+			"colWidth": 74,
 			"dataType": "date",
 			"fieldWidth": 140,
-			"label": "Data de assinatura"
+			"label": "Data de assinatura",
+			"render": { "layout": "date", "format": "DD/MM/YY" }
 		},
 		"validade": {
 			"colStyles": "tabular",
 			"header": "Validade",
-			"colWidth": 90,
+			"colWidth": 74,
 			"dataType": "date",
 			"fieldWidth": 140,
-			"label": "Validade"
+			"label": "Validade",
+			"render": { "layout": "date", "format": "DD/MM/YY" }
 		},
 		"contratado": {
 			"header": "Contratado",
-			"colWidth": 160,
+			"colWidth": 145,
 			"dataType": "select",
 			"fieldWidth": "100%",
 			"label": "Contratado",
-			"options": { "table": "contratados" },
+			"options": { "table": "contratados", "valueAccessor": "id" },
 			"placeholder": "Selecione o contratado"
 		},
 		"situacao": {
 			"header": "Situação",
-			"colWidth": 110,
+			"colWidth": 96,
 			"dataType": "select",
 			"fieldWidth": 160,
 			"label": "Situação",
 			"options": { "table": "situacoes_contrato" },
-			"placeholder": "Selecione a situação"
+			"placeholder": "Selecione a situação",
+			"render": { "layout": "colorWrapper" },
+			"wrapperWidth": 96
 		},
 		"processo_ref": {
 			"dataType": "string",
@@ -91,6 +95,7 @@
 		},
 		"actions": {
 			"header": "",
+			"colWidth": 44,
 			"render": { "layout": "actions" }
 		}
 	}

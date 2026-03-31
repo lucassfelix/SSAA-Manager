@@ -1,6 +1,6 @@
 [
-	{ "id": 1, "value": "assinado", "label": "Assinado" },
-	{ "id": 2, "value": "cancelado", "label": "Cancelado" },
-	{ "id": 3, "value": "pendente", "label": "Pendente" },
-	{ "id": 4, "value": "encerrado", "label": "Encerrado" }
+	{ "id": 1, "value": "assinado",  "label": "Assinado",  "className": "success",   "lightColor": "#ADEBD6", "darkColor": "teal.9" },
+	{ "id": 2, "value": "cancelado", "label": "Cancelado", "className": "cancelled", "lightColor": "#FFD2A5", "darkColor": "orange.9" },
+	{ "id": 3, "value": "pendente",  "label": "Pendente",  "className": "warning",   "lightColor": "#FFDD99", "darkColor": "yellow.9" },
+	{ "id": 4, "value": "encerrado", "label": "Encerrado", "className": "default",   "lightColor": "#DCDCE2", "darkColor": "gray.8" }
 ]

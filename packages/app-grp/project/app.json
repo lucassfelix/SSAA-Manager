@@ -31,16 +31,16 @@
 			"fullWidth": false,
 			"height": 60,
 			"bordered": true,
-			"items": [ "collapseToggle", "userToolbar" ]
+			"items": [ "collapseToggle", "spacer", "userToolbar" ]
 		},
 		"navbar": {
-			"width": 300,
+			"width": 170,
 			"collapsible": true,
 			"collapsedWidth": 60,
 			"bordered": true,
 			"icons": true,
 			"footer": false,
-			"items": [ "mainMenu", "spacer", "collapseToggle", "logo" ]
+			"items": [ "mainMenu", "spacer", "logo" ]
 		},
 		"userToolbar": [ { "type": "text", "text": "Usuário" }, "userMenu" ]
 	},
@@ -48,10 +48,10 @@
 		"openSubmenusOnHover": false,
 		"submenuOffset": 12,
 		"items": {
-			"gap": 2,
+			"gap": 10,
 			"radius": 8,
-			"labelSize": "0.9rem",
-			"labelWeight": 600,
+			"labelSize": "0.875rem",
+			"labelWeight": 400,
 			"subtitleSize": "0.8rem",
 			"subtitleWeight": null,
 			"subtitleUppercase": true,
@@ -98,9 +98,9 @@
 			"fontWeight": 600
 		},
 		"titles": {
-			"size": 20,
-			"fontWeight": 600,
-			"width": 120
+			"size": 26,
+			"fontWeight": 200,
+			"width": 160
 		}
 	},
 	"topControls": {
@@ -115,8 +115,10 @@
 			"tipDark": "Mudar para o tema escuro"
 		},
 		"logo": {
-			"collapsedHeight": 40,
-			"expandedHeight": 40,
+			"collapsedHeight": 24,
+			"expandedHeight": 29,
+			"collapsedWidth": 24,
+			"expandedWidth": 160,
 			"altText": "GRP",
 			"link": "/"
 		}
@@ -142,7 +144,8 @@
 			"label": "Novo contrato",
 			"tip": "Adicionar {singular}",
 			"icon": "add",
-			"action": "add"
+			"action": "add",
+			"default": true
 		},
 		"search": {
 			"type": "iconButton",
@@ -284,16 +287,16 @@
 	"listViews": {
 		"defaultList": "contratos",
 		"table": {
-			"striped": true,
+			"striped": false,
 			"bordered": true,
-			"rowBorders": false,
+			"rowBorders": true,
 			"colBorders": false,
 			"borderRadius": "sm",
 			"horizontalSpacing": 10,
 			"verticalSpacing": 8,
 			"headerHeight": 20,
 			"shadow": "xs",
-			"wrapperSize": "md",
+			"wrapperSize": "sm",
 			"wrapperBooleanWidth": 50,
 			"booleanIconsSize": 26,
 			"booleanIconsStroke": 1.5,
