@@ -1,0 +1,4 @@
+{
+	"$schema": "../../../../schemas/views.schema.json",
+	"active": [ "contratos" ]
+}

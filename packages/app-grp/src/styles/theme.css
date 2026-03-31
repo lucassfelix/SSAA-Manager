@@ -1,0 +1,293 @@
+/*
+ * Theme-specific style overrides for GRP.
+ *
+ * GRP design tokens (Figma: GRP Mockups):
+ *   Primary:     #E5004C  (Primária)
+ *   Body bg:     #F6F6F8  (Fundos/Tela)
+ *   Sidebar bg:  #242442  (Fundos/Barra lateral esquerda)
+ *   Text:        #242442  (Texto)
+ *   Icons:       #4A5864  (Ícones)
+ *   Borders:     #E9E9ED  (Outlines e hover)
+ *   Link:        #0073E5  (Link)
+ *   Status/OK:   #ADEBD6
+ *   Status/Warn: #FFDD99  (Status/Atenção)
+ *   Status/Neut: #DCDCE2  (Status/Neutro)
+ *   Font:        Inter (200 / 400 / 600 / 700)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
+
+/* #region ---------------------------------------------------------------- Global element styles */
+
+/* Theme color tokens */
+body.nf-light {
+  --nf-primary: #E5004C;
+  --nf-background: #F6F6F8;
+  --nf-sidebar-bg: #242442;
+  --nf-text: #242442;
+  --nf-icon: #4A5864;
+  --nf-border: #E9E9ED;
+
+  --mantine-color-body: var(--nf-background);
+  --mantine-primary-color-light-color: var(--nf-primary);
+  --mantine-color-anchor: #0073E5;
+}
+body.nf-dark {
+  --nf-primary: #ff4d80;
+  --nf-background: #16162a;
+  --nf-sidebar-bg: #1a1a33;
+  --nf-text: #e0e0f0;
+  --nf-icon: #8a97a4;
+  --nf-border: #2e2e4a;
+
+  --mantine-color-body: var(--nf-background);
+  --mantine-primary-color-light-color: var(--nf-primary);
+  --mantine-color-anchor: #4da6ff;
+  --mantine-color-dark-6: var(--nf-background);
+}
+
+/* Tooltip custom styles */
+.nf-light {
+  --tooltip-bg: var(--mantine-color-gray-7);
+}
+
+/* Switch track styles */
+.nf-light .mantine-Switch-track {
+  background-color: var(--nf-primary);
+}
+.nf-dark .mantine-Switch-track {
+  background-color: #cc0044;
+}
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Navbar / Sidebar */
+
+/* Sidebar always dark (#242442) regardless of color scheme */
+.mantine-AppShell-navbar {
+  background-color: var(--nf-sidebar-bg);
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Search box inside sidebar */
+.mantine-AppShell-navbar .mantine-Input-input {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.mantine-AppShell-navbar .mantine-Input-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+}
+
+/* Menu items */
+#main-menu-stack .mantine-NavLink-root {
+  position: relative;
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+}
+#main-menu-stack .mantine-NavLink-root:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: white;
+}
+#main-menu-stack .mantine-NavLink-root[data-active] {
+  background-color: rgba(229, 0, 76, 0.14);
+  color: white;
+}
+#main-menu-stack .mantine-NavLink-root[data-active]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 3px;
+  background-color: var(--nf-primary);
+  border-radius: 0 2px 2px 0;
+}
+#main-menu-stack .mantine-NavLink-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+#main-menu-stack .mantine-NavLink-icon {
+  color: rgba(255, 255, 255, 0.55);
+}
+#main-menu-stack .mantine-NavLink-root[data-active] .mantine-NavLink-icon {
+  color: var(--nf-primary);
+}
+
+/* Section subtitles (group labels) */
+#main-menu-stack .mantine-NavLink-description {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Submenu active items */
+.nf-submenu .mantine-Menu-item.nf-active {
+  background-color: rgba(229, 0, 76, 0.12);
+  color: white;
+}
+.nf-submenu .mantine-Menu-item.nf-active:hover {
+  background-color: rgba(229, 0, 76, 0.2);
+}
+
+/* #endregion */
+
+/* #region ----------------------------------------------------------- Table and datatable styles */
+
+/* Table cell text */
+.mantine-Table-td p,
+.mantine-Table-td a {
+  font-size: 0.9rem;
+}
+
+/* Table header */
+.mantine-Table-th {
+  font-weight: 600;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+/* Table header colors */
+.nf-light .mantine-Table-thead,
+.nf-light .mantine-Table-tfoot {
+  color: var(--nf-text);
+  background-color: #EDEDF2;
+}
+.nf-dark .mantine-Table-thead,
+.nf-dark .mantine-Table-tfoot {
+  color: #b0b0c8;
+  background-color: #1e1e38;
+}
+
+/* Boolean icons */
+.nf-light .nf-boolean-icon.nf-boolean-true  { color: var(--mantine-color-teal-6); }
+.nf-light .nf-boolean-icon.nf-boolean-false { color: var(--mantine-color-red-6); }
+.nf-dark  .nf-boolean-icon.nf-boolean-true  { color: var(--mantine-color-green-4); }
+.nf-dark  .nf-boolean-icon.nf-boolean-false { color: var(--mantine-color-red-4); }
+
+/* Emphasis rows */
+.nf-light .nf-emphasis {
+  color: var(--mantine-color-blue-8);
+  background-color: #0073E510 !important;
+}
+.nf-dark .nf-emphasis {
+  color: var(--mantine-color-blue-3);
+  background-color: #4da6ff18 !important;
+}
+
+/* Status badge styles (Figma Status tokens) */
+.mantine-Badge-root.nf-success {
+  background-color: #ADEBD6;
+  color: #1a5c48;
+}
+.mantine-Badge-root.nf-warning {
+  background-color: #FFDD99;
+  color: #7a5000;
+}
+.mantine-Badge-root.nf-default {
+  background-color: #DCDCE2;
+  color: #4a4a5c;
+}
+.mantine-Badge-root.nf-error {
+  background-color: #ffc5d4;
+  color: #8c0026;
+}
+
+/* Row action toolbar: show only on hover */
+tr .nf-actions-toolbar {
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+tr:hover .nf-actions-toolbar {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+/* Critical action color in row toolbar */
+.nf-light .nf-actions-toolbar .nf-warning { color: var(--mantine-color-red-7); }
+.nf-dark  .nf-actions-toolbar .nf-warning { color: var(--mantine-color-red-5); }
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Form element styles */
+
+/* Primary filled button */
+.nf-light .mantine-Button-root.nf-Button-filled {
+  background-color: var(--nf-primary);
+}
+.nf-dark .mantine-Button-root.nf-Button-filled {
+  background-color: #cc0044;
+}
+
+/* Critical action button */
+.nf-Button-filled.nf-critical {
+  background-color: var(--mantine-color-red-6);
+}
+.nf-Button-outline.nf-critical {
+  border-color: var(--mantine-color-red-6);
+  color: var(--mantine-color-red-6);
+}
+
+/* Required field: left stripe + bullet */
+.mantine-InputWrapper-root.nf-required .mantine-InputWrapper-required {
+  display: none;
+}
+.mantine-InputWrapper-root.nf-required .mantine-Input-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--input-radius, var(--mantine-radius-md));
+}
+.mantine-InputWrapper-root.nf-required .mantine-Input-wrapper::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background-color: var(--nf-primary);
+  height: 100%;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-start-start-radius: var(--input-radius, var(--mantine-radius-md));
+  border-end-start-radius: var(--input-radius, var(--mantine-radius-md));
+  z-index: 1;
+}
+.mantine-InputWrapper-root.nf-required .mantine-InputWrapper-label::after {
+  content: "•";
+  display: inline-block;
+  padding-left: 0.2em;
+  font-size: 1.8em;
+  line-height: 0.1em;
+  color: var(--nf-primary);
+  transform: translateY(0.12em);
+}
+
+/* Accordion */
+.mantine-Accordion-control {
+  margin-bottom: 0;
+  transition: margin-bottom 200ms ease;
+}
+[data-active=true] .mantine-Accordion-control {
+  margin-bottom: 1em;
+}
+.mantine-Accordion-label {
+  font-weight: 600;
+}
+.nf-light .mantine-Accordion-control {
+  border-bottom: 1px solid var(--nf-border);
+}
+.nf-dark .mantine-Accordion-control {
+  border-bottom: 1px solid var(--mantine-color-dark-4);
+}
+
+/* #endregion */
+
+/* #region ---------------------------------------------------------------- Message box styles */
+
+.nf-light .mantine-Modal-body svg.nf-warning {
+  color: var(--mantine-color-orange-6);
+}
+.nf-dark .mantine-Modal-body svg.nf-warning {
+  color: var(--mantine-color-orange-4);
+}
+
+/* #endregion */

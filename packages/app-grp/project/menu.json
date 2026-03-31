@@ -1,0 +1,48 @@
+{
+	"$schema": "../../../schemas/menu.schema.json",
+	"items": [
+		{
+			"name": "contratos",
+			"label": "Contratos",
+			"icon": "fileText"
+		},
+		{
+			"name": "diarias",
+			"label": "Diárias",
+			"icon": "calendarMonth"
+		},
+		{
+			"name": "imoveis",
+			"label": "Imóveis",
+			"icon": "buildingsAlt"
+		},
+		{
+			"name": "assinaturas",
+			"label": "Assinaturas",
+			"icon": "pen"
+		},
+		{
+			"name": "processos",
+			"label": "Processos",
+			"icon": "treeView"
+		},
+		{
+			"type": "separator"
+		},
+		{
+			"name": "cadastros",
+			"label": "Cadastros",
+			"icon": "id",
+			"items": [
+				{ "name": "contratados", "label": "Contratados" },
+				{ "name": "categorias", "label": "Categorias" },
+				{ "name": "usuarios", "label": "Usuários" }
+			]
+		},
+		{
+			"name": "favoritos",
+			"label": "Favoritos",
+			"icon": "favorite"
+		}
+	]
+}

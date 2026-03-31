@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../schemas/form.schema.json",
+	"name": "login",
+	"language": "ptBR",
+	"layout": {
+		"sections": [
+			{
+				"title": "Informe seus dados",
+				"initialState": "fixed",
+				"columns": [ [ [ "username", "passwordInput" ] ] ]
+			}
+		]
+	},
+	"edit": {
+		"title": "GRP — Gestão de Recursos Públicos",
+		"toolbar": [ "login", "forgotPassword" ]
+	}
+}

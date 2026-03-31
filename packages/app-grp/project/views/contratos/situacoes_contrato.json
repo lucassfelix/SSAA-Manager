@@ -1,0 +1,6 @@
+[
+	{ "id": 1, "value": "assinado", "label": "Assinado" },
+	{ "id": 2, "value": "cancelado", "label": "Cancelado" },
+	{ "id": 3, "value": "pendente", "label": "Pendente" },
+	{ "id": 4, "value": "encerrado", "label": "Encerrado" }
+]

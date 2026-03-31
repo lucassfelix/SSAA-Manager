@@ -1,0 +1,329 @@
+{
+	"$schema": "../../../schemas/app.schema.json",
+	"version": "0.3.0",
+	"language": "pt-br",
+	"comments": "GRP: Gestão de Recursos Públicos",
+	"projectId": "neofront-grp-app",
+	"strings": {
+		"appVersion": "0.1.0",
+		"appTitle": "{pageName} | GRP",
+		"deleteItemConfirm": "Tem certeza que você deseja excluir {theItem} {name}?"
+	},
+	"errorStrings": {
+		"noRecordsText": "Não há itens a serem exibidos nesta tela."
+	},
+	"errorImages": {
+		"noViewType": "fruit_basket",
+		"viewMissing": "beach_house",
+		"formLayoutMissing": "shipwreck_survivor",
+		"formConfigMissing": "octopus",
+		"formMissing": "forest"
+	},
+	"paths": {
+		"images": "images/"
+	},
+	"data": {
+		"source": "mock",
+		"apiBaseUrl": "http://localhost:3100"
+	},
+	"shell": {
+		"header": {
+			"fullWidth": false,
+			"height": 60,
+			"bordered": true,
+			"items": [ "collapseToggle", "userToolbar" ]
+		},
+		"navbar": {
+			"width": 300,
+			"collapsible": true,
+			"collapsedWidth": 60,
+			"bordered": true,
+			"icons": true,
+			"footer": false,
+			"items": [ "mainMenu", "spacer", "collapseToggle", "logo" ]
+		},
+		"userToolbar": [ { "type": "text", "text": "Usuário" }, "userMenu" ]
+	},
+	"menu": {
+		"openSubmenusOnHover": false,
+		"submenuOffset": 12,
+		"items": {
+			"gap": 2,
+			"radius": 8,
+			"labelSize": "0.9rem",
+			"labelWeight": 600,
+			"subtitleSize": "0.8rem",
+			"subtitleWeight": null,
+			"subtitleUppercase": true,
+			"descriptionSize": "0.85rem",
+			"descriptionWeight": 600,
+			"iconFilled": false,
+			"iconSize": 22,
+			"iconStroke": 1.5,
+			"arrowIcon": "chevronRight",
+			"arrowStroke": 2,
+			"arrowSize": 18
+		},
+		"submenuItems": {
+			"gap": 6,
+			"labelSize": "0.9rem",
+			"labelWeight": 400,
+			"subtitleSize": "0.65rem"
+		}
+	},
+	"toolbars": {
+		"horizontalPadding": 24,
+		"verticalPadding": 6,
+		"gap": 16,
+		"align": "left",
+		"upperBorder": false,
+		"iconButtons": {
+			"rotateSelected": true,
+			"size": 36,
+			"radius": 8,
+			"filled": false,
+			"selectedVariant": "filled",
+			"regularVariant": "subtle",
+			"iconSize": 24,
+			"iconStroke": 2,
+			"selectedIcon": "check"
+		},
+		"textButtons": {
+			"size": "sm",
+			"radius": 6,
+			"defaultVariant": "filled",
+			"regularVariant": "light"
+		},
+		"texts": {
+			"fontWeight": 600
+		},
+		"titles": {
+			"size": 20,
+			"fontWeight": 600,
+			"width": 120
+		}
+	},
+	"topControls": {
+		"collapseToggle": {
+			"rotateIcon": true,
+			"tipCollapse": "Fechar a barra lateral",
+			"tipExpand": "Abrir a barra lateral"
+		},
+		"themeSwitch": {
+			"type": "iconButton",
+			"tipLight": "Mudar para o tema claro",
+			"tipDark": "Mudar para o tema escuro"
+		},
+		"logo": {
+			"collapsedHeight": 40,
+			"expandedHeight": 40,
+			"altText": "GRP",
+			"link": "/"
+		}
+	},
+	"controls": {
+		"userMenu": {
+			"type": "iconButton",
+			"name": "userSettings",
+			"icon": "userSettings",
+			"tip": "Opções do usuário",
+			"items": [
+				{ "label": "Tema claro", "action": "lightMode", "selectable": true },
+				{ "label": "Tema escuro", "action": "darkMode", "selectable": true },
+				{ "type": "separator" },
+				{ "label": "Sair", "action": "logout" }
+			]
+		},
+		"separator": {
+			"type": "separator"
+		},
+		"add": {
+			"type": "textButton",
+			"label": "Novo contrato",
+			"tip": "Adicionar {singular}",
+			"icon": "add",
+			"action": "add"
+		},
+		"search": {
+			"type": "iconButton",
+			"tip": "Pesquisar {plural}",
+			"icon": "search",
+			"action": "search"
+		},
+		"record_detail": {
+			"type": "iconButton",
+			"tip": "Ver detalhes do {singular}",
+			"icon": "view",
+			"action": "detail"
+		},
+		"record_edit": {
+			"type": "iconButton",
+			"tip": "Editar {singular}",
+			"icon": "edit",
+			"action": "edit"
+		},
+		"record_delete": {
+			"type": "iconButton",
+			"tip": "Excluir {singular}",
+			"icon": "trash",
+			"action": "delete",
+			"class": "warning"
+		},
+		"send": {
+			"type": "textButton",
+			"label": "Salvar",
+			"action": "send",
+			"default": true
+		},
+		"cancel": {
+			"type": "textButton",
+			"label": "Cancelar",
+			"action": "cancel"
+		},
+		"delete": {
+			"type": "textButton",
+			"label": "Excluir",
+			"action": "delete",
+			"class": "critical",
+			"default": true
+		},
+		"close": {
+			"type": "textButton",
+			"label": "Fechar",
+			"action": "cancel",
+			"default": true
+		},
+		"edit": {
+			"type": "textButton",
+			"label": "Editar",
+			"action": "edit"
+		},
+		"previous": {
+			"type": "iconButton",
+			"icon": "arrowLeft",
+			"tip": "Anterior",
+			"action": "previous"
+		},
+		"next": {
+			"type": "iconButton",
+			"icon": "arrowRight",
+			"tip": "Próximo",
+			"action": "next"
+		},
+		"listViewMore": {
+			"type": "iconButton",
+			"tip": "Mais ações",
+			"icon": "moreVertical",
+			"items": [
+				{ "label": "Exportar para planilha", "action": "exportCSV" },
+				{ "label": "Exportar PDF", "action": "exportPDF" },
+				{ "type": "separator" },
+				{ "label": "Imprimir listagem", "action": "printRecords" }
+			]
+		},
+		"filterPanel": {
+			"type": "iconButton",
+			"toggle": true,
+			"tip": "Abrir painel de pesquisa",
+			"selectedTip": "Fechar painel de pesquisa",
+			"icon": "filter",
+			"action": "toggleFilterPanel"
+		},
+		"filter": {
+			"type": "textButton",
+			"label": "Pesquisar",
+			"action": "filter",
+			"default": true
+		},
+		"filterMore": {
+			"type": "iconButton",
+			"icon": "moreVertical",
+			"tip": "Mais opções",
+			"items": [
+				{ "label": "Salvar pesquisa", "action": "saveFilter" },
+				{ "label": "Carregar pesquisa", "action": "loadFilter" },
+				{ "type": "separator" },
+				{ "label": "Fechar painel", "action": "closeFilterPanel" },
+				{ "label": "Limpar filtros", "action": "clearForm" }
+			]
+		},
+		"login": {
+			"type": "textButton",
+			"label": "Entrar",
+			"action": "login",
+			"width": "100%"
+		},
+		"forgotPassword": {
+			"type": "link",
+			"label": "Esqueci minha senha",
+			"action": "forgotPassword"
+		}
+	},
+	"login": {
+		"fullHeight": true,
+		"width": 480,
+		"themeSwitch": true,
+		"toolbar": {
+			"upperBorder": true
+		},
+		"fields": {
+			"username": {
+				"dataType": "string",
+				"label": "Nome de usuário",
+				"placeholder": "Digite seu nome de usuário",
+				"required": true
+			},
+			"passwordInput": {
+				"dataType": "passwordInput",
+				"label": "Senha",
+				"placeholder": "Digite sua senha",
+				"required": true
+			}
+		}
+	},
+	"listViews": {
+		"defaultList": "contratos",
+		"table": {
+			"striped": true,
+			"bordered": true,
+			"rowBorders": false,
+			"colBorders": false,
+			"borderRadius": "sm",
+			"horizontalSpacing": 10,
+			"verticalSpacing": 8,
+			"headerHeight": 20,
+			"shadow": "xs",
+			"wrapperSize": "md",
+			"wrapperBooleanWidth": 50,
+			"booleanIconsSize": 26,
+			"booleanIconsStroke": 1.5,
+			"footerIconsSize": 22,
+			"footerIconsStroke": 2,
+			"headerIconsSize": 18,
+			"headerIconsStroke": 2.5,
+			"trueIcon": "circleCheck",
+			"falseIcon": "squareX",
+			"imageRadius": "sm"
+		},
+		"messageBox": {
+			"deleteControls": [ "delete", "cancel" ]
+		}
+	},
+	"forms": {
+		"fieldSize": "sm",
+		"outlinedSections": false
+	},
+	"theme": {
+		"iconFamily": "tabler",
+		"mainFontFamily": "Inter",
+		"headingsFontFamily": "Inter",
+		"lightMode": {
+			"expandedLogo": "logo-grp-light.svg",
+			"collapsedLogo": "logo-grp-symbol.svg"
+		},
+		"darkMode": {
+			"expandedLogo": "logo-grp-dark.svg",
+			"collapsedLogo": "logo-grp-symbol.svg"
+		}
+	}
+}

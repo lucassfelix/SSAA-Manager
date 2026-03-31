@@ -1,0 +1,38 @@
+{
+	"$schema": "../../../../../schemas/form.schema.json",
+	"name": "contratos",
+	"language": "ptBR",
+	"layout": {
+		"sections": [
+			{
+				"initialState": "noheader",
+				"columns": [
+					[
+						[ "id", "numero" ],
+						"objeto",
+						[ "assinatura", "validade" ],
+						[ "situacao", "contratado" ]
+					],
+					[
+						"processo_ref",
+						"processo_inicio",
+						"tipo",
+						"controla_assinaturas"
+					]
+				]
+			}
+		]
+	},
+	"edit": {
+		"title": "Contrato {name}",
+		"toolbar": [ "previous", "next", { "type": "spacer" }, "send", "cancel" ]
+	},
+	"add": {
+		"title": "Novo contrato",
+		"toolbar": [ "send", "cancel" ]
+	},
+	"detail": {
+		"title": "Contrato {name}",
+		"toolbar": [ "edit", "close" ]
+	}
+}

@@ -1,0 +1,11 @@
+[
+	{ "id": 1, "label": "Cooperativa Agrícola" },
+	{ "id": 2, "label": "Papeleria Central" },
+	{ "id": 3, "label": "Banco do Brasil S/A" },
+	{ "id": 4, "label": "Construtora Verde" },
+	{ "id": 5, "label": "Editora Local" },
+	{ "id": 6, "label": "Agência Eco" },
+	{ "id": 7, "label": "Serviços Urbanos S/A" },
+	{ "id": 8, "label": "Cultura Viva" },
+	{ "id": 9, "label": "Sinalize Mais" }
+]

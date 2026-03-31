@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../../../schemas/listview.schema.json",
+	"name": "contratos",
+	"type": "listView",
+	"language": "ptBR",
+	"config": {
+		"header": true,
+		"footer": true,
+		"idAccessor": "id",
+		"nameAccessor": "numero",
+		"rowClassAccessor": "none"
+	},
+	"columns": [ "numero", "objeto", "assinatura", "contratado", "validade", "situacao", "actions" ],
+	"actions": [ "record_detail", "record_edit", "record_delete" ],
+	"toolbar": [
+		{ "type": "title", "text": "Contratos" },
+		"add",
+		"separator",
+		"search",
+		"filterPanel",
+		"listViewMore"
+	],
+	"filterPanel": {
+		"layout": { "header": [ "numero", "objeto", "contratado", "situacao" ] },
+		"toolbar": [ "filter", "filterMore" ]
+	}
+}

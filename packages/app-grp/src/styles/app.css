@@ -1,0 +1,33 @@
+/*
+ * Style overrides for most applications.
+ */
+
+/* #region ------------------------------------------------------------- Global element overrides */
+
+/* Tooltip size overrides */
+.mantine-Tooltip-tooltip {
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+}
+
+/* ScrollArea thumb opacity */
+.mantine-ScrollArea-thumb {
+  opacity: 0.4;
+}
+
+/* #endregion */
+
+/* #region ------------------------------------------------------------------ Main menu overrides */
+
+/* Avoids extra height added by indicator */
+#main-menu-stack .mantine-Indicator-root {
+  display: flex;
+}
+
+/* Ensure main menu never creates horizontal scroll */
+#main-menu-stack {
+  width: 100%;
+}
+
+/* #endregion */

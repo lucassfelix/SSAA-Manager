@@ -1,0 +1,97 @@
+{
+	"$schema": "../../../../../schemas/fields.schema.json",
+	"name": "contratos",
+	"language": "ptBR",
+	"strings": {
+		"singular": "contrato",
+		"plural": "contratos",
+		"theItem": "o contrato"
+	},
+	"fields": {
+		"id": {
+			"colStyles": "tabular",
+			"header": "ID",
+			"colWidth": 60,
+			"dataType": "string",
+			"fieldWidth": 60,
+			"label": "ID",
+			"readOnly": true
+		},
+		"numero": {
+			"colStyles": [ "semibold", "tabular" ],
+			"header": "Contrato",
+			"colWidth": 90,
+			"dataType": "string",
+			"fieldWidth": 120,
+			"label": "Nº / Exercício",
+			"readOnly": true,
+			"render": { "layout": "link", "op": "detail" }
+		},
+		"objeto": {
+			"header": "Objeto",
+			"dataType": "string",
+			"fieldWidth": "100%",
+			"label": "Objeto",
+			"placeholder": "Descreva o objeto do contrato",
+			"required": true
+		},
+		"assinatura": {
+			"colStyles": "tabular",
+			"header": "Assinatura",
+			"colWidth": 90,
+			"dataType": "date",
+			"fieldWidth": 140,
+			"label": "Data de assinatura"
+		},
+		"validade": {
+			"colStyles": "tabular",
+			"header": "Validade",
+			"colWidth": 90,
+			"dataType": "date",
+			"fieldWidth": 140,
+			"label": "Validade"
+		},
+		"contratado": {
+			"header": "Contratado",
+			"colWidth": 160,
+			"dataType": "select",
+			"fieldWidth": "100%",
+			"label": "Contratado",
+			"options": { "table": "contratados" },
+			"placeholder": "Selecione o contratado"
+		},
+		"situacao": {
+			"header": "Situação",
+			"colWidth": 110,
+			"dataType": "select",
+			"fieldWidth": 160,
+			"label": "Situação",
+			"options": { "table": "situacoes_contrato" },
+			"placeholder": "Selecione a situação"
+		},
+		"processo_ref": {
+			"dataType": "string",
+			"fieldWidth": "100%",
+			"label": "Processo de referência"
+		},
+		"processo_inicio": {
+			"dataType": "string",
+			"fieldWidth": "100%",
+			"label": "Processo inicial"
+		},
+		"tipo": {
+			"dataType": "string",
+			"fieldWidth": "100%",
+			"label": "Tipo"
+		},
+		"controla_assinaturas": {
+			"dataType": "boolean",
+			"fieldWidth": 200,
+			"label": "Controla assinaturas digitais"
+		},
+		"actions": {
+			"header": "",
+			"render": { "layout": "actions" }
+		}
+	}
+}
