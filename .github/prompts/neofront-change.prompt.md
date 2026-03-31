@@ -12,9 +12,12 @@ You are working in the NeoFront monorepo.
 Before writing or editing any code:
 
 1) Read and follow [`.github/copilot-instructions.md`](../copilot-instructions.md).
-2) Consult the most relevant templates in [`ai/examples/`](../../ai/examples):
+2) Read [`ai/CONTEXT.md`](../../ai/CONTEXT.md) — the dense single-file reference for all JSON schemas, patterns, and wiring.
+3) Consult the most relevant templates in [`ai/examples/`](../../ai/examples):
+   - [`create-project-bootstrap.ts`](../../ai/examples/create-project-bootstrap.ts)
    - [`create-form-from-schema.ts`](../../ai/examples/create-form-from-schema.ts)
    - [`create-table-view.ts`](../../ai/examples/create-table-view.ts)
+   - [`tabbed-form-with-embedded-list.ts`](../../ai/examples/tabbed-form-with-embedded-list.ts)
    - [`add-view-action.ts`](../../ai/examples/add-view-action.ts)
    - [`project-loader-pattern.ts`](../../ai/examples/project-loader-pattern.ts)
    - [`metadata-validation-flow.md`](../../ai/examples/metadata-validation-flow.md)

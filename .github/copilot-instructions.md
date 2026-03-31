@@ -234,6 +234,13 @@ Engine must **not depend on project specifics**.
 - `packages/app-*/project/` → configuration-driven structure
 - `packages/neofront/src/components/` → engine UI patterns
 
+Documentation:
+
+- `ai/CONTEXT.md` → **dense single-file reference** for JSON schemas, patterns, and wiring. Read this first for any metadata or project work.
+- `docs/INDEX.md` → full human-readable documentation navigator
+- `docs/reference/` → per-file reference (fields, listview, form, app, menu, login, patterns)
+- `ai/examples/` → copyable patterns for common tasks
+
 External:
 
 - React reference → https://react.dev/reference/react
