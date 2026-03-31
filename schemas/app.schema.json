@@ -157,9 +157,7 @@
               "description": "Ordered list of items to display in the navbar.",
               "items": {
                 "type": "string",
-                "enum": [
-                  "mainMenu"
-                ]
+                "enum": [ "collapseToggle", "logo", "spacer", "mainMenu", "mainTitle", "themeSwitch", "userToolbar" ]
               }
             },
             "footerItems": {
