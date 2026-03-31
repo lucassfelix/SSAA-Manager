@@ -19,11 +19,15 @@ import { NfIconProps } from "./NfIcon";
 
 const iconMap = {
   add: "Plus",
+  buildingsAlt: "BuildingCommunity",
   chart: "Activity",
+  favorite: "Heart",
   filter: "Filter2",
   menu: "Menu2",
   moreVertical: "DotsVertical",
   notification: "Bell",
+  pen: "WritingSign",
+  treeView: "Sitemap",
   userSettings: "UserCog",
   view: "Eye",
 } as Record<string, string>;
