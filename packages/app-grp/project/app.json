@@ -317,7 +317,7 @@
 		"outlinedSections": false
 	},
 	"theme": {
-		"iconFamily": "tabler",
+		"iconFamily": "material",
 		"mainFontFamily": "Inter",
 		"headingsFontFamily": "Inter",
 		"lightMode": {
