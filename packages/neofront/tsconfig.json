@@ -15,11 +15,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/components/*"],
-      "context": ["src/contexts/index.ts"],
-      "utils/*": ["src/utils/*"]
+      "@/*": ["./src/components/*"],
+      "context": ["./src/contexts/index.ts"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"],
