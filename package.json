@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "npm run dev -w @neofront/app-ssaa",
     "mysql-api": "npm run dev -w @neofront/mysql-api",
+    "supabase-api": "npm run dev -w @neofront/supabase-api",
     "metadata-analyzer": "node scripts/metadata-analyzer.js --project ./packages/app-ssaa/project --log metadata-analyzer-ssaa.log",
     "schema-validator": "node scripts/schema-validator.js ./schemas --out schema-validator.log",
     "json-validator": "node scripts/json-validator.js --schemas ./schemas --project ./packages/app-ssaa/project --log json-validator-ssaa.log",
@@ -15,6 +16,7 @@
     "build": "npm run build -w @neofront/app-ssaa"
   },
   "devDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.52.5",
     "@eslint/js": "^9.39.1",
     "@stylistic/eslint-plugin": "^5.6.1",
     "@types/node": "^24.10.1",

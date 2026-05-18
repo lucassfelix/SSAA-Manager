@@ -44,14 +44,14 @@
             "dataType": "string",
             "fieldWidth": "100%",
             "label": "Imagem sem afastador",
-            "placeholder": "URL ou caminho da imagem"
+            "placeholder": "URL pública ou caminho no bucket privado patient-images (signed URL)"
         },
         "imagem_com_afastador": {
             "header": "C / afastador",
             "dataType": "string",
             "fieldWidth": "100%",
             "label": "Imagem com afastador",
-            "placeholder": "URL ou caminho da imagem"
+            "placeholder": "URL pública ou caminho no bucket privado patient-images (signed URL)"
         },
         "actions": {
             "colTextAlign": "center",

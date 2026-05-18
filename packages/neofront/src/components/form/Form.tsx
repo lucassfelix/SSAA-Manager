@@ -17,7 +17,8 @@ import TabbedLayout from './TabbedLayout';
 import ErrorPage from '@/errorpage/ErrorPage';
 import DeleteBox from '@/messageBox/DeleteBox';
 import { getFormValues, hasAllRequired } from './validation';
-import { RecordConfig } from 'src/contexts/FormProps';
+import { RecordConfig } from "context";
+import { withApiFetchCredentials } from '@/app/mainUtils';
 
 // #endregion
 
@@ -164,7 +165,7 @@ export default function NfForm(props: FormProps): JSX.Element {
   const hasNext = curIndex !== -1 && curIndex < recordsList.length - 1;
 
   // Prepare toolbar items with disabled state for previous/next buttons
-  const resolvedToolbarItems = (toolbarItems ?? []).map(it => {
+  const resolvedToolbarItems = (toolbarItems ?? []).map((it: string | Record<string, unknown>) => {
     if (typeof it === 'string') {
       const btn = appCfg.controls[it] as any;
       if (!btn) {
@@ -232,11 +233,11 @@ export default function NfForm(props: FormProps): JSX.Element {
     const payload = getFormValues(formRef.current);
 
     if (op === 'add') {
-      const response = await fetch(`${baseUrl}/record/${currentView}`, {
+      const response = await fetch(`${baseUrl}/record/${currentView}`, withApiFetchCredentials(appCfg.data, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(payload),
-      });
+      }));
       if (!response.ok) {
         let msg = 'Failed to save record';
         try {
@@ -260,11 +261,11 @@ export default function NfForm(props: FormProps): JSX.Element {
     if (op === 'edit') {
       const response = await fetch(
         `${baseUrl}/record/${currentView}/${encodeURIComponent(String(currentRecordId))}?idAccessor=${encodeURIComponent(idAccessor)}`,
-        {
+        withApiFetchCredentials(appCfg.data, {
           method: 'PUT',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(payload),
-        }
+        })
       );
       if (!response.ok) {
         let msg = 'Failed to update record';

@@ -38,8 +38,7 @@
             "label": "Clínica",
             "options": { "table": "clinicas", "valueAccessor": "id",
                 "labelAccessor": "nome" },
-            "placeholder": "Selecione uma opção",
-            "readOnly": true
+            "placeholder": "Selecione uma opção"
         },
         "paciente_id": {
             "header": "Paciente",

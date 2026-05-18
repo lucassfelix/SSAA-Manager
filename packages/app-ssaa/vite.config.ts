@@ -4,7 +4,16 @@ import path from "path";
 
 const neofrontPath = path.resolve(__dirname, "../neofront/src");
 
+const rawBase = process.env.VITE_BASE_PATH;
+const base =
+  !rawBase || rawBase === "/"
+    ? "/"
+    : rawBase.endsWith("/")
+      ? rawBase
+      : `${rawBase}/`;
+
 export default defineConfig({
+  base,
   build: {
     sourcemap: false,
   },

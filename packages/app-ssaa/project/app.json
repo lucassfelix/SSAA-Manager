@@ -26,7 +26,8 @@
 	},
 	"data": {
 		"source": "api",
-		"apiBaseUrl": "http://localhost:3100"
+		"apiBaseUrl": "http://localhost:3101",
+		"apiFetchCredentials": "include"
 	},
 	"shell": {
 		"header": {
@@ -227,6 +228,7 @@
 		}
 	},
 	"login": {
+		"authEmailDomain": "ssaa.local",
 		"fullHeight": true,
 		"width": 480,
 		"alignItems": "center",
@@ -248,8 +250,8 @@
 		"fields": {
 			"username": {
 				"dataType": "string",
-				"label": "Nome de usuário",
-				"placeholder": "Digite seu nome de usuário",
+				"label": "Usuário",
+				"placeholder": "seu usuário",
 				"required": true
 			},
 			"passwordInput": {

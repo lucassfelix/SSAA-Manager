@@ -1,0 +1,32 @@
+# Render Blueprint: deploy supabase-api (BFF) with Docker.
+# https://render.com/docs/blueprint-spec
+#
+# After linking the repo, set secret env vars in the Render dashboard:
+#   DATABASE_URL, SESSION_SECRET, SUPABASE_URL, CORS_ORIGIN
+# Do not put those values in this file.
+
+services:
+  - type: web
+    name: ssaa-supabase-api
+    runtime: docker
+    dockerfilePath: ./packages/supabase-api/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3101"
+      - key: COOKIE_SAMESITE
+        value: none
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false

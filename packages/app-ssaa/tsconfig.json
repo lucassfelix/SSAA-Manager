@@ -17,7 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@neofront/core": ["../neofront/src/index.ts"],
-      "@": ["../neofront/src/components"],
+      "@/*": ["../neofront/src/components/*"],
       "context": ["../neofront/src/contexts/index.ts"],
       "project/*": ["./project/*"]
     }

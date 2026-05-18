@@ -136,18 +136,81 @@ export function createViewLoader(activeViews: string[], viewName: string, metada
  * @param dataEnhancer A function to enhance the fetched data.
  * @returns A function that loads and enhances data from the API.
  */
-export function createDataLoader(apiBaseUrl: string, tableNames: string[],
-  dataEnhancer?: (arg0: any) => any): () => Promise<any> {
+export function createDataLoader(
+  apiBaseUrl: string,
+  tableNames: string[],
+  dataEnhancer?: (arg0: any) => any,
+  apiFetchCredentials?: RequestCredentials,
+): () => Promise<any> {
   const baseUrl = apiBaseUrl?.replace(/\/$/, "") || "";
   return async () => {
     const url = `${baseUrl}/data?tables=${encodeURIComponent(tableNames.join(','))}`;
-    const response = await fetch(url);
+    const response = await fetch(url, apiFetchCredentials ? { credentials: apiFetchCredentials } : undefined);
     if (!response.ok) {
       throw new Error('Failed to load data from API: ' + response.statusText);
     }
     const payload = await response.json();
     return dataEnhancer ? dataEnhancer(payload) : payload;
   };
+}
+
+/**
+ * Returns true when the BFF session cookie is valid (`GET /auth/session`).
+ * Syncs `__nf_username` from the server when present.
+ */
+export async function checkApiSession(
+  apiBaseUrl: string,
+  apiFetchCredentials?: RequestCredentials,
+): Promise<boolean> {
+  const baseUrl = apiBaseUrl?.replace(/\/$/, "") || "";
+  if (!baseUrl) {
+    return false;
+  }
+  const response = await fetch(
+    `${baseUrl}/auth/session`,
+    apiFetchCredentials ? { credentials: apiFetchCredentials } : undefined,
+  );
+  if (!response.ok) {
+    return false;
+  }
+  const body = (await response.json().catch(() => ({}))) as { username?: string };
+  const username = String(body.username ?? "").trim();
+  if (username) {
+    try {
+      localStorage.setItem("__nf_username", username);
+      localStorage.setItem("__nf_username_valid", "1");
+    } catch {
+      /* ignore */
+    }
+  }
+  return true;
+}
+
+/**
+ * Clears client-side login markers used by the access resolver.
+ */
+export function clearClientAuthMarkers() {
+  try {
+    localStorage.removeItem("__nf_username");
+    localStorage.removeItem("__nf_username_valid");
+    sessionStorage.removeItem("__nf_loaded_cache");
+  } catch {
+    /* ignore */
+  }
+}
+
+/**
+ * Merges optional API cookie credentials from app config into fetch init.
+ */
+export function withApiFetchCredentials(
+  data: { apiFetchCredentials?: RequestCredentials } | undefined,
+  init?: RequestInit,
+): RequestInit {
+  const c = data?.apiFetchCredentials;
+  if (!c) {
+    return { ...init };
+  }
+  return { ...(init || {}), credentials: c };
 }
 
 /**

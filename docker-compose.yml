@@ -1,0 +1,22 @@
+# BFF (supabase-api) for local Docker testing.
+# Secrets: copy packages/supabase-api/.env.example → packages/supabase-api/.env (never commit .env).
+#
+#   docker compose up --build
+#   curl http://localhost:3101/health?checkDb=1
+
+services:
+  supabase-api:
+    build:
+      context: .
+      dockerfile: packages/supabase-api/Dockerfile
+    image: neofront-supabase-api:local
+    ports:
+      - "3101:3101"
+    env_file:
+      - packages/supabase-api/.env
+    environment:
+      NODE_ENV: production
+      PORT: "3101"
+      # Prefer IPv4 when db host has AAAA but Docker cannot reach IPv6
+      NODE_OPTIONS: --dns-result-order=ipv4first
+    restart: unless-stopped

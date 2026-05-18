@@ -84,6 +84,11 @@
         "apiBaseUrl": {
           "type": "string",
           "description": "Base URL for the data API."
+        },
+        "apiFetchCredentials": {
+          "type": "string",
+          "enum": [ "omit", "include", "same-origin" ],
+          "description": "Fetch credentials mode for API requests (use include for cross-origin session cookies)."
         }
       },
       "required": [ "source" ]
@@ -301,6 +306,10 @@
           "type": "string",
           "description": "Alignment of the form contents.",
           "enum": [ "flex-start", "center", "flex-end" ]
+        },
+        "authEmailDomain": {
+          "type": "string",
+          "description": "When set, Supabase Auth receives username@authEmailDomain; the login field stays username-only."
         },
         "themeSwitch": {
           "type": "boolean",

@@ -1,0 +1,60 @@
+# Builds the SSAA SPA and deploys to GitHub Pages (project site: /REPO_NAME/).
+#
+# Repository secrets (Settings → Secrets → Actions):
+#   VITE_API_BASE_URL     — public HTTPS URL of the supabase-api BFF (no trailing slash).
+#   VITE_SUPABASE_URL     — https://<ref>.supabase.co
+#   VITE_SUPABASE_ANON_KEY — Supabase anon key (public; safe in the SPA bundle).
+#
+# BFF host must list your Pages origin in CORS_ORIGIN, e.g. https://<user>.github.io
+
+name: Deploy app-ssaa to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build SPA
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/app-ssaa/dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

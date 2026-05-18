@@ -8,7 +8,7 @@ import type { JSX } from 'react';
 
 import { useAppUI } from 'context';
 import MessageBox from './MessageBox';
-import { replaceVars } from '@/app/mainUtils';
+import { replaceVars, withApiFetchCredentials } from '@/app/mainUtils';
 
 // #endregion
 
@@ -53,7 +53,7 @@ export default function DeleteBox(props: DeleteBoxProps): JSX.Element | null {
     const idVal = record?.[idAccessor];
     const response = await fetch(
       `${baseUrl}/record/${encodeURIComponent(viewName)}/${encodeURIComponent(String(idVal))}?idAccessor=${encodeURIComponent(idAccessor)}`,
-      { method: 'DELETE' }
+      withApiFetchCredentials(appCfg.data, { method: 'DELETE' })
     );
 
     if (!response.ok) {

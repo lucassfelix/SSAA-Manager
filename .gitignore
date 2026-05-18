@@ -2,4 +2,7 @@
 **/dist
 **/package-lock.json
 **/*.log
+**/.env
+!**/.env.example
 __*
+**/*.env

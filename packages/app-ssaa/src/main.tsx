@@ -9,7 +9,7 @@ import { App, getRoot } from "@neofront/core";
 
 // Configurações da aplicação
 
-import appCfg from "project/app.json";
+import appCfgJson from "project/app.json";
 import menuCfg from "project/menu.json";
 import loginCfg from "project/login.json";
 import viewsCfg from "project/views/views.json";
@@ -20,6 +20,30 @@ import { accessResolver } from "./policy";
 
 import "./styles/theme.css";
 import "./styles/app.css";
+
+import type { AppProps, FormDataConfig } from "context";
+
+const apiBaseUrl =
+  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.trim() ||
+  appCfgJson.data.apiBaseUrl;
+
+const appCfg = {
+  ...appCfgJson,
+  data: {
+    ...appCfgJson.data,
+    apiBaseUrl,
+    apiFetchCredentials: appCfgJson.data.apiFetchCredentials ?? ("include" as RequestCredentials),
+  },
+};
+
+const routerBasename = (() => {
+  const raw = import.meta.env.BASE_URL || "/";
+  if (raw === "/") {
+    return undefined;
+  }
+  const trimmed = raw.replace(/\/$/, "");
+  return trimmed === "" ? undefined : trimmed;
+})();
 
 // #endregion
 
@@ -98,11 +122,11 @@ const tableNames = [
 ];
 
 getRoot().render(
-  <BrowserRouter>
+  <BrowserRouter basename={routerBasename}>
     <App
-      appCfg={appCfg}
+      appCfg={appCfg as AppProps}
       menuCfg={menuCfg}
-      loginCfg={loginCfg}
+      loginCfg={loginCfg as FormDataConfig}
       activeViews={viewsCfg.active}
       metadata={metadata}
       mockData={data}

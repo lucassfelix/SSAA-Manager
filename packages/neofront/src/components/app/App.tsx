@@ -9,14 +9,14 @@ import "@mantine/dates/styles.css";
 import { defaultStrings, errorStrings } from "context";
 
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { DatesProvider } from '@mantine/dates';
-import { createTheme, MantineProvider, DEFAULT_THEME } from "@mantine/core";
+import { Center, createTheme, Loader, MantineProvider, DEFAULT_THEME } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
 import { AppUIContext, AppProps, FieldsConfig, FormDataConfig, ListViewProps, MenuConfig, UserSettings, ViewResultProps } from "context";
 import { setDocumentTitle, useToggleClass, useEmbedTracking, extendDayjs } from "./appUtils";
-import { createDataLoader, createViewLoader } from "./mainUtils";
+import { checkApiSession, clearClientAuthMarkers, createDataLoader, createViewLoader } from "./mainUtils";
 import type { AccessResolver } from "./accessCapabilities";
 import Shell from "@/shell/Shell";
 import Login from "@/login/Login";
@@ -43,6 +43,8 @@ interface MainAppProps {
   accessResolver?: AccessResolver;
 }
 
+type AuthStatus = "pending" | "authenticated" | "guest";
+
 // #endregion
 
 // #region ------------------------------------------------------------------------------- Component
@@ -62,7 +64,12 @@ export default function App(props: MainAppProps) {
       }
 
       const dataSource = appCfg.data?.source === "api"
-        ? createDataLoader(appCfg.data.apiBaseUrl || "", apiTableNames || [], dataEnhancer)
+        ? createDataLoader(
+          appCfg.data.apiBaseUrl || "",
+          apiTableNames || [],
+          dataEnhancer,
+          appCfg.data.apiFetchCredentials,
+        )
         : (dataEnhancer ? dataEnhancer(mockData) : mockData) || {};
 
       return createViewLoader(activeViews, viewName, metadata, dataSource,
@@ -104,9 +111,66 @@ export default function App(props: MainAppProps) {
   // Derive current view from URL (?v=...) with fallback
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const isLogin = location.pathname === '/login' || location.pathname === '/login/';
   const urlView = searchParams.get('v') ?? appCfg.listViews.defaultList;
   const urlOp = searchParams.get('op') ?? '';
+  const usesApiAuth = appCfg.data?.source === "api" && Boolean(appCfg.data.apiBaseUrl);
+  const [authStatus, setAuthStatus] = useState<AuthStatus>("pending");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const resolveAuth = async () => {
+      if (!usesApiAuth) {
+        const ok = localStorage.getItem("__nf_username_valid") === "1";
+        if (!cancelled) {
+          setAuthStatus(ok ? "authenticated" : "guest");
+        }
+        return;
+      }
+
+      try {
+        const ok = await checkApiSession(
+          appCfg.data!.apiBaseUrl!,
+          appCfg.data!.apiFetchCredentials,
+        );
+        if (cancelled) {
+          return;
+        }
+        if (!ok) {
+          clearClientAuthMarkers();
+        }
+        setAuthStatus(ok ? "authenticated" : "guest");
+      } catch {
+        if (!cancelled) {
+          clearClientAuthMarkers();
+          setAuthStatus("guest");
+        }
+      }
+    };
+
+    void resolveAuth();
+    return () => {
+      cancelled = true;
+    };
+  }, [usesApiAuth, appCfg.data?.apiBaseUrl, appCfg.data?.apiFetchCredentials, location.pathname]);
+
+  useEffect(() => {
+    if (authStatus === "pending") {
+      return;
+    }
+    if (!isLogin && authStatus === "guest") {
+      navigate("/login", { replace: true });
+      return;
+    }
+    if (isLogin && authStatus === "authenticated") {
+      navigate({
+        pathname: "/",
+        search: `?v=${encodeURIComponent(appCfg.listViews.defaultList)}`,
+      }, { replace: true });
+    }
+  }, [authStatus, isLogin, navigate, appCfg.listViews.defaultList]);
 
   // Loaded state: frozen until new view data is ready
   const [loaded, setLoaded] = useState<{
@@ -148,7 +212,7 @@ export default function App(props: MainAppProps) {
 
   // Load view schema and data when URL view changes
   useEffect(() => {
-    if (isLogin) {
+    if (isLogin || authStatus !== "authenticated") {
       return;
     }
     if (!searchParams.get('v')) {
@@ -161,11 +225,15 @@ export default function App(props: MainAppProps) {
         const idAccessor = result?.listView?.config?.idAccessor ?? 'id';
         const recordId = searchParams.get(idAccessor) ?? '';
         setLoaded({ view: urlView, op: urlOp, recordId, search: `?${searchParams.toString()}`, result });
+      }).catch(() => {
+        clearClientAuthMarkers();
+        setAuthStatus("guest");
+        navigate("/login", { replace: true });
       });
     } else {
       setLoaded({ view: urlView, op: urlOp, recordId: '', search: `?${searchParams.toString()}`, result: {} as ViewResultProps });
     }
-  }, [isLogin, urlView, urlOp, setSearchParams, searchParams]);
+  }, [isLogin, authStatus, urlView, urlOp, setSearchParams, searchParams, navigate]);
 
   // Update document title when view or record changes
   useEffect(() => {
@@ -195,6 +263,10 @@ export default function App(props: MainAppProps) {
     },
   });
 
+  const showLogin = isLogin && authStatus !== "authenticated";
+  const showShell = !isLogin && authStatus === "authenticated";
+  const showAuthPending = authStatus === "pending" || (!isLogin && authStatus === "guest");
+
   // #endregion
 
   return (
@@ -219,7 +291,13 @@ export default function App(props: MainAppProps) {
           currentSearchParams,
           isReady: Boolean(loaded.view),
         }}>
-          {isLogin ? <Login /> : <Shell />}
+          {showAuthPending && (
+            <Center h="100vh">
+              <Loader />
+            </Center>
+          )}
+          {showLogin && <Login />}
+          {showShell && <Shell />}
         </AppUIContext.Provider>
       </DatesProvider>
     </MantineProvider>

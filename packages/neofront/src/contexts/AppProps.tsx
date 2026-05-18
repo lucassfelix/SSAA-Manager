@@ -88,6 +88,8 @@ export interface AppProps {
   data: {
     source: 'mock' | 'api';
     apiBaseUrl?: string;
+    /** When `include`, browser sends cookies on cross-origin requests to `apiBaseUrl` (BFF session). */
+    apiFetchCredentials?: RequestCredentials;
   };
   shell: ShellProps;
   menu: MainMenuProps;
@@ -97,6 +99,8 @@ export interface AppProps {
     [key: string]: ToolbarItem;
   };
   login: {
+    /** Appends `@{authEmailDomain}` for Supabase Auth when the user enters only a username. */
+    authEmailDomain?: string;
     fullHeight?: boolean;
     width?: number;
     alignItems?: 'flex-start' | 'center' | 'flex-end';

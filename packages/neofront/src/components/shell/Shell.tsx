@@ -11,6 +11,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from "react-router-dom";
 
 import { useAppUI } from "context";
+import { clearClientAuthMarkers } from "@/app/mainUtils";
 import ThemeSwitch from "./ThemeSwitch";
 import FullyCollapsibleLayout from "./FullyCollapsibleLayout";
 import SidebarIconsLayout from "./SidebarIconsLayout";
@@ -117,9 +118,19 @@ export default function Shell(): JSX.Element {
         setColorScheme("dark");
         setUserSettings({ ...userSettings, dark: true });
         break;
-      case 'logout':
-        navigate('/login', { replace: true });
+      case 'logout': {
+        const base = appCfg.data?.apiBaseUrl?.replace(/\/$/, "");
+        if (appCfg.data?.source === "api" && base) {
+          const cred = appCfg.data.apiFetchCredentials;
+          void fetch(`${base}/auth/logout`, {
+            method: "POST",
+            ...(cred ? { credentials: cred } : {}),
+          });
+        }
+        clearClientAuthMarkers();
+        navigate("/login", { replace: true });
         return;
+      }
       default:
         console.log(`Action: '${action}'`);
         return;
